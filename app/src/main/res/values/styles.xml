@@ -13,22 +13,30 @@
         <item name="android:layout_width">match_parent</item>
     </style>
 
+    <style name="WrapContentStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 
     <style name="TextViewStyle" parent="@style/TextView.Compat">
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/colorTextHint</item>
         <item name="android:textSize">@dimen/wwpx32</item>
     </style>
 
     <style name="EditTextStyle" parent="@style/EditText.Compat">
-        <item name="android:background">@drawable/edit_style_normal_shape</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center|left</item>
     </style>
 
     <style name="ButtonStyle" parent="@style/Button.Compat">
         <item name="android:textSize">@dimen/wwpx32</item>
-        <item name="android:background">@drawable/btn_style_selector</item>
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="CustomerDialogStyle" parent="@android:style/Theme.Dialog">
