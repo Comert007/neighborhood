@@ -8,4 +8,51 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TitleBar">
+        <item name="android:layout_height">@dimen/wwpx90</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+
+    <style name="TextViewStyle" parent="@style/TextView.Compat">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColorHint">@color/colorTextHint</item>
+        <item name="android:textSize">@dimen/wwpx32</item>
+    </style>
+
+    <style name="EditTextStyle" parent="@style/EditText.Compat">
+        <item name="android:background">@drawable/edit_style_normal_shape</item>
+        <item name="android:gravity">center|left</item>
+    </style>
+
+    <style name="ButtonStyle" parent="@style/Button.Compat">
+        <item name="android:textSize">@dimen/wwpx32</item>
+        <item name="android:background">@drawable/btn_style_selector</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="CustomerDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="ios_bottom_dialog" parent="android:style/Theme.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
 </resources>

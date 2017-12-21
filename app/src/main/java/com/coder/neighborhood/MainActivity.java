@@ -1,13 +1,19 @@
 package com.coder.neighborhood;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import com.coder.neighborhood.activity.BaseActivity;
+import com.coder.neighborhood.mvp.model.VoidModel;
+import com.coder.neighborhood.mvp.vu.VoidView;
 
-public class MainActivity extends AppCompatActivity {
+public  class MainActivity extends BaseActivity<VoidView,VoidModel> {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void init() {
+
     }
 }

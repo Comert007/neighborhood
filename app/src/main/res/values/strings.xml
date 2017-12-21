@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Neighborhood</string>
+    <string name="app_name">邻里</string>
+    <string name="dialog_loding">加载中</string>
 </resources>
