@@ -4,13 +4,16 @@
     <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/app_color_blue</item>
+        <item name="colorAccent">@color/app_color_blue</item>
+
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
     </style>
 
     <style name="TitleBar">
         <item name="android:layout_height">@dimen/wwpx90</item>
         <item name="android:layout_width">match_parent</item>
+        <item name="android:background">?attr/qmui_config_color_blue</item>
     </style>
 
     <style name="WrapContentStyle">
@@ -23,6 +26,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/colorTextHint</item>
+        <item name="android:textColor">@color/color_white</item>
         <item name="android:textSize">@dimen/wwpx32</item>
     </style>
 

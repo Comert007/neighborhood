@@ -3,6 +3,7 @@ package com.coder.neighborhood.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +12,8 @@ import com.coder.neighborhood.R;
 import com.coder.neighborhood.mvp.model.IModel;
 import com.coder.neighborhood.mvp.presenter.PresenterActivity;
 import com.coder.neighborhood.mvp.vu.IView;
+import com.coder.neighborhood.utils.DialogUtils;
+import com.coder.neighborhood.utils.ToastUtils;
 import com.coder.neighborhood.widget.LoadingDialog;
 
 import butterknife.BindView;
@@ -37,6 +40,33 @@ public abstract class BaseActivity<V extends IView,M extends IModel> extends Pre
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         baseApp = BaseApplication.getInstance();
         super.onCreate(savedInstanceState);
+    }
+
+
+    public void showToast(CharSequence text) {
+        ToastUtils.showToast(text);
+    }
+
+    public void showDialog(String message){
+        if (loadingDialog ==null){
+            loadingDialog = DialogUtils.obtainLoadingDialog(this);
+            loadingDialog.setCancelable(false);
+        }
+
+        loadingDialog.show();
+
+        if (!TextUtils.isEmpty(message)){
+            loadingDialog.setMessage(message);
+        }else {
+            loadingDialog.setMessage("Loading...");
+        }
+    }
+
+
+    public void dismissDialog(){
+        if (loadingDialog !=null){
+            loadingDialog.dismiss();
+        }
     }
 
     @Optional
