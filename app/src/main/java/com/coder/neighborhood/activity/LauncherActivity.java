@@ -24,6 +24,7 @@ public class LauncherActivity extends BaseActivity<VoidView,VoidModel>{
             @Override
             public void run() {
                 RegisterActivity.start(LauncherActivity.this);
+                finish();
             }
         },2000);
     }
