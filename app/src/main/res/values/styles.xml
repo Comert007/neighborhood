@@ -4,16 +4,15 @@
     <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/app_color_blue</item>
-        <item name="colorAccent">@color/app_color_blue</item>
-
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="qmui_config_color_blue">@color/colorPrimary</item>
     </style>
 
     <style name="TitleBar">
         <item name="android:layout_height">@dimen/wwpx90</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">?attr/qmui_config_color_blue</item>
+        <item name="android:background">@color/color_title_bg</item>
     </style>
 
     <style name="WrapContentStyle">
@@ -26,7 +25,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/colorTextHint</item>
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColor">@color/color_title_text</item>
         <item name="android:textSize">@dimen/wwpx32</item>
     </style>
 
@@ -36,12 +35,39 @@
         <item name="android:gravity">center|left</item>
     </style>
 
+
+    <!--<item name="android:layout_width">wrap_content</item>-->
+    <!--<item name="android:layout_height">wrap_content</item>-->
+
     <style name="ButtonStyle" parent="@style/Button.Compat">
         <item name="android:textSize">@dimen/wwpx32</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="TitleButtonStyle" parent="@style/Button.Compat">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:paddingRight">@dimen/wwpx24</item>
+        <item name="android:paddingLeft">@dimen/wwpx24</item>
+        <item name="android:textSize">@dimen/wwpx28</item>
+        <item name="android:textColor">@color/color_title_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:drawablePadding">@dimen/wwpx20</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">@dimen/wwpx36</item>
+        <item name="android:textColor">@color/color_title_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxWidth">200dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 
     <style name="CustomerDialogStyle" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -65,6 +91,7 @@
         <!--是否模糊-->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
 
 
 </resources>

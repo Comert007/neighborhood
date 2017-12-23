@@ -15,4 +15,15 @@
 
     <color name="color_white">#ffffff</color>
     <color name="colorTextHint">#acaaa6</color>
+
+    <color name="color_title_bg">#e5e5e5</color>
+    <color name="color_page_bg">#f5f5f5</color>
+    <color name="color_space_line">#b2b2b2</color>
+    <color name="color_tab_bg">#555555</color>
+
+    <color name="color_tab_text">#acacac</color>
+    <color name="color_split">#bbbbbb</color>
+    <color name="color_title_text">#43cc60</color>
+    <color name="color_text">#43cc60</color>
+
 </resources>

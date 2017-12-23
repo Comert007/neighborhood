@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TabLayout">
+        <item name="android:layout_width">0px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="TabText">
+        <item name="android:textColor">@drawable/tab_name_selector</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/wwpx28</item>
+    </style>
+    <style name="TabImage">
+        <item name="android:layout_width">@dimen/wwpx36</item>
+        <item name="android:layout_height">@dimen/wwpx36</item>
+
+    </style>
+
+    <style name="CustomLineColor" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/color_split</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="LlayFill">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@color/color_page_bg</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+    <style name="CommitButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">@dimen/wwpx20</item>
+        <item name="android:layout_marginLeft">@dimen/wwpx20</item>
+        <item name="android:paddingRight">@dimen/wwpx20</item>
+        <item name="android:textColor">@color/color_text</item>
+        <item name="android:background">@drawable/round_border_gray_shape</item>
+        <item name="android:layout_height">@dimen/wwpx70</item>
+    </style>
+
+</resources>

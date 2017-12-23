@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LlayFill">
 
-    <com.coder.neighborhood.widget.TitleView
-        android:id="@+id/title_view"
-        style="@style/TitleBar"
-        app:titleText="主页"/>
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        tools:ignore="Suspicious0dp"/>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/color_space_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx97"
+        android:background="@color/color_tab_bg">
+
+        <LinearLayout
+            android:id="@+id/tab_home_layout"
+            style="@style/TabLayout">
+            <ImageView
+                android:id="@+id/tab_home_image"
+                android:background="@drawable/tab_home_selector"
+                style="@style/TabImage"/>
+            <TextView
+                android:id="@+id/tab_home_text"
+                android:text="首页"
+                style="@style/TabText"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/tab_cart_layout"
+            style="@style/TabLayout">
+            <ImageView
+                android:id="@+id/tab_cart_image"
+                android:background="@drawable/tab_mall_selector"
+                style="@style/TabImage"/>
+            <TextView
+                android:id="@+id/tab_cart_text"
+                android:text="商城"
+                style="@style/TabText"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/tab_circle_layout"
+            style="@style/TabLayout">
+            <ImageView
+                android:id="@+id/tab_circle_image"
+                android:background="@drawable/tab_circle_selector"
+                style="@style/TabImage"/>
+            <TextView
+                android:id="@+id/tab_circle_text"
+                android:text="圈"
+                style="@style/TabText"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_message_layout"
+            style="@style/TabLayout">
+            <ImageView
+                android:id="@+id/tab_message_image"
+                android:background="@drawable/tab_message_selector"
+                style="@style/TabImage"/>
+            <TextView
+                android:id="@+id/tab_message_text"
+                android:text="消息"
+                style="@style/TabText"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_user_layout"
+            style="@style/TabLayout">
+            <ImageView
+                android:id="@+id/tab_user_image"
+                android:background="@drawable/tab_user_selector"
+                style="@style/TabImage"/>
+            <TextView
+                android:id="@+id/tab_user_text"
+                android:text="个人"
+                style="@style/TabText"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/ic_login_page"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/wwpx140"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/wwpx83"
+        android:paddingRight="@dimen/wwpx83"
+        android:layout_height="wrap_content">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:textColorHint="@color/color_title_text"
+            android:theme="@style/CustomLineColor"
+            android:layout_height="@dimen/wwpx95">
+
+            <EditText
+                android:hint="手机号码"
+                android:textColor="@color/color_title_text"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/wwpx32"
+                android:inputType="number"
+                android:maxLength="11"
+                android:layout_height="wrap_content"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_height="@dimen/wwpx95">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0px"
+                android:theme="@style/CustomLineColor"
+                android:layout_weight="1"
+                android:textColorHint="@color/color_title_text"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:hint="验证码"
+                    android:textColor="@color/color_title_text"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/wwpx32"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:layout_height="match_parent"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:text="@string/gain_text_code"
+                style="@style/CommitButtonStyle"/>
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:theme="@style/CustomLineColor"
+            android:textColorHint="@color/color_title_text"
+            android:layout_height="@dimen/wwpx95">
+            <EditText
+                android:hint="设置密码"
+                android:textColor="@color/color_title_text"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/wwpx32"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:maxLength="11"
+                android:layout_height="wrap_content"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:layout_marginTop="@dimen/wwpx15"
+            android:text="@string/str_register"
+            style="@style/CommitButtonStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>

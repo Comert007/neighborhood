@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@mipmap/ic_home_page"
+    android:gravity="center_horizontal"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="@dimen/wwpx48"
+        android:layout_alignParentBottom="true"
+        android:layout_height="@dimen/wwpx48"
+        android:layout_marginBottom="@dimen/wwpx250"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateDrawable="@drawable/anim_loading" />
+
+</RelativeLayout>
