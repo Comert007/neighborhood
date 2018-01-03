@@ -8,7 +8,9 @@ import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 
 /**
- * Created by feng on 2017/12/23.
+ *
+ * @author feng
+ * @date 2017/12/23
  */
 
 public class LauncherActivity extends BaseActivity<VoidView,VoidModel>{

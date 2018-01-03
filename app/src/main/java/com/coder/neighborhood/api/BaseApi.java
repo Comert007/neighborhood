@@ -19,7 +19,9 @@ import ww.com.http.rx.RxHelper;
 import ww.com.http.rx.StringFunc;
 
 /**
- * Created by feng on 2017/12/21.
+ *
+ * @author feng
+ * @date 2017/12/21
  */
 
 public class BaseApi {

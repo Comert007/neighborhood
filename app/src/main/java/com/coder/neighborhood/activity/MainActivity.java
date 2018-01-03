@@ -23,6 +23,9 @@ import java.util.List;
 import butterknife.BindViews;
 import ww.com.core.adapter.MenuTabAdapter;
 
+/**
+ * @author feng
+ */
 public class MainActivity extends BaseActivity<VoidView, VoidModel> {
 
     @BindViews({R.id.tab_home_layout, R.id.tab_cart_layout, R.id.tab_circle_layout, R.id

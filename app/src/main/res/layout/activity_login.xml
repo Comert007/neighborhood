@@ -46,6 +46,7 @@
                 style="@style/CommitButtonStyle"/>
 
 
+
             <Button
                 android:id="@+id/btn_enter"
                 android:layout_width="0px"
