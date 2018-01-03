@@ -8,7 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.coder.neighborhood.config.Constants;
 
 /**
- * Created by feng on 2016/10/9.
+ *
+ * @author feng
+ * @date 2016/10/9
  */
 public class ResponseBean {
 
