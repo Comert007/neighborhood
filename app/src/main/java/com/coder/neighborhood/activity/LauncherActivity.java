@@ -3,7 +3,7 @@ package com.coder.neighborhood.activity;
 import android.os.Handler;
 
 import com.coder.neighborhood.R;
-import com.coder.neighborhood.activity.user.RegisterActivity;
+import com.coder.neighborhood.activity.user.LoginActivity;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 
@@ -23,7 +23,7 @@ public class LauncherActivity extends BaseActivity<VoidView,VoidModel>{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                RegisterActivity.start(LauncherActivity.this);
+                LoginActivity.start(LauncherActivity.this);
                 finish();
             }
         },2000);

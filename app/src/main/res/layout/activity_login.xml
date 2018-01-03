@@ -1,7 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/ic_login_page"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/wwpx140"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/wwpx83"
+        android:paddingRight="@dimen/wwpx83"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:hint="用户名"
+            style="@style/UserEditTextStyle"/>
+
+        <EditText
+            android:hint="密码"
+            style="@style/UserEditTextStyle"/>
+
+
+        <TextView
+            android:text="@string/str_forget_pass"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/wwpx28"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/color_text"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="@dimen/wwpx10"
+                      android:layout_height="wrap_content">
+            <Button
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="@dimen/wwpx60"
+                android:text="@string/str_user_register"
+                android:textSize="@dimen/wwpx28"
+                style="@style/CommitButtonStyle"/>
+
+
+            <Button
+                android:id="@+id/btn_enter"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:textSize="@dimen/wwpx28"
+                android:layout_height="@dimen/wwpx60"
+                android:text="@string/str_user_enter"
+                style="@style/CommitButtonStyle"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

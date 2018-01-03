@@ -91,7 +91,13 @@
         <!--是否模糊-->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-
+    <style name="UserEditTextStyle">
+        <item name="android:textColor">@color/color_title_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:theme">@style/CustomLineColor</item>
+        <item name="android:textSize">@dimen/wwpx32</item>
+        <item name="android:layout_height">@dimen/wwpx95</item>
+    </style>
 
 
 </resources>

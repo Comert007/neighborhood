@@ -94,6 +94,8 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
                         adapter.changeMenu(4);
                         changeMenuStatus(4);
                         break;
+                    default:
+                        break;
                 }
             }
         });
