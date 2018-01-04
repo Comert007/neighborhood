@@ -11,26 +11,10 @@
     app:titleLeftIco="@mipmap/ic_back"
     app:titleText="首页"/>
 
-
-
-    <ImageView
-        android:layout_marginTop="@dimen/wwpx10"
-        android:src="@mipmap/ic_default"
+    <ww.com.core.widget.CustomRecyclerView
+        android:id="@+id/crv"
+        android:background="@color/color_page_bg"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/wwpx426"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:background="@color/color_white"
-        android:layout_marginTop="@dimen/wwpx10"
-        android:layout_height="@dimen/wwpx340">
-
-    </LinearLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

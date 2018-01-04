@@ -98,6 +98,13 @@
         <item name="android:textSize">@dimen/wwpx32</item>
         <item name="android:layout_height">@dimen/wwpx95</item>
     </style>
+    <style name="HomeTextViewStyle">
+        <item name="android:textSize">@dimen/wwpx26</item>
+        <item name="android:layout_marginTop">@dimen/wwpx28</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
 
 </resources>

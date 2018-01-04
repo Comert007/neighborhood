@@ -2,8 +2,10 @@ package com.coder.neighborhood.activity;
 
 import android.os.Handler;
 
+import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.user.LoginActivity;
+import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 
@@ -25,9 +27,20 @@ public class LauncherActivity extends BaseActivity<VoidView,VoidModel>{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                LoginActivity.start(LauncherActivity.this);
-                finish();
+               enter();
             }
         },2000);
+    }
+
+
+    private void enter(){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user ==null){
+            LoginActivity.start(LauncherActivity.this);
+
+        }else {
+            MainActivity.start(this);
+        }
+        finish();
     }
 }

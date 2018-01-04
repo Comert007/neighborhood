@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_page_bg"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginTop="@dimen/wwpx10"
+        android:src="@mipmap/ic_default"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx322"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/wwpx10"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/wwpx320">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+
+                      android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_live"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="邻里直播"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_secondary_market"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="二手市场"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_mall"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="邻里商场"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_travel"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="邻里旅行"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="@dimen/wwpx40"
+                      android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_help"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="邻里帮帮"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_lost_article"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="失物/寻物"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_express"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="代取快递"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0px"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+
+                <ImageView android:layout_width="@dimen/wwpx42"
+                           android:src="@mipmap/ic_service"
+                           android:layout_height="@dimen/wwpx42"/>
+
+                <TextView
+                    android:text="客服中心"
+                    style="@style/HomeTextViewStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
