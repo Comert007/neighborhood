@@ -20,7 +20,7 @@ public class ResponseFunc implements Func1<String, ResponseBean> {
             if (Constants.STATUS_OK == bean.getStatus())
                 return bean;
             else {
-                throw new RequestErr(bean.getMsg(),bean.getCode());
+                throw new RequestErr(bean.getMessage(),bean.getCode());
             }
         } else {
             throw new NetworkException(NetworkException.TYPE_DEFAULT);

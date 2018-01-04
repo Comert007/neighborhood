@@ -16,7 +16,7 @@ public class ResponseBean {
 
     private int status;
     private int code;
-    private String msg;
+    private String message;
     private String data;
     private String need_relogin;
 
@@ -28,7 +28,7 @@ public class ResponseBean {
             bean.setStatus(json.getInteger("status"));
         } catch (Exception e) {
             bean.setStatus(Constants.STATUS_ERROR);
-            bean.setMsg("数据解析错误!");
+            bean.setMessage("数据解析错误!");
         }
 
         try {
@@ -41,11 +41,11 @@ public class ResponseBean {
         try {
             String msg = json.getString("msg");
             if (!TextUtils.isEmpty(msg)) {
-                bean.setMsg(msg);
+                bean.setMessage(msg);
             }
         } catch (Exception e) {
             bean.setStatus(Constants.STATUS_ERROR);
-            bean.setMsg("数据解析错误!");
+            bean.setMessage("数据解析错误!");
         }
 
         try {
@@ -65,7 +65,7 @@ public class ResponseBean {
 
         } catch (Exception e) {
             bean.setStatus(Constants.STATUS_ERROR);
-            bean.setMsg("数据解析错误!");
+            bean.setMessage("数据解析错误!");
         }
 
         return bean;
@@ -104,12 +104,12 @@ public class ResponseBean {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getData() {
@@ -129,7 +129,7 @@ public class ResponseBean {
         return "ResponseBean{" +
                 "status='" + status + '\'' +
                 ", code=" + code +
-                ", msg='" + msg + '\'' +
+                ", msg='" + message + '\'' +
                 ", data='" + data + '\'' +
                 '}';
     }
