@@ -17,6 +17,7 @@
 
 
         <EditText
+            android:id="@+id/et_mobile"
             android:hint="手机号码"
             android:textColor="@color/color_title_text"
             android:layout_width="match_parent"
@@ -32,6 +33,7 @@
                       android:layout_height="@dimen/wwpx95">
 
             <EditText
+                android:id="@+id/et_password"
                 android:hint="验证码"
                 android:textColor="@color/color_title_text"
                 android:layout_width="0px"
@@ -62,6 +64,7 @@
             android:layout_height="@dimen/wwpx95"/>
 
         <Button
+            android:id="@+id/btn_request_register"
             android:layout_marginTop="@dimen/wwpx15"
             android:text="@string/str_register"
             style="@style/CommitButtonStyle"/>

@@ -11,7 +11,6 @@
     app:titleLeftIco="@mipmap/ic_back"
     app:titleText="首页"/>
 
-    <include layout="@layout/view_title_split"/>
 
 
     <ImageView

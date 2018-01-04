@@ -3,13 +3,15 @@ package com.coder.neighborhood.activity.rx;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Looper;
+import android.text.TextUtils;
 
+import com.coder.neighborhood.api.convert.ResponseErr;
+import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.utils.DialogUtils;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.coder.neighborhood.widget.LoadingDialog;
 
 import rx.Subscriber;
-import ww.com.http.exception.RequestErr;
 
 /**
  * Created by feng on 2017/12/23.
@@ -83,8 +85,8 @@ public abstract class HttpSubscriber<T> extends Subscriber<T> {
 
 
     public void onFail(Throwable e) {
-        if (e instanceof RequestErr) {
-            if (((RequestErr) e).getErrCode() ==  202){
+        if (e instanceof ResponseErr) {
+            if (TextUtils.equals(Constants.CODE_RELOGIN,((ResponseErr) e).getErrCode())){
               //
             }else {
                 ToastUtils.showToast(e.getMessage());

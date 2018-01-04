@@ -33,7 +33,20 @@ public class UserModel implements IModel {
                     public String call(ResponseBean responseBean) {
                         return responseBean.getMessage();
                     }
-                }).compose(RxHelper.<String>cutMain())
+                })
+                .compose(RxHelper.<String>cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void loginUp(String username,
+                        String password,
+                        LifecycleTransformer transformer,
+                        HttpSubscriber<ResponseBean> httpSubscriber){
+
+        UserApi.loginup(username, password)
+                .compose(RxHelper.<ResponseBean>cutMain())
+                .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 }

@@ -17,4 +17,12 @@ public class UserApi extends BaseApi {
         params.addParameters("password",password);
         return onPost(getActionUrl("app/signup"),params);
     }
+
+
+    public static final Observable<ResponseBean> loginup(String username,String password){
+        AjaxParams params = new AjaxParams();
+        params.addParameters("username",username);
+        params.addParameters("password",password);
+        return onPost(getActionUrl("app/signin"),params);
+    }
 }

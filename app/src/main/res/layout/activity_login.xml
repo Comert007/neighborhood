@@ -16,11 +16,14 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/et_mobile"
             android:hint="用户名"
             style="@style/UserEditTextStyle"/>
 
         <EditText
+            android:id="@+id/et_password"
             android:hint="密码"
+            android:inputType="textPassword"
             style="@style/UserEditTextStyle"/>
 
 
