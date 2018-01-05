@@ -128,8 +128,10 @@ public class BaseApi {
     public static final AjaxParams getBaseParams() {
         AjaxParams params = new AjaxParams();
         Map<String, String> header = getHeader();
-        for (String key : header.keySet()) {
-            params.addHeaders(key, header.get(key));
+        if (header.size()>0){
+            for (String key : header.keySet()) {
+                params.addHeaders(key, header.get(key));
+            }
         }
         return params;
     }

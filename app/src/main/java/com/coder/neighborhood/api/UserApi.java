@@ -12,7 +12,7 @@ import ww.com.http.core.AjaxParams;
 public class UserApi extends BaseApi {
 
     public static final Observable<ResponseBean> signup(String username,String password){
-        AjaxParams params = new AjaxParams();
+        AjaxParams params = getBaseParams();
         params.addParameters("username",username);
         params.addParameters("password",password);
         return onPost(getActionUrl("app/signup"),params);
@@ -20,7 +20,7 @@ public class UserApi extends BaseApi {
 
 
     public static final Observable<ResponseBean> loginup(String username,String password){
-        AjaxParams params = new AjaxParams();
+        AjaxParams params = getBaseParams();
         params.addParameters("username",username);
         params.addParameters("password",password);
         return onPost(getActionUrl("app/signin"),params);
