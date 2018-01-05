@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.home.SecondHandMarketActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
 
@@ -20,19 +21,21 @@ import ww.com.core.ScreenUtil;
  * @Date 2018/1/5.
  */
 
-public class BannerView extends RefreshView {
+public class HomeView extends RefreshView {
 
-    protected Banner banner;
-    protected View bannerView;
-    protected List<String> urls;
+    Banner banner;
+    private View bannerView;
+    private List<String> urls;
 
     @Override
     public void attach() {
         super.attach();
-        bannerView = LayoutInflater.from(preActivity).inflate(R.layout.view_banner,null);
+        bannerView = LayoutInflater.from(preActivity).inflate(R.layout.layout_home_header,null);
+        onBannerPosition();
         ScreenUtil.scale(bannerView);
         banner = ButterKnife.findById(bannerView,R.id.banner);
     }
+
 
     public void addBanner(){
         crv.addHeadView(bannerView);
@@ -59,5 +62,39 @@ public class BannerView extends RefreshView {
 
     public Banner getBanner() {
         return banner;
+    }
+
+
+    private void onBannerPosition(){
+        ButterKnife.findById(bannerView,R.id.ll_second_market).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBannerClick(2);
+            }
+        });
+    }
+
+    private void onBannerClick(int position){
+        switch (position){
+            case 1:
+                break;
+            case 2:
+                SecondHandMarketActivity.start(preActivity);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            default:
+                break;
+        }
     }
 }

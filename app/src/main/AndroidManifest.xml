@@ -28,6 +28,10 @@
 
         <activity android:name=".activity.user.RegisterActivity"
                   android:screenOrientation="portrait"/>
+
+        <!--二手市场-->
+        <activity android:name=".activity.home.SecondHandMarketActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -6,11 +6,11 @@
     android:background="@color/color_page_bg"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_marginTop="@dimen/wwpx10"
-        android:src="@mipmap/ic_default"
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:background="@color/color_b3b3b3"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/wwpx322"/>
+        android:layout_height="@dimen/wwpx322" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,9 @@
                     style="@style/HomeTextViewStyle"/>
             </LinearLayout>
 
-            <LinearLayout android:layout_width="0px"
+            <LinearLayout
+                android:id="@+id/ll_second_market"
+                android:layout_width="0px"
                           android:layout_weight="1"
                           android:orientation="vertical"
                           android:gravity="center"

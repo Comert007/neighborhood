@@ -30,12 +30,12 @@ public class RefreshView extends BaseView {
 
     @Nullable
     @BindView(R.id.crv)
-    CustomRecyclerView crv;
+    protected CustomRecyclerView crv;
     @Nullable
     @BindView(R.id.csr)
-    CustomSwipeRefreshLayout csr;
+    protected CustomSwipeRefreshLayout csr;
 
-    private OnEmptyListener emptyListener;
+    protected OnEmptyListener emptyListener;
 
     public void setEmptyListener(OnEmptyListener emptyListener) {
         this.emptyListener = emptyListener;
