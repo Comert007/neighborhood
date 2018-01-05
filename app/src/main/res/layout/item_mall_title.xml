@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/wwpx20"
+    android:padding="@dimen/wwpx20"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="服饰类"
+            android:textSize="@dimen/wwpx32"
+            android:layout_width="wrap_content"
+            android:textColor="@color/color_black"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="更多 +"
+            android:textSize="@dimen/wwpx28"
+            android:textColor="@color/color_gray"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

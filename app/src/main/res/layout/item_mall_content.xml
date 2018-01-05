@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginRight="@dimen/wwpx19"
+    android:layout_marginLeft="@dimen/wwpx19"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="@dimen/wwpx300"
+        android:src="@mipmap/pic_default"
+        android:layout_height="@dimen/wwpx300"/>
+
+    <TextView
+        android:textSize="@dimen/wwpx26"
+        android:layout_marginTop="@dimen/wwpx10"
+        android:textColor="@color/color_black"
+        android:text="测试数据测试数据测试数据"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/color_red"
+            android:textSize="@dimen/wwpx32"
+            android:text="99"
+            android:gravity="bottom"
+            android:drawableLeft="@mipmap/ic_money_china"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/wwpx26"
+            android:text="服饰类"
+            android:gravity="bottom|right"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/wwpx26"
+            android:text="男童/7岁"
+            android:gravity="bottom|right"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>
