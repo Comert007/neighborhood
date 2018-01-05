@@ -32,6 +32,9 @@
         <!--二手市场-->
         <activity android:name=".activity.home.SecondHandMarketActivity"
                   android:screenOrientation="portrait"/>
+        <!--邻里直播-->
+        <activity android:name=".activity.home.LivingListActivity"
+        android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
