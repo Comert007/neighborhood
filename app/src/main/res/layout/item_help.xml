@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/wwpx20"
+    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:background="@drawable/white_border_round_shape"
+                  android:layout_height="wrap_content">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="@dimen/wwpx20"
+                      android:layout_height="wrap_content">
+
+            <ww.com.core.widget.RoundImageView
+                android:src="@mipmap/ic_default_avatar"
+                android:layout_width="@dimen/wwpx100"
+                app:type="type_circle"
+                android:layout_height="@dimen/wwpx100"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="问"
+                    android:textSize="@dimen/wwpx40"
+                    android:textColor="@color/color_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:padding="@dimen/wwpx20"
+                          android:text="@string/str_test"
+                          android:textSize="@dimen/wwpx26"
+                          android:textColor="@color/color_black"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content"
+                  android:padding="@dimen/wwpx20"
+                  android:text="万能的社区好友和游客已经更新了答案，去看看吧"
+                  android:textSize="@dimen/wwpx26"
+                  android:textColor="@color/color_black"
+                  android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

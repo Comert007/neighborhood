@@ -7,52 +7,54 @@ import android.view.View;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
-import com.coder.neighborhood.adapter.home.LivingListAdapter;
+import com.coder.neighborhood.adapter.home.HelpAdapter;
 import com.coder.neighborhood.mvp.model.VoidModel;
-import com.coder.neighborhood.mvp.vu.home.LivingListView;
+import com.coder.neighborhood.mvp.vu.home.HelpView;
 
 import java.util.Arrays;
 
 import butterknife.OnClick;
 
 /**
- * @author feng
- * @Date 2018/1/5.
+ * Created by feng on 2018/1/8.
  */
 
 @SuppressLint("Registered")
-public class LivingListActivity extends BaseActivity<LivingListView,VoidModel> {
+public class HelpActivity extends BaseActivity<HelpView,VoidModel> {
 
-    private LivingListAdapter adapter;
+
+    private HelpAdapter adapter;
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, LivingListActivity.class);
+        Intent intent = new Intent(context, HelpActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_living_list;
+        return R.layout.activity_help;
     }
 
     @Override
     protected void init() {
-        adapter = new LivingListAdapter(this);
+        adapter = new HelpAdapter(this);
         v.getCrv().setAdapter(adapter);
+
         adapter.addList(Arrays.asList("1","2","3"));
     }
 
+
     @Override
     public void onTitleLeft() {
-        super.onTitleLeft();
         finish();
     }
 
-    @OnClick({R.id.btn_open_living})
-    public void onLiving(View v){
+
+    @OnClick({R.id.btn_ask})
+    public void onHelp(View v){
         switch (v.getId()){
-            case R.id.btn_open_living:
-                LivingCertificationActivity.start(this);
+            case R.id.btn_ask:
+                PublishQuestionActivity.start(this,1);
                 break;
         }
     }

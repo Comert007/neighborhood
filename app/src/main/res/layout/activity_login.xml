@@ -41,6 +41,7 @@
                       android:layout_marginTop="@dimen/wwpx10"
                       android:layout_height="wrap_content">
             <Button
+                android:id="@+id/btn_register"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:layout_height="@dimen/wwpx60"

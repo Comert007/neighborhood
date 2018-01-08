@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#cccccc"
+    style="@style/LlayFill">
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="直播认证"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="@dimen/wwpx200"
+                  android:background="@color/color_white"
+                  android:paddingTop="@dimen/wwpx20"
+                  android:paddingBottom="@dimen/wwpx40"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+
+        <include layout="@layout/view_title_split"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/wwpx20"
+            android:layout_height="wrap_content">
+            <EditText android:layout_width="match_parent"
+                      android:hint="姓名"
+                      android:padding="@dimen/wwpx10"
+                      android:gravity="bottom"
+                      android:textSize="@dimen/wwpx26"
+                      android:textColor="@color/color_text"
+                      android:textColorHint="@color/color_text"
+                      android:background="@android:color/transparent"
+                      android:layout_height="wrap_content"/>
+
+            <View android:layout_width="match_parent"
+                  android:background="@color/color_gray"
+                  android:layout_height="2px"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/wwpx20"
+            android:layout_height="wrap_content">
+            <EditText android:layout_width="match_parent"
+                      android:hint="身份证号"
+                      android:padding="@dimen/wwpx10"
+                      android:gravity="bottom"
+                      android:textSize="@dimen/wwpx26"
+                      android:textColor="@color/color_text"
+                      android:textColorHint="@color/color_text"
+                      android:background="@android:color/transparent"
+                      android:layout_height="wrap_content"/>
+
+            <View android:layout_width="match_parent"
+                  android:background="@color/color_gray"
+                  android:layout_height="2px"/>
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:paddingLeft="@dimen/wwpx40"
+                      android:paddingRight="@dimen/wwpx40"
+                      android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="@dimen/wwpx150"
+                android:layout_margin="@dimen/wwpx20"
+                android:background="@color/color_page_bg"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+
+                    android:layout_width="@dimen/wwpx48"
+                    android:layout_height="@dimen/wwpx48"
+                    android:src="@mipmap/ic_add"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="身份证正面照"
+                          android:textColor="@color/color_black"
+                          android:textSize="@dimen/wwpx26"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="@dimen/wwpx150"
+                android:layout_margin="@dimen/wwpx20"
+                android:background="@color/color_page_bg"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+
+                    android:layout_width="@dimen/wwpx48"
+                    android:layout_height="@dimen/wwpx48"
+                    android:src="@mipmap/ic_add"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="身份证反面照"
+                          android:textColor="@color/color_black"
+                          android:textSize="@dimen/wwpx26"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

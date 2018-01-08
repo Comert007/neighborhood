@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LlayFill">
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="邻里帮帮"/>
+
+
+    <Button
+        android:id="@+id/btn_ask"
+        android:layout_marginTop="@dimen/wwpx20"
+        android:layout_marginBottom="@dimen/wwpx20"
+        android:layout_marginLeft="@dimen/wwpx80"
+        android:layout_marginRight="@dimen/wwpx80"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx60"
+        android:text="我要提问"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/wwpx28"
+        android:layout_below="@+id/et_search"
+        android:background="@drawable/red_round_shape"/>
+
+    <include layout="@layout/layout_refresh"/>
+</LinearLayout>

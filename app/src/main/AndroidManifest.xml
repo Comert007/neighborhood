@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".activity.LauncherActivity"
-        android:screenOrientation="portrait">
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -30,11 +30,40 @@
                   android:screenOrientation="portrait"/>
 
         <!--二手市场-->
-        <activity android:name=".activity.home.SecondHandMarketActivity"
-                  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.home.SecondHandMarketActivity"
+            android:screenOrientation="portrait"/>
         <!--邻里直播-->
-        <activity android:name=".activity.home.LivingListActivity"
-        android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.home.LivingListActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+        <!--邻里旅行-->
+        <activity android:name=".activity.home.TravelActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--邻里帮帮-->
+        <activity
+            android:name=".activity.home.HelpActivity"
+            android:screenOrientation="portrait"/>
+        <!--寻物启示-->
+        <activity android:name=".activity.home.FindThingsActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--发布问题-->
+        <activity android:name=".activity.home.PublishQuestionActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--发布带图片的问题-->
+        <activity android:name=".activity.home.PublishPicQuestionActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--直播认证-->
+        <activity android:name=".activity.home.LivingCertificationActivity"
+                  android:screenOrientation="portrait"/>
+        <!--直播详情界面-->
+        <activity android:name=".activity.home.LivingDetailActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

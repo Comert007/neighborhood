@@ -54,12 +54,14 @@ public class LoginActivity extends BaseActivity<VoidView,UserModel> {
 
     }
 
-    @OnClick({R.id.btn_enter})
+    @OnClick({R.id.btn_enter,R.id.btn_register})
     public void onLoginClick(View v){
         switch (v.getId()){
             case R.id.btn_enter:
-
                 loginup();
+                break;
+            case R.id.btn_register:
+                RegisterActivity.start(this);
                 break;
             default:
                 break;

@@ -54,7 +54,8 @@ public class RegisterActivity extends BaseActivity<VoidView,UserModel> {
                 <String>(this,true){
             @Override
             public void onNext(String s) {
-                ToastUtils.showToast(s);
+                ToastUtils.showToast("注册成功");
+                finish();
             }
         });
     }

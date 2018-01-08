@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/wwpx40"
+    android:layout_marginRight="@dimen/wwpx40"
+    android:layout_marginBottom="@dimen/wwpx30"
+    android:background="@drawable/black_round_shape"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:padding="@dimen/wwpx20"
+                  android:layout_height="@dimen/wwpx400">
+
+       <LinearLayout android:layout_width="match_parent"
+                     android:orientation="vertical"
+                     android:paddingLeft="@dimen/wwpx40"
+                     android:paddingRight="@dimen/wwpx40"
+                     android:gravity="center_horizontal"
+                     android:layout_height="wrap_content">
+           <TextView
+               android:layout_width="wrap_content"
+               android:text="精品旅游"
+               android:textColor="@color/color_white"
+               android:textSize="@dimen/wwpx26"
+               android:layout_height="wrap_content"/>
+
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:text="黄山登高"
+               android:textColor="@color/color_white"
+               android:textSize="@dimen/wwpx40"
+               android:layout_marginTop="@dimen/wwpx40"
+               android:layout_height="wrap_content"/>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:text="路线详情"
+               android:textColor="@color/color_white"
+               android:layout_marginTop="@dimen/wwpx20"
+               android:textSize="@dimen/wwpx26"
+               android:layout_height="wrap_content"/>
+       </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="4888元/人起"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/color_red"
+            android:layout_marginTop="@dimen/wwpx20"
+            android:textSize="@dimen/wwpx28"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
