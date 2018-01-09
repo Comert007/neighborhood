@@ -6,10 +6,13 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.mall.OrderStatusActivity;
+import com.coder.neighborhood.activity.user.GoodFriendsActivity;
 import com.coder.neighborhood.activity.user.LoginActivity;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
+import com.coder.neighborhood.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -29,8 +32,8 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
     @BindView(R.id.tv_name)
     TextView tvName;
 
-    private QMUIDialog dialog;
-
+    private QMUIDialog quiteDialog;
+    private QMUIDialog signDialog;
 
     @Override
     protected int getLayoutResId() {
@@ -51,17 +54,20 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
         }
     }
 
-    @OnClick({R.id.btn_loginout})
+    @OnClick({R.id.btn_loginout,R.id.ll_sign})
     public void onUser(View v){
         switch (v.getId()){
             case R.id.btn_loginout:
                 showDialog();
                 break;
+            case R.id.ll_sign:
+                showSign();
+                break;
         }
     }
 
     private void showDialog(){
-        if (dialog ==null){
+        if (quiteDialog ==null){
             QMUIDialog.MessageDialogBuilder builder = new QMUIDialog.MessageDialogBuilder(getContext());
             builder.setTitle("提示");
             builder.setMessage("确定退出登录？");
@@ -81,13 +87,62 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
                     dialog.dismiss();
                 }
             });
-            dialog = builder.create();
+            quiteDialog = builder.create();
         }
 
-        if (dialog.isShowing()){
-            dialog.dismiss();
+        if (quiteDialog.isShowing()){
+            quiteDialog.dismiss();
         }else {
-            dialog.show();
+            quiteDialog.show();
+        }
+    }
+
+
+    private void showSign(){
+        if (signDialog ==null){
+            QMUIDialog.MessageDialogBuilder builder = new QMUIDialog.MessageDialogBuilder(getContext());
+            builder.setTitle("签到记录");
+            builder.setMessage("本月签到1天");
+            builder.addAction("签到", new QMUIDialogAction.ActionListener() {
+                @Override
+                public void onClick(QMUIDialog dialog, int index) {
+                    ToastUtils.showToast("签到成功");
+                    dialog.dismiss();
+                }
+            });
+
+            signDialog = builder.create();
+        }
+
+        if (signDialog.isShowing()){
+            signDialog.dismiss();
+        }else {
+            signDialog.show();
+        }
+    }
+
+    @OnClick({R.id.ll_wait_pay,R.id.ll_wait_send,R.id.ll_wait_gain,R.id.ll_wait_comment,R.id.ll_return_goods,
+    R.id.ll_good_friends})
+    public void onUserClick(View v){
+        switch (v.getId()){
+            case R.id.ll_wait_pay:
+                OrderStatusActivity.start(getContext());
+                break;
+            case R.id.ll_wait_send:
+                OrderStatusActivity.start(getContext());
+                break;
+            case R.id.ll_wait_gain:
+                OrderStatusActivity.start(getContext());
+                break;
+            case R.id.ll_wait_comment:
+                OrderStatusActivity.start(getContext());
+                break;
+            case R.id.ll_return_goods:
+                OrderStatusActivity.start(getContext());
+                break;
+            case R.id.ll_good_friends:
+                GoodFriendsActivity.start(getContext());
+                break;
         }
     }
 }

@@ -64,6 +64,24 @@
         <!--直播详情界面-->
         <activity android:name=".activity.home.LivingDetailActivity"
                   android:screenOrientation="portrait"/>
+
+        <!--商品详情-->
+        <activity android:name=".activity.mall.GoodsDetailActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--评价详情-->
+        <activity android:name=".activity.mall.CommentDetailActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--我的订单-->
+        <activity android:name=".activity.mall.OrderStatusActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--好友中心-->
+        <activity android:name=".activity.user.GoodFriendsActivity"
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

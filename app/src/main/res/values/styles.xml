@@ -12,7 +12,7 @@
     <style name="TitleBar">
         <item name="android:layout_height">@dimen/wwpx90</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/color_title_bg</item>
+        <item name="android:background">@color/color_white</item>
     </style>
 
     <style name="WrapContentStyle">
@@ -49,7 +49,7 @@
         <item name="android:paddingRight">@dimen/wwpx24</item>
         <item name="android:paddingLeft">@dimen/wwpx24</item>
         <item name="android:textSize">@dimen/wwpx28</item>
-        <item name="android:textColor">@color/color_title_text</item>
+        <item name="android:textColor">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:minWidth">0dp</item>
@@ -61,7 +61,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">@dimen/wwpx36</item>
-        <item name="android:textColor">@color/color_title_text</item>
+        <item name="android:textColor">@color/color_black</item>
         <item name="android:gravity">center</item>
         <item name="android:maxWidth">200dp</item>
         <item name="android:maxLines">1</item>

@@ -3,6 +3,7 @@ package com.coder.neighborhood.fragment;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.HomeAdapter;
+import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.base.HomeView;
 import com.youth.banner.listener.OnBannerListener;
@@ -45,18 +46,19 @@ public class HomeFragment extends BaseFragment<HomeView,HomeModel>{
     }
 
     private void onBanner(){
-        m.onBanner("1", new HttpSubscriber<List<String>>(getContext(),true) {
+        m.onBanner("1", new HttpSubscriber<List<BannerBean>>(getContext(),true) {
             @Override
-            public void onNext(List<String> strings) {
-                startBanner(strings);
+            public void onNext(List<BannerBean> bannerBeans) {
+
+                startBanner(bannerBeans);
             }
         });
     }
 
-    private void startBanner(List<String> strings) {
+    private void startBanner(List<BannerBean> bannerBeans) {
         urls.clear();
-        for (String string : strings) {
-            urls.add(string);
+        for (BannerBean banner : bannerBeans) {
+            urls.add(banner.getImgUrl());
         }
 
         v.setUrls(urls);

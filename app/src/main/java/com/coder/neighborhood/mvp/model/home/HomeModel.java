@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.bean.ResponseBean;
+import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
@@ -21,15 +22,15 @@ public class HomeModel extends BaseModel {
 
 
     public void onBanner(String bannerType,
-                         HttpSubscriber<List<String>> httpSubscriber){
+                         HttpSubscriber<List<BannerBean>> httpSubscriber){
         HomeApi.banner(bannerType)
-                .map(new Func1<ResponseBean, List<String>>() {
+                .map(new Func1<ResponseBean, List<BannerBean>>() {
                     @Override
-                    public List<String> call(ResponseBean responseBean) {
-                        List<String> strings = JSON.parseArray(responseBean.getData(), String.class);
+                    public List<BannerBean> call(ResponseBean responseBean) {
+                        List<BannerBean> strings = JSON.parseArray(responseBean.getData(), BannerBean.class);
                         return strings;
                     }
-                }).compose(RxHelper.<List<String>>cutMain())
+                }).compose(RxHelper.<List<BannerBean>>cutMain())
                 .subscribe(httpSubscriber);
     }
 

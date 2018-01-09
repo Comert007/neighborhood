@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/wwpx20"
+    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:background="@color/color_white"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20"
+                  android:layout_height="@dimen/wwpx170">
+
+        <ww.com.core.widget.RoundImageView
+            android:src="@mipmap/ic_default_avatar"
+            app:type="type_circle"
+            android:layout_width="@dimen/wwpx92"
+            android:layout_height="@dimen/wwpx92"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:paddingLeft="@dimen/wwpx20"
+                      android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/wwpx26"
+                android:textColor="@color/color_666666"
+                android:layout_width="wrap_content"
+                android:text="这个燕麦牛奶好喝，要多喝好喝只有更好喝，没有最好喝"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:textSize="@dimen/wwpx26"
+                android:textColor="@color/color_666666"
+                android:layout_width="wrap_content"
+                android:text="2017.2.30"
+                android:layout_marginTop="@dimen/wwpx10"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

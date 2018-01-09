@@ -90,7 +90,9 @@
                                 android:text="购物车"/>
                         </LinearLayout>
 
-                        <LinearLayout android:layout_width="0px"
+                        <LinearLayout
+                            android:id="@+id/ll_sign"
+                            android:layout_width="0px"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
                                       android:gravity="center"
@@ -105,11 +107,13 @@
                                 android:text="签到"/>
                         </LinearLayout>
 
-                        <LinearLayout android:layout_width="0px"
-                                      android:layout_height="wrap_content"
-                                      android:layout_weight="1"
-                                      android:gravity="center"
-                                      android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/ll_good_friends"
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
                             <ImageView android:layout_width="@dimen/wwpx42"
                                        android:layout_height="@dimen/wwpx42"
@@ -154,7 +158,9 @@
                                   android:layout_marginTop="@dimen/wwpx40"
                                   android:orientation="horizontal">
 
-                        <LinearLayout android:layout_width="0px"
+                        <LinearLayout
+                            android:id="@+id/ll_wait_pay"
+                            android:layout_width="0px"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
                                       android:gravity="center"
@@ -169,7 +175,9 @@
                                 android:text="待付款"/>
                         </LinearLayout>
 
-                        <LinearLayout android:layout_width="0px"
+                        <LinearLayout
+                            android:id="@+id/ll_wait_send"
+                            android:layout_width="0px"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
                                       android:gravity="center"
@@ -181,10 +189,12 @@
                             <TextView
                                 style="@style/HomeTextViewStyle"
                                 android:layout_marginTop="@dimen/wwpx10"
-                                android:text="代发货"/>
+                                android:text="待发货"/>
                         </LinearLayout>
 
-                        <LinearLayout android:layout_width="0px"
+                        <LinearLayout
+                            android:id="@+id/ll_wait_gain"
+                            android:layout_width="0px"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
                                       android:gravity="center"
@@ -199,7 +209,9 @@
                                 android:text="待收货"/>
                         </LinearLayout>
 
-                        <LinearLayout android:layout_width="0px"
+                        <LinearLayout
+                            android:id="@+id/ll_wait_comment"
+                            android:layout_width="0px"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
                                       android:gravity="center"
@@ -214,7 +226,9 @@
                                 android:text="待评价"/>
                         </LinearLayout>
 
-                        <LinearLayout android:layout_width="0px"
+                        <LinearLayout
+                            android:id="@+id/ll_return_goods"
+                            android:layout_width="0px"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
                                       android:gravity="center"
