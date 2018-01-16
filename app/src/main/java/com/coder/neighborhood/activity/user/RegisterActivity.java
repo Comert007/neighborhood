@@ -2,6 +2,7 @@ package com.coder.neighborhood.activity.user;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,15 +18,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
  * @author feng
  * @date 2017/12/23
  */
 
-public class RegisterActivity extends BaseActivity<VoidView,UserModel> {
+public class RegisterActivity extends BaseActivity<VoidView, UserModel> {
 
     @BindView(R.id.et_mobile)
     EditText etMobile;
+    @BindView(R.id.et_code)
+    EditText etCode;
     @BindView(R.id.et_password)
     EditText etPassword;
 
@@ -49,9 +51,20 @@ public class RegisterActivity extends BaseActivity<VoidView,UserModel> {
     }
 
     @OnClick(R.id.btn_request_register)
-    public void signup(){
-        m.signup("18200131081","123456",bindUntilEvent(ActivityEvent.DESTROY),new HttpSubscriber
-                <String>(this,true){
+    public void signup() {
+        String mobile = etMobile.getText().toString();
+        String password = etPassword.getText().toString();
+        if (TextUtils.isEmpty(mobile) || mobile.length() != 11) {
+            ToastUtils.showToast("请输入正确的手机号");
+            return;
+        }
+
+        if (TextUtils.isEmpty(password) || password.length() < 6) {
+            ToastUtils.showToast("请输入至少6位密码");
+            return;
+        }
+        m.signup(mobile, password, bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber
+                <String>(this, true) {
             @Override
             public void onNext(String s) {
                 ToastUtils.showToast("注册成功");

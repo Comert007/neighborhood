@@ -56,7 +56,6 @@ public class MallFragment extends BaseFragment<MallView, MallModel> {
         m.onBanner("1", new HttpSubscriber<List<BannerBean>>(getContext(),true) {
             @Override
             public void onNext(List<BannerBean> bannerBeans) {
-
                 startBanner(bannerBeans);
             }
         });

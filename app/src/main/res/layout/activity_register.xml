@@ -1,73 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@mipmap/ic_login_page"
-    android:layout_height="match_parent">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/wwpx140"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/wwpx140"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/wwpx83"
-        android:paddingRight="@dimen/wwpx83"
-        android:layout_height="wrap_content">
+        android:paddingRight="@dimen/wwpx83">
 
 
         <EditText
             android:id="@+id/et_mobile"
-            android:hint="手机号码"
-            android:textColor="@color/color_title_text"
             android:layout_width="match_parent"
-            android:theme="@style/CustomLineColor"
-            android:textSize="@dimen/wwpx32"
+            android:layout_height="@dimen/wwpx95"
+            android:hint="手机号码"
             android:inputType="number"
             android:maxLength="11"
-            android:layout_height="@dimen/wwpx95"/>
+            android:textColor="@color/color_title_text"
+            android:textSize="@dimen/wwpx32"
+            android:theme="@style/CustomLineColor"/>
 
         <LinearLayout android:layout_width="match_parent"
-                      android:orientation="horizontal"
+                      android:layout_height="@dimen/wwpx95"
                       android:gravity="center_vertical"
-                      android:layout_height="@dimen/wwpx95">
+                      android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/et_password"
-                android:hint="验证码"
-                android:textColor="@color/color_title_text"
+                android:id="@+id/et_code"
                 android:layout_width="0px"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="@dimen/wwpx32"
-                android:theme="@style/CustomLineColor"
+                android:hint="验证码"
                 android:inputType="number"
                 android:maxLength="6"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_title_text"
+                android:textSize="@dimen/wwpx32"
+                android:theme="@style/CustomLineColor"/>
 
 
             <Button
+                style="@style/CommitButtonStyle"
                 android:layout_width="wrap_content"
-                android:text="@string/gain_text_code"
-                style="@style/CommitButtonStyle"/>
+                android:text="@string/gain_text_code"/>
 
         </LinearLayout>
 
         <EditText
-            android:hint="设置密码"
-            android:textColor="@color/color_title_text"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:textSize="@dimen/wwpx32"
-            android:theme="@style/CustomLineColor"
-            android:singleLine="true"
+            android:layout_height="@dimen/wwpx95"
+            android:hint="设置密码"
             android:inputType="textPassword"
             android:maxLength="11"
-            android:layout_height="@dimen/wwpx95"/>
+            android:singleLine="true"
+            android:textColor="@color/color_title_text"
+            android:textSize="@dimen/wwpx32"
+            android:theme="@style/CustomLineColor"/>
 
         <Button
             android:id="@+id/btn_request_register"
+            style="@style/CommitButtonStyle"
             android:layout_marginTop="@dimen/wwpx15"
-            android:text="@string/str_register"
-            style="@style/CommitButtonStyle"/>
+            android:text="@string/str_register"/>
 
     </LinearLayout>
 
