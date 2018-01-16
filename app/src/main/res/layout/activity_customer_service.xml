@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/LlayFill">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/LlayFill">
 
     <com.coder.neighborhood.widget.TitleView
-    android:id="@+id/title_view"
-    style="@style/TitleBar"
-    app:titleLeftIco="@mipmap/ic_back"
-    app:titleText="圈"/>
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="客服中心"/>
 
     <ww.com.core.widget.TranslateTabBar
         android:id="@+id/translate"
-        app:text="@array/circle_text"
+        app:text="@array/customer_service_text"
         android:layout_width="match_parent"
         app:textColor="@color/color_666666"
         app:textSize="@dimen/wwpx30"

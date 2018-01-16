@@ -82,6 +82,37 @@
                   android:windowSoftInputMode="adjustPan"
                   android:screenOrientation="portrait"/>
 
+        <!--支付显示页面-->
+        <activity android:name=".activity.mall.PayShowActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--代取快递-->
+        <activity android:name=".activity.home.TakeDeliveryActivity"
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"/>
+
+        <!--用户认证-->
+        <activity android:name=".activity.user.UserAuthenticationActivity"
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"/>
+
+        <!--关于我们-->
+        <activity android:name=".activity.user.AboutUsActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--个人信息-->
+        <activity android:name=".activity.user.UserInfoActivity"
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"/>
+
+        <!--好友信息-->
+        <activity android:name=".activity.user.FriendsInfoActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--客服中心-->
+        <activity android:name=".activity.user.CustomerServiceActivity"
+                  android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

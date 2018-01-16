@@ -7,8 +7,10 @@ import android.widget.TextView;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.mall.OrderStatusActivity;
+import com.coder.neighborhood.activity.user.AboutUsActivity;
 import com.coder.neighborhood.activity.user.GoodFriendsActivity;
 import com.coder.neighborhood.activity.user.LoginActivity;
+import com.coder.neighborhood.activity.user.UserInfoActivity;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
@@ -31,6 +33,8 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
     RoundImageView rivHeader;
     @BindView(R.id.tv_name)
     TextView tvName;
+    @BindView(R.id.tv_grade)
+    TextView tvGrade;
 
     private QMUIDialog quiteDialog;
     private QMUIDialog signDialog;
@@ -50,11 +54,12 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
         if (user != null) {
             ImageLoader.getInstance().displayImage(user.getImgUrl(), rivHeader, BaseApplication
                     .getDisplayImageOptions(R.mipmap.ic_default_avatar));
-            tvName.setText("LV.0 "+(TextUtils.isEmpty(user.getNickName())?user.getPhone()+"用户":user.getNickName()));
+            tvName.setText(TextUtils.isEmpty(user.getNickName())?user.getPhone()+"用户":user.getNickName());
+            tvGrade.setText("LV.0");
         }
     }
 
-    @OnClick({R.id.btn_loginout,R.id.ll_sign})
+    @OnClick({R.id.btn_loginout,R.id.ll_sign,R.id.rl_about_us})
     public void onUser(View v){
         switch (v.getId()){
             case R.id.btn_loginout:
@@ -62,6 +67,12 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
                 break;
             case R.id.ll_sign:
                 showSign();
+                break;
+            case R.id.rl_about_us:
+                AboutUsActivity.start(getContext());
+                break;
+            case R.id.ll_user_info:
+                UserInfoActivity.start(getContext());
                 break;
         }
     }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LlayFill">
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="支付页面"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="@dimen/wwpx10"
+                  android:orientation="vertical"
+                  android:background="@color/color_white"
+                  android:layout_height="@dimen/wwpx560">
+
+        <TextView android:layout_width="match_parent"
+                  android:gravity="center"
+                  android:text="支付提示"
+                  android:textColor="@color/color_black"
+                  android:textSize="@dimen/wwpx30"
+                  android:layout_marginTop="@dimen/wwpx48"
+                  android:textStyle="bold"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:text="您所选择的支付功能由第三方平台提供，选择支付方式将转到第三方平台"
+                  android:textColor="@color/color_666666"
+                  android:textSize="@dimen/wwpx28"
+                  android:paddingLeft="@dimen/wwpx61"
+                  android:paddingRight="@dimen/wwpx61"
+                  android:layout_marginTop="@dimen/wwpx23"
+                  android:layout_height="wrap_content"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:gravity="center"
+                      android:layout_height="match_parent">
+            
+            <Button
+                android:layout_width="@dimen/wwpx130"
+                android:background="@mipmap/ic_alipay"
+                android:layout_height="@dimen/wwpx130"/>
+
+
+            <Button
+                android:layout_width="@dimen/wwpx130"
+                android:layout_marginLeft="@dimen/wwpx209"
+                android:background="@mipmap/ic_wechat"
+                android:layout_height="@dimen/wwpx130"/>
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>

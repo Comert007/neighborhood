@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_page_bg"
+    android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:background="@color/color_white"
+                  android:padding="@dimen/wwpx40"
+                  android:gravity="center_horizontal"
+                  android:layout_marginTop="@dimen/wwpx10"
+                  android:layout_height="wrap_content">
+
+        <ww.com.core.widget.RoundImageView
+            android:id="@+id/riv_header"
+            android:layout_width="@dimen/wwpx120"
+            android:layout_height="@dimen/wwpx120"
+            android:src="@mipmap/pic_default"
+            app:type="type_circle"/>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wwpx10"
+            android:text="我是一只小小鸟"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/wwpx32"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wwpx24"
+            android:text="18200131081"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/wwpx24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wwpx20"
+            android:text="四川省成都市"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/wwpx24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wwpx32"
+            android:text="个人介绍"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/wwpx28"/>
+
+        <Button
+            android:layout_width="@dimen/wwpx180"
+            android:layout_marginTop="@dimen/wwpx26"
+            android:layout_height="@dimen/wwpx60"
+            android:background="@drawable/green_border_shape"
+            android:text="添加好友"
+            android:textColor="@color/color_title_text"
+            android:textSize="@dimen/wwpx30"/>
+
+
+
+
+    </LinearLayout>
+</LinearLayout>

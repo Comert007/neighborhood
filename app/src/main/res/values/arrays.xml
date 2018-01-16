@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="customer_service_text">
+        <item>电话咨询</item>
+        <item>在线咨询</item>
+    </string-array>
+
+    <string-array name="circle_text">
+        <item>交友</item>
+        <item>大事件</item>
+        <item>话题</item>
+        <item>活动</item>
+    </string-array>
+
+    <string-array name="circle_second_text">
+        <item>交友</item>
+        <item>大事件</item>
+        <item>话题</item>
+        <item>活动</item>
+    </string-array>
+</resources>

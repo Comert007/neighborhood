@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/LlayFill"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="代取快递"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/wwpx10"
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/wwpx125"
+        android:paddingRight="@dimen/wwpx125">
+
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx80"
+                  android:layout_marginTop="@dimen/wwpx80"
+                  android:hint="姓名"
+                  android:background="@android:color/transparent"
+                  android:textColor="@color/color_title_text"
+                  android:textColorHint="@color/color_title_text"
+                  android:textSize="@dimen/wwpx28"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/color_aaaaaa"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx80"
+                  android:layout_marginTop="@dimen/wwpx60"
+                  android:hint="快递编号"
+                  android:background="@android:color/transparent"
+                  android:textColor="@color/color_title_text"
+                  android:textColorHint="@color/color_title_text"
+                  android:textSize="@dimen/wwpx28"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/color_aaaaaa"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx80"
+                  android:layout_marginTop="@dimen/wwpx60"
+                  android:hint="联系方式（收件人）"
+                  android:background="@android:color/transparent"
+                  android:textColor="@color/color_title_text"
+                  android:textColorHint="@color/color_title_text"
+                  android:textSize="@dimen/wwpx28"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/color_aaaaaa"/>
+
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx80"
+                  android:layout_marginTop="@dimen/wwpx60"
+                  android:hint="备注"
+                  android:background="@android:color/transparent"
+                  android:textColor="@color/color_title_text"
+                  android:textColorHint="@color/color_title_text"
+                  android:textSize="@dimen/wwpx28"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/color_aaaaaa"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx60"
+            android:layout_marginBottom="@dimen/wwpx118"
+            android:layout_marginTop="@dimen/wwpx90"
+            android:background="@drawable/green_border_shape"
+            android:text="提交"
+            android:textColor="@color/color_title_text"
+            android:textSize="@dimen/wwpx30"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
