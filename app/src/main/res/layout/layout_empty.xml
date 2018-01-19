@@ -10,7 +10,6 @@
   <com.qmuiteam.qmui.widget.QMUIEmptyView
       android:id="@+id/empty_view"
       app:qmui_title_text="@string/str_empty_title"
-      app:qmui_detail_text="@string/str_empty_detail"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
   </com.qmuiteam.qmui.widget.QMUIEmptyView>

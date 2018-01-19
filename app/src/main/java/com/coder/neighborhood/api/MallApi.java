@@ -27,4 +27,14 @@ public class MallApi extends BaseApi {
         params.addParameters("pageNo",pageNo);
         return onPost(getActionUrl("app/getItemList"),params);
     }
+
+
+    public static final Observable<ResponseBean> categoryGoods(String mallType,
+                                                               String pageNo){
+        AjaxParams params = getBaseParams();
+        params.addParameters("mallType",mallType);
+        params.addParameters("pageNo",pageNo);
+
+        return onPost(getActionUrl("app/getItemCategoryList"),params);
+    }
 }

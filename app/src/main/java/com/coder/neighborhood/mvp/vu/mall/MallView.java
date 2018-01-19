@@ -2,7 +2,7 @@ package com.coder.neighborhood.mvp.vu.mall;
 
 import android.graphics.Color;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -23,33 +23,14 @@ public class MallView extends BannerView {
     @Override
     public void attach() {
         if (crv!=null){
-            GridLayoutManager manager = new GridLayoutManager(preActivity,2);
-            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    if (position == 0){
-                        return 2;
-                    } else if ((position-1)%3==0){
-                        return 2;
-                    }else {
-                        return 1;
-                    }
-
-                }
-            });
+            LinearLayoutManager manager = new LinearLayoutManager(preActivity);
             crv.setLayoutManager(manager);
             crv.setItemAnimator(new DefaultItemAnimator());
 
             View emptyView = LayoutInflater.from(preActivity).inflate(R.layout.layout_empty, null);
             QMUIEmptyView qmuiEmptyView = ButterKnife.findById(emptyView,R.id.empty_view);
-            qmuiEmptyView.setButton(getResources().getString(R.string.str_empty_btn), new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (emptyListener!=null){
-                        emptyListener.onButton();
-                    }
-                }
-            });
+            qmuiEmptyView.setTitleText("暂无更多商品");
+
             ScreenUtil.scale(emptyView);
             crv.addEmpty(emptyView);
         }
@@ -60,7 +41,7 @@ public class MallView extends BannerView {
             csr.setEnableRefresh(false);
         }
 
-        bannerView = LayoutInflater.from(preActivity).inflate(R.layout.view_banner,null,false);
+        bannerView = LayoutInflater.from(preActivity).inflate(R.layout.view_search_banner,null,false);
         ScreenUtil.scale(bannerView);
         banner = ButterKnife.findById(bannerView,R.id.banner);
     }

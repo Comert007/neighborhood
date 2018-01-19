@@ -7,6 +7,7 @@ import com.coder.neighborhood.api.MallApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.bean.home.GoodsBean;
+import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
@@ -72,6 +73,21 @@ public class MallModel extends BaseModel{
                         return beans;
                     }
                 }).compose(RxHelper.<List<GoodsBean>>cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+
+    public void categoryGoods(String mallType,
+                              String pageNo,
+                              HttpSubscriber<List<CategoryGoodsBean>> httpSubscriber){
+        MallApi.categoryGoods(mallType, pageNo)
+                .map(new Func1<ResponseBean, List<CategoryGoodsBean>>() {
+                    @Override
+                    public List<CategoryGoodsBean> call(ResponseBean responseBean) {
+                        List<CategoryGoodsBean> beans = JSON.parseArray(responseBean.getData(),CategoryGoodsBean.class);
+                        return beans;
+                    }
+                }).compose(RxHelper.<List<CategoryGoodsBean>>cutMain())
                 .subscribe(httpSubscriber);
     }
 

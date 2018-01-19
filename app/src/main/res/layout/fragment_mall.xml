@@ -12,6 +12,7 @@
     app:titleText="商城"/>
 
 
+    <include layout="@layout/layout_search"/>
 
     <ww.com.core.widget.CustomSwipeRefreshLayout
         android:id="@+id/csr"

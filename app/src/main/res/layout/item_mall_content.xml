@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/wwpx350"
     android:orientation="vertical"
     android:layout_marginRight="@dimen/wwpx19"
+    android:padding="@dimen/wwpx2"
     android:layout_marginLeft="@dimen/wwpx19"
+    android:background="@drawable/gray_border_shape"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_goods_image"
-        android:layout_width="@dimen/wwpx300"
+        android:layout_width="@dimen/wwpx348"
+        android:scaleType="centerCrop"
         android:src="@mipmap/pic_default"
-        android:layout_height="@dimen/wwpx300"/>
+        android:layout_height="@dimen/wwpx261"/>
 
     <TextView
         android:id="@+id/tv_goods_title"
         android:textSize="@dimen/wwpx26"
+        android:paddingLeft="@dimen/wwpx16"
+        android:paddingRight="@dimen/wwpx16"
         android:layout_marginTop="@dimen/wwpx10"
         android:textColor="@color/color_black"
         android:text="测试数据测试数据测试数据"
         android:maxLines="2"
         android:ellipsize="end"
+        android:maxWidth="@dimen/wwpx348"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout android:layout_width="@dimen/wwpx348"
                   android:orientation="horizontal"
+                  android:padding="@dimen/wwpx16"
                   android:layout_height="wrap_content">
 
         <TextView
@@ -43,7 +50,6 @@
             android:id="@+id/tv_goods_type"
             android:textColor="@color/color_black"
             android:textSize="@dimen/wwpx26"
-            android:text="服饰类"
             android:gravity="bottom|right"
             android:layout_width="0px"
             android:layout_weight="1"
@@ -54,7 +60,6 @@
             android:id="@+id/tv_goods_use"
             android:textColor="@color/color_black"
             android:textSize="@dimen/wwpx26"
-            android:text="男童/7岁"
             android:gravity="bottom|right"
             android:layout_width="0px"
             android:layout_weight="1"

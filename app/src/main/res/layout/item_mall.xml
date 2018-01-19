@@ -3,8 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="@dimen/wwpx20"
-    android:padding="@dimen/wwpx20"
+    android:background="@color/color_white"
+    android:paddingTop="@dimen/wwpx40"
+    android:paddingBottom="@dimen/wwpx40"
+    android:paddingLeft="@dimen/wwpx20"
+    android:paddingRight="@dimen/wwpx20"
+    android:layout_marginBottom="@dimen/wwpx20"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -30,6 +34,10 @@
 
     </RelativeLayout>
 
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_marginTop="@dimen/wwpx20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
