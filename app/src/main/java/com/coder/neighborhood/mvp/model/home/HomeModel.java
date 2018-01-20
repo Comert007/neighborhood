@@ -3,8 +3,11 @@ package com.coder.neighborhood.mvp.model.home;
 import com.alibaba.fastjson.JSON;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.HomeApi;
+import com.coder.neighborhood.api.MallApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
+import com.coder.neighborhood.bean.home.TravelBean;
+import com.coder.neighborhood.bean.home.TravelDetailBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
@@ -49,6 +52,55 @@ public class HomeModel extends BaseModel {
                 .compose(transformer)
                 .subscribe(httpSubscriber);
 
+    }
+
+
+    public void travels(String pageNo,String pageSize,
+                        LifecycleTransformer transformer,
+                        HttpSubscriber<List<TravelBean>> httpSubscriber){
+        HomeApi.travels(pageNo, pageSize)
+                .map(new Func1<ResponseBean, List<TravelBean>>() {
+                    @Override
+                    public List<TravelBean> call(ResponseBean responseBean) {
+                        return JSON.parseArray(responseBean.getData(),TravelBean.class);
+                    }
+                }).compose(RxHelper.<List<TravelBean>>cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void travelDetail(String travelId, LifecycleTransformer transformer,
+                             HttpSubscriber<TravelDetailBean> httpSubscriber){
+
+        HomeApi.travelDetail(travelId)
+                .map(new Func1<ResponseBean, TravelDetailBean>() {
+                    @Override
+                    public TravelDetailBean call(ResponseBean responseBean) {
+                        return JSON.parseObject(responseBean.getData(),TravelDetailBean.class);
+                    }
+                }).compose(RxHelper.<TravelDetailBean>cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void addCart(String userId,
+                        String itemId,
+                        String quantity,
+                        String itemType,
+                        LifecycleTransformer transformer,
+                        HttpSubscriber<String> httpSubscriber){
+
+
+        MallApi.addCart(userId, itemId, quantity, itemType)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        responseBean.getData();
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.<String>cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
     }
 
 }

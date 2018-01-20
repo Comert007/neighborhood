@@ -1,10 +1,17 @@
 package com.coder.neighborhood.adapter.home;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.adapter.mall.CategoryGoodsItemAdapter;
+import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 
+import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 
@@ -13,7 +20,7 @@ import ww.com.core.adapter.RvViewHolder;
  * @Date 2018/1/5.
  */
 
-public class SecondHandMarketAdapter extends RvAdapter<String> {
+public class SecondHandMarketAdapter extends RvAdapter<CategoryGoodsBean> {
 
     public SecondHandMarketAdapter(Context context) {
         super(context);
@@ -25,19 +32,28 @@ public class SecondHandMarketAdapter extends RvAdapter<String> {
     }
 
     @Override
-    protected RvViewHolder<String> getViewHolder(int viewType, View view) {
+    protected RvViewHolder<CategoryGoodsBean> getViewHolder(int viewType, View view) {
         return new SecondHandMarketViewHolder(view);
     }
 
-    class SecondHandMarketViewHolder extends RvViewHolder<String>{
-
+    class SecondHandMarketViewHolder extends RvViewHolder<CategoryGoodsBean>{
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+        @BindView(R.id.rv)
+        RecyclerView rv;
         public SecondHandMarketViewHolder(View itemView) {
             super(itemView);
         }
 
         @Override
-        public void onBindData(int position, String bean) {
-
+        public void onBindData(int position, CategoryGoodsBean bean) {
+            tvTitle.setText(bean.getItemCategoryName());
+            GridLayoutManager manager = new GridLayoutManager(getContext(),2);
+            rv.setLayoutManager(manager);
+            rv.setItemAnimator(new DefaultItemAnimator());
+            CategoryGoodsItemAdapter adapter = new CategoryGoodsItemAdapter(getContext());
+            adapter.addList(bean.getItem());
+            rv.setAdapter(adapter);
         }
     }
 }

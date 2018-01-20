@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.mall.GoodsDetailActivity;
 import com.coder.neighborhood.bean.mall.CategoryGoodsItemBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -50,22 +51,23 @@ public class CategoryGoodsItemAdapter extends RvAdapter<CategoryGoodsItemBean> {
         TextView tvGoodsUse;
         public CategoryGoodsItemViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    
-                }
-            });
+
         }
 
         @Override
-        public void onBindData(int position, CategoryGoodsItemBean bean) {
+        public void onBindData(int position, final CategoryGoodsItemBean bean) {
             ImageLoader.getInstance().displayImage(bean.getImgUrl(), ivGoodsImage,
                     BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             tvGoodsTitle.setText(TextUtils.isEmpty(bean.getItemName())?"":bean.getItemName());
             tvGoodsPrice.setText(TextUtils.isEmpty(bean.getItemPrice())?"":bean.getItemPrice());
 //            tvGoodsType.setText(TextUtils.isEmpty(bean.getItemCategoryName())?"":bean.getItemCategoryName());
 //            tvGoodsUse.setText(TextUtils.isEmpty(bean.getItemPickingPrice())?"":bean.getItemPickingPrice());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GoodsDetailActivity.start(getContext(),bean.getItemId());
+                }
+            });
         }
     }
 }

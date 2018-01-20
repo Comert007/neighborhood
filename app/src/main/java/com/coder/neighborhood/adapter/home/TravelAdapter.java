@@ -2,9 +2,15 @@ package com.coder.neighborhood.adapter.home;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.home.TravelDetailActivity;
+import com.coder.neighborhood.bean.home.TravelBean;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 
@@ -12,7 +18,7 @@ import ww.com.core.adapter.RvViewHolder;
  * Created by feng on 2018/1/8.
  */
 
-public class TravelAdapter extends RvAdapter<String> {
+public class TravelAdapter extends RvAdapter<TravelBean> {
 
     public TravelAdapter(Context context) {
         super(context);
@@ -24,19 +30,42 @@ public class TravelAdapter extends RvAdapter<String> {
     }
 
     @Override
-    protected RvViewHolder<String> getViewHolder(int viewType, View view) {
+    protected RvViewHolder<TravelBean> getViewHolder(int viewType, View view) {
         return new TravelViewHolder(view);
     }
 
-    class TravelViewHolder extends RvViewHolder<String>{
+    class TravelViewHolder extends RvViewHolder<TravelBean>{
+
+        @BindView(R.id.tv_travel_name)
+        TextView tvTravelName;
+        @BindView(R.id.tv_travel_route)
+        TextView tvTravelRoute;
+        @BindView(R.id.tv_travel_price)
+        TextView tvTravelPrice;
+        @BindView(R.id.iv_bg)
+        ImageView ivBg;
+
+
 
         public TravelViewHolder(View itemView) {
             super(itemView);
+
         }
 
         @Override
-        public void onBindData(int position, String bean) {
+        public void onBindData(int position, final TravelBean bean) {
+            tvTravelName.setText(bean.getTravelName());
+            tvTravelRoute.setText(bean.getTraveRoute());
+            tvTravelPrice.setText(bean.getTravePrice()+"元/人起");
 
+            ImageLoader.getInstance().displayImage(bean.getImgUrl(),ivBg);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TravelDetailActivity.start(getContext(),bean.getTravelId());
+                }
+            });
         }
     }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.mall.CartActivity;
 import com.coder.neighborhood.activity.mall.OrderStatusActivity;
 import com.coder.neighborhood.activity.user.AboutUsActivity;
 import com.coder.neighborhood.activity.user.GoodFriendsActivity;
@@ -59,7 +60,7 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
         }
     }
 
-    @OnClick({R.id.btn_loginout,R.id.ll_sign,R.id.rl_about_us})
+    @OnClick({R.id.btn_loginout,R.id.ll_sign,R.id.rl_about_us,R.id.ll_cart,R.id.ll_order})
     public void onUser(View v){
         switch (v.getId()){
             case R.id.btn_loginout:
@@ -73,6 +74,12 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
                 break;
             case R.id.ll_user_info:
                 UserInfoActivity.start(getContext());
+                break;
+            case R.id.ll_cart:
+                CartActivity.start(getContext());
+                break;
+            case R.id.ll_order:
+                OrderStatusActivity.start(getContext());
                 break;
         }
     }

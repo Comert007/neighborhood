@@ -37,4 +37,83 @@ public class MallApi extends BaseApi {
 
         return onPost(getActionUrl("app/getItemCategoryList"),params);
     }
+
+    public static final Observable<ResponseBean> goodsDetailBanner(String itemId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("itemId",itemId);
+
+        return onPost(getActionUrl("app/getItemDetails"),params);
+    }
+
+    public static final Observable<ResponseBean> goodsDetail(String itemId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("itemId",itemId);
+
+        return onPost(getActionUrl("app/getItemInfo"),params);
+    }
+
+
+    public static final Observable<ResponseBean> comments(String itemId,
+                                                          String pageNo,
+                                                          String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("itemId",itemId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getItemCommentsList"),params);
+    }
+
+
+    public static final Observable<ResponseBean> addCart(String userId,
+                                                         String itemId,
+                                                         String quantity,
+                                                         String itemType){
+
+        AjaxParams params = getBaseParams();
+        params.addParameters("itemId",itemId);
+        params.addParameters("userId",userId);
+        params.addParameters("quantity",quantity);
+        params.addParameters("itemType",itemType);
+
+        return onPost(getActionUrl("app/addCart"),params);
+    }
+
+    public static final Observable<ResponseBean> deleteCart(String userId,
+                                                         String cartId){
+
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("cartId",cartId);
+
+        return onPost(getActionUrl("app/deleteCart"),params);
+    }
+    public static final Observable<ResponseBean> cartGoods(String userId,
+                                                           String selectFlag,
+                                                           String pageNo,
+                                                           String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("selectFlag",selectFlag);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getCartList"),params);
+    }
+
+
+    public static final Observable<ResponseBean> goodsOrders(String userId,
+                                                           String orderStatus,
+                                                           String pageNo,
+                                                           String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("orderStatus",orderStatus);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getOrderList"),params);
+    }
+
+
 }

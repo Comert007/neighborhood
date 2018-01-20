@@ -11,5 +11,6 @@ public class GoodFriendsView extends RefreshView {
     @Override
     public void attach() {
         super.attach();
+        qmuiEmptyView.setTitleText("暂无更多好友");
     }
 }

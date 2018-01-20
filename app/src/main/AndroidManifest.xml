@@ -2,6 +2,15 @@
 <manifest package="com.coder.neighborhood"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
+
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -33,6 +42,7 @@
         <!--二手市场-->
         <activity
             android:name=".activity.home.SecondHandMarketActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <!--邻里直播-->
         <activity
@@ -112,6 +122,14 @@
 
         <!--客服中心-->
         <activity android:name=".activity.user.CustomerServiceActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--购物车-->
+        <activity android:name=".activity.mall.CartActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--旅游详情-->
+        <activity android:name=".activity.home.TravelDetailActivity"
                   android:screenOrientation="portrait"/>
 
     </application>

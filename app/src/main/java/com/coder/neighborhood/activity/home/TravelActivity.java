@@ -6,20 +6,26 @@ import android.content.Intent;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
+import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.home.TravelAdapter;
-import com.coder.neighborhood.mvp.model.VoidModel;
+import com.coder.neighborhood.bean.home.TravelBean;
+import com.coder.neighborhood.config.Constants;
+import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.home.TravelView;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by feng on 2018/1/8.
  */
 
 @SuppressLint("Registered")
-public class TravelActivity extends BaseActivity<TravelView,VoidModel> {
+public class TravelActivity extends BaseActivity<TravelView,HomeModel> {
 
     private TravelAdapter adapter;
+
+    private int page =1;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, TravelActivity.class);
@@ -41,6 +47,17 @@ public class TravelActivity extends BaseActivity<TravelView,VoidModel> {
         adapter = new TravelAdapter(this);
         v.getCrv().setAdapter(adapter);
 
-        adapter.addList(Arrays.asList("1","2","3"));
+        onTravels();
+    }
+
+    private void onTravels(){
+        m.travels(page + "", Constants.PAGE_SIZE + "", bindUntilEvent(ActivityEvent.DESTROY)
+                , new HttpSubscriber<List<TravelBean>>(this,true) {
+                    @Override
+                    public void onNext(List<TravelBean> travelBeans) {
+                        adapter.addList(travelBeans);
+
+                    }
+                });
     }
 }

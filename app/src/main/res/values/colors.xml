@@ -23,8 +23,8 @@
 
     <color name="color_tab_text">#acacac</color>
     <color name="color_split">#bbbbbb</color>
-    <color name="color_title_text">#43cc60</color>
-    <color name="color_text">#43cc60</color>
+    <color name="color_title_text">#29D829</color>
+    <color name="color_text">#29D829</color>
     <color name="color_gray">#666666</color>
     <color name="color_black">#333333</color>
     <color name="color_yellow">#FF7F21</color>
@@ -36,5 +36,7 @@
     <color name="color_b3b3b3">#b3b3b3</color>
     <color name="color_aaaaaa">#aaaaaa</color>
     <color name="color_1d65a2">#1d65a2</color>
+    
+    <color name="color_c7fea416">#c7fea416</color>
 
 </resources>

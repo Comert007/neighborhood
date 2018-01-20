@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:background="@color/color_white"
+              android:layout_marginBottom="@dimen/wwpx20"
+              android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/ll_check"
+        android:layout_width="wrap_content"
+                  android:gravity="center"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:layout_height="match_parent">
+
+        <com.coder.neighborhood.widget.IconFontTextView
+            android:id="@+id/itv_check"
+            android:text="\ue678"
+            android:textSize="@dimen/wwpx40"
+            android:textColor="@color/color_aaaaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:paddingTop="@dimen/wwpx40"
+                  android:orientation="vertical"
+                  android:paddingBottom="@dimen/wwpx40"
+                  android:layout_marginBottom="@dimen/wwpx20"
+                  android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:paddingLeft="@dimen/wwpx20"
+                      android:layout_height="wrap_content">
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:padding="@dimen/wwpx1"
+                          android:background="@drawable/gray_border_shape"
+                          android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_goods_image"
+                    android:src="@mipmap/pic_default"
+                    android:layout_width="@dimen/wwpx220"
+                    android:layout_height="@dimen/wwpx220"/>
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="vertical"
+                          android:paddingLeft="@dimen/wwpx20"
+                          android:paddingRight="@dimen/wwpx20"
+                          android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_goods_name"
+                    android:textSize="@dimen/wwpx28"
+                    android:textColor="@color/color_666666"
+                    android:text="川香鸡柳早餐各种零食"
+                    android:lines="2"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_goods_num"
+                    android:textSize="@dimen/wwpx26"
+                    android:textColor="@color/color_666666"
+                    android:text="数量："
+                    android:layout_marginTop="@dimen/wwpx30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_goods_type"
+                    android:textSize="@dimen/wwpx26"
+                    android:textColor="@color/color_666666"
+                    tools:text="鸡肉/一串6份"
+                    android:layout_marginTop="@dimen/wwpx20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_price_symbol"
+                        android:text="￥"
+                        android:textSize="@dimen/wwpx26"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_goods_price"
+                        tools:text="28.8元/份"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tv_price_symbol"
+                        android:textSize="@dimen/wwpx38"
+                        android:textColor="@color/color_yellow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                    <com.coder.neighborhood.widget.IconFontTextView
+                        android:id="@+id/itv_delete"
+                        android:text="\ue615"
+                        android:textSize="@dimen/wwpx35"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/color_aaaaaa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

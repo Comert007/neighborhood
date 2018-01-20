@@ -57,6 +57,7 @@ public class CircleFragment extends BaseFragment<VoidView,VoidModel>{
         vp.setOffscreenPageLimit(3);
 
         vp.setOnPageChangeListener(pageChangeListener);
+
     }
 
     private void addFragment(){

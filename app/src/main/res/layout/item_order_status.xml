@@ -10,13 +10,18 @@
 
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="horizontal"
+                  android:paddingLeft="@dimen/wwpx20"
                   android:layout_height="wrap_content">
-        
-        <ImageView
-            android:src="@mipmap/pic_default"
-            android:layout_width="@dimen/wwpx220"
-            android:layout_height="@dimen/wwpx220"/>
 
+        <LinearLayout android:layout_width="wrap_content"
+                      android:padding="@dimen/wwpx1"
+                      android:background="@drawable/gray_border_shape"
+                      android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/pic_default"
+                android:layout_width="@dimen/wwpx220"
+                android:layout_height="@dimen/wwpx220"/>
+        </LinearLayout>
         <LinearLayout android:layout_width="match_parent"
                       android:orientation="vertical"
                       android:paddingLeft="@dimen/wwpx20"

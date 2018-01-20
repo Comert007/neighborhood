@@ -81,7 +81,9 @@
                               android:layout_marginTop="@dimen/wwpx70"
                               android:orientation="horizontal">
 
-                    <LinearLayout android:layout_width="0px"
+                    <LinearLayout
+                        android:id="@+id/ll_cart"
+                        android:layout_width="0px"
                                   android:layout_height="wrap_content"
                                   android:layout_weight="1"
                                   android:gravity="center"
@@ -273,7 +275,9 @@
             </RelativeLayout>
 
 
-            <RelativeLayout android:layout_width="match_parent"
+            <RelativeLayout
+                android:id="@+id/ll_order"
+                android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/wwpx10"
                             android:background="@color/color_white"

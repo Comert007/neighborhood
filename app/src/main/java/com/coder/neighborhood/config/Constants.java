@@ -12,6 +12,7 @@ public class Constants {
     public static final String CODE_OK = "000000";
     public static final int CONNECT_TIME_OUT = 15;
     public static final int READ_TIME_OUT = 60 * 1000;
+    public static final int PAGE_SIZE =10;
 
     //商场类型（1商城2二手商城）
     public static final String TYPE_MALL = "1";

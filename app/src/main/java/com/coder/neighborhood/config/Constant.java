@@ -1,4 +1,4 @@
-package com.ww.android.esclub.config;
+package com.coder.neighborhood.config;
 
 /**
  * Created by feng on 2017/6/22.

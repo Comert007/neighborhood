@@ -37,6 +37,8 @@ public class RefreshView extends BaseView {
 
     protected OnEmptyListener emptyListener;
 
+    protected QMUIEmptyView qmuiEmptyView;
+
     public void setEmptyListener(OnEmptyListener emptyListener) {
         this.emptyListener = emptyListener;
     }
@@ -55,15 +57,8 @@ public class RefreshView extends BaseView {
             crv.setItemAnimator(new DefaultItemAnimator());
 
             View emptyView = LayoutInflater.from(preActivity).inflate(R.layout.layout_empty, null);
-            QMUIEmptyView qmuiEmptyView = ButterKnife.findById(emptyView,R.id.empty_view);
-            qmuiEmptyView.setButton(getResources().getString(R.string.str_empty_btn), new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (emptyListener!=null){
-                        emptyListener.onButton();
-                    }
-                }
-            });
+            qmuiEmptyView = ButterKnife.findById(emptyView,R.id.empty_view);
+            qmuiEmptyView.setTitleText("暂无更多商品");
             ScreenUtil.scale(emptyView);
             crv.addEmpty(emptyView);
         }

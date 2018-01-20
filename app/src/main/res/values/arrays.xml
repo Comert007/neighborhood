@@ -13,9 +13,29 @@
     </string-array>
 
     <string-array name="circle_second_text">
-        <item>交友</item>
-        <item>大事件</item>
-        <item>话题</item>
-        <item>活动</item>
+        <item>小区圈</item>
+        <item>好友圈</item>
+        <item>游客圈</item>
     </string-array>
+
+    <string-array name="goods_detail_text">
+        <item>商品详情</item>
+        <item>评价详情</item>
+    </string-array>
+
+
+    <string-array name="travel_detail_text">
+        <item>路线详情</item>
+    </string-array>
+
+    <string-array name="help_text">
+        <item>好友问题</item>
+        <item>游客问题</item>
+    </string-array>
+    <string-array name="find_things_text">
+        <item>寻物启事</item>
+        <item>失物招领</item>
+    </string-array>
+
+
 </resources>

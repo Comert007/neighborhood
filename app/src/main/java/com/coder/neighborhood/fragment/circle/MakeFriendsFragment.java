@@ -11,7 +11,6 @@ import com.coder.neighborhood.mvp.vu.circle.MakeFriendsView;
 
 import java.util.Arrays;
 
-import butterknife.BindView;
 import ww.com.core.ScreenUtil;
 import ww.com.core.widget.TranslateTabBar;
 
@@ -22,7 +21,6 @@ import ww.com.core.widget.TranslateTabBar;
 
 public class MakeFriendsFragment extends BaseFragment<MakeFriendsView,VoidModel> {
 
-    @BindView(R.id.translate)
     TranslateTabBar translate;
 
     private MakeFriendsAdapter adapter;
@@ -36,10 +34,10 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView,VoidModel>
     protected void init() {
         adapter = new MakeFriendsAdapter(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_make_friends_header,null);
+        translate = view.findViewById(R.id.translate);
         ScreenUtil.scale(view);
-        v.getCrv().addHeadView(view);
         v.getCrv().setAdapter(adapter);
-
+        v.getCrv().addHeadView(view);
         adapter.addList(Arrays.asList("1","2","3"));
 
         translate.setOnTabChangeListener(new TranslateTabBar.OnTabChangeListener() {

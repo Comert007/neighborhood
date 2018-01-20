@@ -25,4 +25,15 @@ public class UserApi extends BaseApi {
         params.addParameters("password",password);
         return onPost(getActionUrl("app/signin"),params);
     }
+
+    public static final Observable<ResponseBean> friends(String userId,
+                                                         String pageNo,
+                                                         String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getFriendList"),params);
+    }
 }

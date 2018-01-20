@@ -49,4 +49,21 @@ public class UserModel implements IModel {
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
+    
+    
+    public void friends(String userId,
+                        String pageNo,
+                        String pageSize,
+                        LifecycleTransformer transformer,
+                        HttpSubscriber<String> httpSubscriber){
+        UserApi.friends(userId, pageNo, pageSize)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.<String>cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
 }
