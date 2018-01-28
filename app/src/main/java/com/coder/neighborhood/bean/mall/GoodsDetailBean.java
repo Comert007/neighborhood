@@ -45,6 +45,18 @@ public class GoodsDetailBean {
     private String itemDealQuantiry;
     private String itemUnit;
     private String itemInfo;
+    /**
+     * hotFlag : 1
+     * sort : 10
+     * sellType : 1
+     * mallType : 1
+     */
+
+    private String hotFlag;
+    private String sort;
+    private String sellType;
+    private String mallType;
+
 
     public String getId() {
         return id;
@@ -180,5 +192,37 @@ public class GoodsDetailBean {
 
     public void setItemInfo(String itemInfo) {
         this.itemInfo = itemInfo;
+    }
+
+    public String getHotFlag() {
+        return hotFlag;
+    }
+
+    public void setHotFlag(String hotFlag) {
+        this.hotFlag = hotFlag;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getSellType() {
+        return sellType;
+    }
+
+    public void setSellType(String sellType) {
+        this.sellType = sellType;
+    }
+
+    public String getMallType() {
+        return mallType;
+    }
+
+    public void setMallType(String mallType) {
+        this.mallType = mallType;
     }
 }

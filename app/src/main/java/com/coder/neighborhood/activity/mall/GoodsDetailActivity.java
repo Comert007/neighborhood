@@ -13,6 +13,7 @@ import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.BaseApi;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.bean.mall.CommentBean;
 import com.coder.neighborhood.bean.mall.GoodsDetailBean;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.GoodsDetailView;
@@ -84,6 +85,7 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
 
     private void initData() {
         onGoodsDetail();
+        comment();
     }
 
     private void initListener(){
@@ -146,11 +148,14 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
     }
 
 
-    @OnClick({R.id.ll_add_cart})
+    @OnClick({R.id.ll_add_cart,R.id.btn_more_comment})
     public void onGoodsClick(View view){
         switch (view.getId()){
             case R.id.ll_add_cart:
                 addCart();
+                break;
+            case R.id.btn_more_comment:
+                CommentDetailActivity.start(this,goodSid);
                 break;
         }
     }
@@ -169,6 +174,20 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
                 ToastUtils.showToast("添加购物车成功");
             }
         });
+    }
+
+    private void comment(){
+        m.comments(goodSid, "1", "1", bindUntilEvent(ActivityEvent.DESTROY)
+                , new HttpSubscriber<List<CommentBean>>(this,false) {
+                    @Override
+                    public void onNext(List<CommentBean> commentBeans) {
+                        if (commentBeans!=null && commentBeans.size()>0){
+                            rlPartComment.setVisibility(View.VISIBLE);
+                        }else {
+                            rlPartComment.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
 
 }

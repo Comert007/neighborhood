@@ -11,22 +11,27 @@
         app:titleLeftIco="@mipmap/ic_back"
         app:titleText="直播认证"/>
 
+
+    <ImageView android:layout_width="match_parent"
+               android:scaleType="centerCrop"
+               android:src="@mipmap/ic_living_certification"
+               android:layout_height="@dimen/wwpx342"/>
+
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_marginTop="@dimen/wwpx200"
                   android:background="@color/color_white"
                   android:paddingTop="@dimen/wwpx20"
+                  android:gravity="center_horizontal"
                   android:paddingBottom="@dimen/wwpx40"
                   android:orientation="vertical"
-                  android:layout_height="wrap_content">
-
-        <include layout="@layout/view_title_split"/>
-
+                  android:layout_height="match_parent">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_margin="@dimen/wwpx20"
+            android:paddingLeft="@dimen/wwpx120"
+            android:paddingRight="@dimen/wwpx120"
+            android:paddingTop="@dimen/wwpx80"
             android:layout_height="wrap_content">
             <EditText android:layout_width="match_parent"
                       android:hint="姓名"
@@ -47,7 +52,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_margin="@dimen/wwpx20"
+            android:paddingLeft="@dimen/wwpx120"
+            android:paddingRight="@dimen/wwpx120"
+            android:paddingTop="@dimen/wwpx40"
             android:layout_height="wrap_content">
             <EditText android:layout_width="match_parent"
                       android:hint="身份证号"
@@ -69,6 +76,7 @@
                       android:orientation="horizontal"
                       android:paddingLeft="@dimen/wwpx40"
                       android:paddingRight="@dimen/wwpx40"
+                      android:layout_marginTop="@dimen/wwpx50"
                       android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="0px"
@@ -111,6 +119,22 @@
                           android:textSize="@dimen/wwpx26"/>
             </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:background="@drawable/green_border_shape"
+            android:text="申请"
+            android:textSize="@dimen/wwpx30"
+            android:textColor="@color/color_text"
+            android:layout_marginTop="@dimen/wwpx50"
+            android:layout_width="@dimen/wwpx498"
+            android:layout_height="@dimen/wwpx60"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:text="欢迎使用万家邻里"
+                  android:textColor="@color/color_666666"
+                  android:textSize="@dimen/wwpx28"
+                  android:gravity="center|bottom"
+                  android:layout_height="match_parent"/>
 
     </LinearLayout>
 

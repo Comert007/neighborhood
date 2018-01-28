@@ -132,7 +132,7 @@ public class MallModel extends BaseModel{
 
     public void comments(String itemId,String pageNo,String pageSize,
                          LifecycleTransformer transformer,
-                         HttpSubscriber<GoodsDetailBean> httpSubscriber){
+                         HttpSubscriber<List<CommentBean>> httpSubscriber){
         MallApi.comments(itemId, pageNo, pageSize)
                 .map(new Func1<ResponseBean, List<CommentBean>>() {
                     @Override

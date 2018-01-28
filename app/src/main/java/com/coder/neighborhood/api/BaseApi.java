@@ -26,7 +26,7 @@ import ww.com.http.rx.StringFunc;
 
 public class BaseApi {
 
-    public static final String HOST_URL = "http://39.106.109.134/";
+    public static final String HOST_URL = "http://39.106.140.31/";
     private static final String BASE_URL = HOST_URL+"linli/";
 
     protected static final String getActionUrl(String action) {
