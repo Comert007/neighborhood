@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout android:layout_width="@dimen/wwpx250"
+                    android:layout_height="@dimen/wwpx180">
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="@dimen/wwpx230"
+            android:layout_centerInParent="true"
+            android:background="@color/color_page_bg"
+            android:layout_height="@dimen/wwpx150"/>
+        <com.coder.neighborhood.widget.IconFontTextView
+            android:id="@+id/if_close"
+            android:layout_width="@dimen/wwpx25"
+            android:layout_marginTop="@dimen/wwpx15"
+            android:layout_alignParentRight="true"
+            android:text="\ue6bf"
+            android:layout_height="@dimen/wwpx25"
+        />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

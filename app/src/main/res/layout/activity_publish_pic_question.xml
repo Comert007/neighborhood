@@ -12,73 +12,64 @@
         app:titleText="发布问题"/>
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="@dimen/wwpx200"
-                  android:background="@color/color_white"
                   android:orientation="vertical"
-                  android:paddingBottom="@dimen/wwpx40"
-                  android:paddingTop="@dimen/wwpx20">
+                  android:gravity="center_horizontal"
+                  android:paddingTop="@dimen/wwpx80"
+                  android:paddingBottom="@dimen/wwpx80"
+                  android:background="@color/color_white"
+                  android:layout_height="wrap_content">
 
-        <include layout="@layout/view_title_split"/>
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:background="@drawable/gray_border_shape"
+                      android:layout_height="@dimen/wwpx260">
+            <EditText
+                android:background="@android:color/transparent"
+                android:layout_width="@dimen/wwpx650"
+                android:textSize="@dimen/wwpx28"
+                android:padding="@dimen/wwpx20"
+                android:textColor="@color/color_999999"
+                android:hint="问题详情"
+                android:gravity="left"
+                android:maxLength="200"
+                android:layout_weight="1"
+                android:layout_height="0px"/>
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx150"
-                  android:layout_margin="@dimen/wwpx20"
-                  android:background="@drawable/white_border_round_shape"
-                  android:gravity="left"
-                  android:hint="问题详情"
-                  android:padding="@dimen/wwpx20"
-                  android:textColor="@color/color_text"
-                  android:textColorHint="@color/color_text"
-                  android:textSize="@dimen/wwpx32"/>
+            <TextView
+                android:text="0/200"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/wwpx22"
+                android:layout_marginTop="@dimen/wwpx5"
+                android:layout_marginRight="@dimen/wwpx20"
+                android:gravity="right"
+                android:layout_marginBottom="@dimen/wwpx20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <LinearLayout android:layout_width="@dimen/wwpx200"
-                      android:layout_height="@dimen/wwpx120"
-                      android:layout_margin="@dimen/wwpx20"
-                      android:background="@color/color_page_bg"
-                      android:gravity="center"
-                      android:orientation="vertical">
-            <ImageView
 
-                android:layout_width="@dimen/wwpx48"
-                android:layout_height="@dimen/wwpx48"
-                android:src="@mipmap/ic_add"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="添加图片"
-                      android:textColor="@color/color_black"
-                      android:textSize="@dimen/wwpx26"/>
+
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ww.com.core.widget.CustomRecyclerView
+            android:id="@+id/crv"
             android:layout_marginTop="@dimen/wwpx40"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-            <Button android:layout_width="wrap_content"
-                    android:layout_height="@dimen/wwpx60"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/gray_round_shape"
-                    android:text="寻物启事"
-                    android:textColor="@color/color_text"
-                    android:textSize="@dimen/wwpx26"/>
 
-            <Button android:layout_width="wrap_content"
-                    android:layout_height="@dimen/wwpx60"
-                    android:layout_marginLeft="@dimen/wwpx90"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/gray_round_shape"
-                    android:text="失物招领"
-                    android:textColor="@color/color_text"
-                    android:textSize="@dimen/wwpx26"/>
-
-        </LinearLayout>
+        <Button
+            android:background="@drawable/green_border_shape"
+            android:text="发布问题"
+            android:textSize="@dimen/wwpx30"
+            android:textColor="@color/color_text"
+            android:layout_marginTop="@dimen/wwpx80"
+            android:layout_width="@dimen/wwpx498"
+            android:layout_height="@dimen/wwpx60"/>
 
 
     </LinearLayout>
+
 
 
 </LinearLayout>

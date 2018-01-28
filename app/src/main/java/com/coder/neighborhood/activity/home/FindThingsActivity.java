@@ -101,7 +101,7 @@ public class FindThingsActivity extends BaseActivity<HelpView,VoidModel> {
     public void onFindThings(View v){
         switch (v.getId()){
             case R.id.btn_ask:
-                PublishQuestionActivity.start(this,2);
+                PublishPicQuestionActivity.start(this);
                 break;
         }
     }

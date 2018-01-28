@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_add"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/wwpx250"
+                  android:orientation="vertical"
+                  android:gravity="center"
+                  android:layout_height="@dimen/wwpx180">
+
+        <LinearLayout
+            android:layout_width="@dimen/wwpx230"
+            android:layout_height="@dimen/wwpx160"
+            android:background="@color/color_page_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+
+                android:layout_width="@dimen/wwpx48"
+                android:layout_height="@dimen/wwpx48"
+                android:src="@mipmap/ic_add"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="添加图片"
+                      android:layout_marginTop="@dimen/wwpx19"
+                      android:textColor="@color/color_666666"
+                      android:textSize="@dimen/wwpx24"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

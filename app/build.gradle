@@ -18,6 +18,10 @@ android {
         }
     }
 
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -38,4 +42,5 @@ dependencies {
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
     compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.lzy.widget:imagepicker:0.6.1'
 }
