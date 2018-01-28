@@ -67,6 +67,7 @@
 
         <!--发布带图片的问题-->
         <activity android:name=".activity.home.PublishPicQuestionActivity"
+                  android:windowSoftInputMode="adjustPan"
                   android:screenOrientation="portrait"/>
 
         <!--直播认证-->

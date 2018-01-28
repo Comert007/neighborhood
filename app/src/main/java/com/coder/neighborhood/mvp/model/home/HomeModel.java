@@ -103,4 +103,33 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+
+    public void lostThings(String lostType,
+                           String pageNo,
+                           String pageSize){
+
+//        HomeApi.lostThings(lostType, pageNo, pageSize)
+//
+        
+    }
+
+    public void addLostThing(String userId,
+                             String type,
+                             String phone,
+                             String questionContent,
+                             String filePath,
+                             LifecycleTransformer transformer,
+                             HttpSubscriber<String> httpSubscriber){
+
+        HomeApi.addLostThing(userId, type, phone, questionContent, filePath)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
 }

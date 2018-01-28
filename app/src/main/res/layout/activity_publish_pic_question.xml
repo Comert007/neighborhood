@@ -24,6 +24,7 @@
                       android:background="@drawable/gray_border_shape"
                       android:layout_height="@dimen/wwpx260">
             <EditText
+                android:id="@+id/et_question"
                 android:background="@android:color/transparent"
                 android:layout_width="@dimen/wwpx650"
                 android:textSize="@dimen/wwpx28"
@@ -61,6 +62,7 @@
 
 
         <Button
+            android:id="@+id/btn_publish"
             android:background="@drawable/green_border_shape"
             android:text="发布问题"
             android:textSize="@dimen/wwpx30"

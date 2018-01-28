@@ -9,10 +9,9 @@ import com.coder.neighborhood.mvp.vu.home.HelpView;
 import java.util.Arrays;
 
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/20
  */
-
 public class FindThingsFragment extends BaseFragment<HelpView,VoidModel>{
 
     private FindThingsAdapter adapter;
