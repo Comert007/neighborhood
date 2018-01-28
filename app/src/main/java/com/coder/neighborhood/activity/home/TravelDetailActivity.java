@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/9
  *
  */

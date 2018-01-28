@@ -9,7 +9,9 @@ import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 
 /**
- * Created by feng on 2018/1/8.
+ *
+ * @author feng
+ * @date 2018/1/8
  */
 
 public class PublishQuestionActivity extends BaseActivity<VoidView,VoidModel> {

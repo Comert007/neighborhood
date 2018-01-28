@@ -24,7 +24,9 @@ import butterknife.OnClick;
 import ww.com.core.widget.TranslateTabBar;
 
 /**
- * Created by feng on 2018/1/8.
+ *
+ * @author feng
+ * @date 2018/1/8
  */
 
 @SuppressLint("Registered")

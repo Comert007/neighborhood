@@ -17,7 +17,9 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 import java.util.List;
 
 /**
- * Created by feng on 2018/1/8.
+ *
+ * @author feng
+ * @date 2018/1/8
  */
 
 @SuppressLint("Registered")
