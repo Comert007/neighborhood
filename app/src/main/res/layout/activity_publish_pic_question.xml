@@ -54,6 +54,8 @@
         <ww.com.core.widget.CustomRecyclerView
             android:id="@+id/crv"
             android:layout_marginTop="@dimen/wwpx40"
+            android:paddingLeft="@dimen/wwpx20"
+            android:paddingRight="@dimen/wwpx20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

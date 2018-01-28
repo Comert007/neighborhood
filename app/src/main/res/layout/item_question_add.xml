@@ -8,14 +8,14 @@
 
 
     <LinearLayout
-        android:layout_width="@dimen/wwpx250"
+        android:layout_width="@dimen/wwpx230"
                   android:orientation="vertical"
                   android:gravity="center"
-                  android:layout_height="@dimen/wwpx180">
+                  android:layout_height="@dimen/wwpx160">
 
         <LinearLayout
-            android:layout_width="@dimen/wwpx230"
-            android:layout_height="@dimen/wwpx160"
+            android:layout_width="@dimen/wwpx210"
+            android:layout_height="@dimen/wwpx130"
             android:background="@color/color_page_bg"
             android:gravity="center"
             android:orientation="vertical">

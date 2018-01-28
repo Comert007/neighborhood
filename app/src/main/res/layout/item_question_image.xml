@@ -2,25 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="wrap_content"
-              android:layout_weight="1"
               android:gravity="center"
               android:layout_height="wrap_content">
 
-    <RelativeLayout android:layout_width="@dimen/wwpx250"
-                    android:layout_height="@dimen/wwpx180">
+    <RelativeLayout android:layout_width="@dimen/wwpx230"
+                    android:layout_height="@dimen/wwpx160">
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="@dimen/wwpx230"
+            android:layout_width="@dimen/wwpx210"
             android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
             android:background="@color/color_page_bg"
-            android:layout_height="@dimen/wwpx150"/>
+            android:layout_height="@dimen/wwpx130"/>
         <com.coder.neighborhood.widget.IconFontTextView
             android:id="@+id/if_close"
-            android:layout_width="@dimen/wwpx25"
-            android:layout_marginTop="@dimen/wwpx15"
+            android:layout_width="@dimen/wwpx20"
+            android:layout_marginTop="@dimen/wwpx8"
             android:layout_alignParentRight="true"
             android:text="\ue6bf"
-            android:layout_height="@dimen/wwpx25"
+            android:textSize="@dimen/wwpx20"
+            android:layout_height="@dimen/wwpx20"
         />
     </RelativeLayout>
 

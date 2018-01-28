@@ -14,10 +14,14 @@ import android.widget.LinearLayout;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.home.ImageQuestionBean;
+import com.coder.neighborhood.utils.OwnerImageLoader;
 import com.coder.neighborhood.widget.IconFontTextView;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.download.ImageDownloader;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -47,6 +51,7 @@ public class ImageQuestionAdapter extends RvAdapter<ImageQuestionBean> implement
         super(context);
         this.context = (Activity) context;
         dispose = PermissionDispose.init(context, this);
+        initImagePicker();
     }
 
     @Override
@@ -110,6 +115,19 @@ public class ImageQuestionAdapter extends RvAdapter<ImageQuestionBean> implement
 
     }
 
+    private void initImagePicker() {
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new OwnerImageLoader());
+        imagePicker.setShowCamera(true);
+        imagePicker.setCrop(true);
+        imagePicker.setSaveRectangle(true);
+        imagePicker.setSelectLimit(5);
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);
+        imagePicker.setFocusWidth(800);
+        imagePicker.setFocusHeight(800);
+        imagePicker.setOutPutX(1000);
+        imagePicker.setOutPutY(1000);
+    }
 
     class ImageQuestionViewHolder extends RvViewHolder<ImageQuestionBean> {
         @BindView(R.id.iv_image)
@@ -124,8 +142,8 @@ public class ImageQuestionAdapter extends RvAdapter<ImageQuestionBean> implement
         @Override
         public void onBindData(final int position, ImageQuestionBean bean) {
             if (!TextUtils.isEmpty(bean.getUrl())) {
-                com.nostra13.universalimageloader.core.ImageLoader.getInstance()
-                        .displayImage(bean.getUrl() ,ivImage, BaseApplication
+                ImageLoader.getInstance()
+                        .displayImage(ImageDownloader.Scheme.FILE.wrap(bean.getUrl()) ,ivImage, BaseApplication
                         .getDisplayImageOptions(R.mipmap.pic_default));
             }
 
