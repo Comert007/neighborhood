@@ -103,6 +103,8 @@ public class FindThingsActivity extends BaseActivity<HelpView,VoidModel> {
             case R.id.btn_ask:
                 PublishPicQuestionActivity.start(this);
                 break;
+            default:
+                break;
         }
     }
 }
