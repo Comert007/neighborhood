@@ -14,7 +14,7 @@ import com.coder.neighborhood.adapter.user.TranslateTabAdapter;
 import com.coder.neighborhood.fragment.home.FindThingsFragment;
 import com.coder.neighborhood.fragment.home.LostThingsFragment;
 import com.coder.neighborhood.mvp.model.VoidModel;
-import com.coder.neighborhood.mvp.vu.home.HelpView;
+import com.coder.neighborhood.mvp.vu.VoidView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ import ww.com.core.widget.TranslateTabBar;
  */
 
 @SuppressLint("Registered")
-public class FindThingsActivity extends BaseActivity<HelpView,VoidModel> {
+public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
 
     @BindView(R.id.translate)
     TranslateTabBar translate;

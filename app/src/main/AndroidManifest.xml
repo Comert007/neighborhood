@@ -137,6 +137,12 @@
         <activity android:name=".activity.home.HelpDetailActivity"
                   android:screenOrientation="portrait"/>
 
+        <!--寻物启事详情-->
+        <activity android:name=".activity.home.ThingDetailActivity"
+                  android:screenOrientation="portrait"/>
+
+
+
     </application>
 
 </manifest>

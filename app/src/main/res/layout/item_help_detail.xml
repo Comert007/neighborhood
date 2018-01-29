@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/wwpx20"
+    android:paddingRight="@dimen/wwpx20"
+    android:background="@color/color_white"
+    android:layout_marginBottom="@dimen/wwpx4"
+    android:gravity="center_vertical"
+    android:paddingTop="@dimen/wwpx40"
+    android:paddingBottom="@dimen/wwpx40"
+    android:layout_height="wrap_content">
+
+    <ww.com.core.widget.RoundImageView
+        android:id="@+id/riv"
+        app:type="type_circle"
+        android:layout_width="@dimen/wwpx90"
+        android:src="@mipmap/ic_default_avatar"
+        android:layout_height="@dimen/wwpx90"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:paddingLeft="@dimen/wwpx24"
+                  android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+                  android:textSize="@dimen/wwpx30"
+                  tools:text="本人昨天在小区丢了一只小花猫，有谁看见了吗？"
+                  android:textColor="@color/color_666666"
+                  android:layout_height="wrap_content"/>
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/wwpx20"
+                        android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_time"
+                android:textSize="@dimen/wwpx24"
+                android:textColor="@color/color_999999"
+                android:layout_width="wrap_content"
+                tools:text="2.107.02.30"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_bounty"
+                android:textSize="@dimen/wwpx24"
+                android:textColor="@color/color_yellow"
+                android:layout_width="wrap_content"
+                tools:text="0.5元悬赏"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

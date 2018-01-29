@@ -46,6 +46,13 @@ public class HomeApi extends BaseApi {
         return onPost(getActionUrl("app/getLostAndRecruitList"),params);
     }
 
+    public static final Observable<ResponseBean> thingsDetail(String lostId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("lostId",lostId);
+
+        return onPost(getActionUrl("app/getLostAndRecruitInfo"),params);
+    }
+
 
     public static final Observable<ResponseBean> addLostThing(String userId,
                                                               String type,
@@ -87,4 +94,35 @@ public class HomeApi extends BaseApi {
 
         return onPost(getActionUrl("app/getFriendQuestionList"), params);
     }
+
+    public static final Observable<ResponseBean> addHelpQuestion(String userId,
+                                                                 String questionType,
+                                                                 String questionContent,
+                                                                 String bounty){
+
+
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId", userId);
+        params.addParameters("questionType", questionType);
+        params.addParameters("questionContent", questionContent);
+        if (!TextUtils.isEmpty(bounty)){
+            params.addParameters("bounty", bounty);
+        }
+
+        return onPost(getActionUrl("app/addQuestion"), params);
+
+    }
+
+    public static final Observable<ResponseBean> questionsComment(String questionId,
+                                                                  String pageNo,
+                                                                  String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("questionId",questionId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getQuestionCommentsList"),params);
+    }
+
+
 }

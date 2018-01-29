@@ -8,9 +8,40 @@
         android:id="@+id/title_view"
         style="@style/TitleBar"
         app:titleLeftIco="@mipmap/ic_back"
+        android:layout_marginBottom="@dimen/wwpx20"
         app:titleText="寻物/失物"/>
 
 
-    <include layout="@layout/layout_refresh"/>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="0px"
+    android:layout_weight="1">
+        <include layout="@layout/layout_refresh"/>
+        <Button
+            android:id="@+id/btn_ask"
+            android:layout_width="@dimen/wwpx88"
+            android:layout_height="@dimen/wwpx88"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/wwpx40"
+            android:layout_marginRight="@dimen/wwpx20"
+            android:layout_marginTop="@dimen/wwpx20"
+            android:background="@drawable/yellow_circle_shape"
+            android:padding="@dimen/wwpx10"
+            android:text="我来帮他"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/wwpx24"/>
+    </RelativeLayout>
+
+    
+    <TextView
+        android:id="@+id/tv_input"
+        android:text="输入"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/wwpx26"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:background="@color/color_white"
+        android:layout_height="@dimen/wwpx98"/>
+    
 
 </LinearLayout>

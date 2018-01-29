@@ -65,7 +65,11 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
     }
 
 
-
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
 
     private void publishQuestion(){
         String content = etQuestion.getText().toString().trim();

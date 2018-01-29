@@ -6,7 +6,10 @@ import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.MallApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
+import com.coder.neighborhood.bean.home.HelpDetailBean;
 import com.coder.neighborhood.bean.home.QuestionBean;
+import com.coder.neighborhood.bean.home.ThingDetailBean;
+import com.coder.neighborhood.bean.home.ThingsBean;
 import com.coder.neighborhood.bean.home.TravelBean;
 import com.coder.neighborhood.bean.home.TravelDetailBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
@@ -107,11 +110,32 @@ public class HomeModel extends BaseModel {
 
     public void lostThings(String lostType,
                            String pageNo,
-                           String pageSize){
+                           String pageSize,
+                           HttpSubscriber<List<ThingsBean>> httpSubscriber){
 
-//        HomeApi.lostThings(lostType, pageNo, pageSize)
+        HomeApi.lostThings(lostType, pageNo, pageSize)
+                .map(new Func1<ResponseBean, List<ThingsBean>>() {
+                    @Override
+                    public List<ThingsBean> call(ResponseBean responseBean) {
+                        return JSON.parseArray(responseBean.getData(),ThingsBean.class);
+                    }
+                }).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
 //
         
+    }
+    
+    public void thingsDetail(String lostId,LifecycleTransformer transformer,
+                             HttpSubscriber<ThingDetailBean> httpSubscriber){
+        HomeApi.thingsDetail(lostId)
+                .map(new Func1<ResponseBean, ThingDetailBean>() {
+                    @Override
+                    public ThingDetailBean call(ResponseBean responseBean) {
+                        return JSON.parseObject(responseBean.getData(),ThingDetailBean.class);
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
     }
 
     public void addLostThing(String userId,
@@ -153,6 +177,39 @@ public class HomeModel extends BaseModel {
 
         HomeApi.customerQuestions(pageNo, pageSize)
                 .map(responseBean -> JSON.parseArray(responseBean.getData(),QuestionBean.class)).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void addHelpQuestion(String userId,
+                                String questionType,
+                                String questionContent,
+                                String bounty,
+                                LifecycleTransformer transformer,
+                                HttpSubscriber<String> httpSubscriber){
+        HomeApi.addHelpQuestion(userId, questionType, questionContent, bounty)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void questionsComment(String questionId,
+                                 String pageNo,
+                                 String pageSize,LifecycleTransformer transformer,
+                                 HttpSubscriber<List<HelpDetailBean>> httpSubscriber){
+
+        HomeApi.questionsComment(questionId, pageNo, pageSize)
+                .map(new Func1<ResponseBean, List<HelpDetailBean>>() {
+                    @Override
+                    public List<HelpDetailBean> call(ResponseBean responseBean) {
+                        return JSON.parseArray(responseBean.getData(),HelpDetailBean.class);
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 

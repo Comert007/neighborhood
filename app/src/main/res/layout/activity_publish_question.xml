@@ -26,6 +26,7 @@
                       android:background="@drawable/gray_border_shape"
                       android:layout_height="@dimen/wwpx260">
             <EditText
+                android:id="@+id/et_content"
                 android:background="@android:color/transparent"
                 android:layout_width="@dimen/wwpx650"
                 android:textSize="@dimen/wwpx28"
@@ -38,6 +39,7 @@
                 android:layout_height="0px"/>
 
             <TextView
+                android:id="@+id/tv_num"
                 android:text="0/200"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/wwpx22"
@@ -59,10 +61,13 @@
                       android:layout_height="wrap_content">
 
             <EditText
-                android:text="添加酬金"
+                android:id="@+id/et_bounty"
+                android:hint="添加酬金"
+                android:textColorHint="@color/color_text"
                 android:textColor="@color/color_text"
                 android:textSize="@dimen/wwpx28"
                 android:gravity="center"
+                android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wwpx80"/>
 
@@ -75,6 +80,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_publish"
             android:background="@drawable/green_border_shape"
             android:text="发布问题"
             android:textSize="@dimen/wwpx30"

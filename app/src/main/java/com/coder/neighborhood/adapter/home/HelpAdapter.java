@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.home.HelpDetailActivity;
 import com.coder.neighborhood.bean.home.QuestionBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -57,6 +58,8 @@ public class HelpAdapter extends RvAdapter<QuestionBean> {
                     BaseApplication.getDisplayImageOptions(R.mipmap.ic_default_avatar));
             tvContent.setText(bean.getQuestionInfo());
             tvTime.setText(TimeUtils.milliseconds2String(bean.getQuestionDate(), new SimpleDateFormat("yyyy.MM.dd")));
+
+            itemView.setOnClickListener(v -> HelpDetailActivity.start(getContext(),bean.getQuestionId()));
         }
     }
 }

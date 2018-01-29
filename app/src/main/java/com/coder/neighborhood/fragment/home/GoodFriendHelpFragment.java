@@ -94,7 +94,13 @@ public class GoodFriendHelpFragment extends BaseFragment<HelpView,HomeModel>{
                     v.getCsr().setFooterRefreshAble(false);
                 }
             }
-        });
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        v.getCsr().setRefreshFinished();
+                    }
+                });
     }
 
 }

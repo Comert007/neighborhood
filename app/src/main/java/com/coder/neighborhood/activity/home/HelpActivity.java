@@ -14,7 +14,7 @@ import com.coder.neighborhood.adapter.user.TranslateTabAdapter;
 import com.coder.neighborhood.fragment.home.CustomerHelpFragment;
 import com.coder.neighborhood.fragment.home.GoodFriendHelpFragment;
 import com.coder.neighborhood.mvp.model.VoidModel;
-import com.coder.neighborhood.mvp.vu.home.HelpView;
+import com.coder.neighborhood.mvp.vu.VoidView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ import ww.com.core.widget.TranslateTabBar;
  */
 
 @SuppressLint("Registered")
-public class HelpActivity extends BaseActivity<HelpView,VoidModel> {
+public class HelpActivity extends BaseActivity<VoidView,VoidModel> {
 
 
     @BindView(R.id.translate)
@@ -41,6 +41,8 @@ public class HelpActivity extends BaseActivity<HelpView,VoidModel> {
     private List<Fragment> fragments;
     private FragmentManager fragmentManager;
     private TranslateTabAdapter adapter;
+
+    private int type =1;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, HelpActivity.class);
@@ -95,6 +97,7 @@ public class HelpActivity extends BaseActivity<HelpView,VoidModel> {
         @Override
         public void onPageSelected(int position) {
             translate.setCurrentIndex(position);
+            type = position+1;
         }
 
         @Override
@@ -107,7 +110,7 @@ public class HelpActivity extends BaseActivity<HelpView,VoidModel> {
     public void onHelp(View v){
         switch (v.getId()){
             case R.id.btn_ask:
-                PublishQuestionActivity.start(this,1);
+                PublishQuestionActivity.start(this,type);
                 break;
         }
     }

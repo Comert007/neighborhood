@@ -1,20 +1,24 @@
 package com.coder.neighborhood.fragment.home;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.home.FindThingsAdapter;
+import com.coder.neighborhood.bean.home.ThingsBean;
+import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.fragment.BaseFragment;
-import com.coder.neighborhood.mvp.model.VoidModel;
+import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.home.HelpView;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author feng
  * @Date 2018/1/20
  */
-public class FindThingsFragment extends BaseFragment<HelpView,VoidModel>{
+public class FindThingsFragment extends BaseFragment<HelpView,HomeModel>{
 
     private FindThingsAdapter adapter;
+    private int page = 1;
 
     @Override
     protected int getLayoutResId() {
@@ -26,6 +30,16 @@ public class FindThingsFragment extends BaseFragment<HelpView,VoidModel>{
         adapter = new FindThingsAdapter(getContext());
         v.getCrv().setAdapter(adapter);
 
-        adapter.addList(Arrays.asList("1","2","3"));
+        lostThings();
+    }
+
+    private void lostThings(){
+        m.lostThings("1", page + "", Constants.PAGE_SIZE + "",
+                new HttpSubscriber<List<ThingsBean>>(getContext(),false) {
+            @Override
+            public void onNext(List<ThingsBean> thingsBeans) {
+                adapter.addList(thingsBeans);
+            }
+        });
     }
 }

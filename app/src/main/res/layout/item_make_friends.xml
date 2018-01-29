@@ -26,8 +26,8 @@
             android:orientation="horizontal">
             <ww.com.core.widget.RoundImageView
                 android:id="@+id/riv_header"
-                android:layout_width="@dimen/wwpx150"
-                android:layout_height="@dimen/wwpx150"
+                android:layout_width="@dimen/wwpx90"
+                android:layout_height="@dimen/wwpx90"
                 android:src="@mipmap/pic_default"
                 app:type="type_circle"/>
 
@@ -48,7 +48,9 @@
                         android:textColor="@color/color_1d65a2"
                         android:textSize="@dimen/wwpx26"/>
 
-                    <TextView android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tv_grade"
+                        android:layout_width="match_parent"
                               android:gravity="right"
                               android:textColor="@color/color_999999"
                               android:textSize="@dimen/wwpx26"
@@ -60,7 +62,7 @@
 
 
                 <TextView
-                    android:id="@+id/tv_grade"
+                    android:id="@+id/tv_subscribe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/wwpx10"
@@ -73,6 +75,8 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx16"
@@ -97,19 +101,27 @@
                        android:layout_height="@dimen/wwpx31"/>
 
             <TextView
+                android:id="@+id/tv_prise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/wwpx10"
-                android:text="23"
+                android:text="0"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/wwpx26"/>
 
-            <ImageView android:layout_width="@dimen/wwpx40"
-                       android:src="@mipmap/ic_reply"
-                       android:layout_marginLeft="@dimen/wwpx54"
-                       android:layout_height="@dimen/wwpx34"/>
+            <ImageView
+                android:layout_width="@dimen/wwpx40"
+                android:src="@mipmap/ic_reply"
+                android:layout_marginLeft="@dimen/wwpx54"
+                android:layout_height="@dimen/wwpx34"/>
 
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_comment"
+            android:layout_marginTop="@dimen/wwpx40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

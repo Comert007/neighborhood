@@ -36,6 +36,13 @@ public class UserBean implements IUserInfo{
     private String communityId;
     private String userId;
     private String liveStatus;
+    /**
+     * easemobUsername : 18200131081
+     * easemobPassword : 123456
+     */
+
+    private String easemobUsername;
+    private String easemobPassword;
 
     public String getImgUrl() {
         return imgUrl;
@@ -154,5 +161,21 @@ public class UserBean implements IUserInfo{
     @Override
     public String getToken() {
         return userId;
+    }
+
+    public String getEasemobUsername() {
+        return easemobUsername;
+    }
+
+    public void setEasemobUsername(String easemobUsername) {
+        this.easemobUsername = easemobUsername;
+    }
+
+    public String getEasemobPassword() {
+        return easemobPassword;
+    }
+
+    public void setEasemobPassword(String easemobPassword) {
+        this.easemobPassword = easemobPassword;
     }
 }

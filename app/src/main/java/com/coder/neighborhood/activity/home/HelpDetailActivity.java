@@ -5,8 +5,17 @@ import android.content.Intent;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
+import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.adapter.home.HelpDetailAdapter;
+import com.coder.neighborhood.bean.home.HelpDetailBean;
+import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.home.HelpDetailView;
+import com.trello.rxlifecycle.android.ActivityEvent;
+
+import java.util.List;
+
+import butterknife.OnClick;
 
 /**
  * @author feng
@@ -15,9 +24,15 @@ import com.coder.neighborhood.mvp.vu.home.HelpDetailView;
 
 public class HelpDetailActivity extends BaseActivity<HelpDetailView,HomeModel> {
 
+    private int page =1;
+    private String questionId;
 
-    public static void start(Context context) {
+    private HelpDetailAdapter adapter;
+
+
+    public static void start(Context context,String questionId) {
         Intent intent = new Intent(context, HelpDetailActivity.class);
+        intent.putExtra("questionId",questionId);
         context.startActivity(intent);
     }
 
@@ -28,6 +43,36 @@ public class HelpDetailActivity extends BaseActivity<HelpDetailView,HomeModel> {
 
     @Override
     protected void init() {
+
+        initView();
+        initData();
+    }
+
+    private void initView(){
+
+    }
+
+    private void initData(){
+        adapter = new HelpDetailAdapter(this);
+        v.getCrv().setAdapter(adapter);
+
+        questionId = getIntent().getStringExtra("questionId");
+
+        questionsComment(questionId);
+    }
+
+    private void questionsComment(String questionId){
+        m.questionsComment(questionId, page + "", Constants.PAGE_SIZE + "", bindUntilEvent(ActivityEvent.DESTROY),
+                new HttpSubscriber<List<HelpDetailBean>>(this,false) {
+                    @Override
+                    public void onNext(List<HelpDetailBean> helpDetailBeans) {
+                        adapter.addList(helpDetailBeans);
+                    }
+                });
+    }
+
+    @OnClick(R.id.btn_ask)
+    public void onHelp(){
 
     }
 }

@@ -11,5 +11,6 @@ public class HelpView extends RefreshView {
     @Override
     public void attach() {
         super.attach();
+        qmuiEmptyView.setTitleText("暂无更多问题");
     }
 }
