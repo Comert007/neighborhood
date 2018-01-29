@@ -21,6 +21,7 @@
                       android:layout_height="wrap_content">
 
             <ww.com.core.widget.RoundImageView
+                android:id="@+id/riv"
                 android:src="@mipmap/ic_default_avatar"
                 android:layout_width="@dimen/wwpx90"
                 app:type="type_circle"
@@ -32,7 +33,9 @@
                           android:layout_height="wrap_content">
 
 
-                <TextView android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_question_content"
+                    android:layout_width="wrap_content"
                           android:text="@string/str_test"
                           android:textSize="@dimen/wwpx30"
                           android:ellipsize="end"
@@ -40,19 +43,23 @@
                           android:textColor="@color/color_666666"
                           android:layout_height="wrap_content"/>
 
-                <TextView android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_question_time"
+                    android:layout_width="wrap_content"
                           android:textSize="@dimen/wwpx24"
                           android:text="2017.2.30"
                           android:layout_marginTop="@dimen/wwpx20"
                           android:textColor="@color/color_999999"
                           android:layout_height="wrap_content"/>
 
-                <TextView android:layout_width="wrap_content"
-                          android:text="万能的社区好友和游客已经更新了答案，去看看吧"
-                          android:textSize="@dimen/wwpx24"
-                          android:layout_marginTop="@dimen/wwpx33"
-                          android:textColor="@color/color_999999"
-                          android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_question_type"
+                    android:layout_width="wrap_content"
+                    android:text="万能的社区好友和游客已经更新了答案，去看看吧"
+                    android:textSize="@dimen/wwpx24"
+                    android:layout_marginTop="@dimen/wwpx33"
+                    android:textColor="@color/color_999999"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
         </LinearLayout>

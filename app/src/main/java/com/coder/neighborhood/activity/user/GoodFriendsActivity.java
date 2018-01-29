@@ -18,15 +18,17 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
+import ww.com.core.widget.CustomSwipeRefreshLayout;
+
 /**
  * @Author feng
  * @Date 2018/1/9
  */
 
-public class GoodFriendsActivity extends BaseActivity<GoodFriendsView,UserModel> {
+public class GoodFriendsActivity extends BaseActivity<GoodFriendsView, UserModel> {
 
     private GoodFriendsAdapter adapter;
-    private int page =1;
+    private int page = 1;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, GoodFriendsActivity.class);
@@ -43,23 +45,61 @@ public class GoodFriendsActivity extends BaseActivity<GoodFriendsView,UserModel>
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         adapter = new GoodFriendsAdapter(this);
+
         v.getCrv().setAdapter(adapter);
+        initListener();
         onFriends();
     }
 
-    private void onFriends(){
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
+    private void initListener() {
+        v.getCsr().setEnableRefresh(true);
+        v.getCsr().setOnSwipeRefreshListener(new CustomSwipeRefreshLayout
+                .OnSwipeRefreshLayoutListener() {
+            @Override
+            public void onHeaderRefreshing() {
+                page = 1;
+                v.getCsr().setFooterRefreshAble(true);
+                onFriends();
+            }
+
+            @Override
+            public void onFooterRefreshing() {
+                onFriends();
+            }
+        });
+    }
+
+    private void onFriends() {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user==null){
+        if (user == null) {
             ToastUtils.showToast("用户信息有误");
             return;
         }
         m.friends(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
-                bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<FriendBean>>(this,true) {
+                bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<FriendBean>>(this,
+                        true) {
                     @Override
                     public void onNext(List<FriendBean> friendBeans) {
-                        adapter.addList(friendBeans);
+                        v.getCsr().setRefreshFinished();
+                        if (friendBeans != null && friendBeans.size()>0) {
+                            if (page == 1) {
+                                adapter.getList().clear();
+                                adapter.addList(friendBeans);
+                            } else {
+//                                adapter.appendList(friendBeans);
+                            }
+                            page++;
+                        } else {
+                            v.getCsr().setFooterRefreshAble(false);
+                        }
                     }
                 });
 

@@ -27,7 +27,6 @@
 
             <TextView
                 android:id="@+id/tv_name"
-                android:text="小鸟飞不飞"
                 android:textColor="@color/color_gray"
                 android:layout_width="wrap_content"
                 android:textSize="@dimen/wwpx28"

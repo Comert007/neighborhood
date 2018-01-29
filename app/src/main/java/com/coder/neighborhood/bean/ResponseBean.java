@@ -50,20 +50,6 @@ public class ResponseBean {
             bean.setMessage("数据解析错误!");
         }
 
-        try {
-            int count = json.getInteger("count");
-            bean.setCount(count);
-        } catch (Exception e) {
-            bean.setCode(Constants.CODE_ERROR);
-            bean.setMessage("数据解析错误!");
-        }
-        try {
-            int pageSize = json.getInteger("pageSize");
-            bean.setPageSize(pageSize);
-        } catch (Exception e) {
-            bean.setCode(Constants.CODE_ERROR);
-            bean.setMessage("数据解析错误!");
-        }
 
         return bean;
     }

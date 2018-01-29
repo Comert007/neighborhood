@@ -6,6 +6,7 @@ import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.MallApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
+import com.coder.neighborhood.bean.home.QuestionBean;
 import com.coder.neighborhood.bean.home.TravelBean;
 import com.coder.neighborhood.bean.home.TravelDetailBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
@@ -135,13 +136,24 @@ public class HomeModel extends BaseModel {
 
     public void friendQuestions(String userId,
                                 String pageNo,
-                                String pageSize){
-
-//        HomeApi.friendQuestions(userId, pageNo, pageSize)
-//                .map(new Func1<ResponseBean, Object>() {
-//                })
+                                String pageSize,HttpSubscriber<List<QuestionBean>> httpSubscriber){
 
 
+        HomeApi.friendQuestions(userId,pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),QuestionBean.class)).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+
+
+    }
+
+
+    public void customQuestions(String pageNo,
+                                String pageSize,
+                                HttpSubscriber<List<QuestionBean>> httpSubscriber){
+
+        HomeApi.customerQuestions(pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),QuestionBean.class)).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
     }
 
 }
