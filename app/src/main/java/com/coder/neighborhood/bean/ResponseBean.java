@@ -15,6 +15,8 @@ public class ResponseBean {
     private String code;
     private String message;
     private String data;
+    private int count;
+    private int pageSize;
 
 
     public static ResponseBean parseObject(JSONObject json) {
@@ -48,6 +50,21 @@ public class ResponseBean {
             bean.setMessage("数据解析错误!");
         }
 
+        try {
+            int count = json.getInteger("count");
+            bean.setCount(count);
+        } catch (Exception e) {
+            bean.setCode(Constants.CODE_ERROR);
+            bean.setMessage("数据解析错误!");
+        }
+        try {
+            int pageSize = json.getInteger("pageSize");
+            bean.setPageSize(pageSize);
+        } catch (Exception e) {
+            bean.setCode(Constants.CODE_ERROR);
+            bean.setMessage("数据解析错误!");
+        }
+
         return bean;
     }
 
@@ -76,5 +93,19 @@ public class ResponseBean {
         this.data = data;
     }
 
+    public int getCount() {
+        return count;
+    }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 }

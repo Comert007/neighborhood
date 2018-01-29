@@ -15,6 +15,7 @@
         android:layout_height="wrap_content">
 
         <ww.com.core.widget.RoundImageView
+            android:id="@+id/riv"
             android:src="@mipmap/ic_default_avatar"
             android:layout_width="@dimen/wwpx90"
             android:layout_height="@dimen/wwpx90"/>
@@ -25,13 +26,14 @@
                       android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_name"
                 android:text="小鸟飞不飞"
                 android:textColor="@color/color_gray"
                 android:layout_width="wrap_content"
                 android:textSize="@dimen/wwpx28"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:text="LV.15"
+                android:id="@+id/tv_grade"
                 android:textColor="@color/color_999999"
                 android:layout_width="wrap_content"
                 android:textSize="@dimen/wwpx24"
@@ -40,7 +42,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
 </LinearLayout>

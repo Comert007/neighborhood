@@ -9,11 +9,14 @@ import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.user.GoodFriendsAdapter;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.bean.user.FriendBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.user.UserModel;
 import com.coder.neighborhood.mvp.vu.user.GoodFriendsView;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
+
+import java.util.List;
 
 /**
  * @Author feng
@@ -53,10 +56,10 @@ public class GoodFriendsActivity extends BaseActivity<GoodFriendsView,UserModel>
             return;
         }
         m.friends(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
-                bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<String>(this,true) {
+                bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<FriendBean>>(this,true) {
                     @Override
-                    public void onNext(String s) {
-
+                    public void onNext(List<FriendBean> friendBeans) {
+                        adapter.addList(friendBeans);
                     }
                 });
 

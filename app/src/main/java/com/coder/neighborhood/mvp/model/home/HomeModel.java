@@ -132,4 +132,16 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+
+    public void friendQuestions(String userId,
+                                String pageNo,
+                                String pageSize){
+
+//        HomeApi.friendQuestions(userId, pageNo, pageSize)
+//                .map(new Func1<ResponseBean, Object>() {
+//                })
+
+
+    }
+
 }
