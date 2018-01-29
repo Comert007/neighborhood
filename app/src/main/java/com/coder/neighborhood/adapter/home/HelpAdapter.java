@@ -9,9 +9,12 @@ import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.home.QuestionBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
+import ww.com.core.utils.TimeUtils;
 import ww.com.core.widget.RoundImageView;
 
 /**
@@ -53,7 +56,7 @@ public class HelpAdapter extends RvAdapter<QuestionBean> {
             ImageLoader.getInstance().displayImage(bean.getHeaderImgUrl(),riv,
                     BaseApplication.getDisplayImageOptions(R.mipmap.ic_default_avatar));
             tvContent.setText(bean.getQuestionInfo());
-            tvTime.setText(bean.getQuestionDate()+"");
+            tvTime.setText(TimeUtils.milliseconds2String(bean.getQuestionDate(), new SimpleDateFormat("yyyy.MM.dd")));
         }
     }
 }
