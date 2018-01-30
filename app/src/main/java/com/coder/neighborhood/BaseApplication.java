@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 
 import com.coder.neighborhood.config.AppConfig;
 import com.coder.neighborhood.mvp.WWApplication;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -38,6 +40,7 @@ public class BaseApplication extends WWApplication {
         Debug.setDebug(debug);
         Debug.setTag("Neighbor");
         initImageLoader(getApplicationContext());
+        initEMOptions();
         OkHttpRequest.setLogging(AppConfig.DEBUG);
     }
 
@@ -73,5 +76,17 @@ public class BaseApplication extends WWApplication {
                 .showImageOnLoading(onLoading).showImageForEmptyUri(emptyUri)
                 .showImageOnFail(onFail).build();
         return builder;
+    }
+
+    private void initEMOptions(){
+        EMOptions options = new EMOptions();
+        // 默认添加好友时，是不需要验证的，改成需要验证
+        options.setAutoLogin(true);
+        options.setAcceptInvitationAlways(false);
+        options.setDeleteMessagesAsExitGroup(false);
+        //初始化
+        EMClient.getInstance().init(getApplicationContext(), options);
+        //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
+        EMClient.getInstance().setDebugMode(true);
     }
 }

@@ -37,5 +37,8 @@
         <item>失物招领</item>
     </string-array>
 
-
+    <string-array name="message_text">
+        <item>电话咨询</item>
+        <item>在线咨询</item>
+    </string-array>
 </resources>

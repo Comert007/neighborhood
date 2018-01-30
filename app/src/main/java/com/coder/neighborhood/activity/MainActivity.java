@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.fragment.CircleFragment;
 import com.coder.neighborhood.fragment.HomeFragment;
 import com.coder.neighborhood.fragment.MallFragment;
@@ -16,11 +17,14 @@ import com.coder.neighborhood.fragment.MessageFragment;
 import com.coder.neighborhood.fragment.UserFragment;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindViews;
+import ww.com.core.Debug;
 import ww.com.core.adapter.MenuTabAdapter;
 
 /**
@@ -103,6 +107,7 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
             }
         });
 
+        initEMClient();
 
         adapter.changeMenuStatus(0);
         changeMenuStatus(0);
@@ -140,5 +145,32 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void initEMClient(){
+        UserBean user  = (UserBean) BaseApplication.getInstance().getUserInfo();
+
+        if (user !=null){
+            EMClient.getInstance().login(user.getEasemobUsername(),user.getEasemobPassword(),new EMCallBack() {
+                @Override
+                public void onSuccess() {
+                    EMClient.getInstance().groupManager().loadAllGroups();
+                    EMClient.getInstance().chatManager().loadAllConversations();
+                    Debug.d("登录聊天服务器成功！");
+                }
+
+                @Override
+                public void onProgress(int progress, String status) {
+
+                }
+
+                @Override
+                public void onError(int code, String message) {
+                    Debug.e("登录聊天服务器失败！");
+                }
+            });
+        }
+
+
     }
 }

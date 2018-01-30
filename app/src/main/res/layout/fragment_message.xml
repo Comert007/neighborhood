@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/LlayFill">
@@ -12,4 +12,20 @@
     app:titleText="消息"/>
 
 
-</android.support.constraint.ConstraintLayout>
+    <ww.com.core.widget.TranslateTabBar
+        android:id="@+id/translate"
+        app:text="@array/message_text"
+        android:layout_width="match_parent"
+        app:textColor="@color/color_666666"
+        app:textSize="@dimen/wwpx30"
+        android:layout_marginTop="@dimen/wwpx10"
+        android:background="@color/color_white"
+        android:layout_height="@dimen/wwpx80"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
