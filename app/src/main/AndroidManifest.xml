@@ -172,6 +172,17 @@
         <activity android:name=".activity.home.ThingDetailActivity"
                   android:screenOrientation="portrait"/>
 
+        <!--修改密码-->
+        <activity android:name=".activity.user.ModifyPasswordActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--反馈问题-->
+        <activity android:name=".activity.home.FeedBackQuestionActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--二手商品添加-->
+        <activity android:name=".activity.mall.AddSecondHandActivity"
+                  android:screenOrientation="portrait"/>
 
 
     </application>

@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity<VoidView,UserModel> {
 
     }
 
-    @OnClick({R.id.btn_enter,R.id.btn_register})
+    @OnClick({R.id.btn_enter,R.id.btn_register,R.id.tv_reset_password})
     public void onLoginClick(View v){
         switch (v.getId()){
             case R.id.btn_enter:
@@ -62,6 +62,10 @@ public class LoginActivity extends BaseActivity<VoidView,UserModel> {
                 break;
             case R.id.btn_register:
                 RegisterActivity.start(this);
+                break;
+
+            case R.id.tv_reset_password:
+                ModifyPasswordActivity.start(this);
                 break;
             default:
                 break;

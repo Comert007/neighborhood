@@ -18,6 +18,21 @@ public class UserApi extends BaseApi {
         return onPost(getActionUrl("app/signup"),params);
     }
 
+    public static final Observable<ResponseBean> findPassword(String username,String password){
+        AjaxParams params = getBaseParams();
+        params.addParameters("username",username);
+        params.addParameters("password",password);
+        return onPost(getActionUrl("app/findPassword"),params);
+    }
+
+    public static final Observable<ResponseBean> modifyPassword(String username,String oldPassword,String newPassword){
+        AjaxParams params = getBaseParams();
+        params.addParameters("username",username);
+        params.addParameters("oldPassword",oldPassword);
+        params.addParameters("newPassword",newPassword);
+        return onPost(getActionUrl("app/modifyPsw"),params);
+    }
+
 
     public static final Observable<ResponseBean> loginup(String username,String password){
         AjaxParams params = getBaseParams();
@@ -35,5 +50,29 @@ public class UserApi extends BaseApi {
         params.addParameters("pageSize",pageSize);
 
         return onPost(getActionUrl("app/getFriendList"),params);
+    }
+
+    public static final Observable<ResponseBean> signIn(String userId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+
+        return onPost(getActionUrl("app/doClockIn"),params);
+    }
+
+    public static final Observable<ResponseBean> querySign(String userId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+
+        return onPost(getActionUrl("app/getClockIn"),params);
+    }
+
+    public static final Observable<ResponseBean> addFriend(String userId,String freindId,String easemodUsername){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("freindId",freindId);
+        params.addParameters("easemodUsername",easemodUsername);
+
+        return onPost(getActionUrl("app/addFriend"),params);
+
     }
 }

@@ -1,11 +1,13 @@
 package com.coder.neighborhood.bean.user;
 
+import java.io.Serializable;
+
 /**
  * @author feng
  * @Date 2018/1/29.
  */
 
-public class FriendBean {
+public class FriendBean implements Serializable{
 
     /**
      * imgUrl : http://39.106.140.31:80/linli/userfiles/images/20180124/20180124195959_29.jpg

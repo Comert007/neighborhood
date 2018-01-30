@@ -3,47 +3,72 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="@mipmap/ic_login_page"
+    android:background="@color/color_white"
     android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:src="@mipmap/img_page"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx500"/>
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/wwpx140"
         android:layout_width="match_parent"
         android:paddingLeft="@dimen/wwpx83"
+        android:layout_marginTop="@dimen/wwpx100"
         android:paddingRight="@dimen/wwpx83"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/et_mobile"
             android:hint="用户名"
-            style="@style/UserEditTextStyle"/>
+            android:layout_height="@dimen/wwpx55"
+            android:textSize="@dimen/wwpx32"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text"
+            android:maxLength="11"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/color_aaaaaa"/>
 
         <EditText
             android:id="@+id/et_password"
             android:hint="密码"
+            android:layout_marginTop="@dimen/wwpx50"
+            android:layout_height="@dimen/wwpx55"
+            android:textSize="@dimen/wwpx32"
+            android:textColor="@color/color_text"
+            android:textColorHint="@color/color_text"
             android:inputType="textPassword"
-            style="@style/UserEditTextStyle"/>
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"/>
 
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/color_aaaaaa"/>
 
         <TextView
+            android:id="@+id/tv_reset_password"
             android:text="@string/str_forget_pass"
             android:layout_width="match_parent"
             android:textSize="@dimen/wwpx28"
+            android:layout_marginTop="@dimen/wwpx20"
             android:gravity="right|center_vertical"
             android:textColor="@color/color_text"
             android:layout_height="wrap_content"/>
 
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:orientation="horizontal"
-                      android:layout_marginTop="@dimen/wwpx10"
+        <RelativeLayout android:layout_width="match_parent"
+                      android:layout_marginTop="@dimen/wwpx80"
                       android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btn_register"
-                android:layout_width="0px"
-                android:layout_weight="1"
+                android:layout_width="@dimen/wwpx196"
                 android:layout_height="@dimen/wwpx60"
                 android:text="@string/str_user_register"
                 android:textSize="@dimen/wwpx28"
@@ -53,14 +78,22 @@
 
             <Button
                 android:id="@+id/btn_enter"
-                android:layout_width="0px"
-                android:layout_weight="1"
+                android:layout_width="@dimen/wwpx196"
                 android:textSize="@dimen/wwpx28"
                 android:layout_height="@dimen/wwpx60"
+                android:layout_alignParentRight="true"
                 android:text="@string/str_user_enter"
                 style="@style/CommitButtonStyle"/>
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:text="欢迎使用万家邻里"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/wwpx28"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

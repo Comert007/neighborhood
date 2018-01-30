@@ -41,7 +41,7 @@
         <item name="android:paddingRight">@dimen/wwpx20</item>
         <item name="android:textColor">@color/color_text</item>
         <item name="android:background">@drawable/round_border_gray_shape</item>
-        <item name="android:layout_height">@dimen/wwpx70</item>
+        <item name="android:layout_height">@dimen/wwpx60</item>
     </style>
 
 </resources>

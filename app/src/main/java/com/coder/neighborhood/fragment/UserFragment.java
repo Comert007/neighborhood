@@ -6,14 +6,17 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.home.FeedBackQuestionActivity;
 import com.coder.neighborhood.activity.mall.CartActivity;
 import com.coder.neighborhood.activity.mall.OrderStatusActivity;
+import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.AboutUsActivity;
 import com.coder.neighborhood.activity.user.GoodFriendsActivity;
 import com.coder.neighborhood.activity.user.LoginActivity;
 import com.coder.neighborhood.activity.user.UserInfoActivity;
+import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.UserBean;
-import com.coder.neighborhood.mvp.model.VoidModel;
+import com.coder.neighborhood.mvp.model.user.UserModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,7 +31,7 @@ import ww.com.core.widget.RoundImageView;
  * Created by feng on 2017/12/23.
  */
 
-public class UserFragment extends BaseFragment<VoidView, VoidModel> {
+public class UserFragment extends BaseFragment<VoidView, UserModel> {
 
     @BindView(R.id.riv_header)
     RoundImageView rivHeader;
@@ -60,14 +63,15 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
         }
     }
 
-    @OnClick({R.id.btn_loginout,R.id.ll_sign,R.id.rl_about_us,R.id.ll_cart,R.id.ll_order})
+    @OnClick({R.id.btn_loginout,R.id.ll_sign,R.id.rl_about_us,R.id.ll_cart,R.id.ll_order,
+    R.id.rl_feedback})
     public void onUser(View v){
         switch (v.getId()){
             case R.id.btn_loginout:
                 showDialog();
                 break;
             case R.id.ll_sign:
-                showSign();
+                querySign();
                 break;
             case R.id.rl_about_us:
                 AboutUsActivity.start(getContext());
@@ -80,6 +84,9 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
                 break;
             case R.id.ll_order:
                 OrderStatusActivity.start(getContext());
+                break;
+            case R.id.rl_feedback:
+                FeedBackQuestionActivity.start(getContext());
                 break;
         }
     }
@@ -116,16 +123,15 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
     }
 
 
-    private void showSign(){
+    private void showSign(String count){
         if (signDialog ==null){
             QMUIDialog.MessageDialogBuilder builder = new QMUIDialog.MessageDialogBuilder(getContext());
             builder.setTitle("签到记录");
-            builder.setMessage("本月签到1天");
+            builder.setMessage("本月签到"+count+"天");
             builder.addAction("签到", new QMUIDialogAction.ActionListener() {
                 @Override
                 public void onClick(QMUIDialog dialog, int index) {
-                    ToastUtils.showToast("签到成功");
-                    dialog.dismiss();
+                   signIn(dialog);
                 }
             });
 
@@ -137,6 +143,37 @@ public class UserFragment extends BaseFragment<VoidView, VoidModel> {
         }else {
             signDialog.show();
         }
+    }
+
+
+    private void signIn(QMUIDialog dialog){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        m.signIn(user.getUserId(), new HttpSubscriber<ResponseBean>(getContext(),false) {
+            @Override
+            public void onNext(ResponseBean responseBean) {
+                ToastUtils.showToast(responseBean.getMessage());
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void querySign(){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        m.querySign(user.getUserId(), new HttpSubscriber<String>(getContext(),true) {
+            @Override
+            public void onNext(String s) {
+                if (TextUtils.isEmpty(s)){
+                    s= "1";
+                }
+                showSign(s);
+            }
+
+        });
     }
 
     @OnClick({R.id.ll_wait_pay,R.id.ll_wait_send,R.id.ll_wait_gain,R.id.ll_wait_comment,R.id.ll_return_goods,

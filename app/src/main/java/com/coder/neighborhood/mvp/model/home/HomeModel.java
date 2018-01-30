@@ -197,6 +197,21 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+    public void feedBackQuestion(String userId,
+                                String content,
+                                LifecycleTransformer transformer,
+                                HttpSubscriber<String> httpSubscriber){
+        HomeApi.feedBackQuestion(userId, content)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
     public void questionsComment(String questionId,
                                  String pageNo,
                                  String pageSize,LifecycleTransformer transformer,

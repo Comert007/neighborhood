@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.user.FriendsInfoActivity;
 import com.coder.neighborhood.bean.user.FriendBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -21,6 +22,7 @@ import ww.com.core.widget.RoundImageView;
  */
 
 public class GoodFriendsAdapter extends RvAdapter<FriendBean> {
+
 
     public GoodFriendsAdapter(Context context) {
         super(context);
@@ -52,6 +54,10 @@ public class GoodFriendsAdapter extends RvAdapter<FriendBean> {
         public void onBindData(int position, FriendBean bean) {
             ImageLoader.getInstance().displayImage(bean.getImgUrl(),riv, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             tvName.setText(TextUtils.isEmpty(bean.getNickName())?"未设置":bean.getNickName());
+
+            itemView.setOnClickListener(v -> {
+                FriendsInfoActivity.start(getContext(),bean);
+            });
         }
     }
 }

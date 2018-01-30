@@ -43,6 +43,42 @@ public class UserModel implements IModel {
                 .subscribe(httpSubscriber);
     }
 
+
+    public void findPassword(String username,
+                       String password,
+                       LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber){
+
+        UserApi.findPassword(username, password)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getMessage();
+                    }
+                })
+                .compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+
+
+    public void modifyPass(String username,
+                       String oldPassword,
+                           String newPassword,
+                       LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber){
+
+        UserApi.modifyPassword(username, oldPassword,newPassword)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getMessage();
+                    }
+                })
+                .compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
     public void loginUp(String username,
                         String password,
                         LifecycleTransformer transformer,
@@ -62,6 +98,38 @@ public class UserModel implements IModel {
                         HttpSubscriber<List<FriendBean>> httpSubscriber){
         UserApi.friends(userId, pageNo, pageSize)
                 .map(responseBean -> JSON.parseArray(responseBean.getData(),FriendBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void signIn(String userId,HttpSubscriber<ResponseBean> httpSubscriber){
+        UserApi.signIn(userId)
+                .compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void querySign(String userId,HttpSubscriber<String> httpSubscriber){
+        UserApi.querySign(userId)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void addFriend(String userId,String freindId,String easemodUsername,
+                          LifecycleTransformer transformer,
+                          HttpSubscriber<String> httpSubscriber){
+
+        UserApi.addFriend(userId, freindId, easemodUsername)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getMessage();
+                    }
+                }).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
