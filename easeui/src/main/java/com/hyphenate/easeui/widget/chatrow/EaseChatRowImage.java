@@ -1,5 +1,6 @@
 package com.hyphenate.easeui.widget.chatrow;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -114,7 +115,8 @@ public class EaseChatRowImage extends EaseChatRowFile{
      * load image into image view
      * 
      */
-    private void showImageView(final String thumbernailPath, final String localFullSizePath,final EMMessage message) {
+    @SuppressLint("StaticFieldLeak")
+    private void showImageView(final String thumbernailPath, final String localFullSizePath, final EMMessage message) {
         // first check if the thumbnail image already loaded into cache s
         Bitmap bitmap = EaseImageCache.getInstance().get(thumbernailPath);
 
@@ -123,36 +125,40 @@ public class EaseChatRowImage extends EaseChatRowFile{
             imageView.setImageBitmap(bitmap);
         } else {
             imageView.setImageResource(R.drawable.ease_default_image);
-            AsyncTaskCompat.executeParallel( new AsyncTask<Object, Void, Bitmap>() {
+            try {
+                AsyncTaskCompat.executeParallel( new AsyncTask<Object, Void, Bitmap>() {
 
-                @Override
-                protected Bitmap doInBackground(Object... args) {
-                    File file = new File(thumbernailPath);
-                    if (file.exists()) {
-                        return EaseImageUtils.decodeScaleImage(thumbernailPath, 160, 160);
-                    } else if (new File(imgBody.thumbnailLocalPath()).exists()) {
-                        return EaseImageUtils.decodeScaleImage(imgBody.thumbnailLocalPath(), 160, 160);
-                    }
-                    else {
-                        if (message.direct() == EMMessage.Direct.SEND) {
-                            if (localFullSizePath != null && new File(localFullSizePath).exists()) {
-                                return EaseImageUtils.decodeScaleImage(localFullSizePath, 160, 160);
+                    @Override
+                    protected Bitmap doInBackground(Object... args) {
+                        File file = new File(thumbernailPath);
+                        if (file.exists()) {
+                            return EaseImageUtils.decodeScaleImage(thumbernailPath, 160, 160);
+                        } else if (new File(imgBody.thumbnailLocalPath()).exists()) {
+                            return EaseImageUtils.decodeScaleImage(imgBody.thumbnailLocalPath(), 160, 160);
+                        }
+                        else {
+                            if (message.direct() == EMMessage.Direct.SEND) {
+                                if (localFullSizePath != null && new File(localFullSizePath).exists()) {
+                                    return EaseImageUtils.decodeScaleImage(localFullSizePath, 160, 160);
+                                } else {
+                                    return null;
+                                }
                             } else {
                                 return null;
                             }
-                        } else {
-                            return null;
                         }
                     }
-                }
 
-                protected void onPostExecute(Bitmap image) {
-                    if (image != null) {
-                        imageView.setImageBitmap(image);
-                        EaseImageCache.getInstance().put(thumbernailPath, image);
+                    protected void onPostExecute(Bitmap image) {
+                        if (image != null) {
+                            imageView.setImageBitmap(image);
+                            EaseImageCache.getInstance().put(thumbernailPath, image);
+                        }
                     }
-                }
-            });
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
