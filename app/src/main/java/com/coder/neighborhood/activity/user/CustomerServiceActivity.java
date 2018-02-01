@@ -3,6 +3,7 @@ package com.coder.neighborhood.activity.user;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -10,10 +11,11 @@ import android.support.v4.view.ViewPager;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.adapter.user.TranslateTabAdapter;
-import com.coder.neighborhood.fragment.OnlineConsultationFragment;
 import com.coder.neighborhood.fragment.PhoneConsultationFragment;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.ui.EaseChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,16 +78,18 @@ public class CustomerServiceActivity extends BaseActivity<VoidView,VoidModel>{
             fragments = new ArrayList<>();
         }
         fragments.add(new PhoneConsultationFragment());
-        fragments.add(new OnlineConsultationFragment());
+        fragments.add(getOnlineFragment());
     }
 
-//    private Fragment createFragment(Fragment fragment,NewsItem item,String type){
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("newsItem",item);
-//        bundle.putString("type",type);
-//        fragment.setArguments(bundle);
-//        return fragment;
-//    }
+    private Fragment getOnlineFragment(){
+        EaseChatFragment chatFragment = new EaseChatFragment();
+        //传入参数
+        Bundle args = new Bundle();
+        args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+        args.putString(EaseConstant.EXTRA_USER_ID, "18782957571");
+        chatFragment.setArguments(args);
+        return chatFragment;
+    }
 
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override

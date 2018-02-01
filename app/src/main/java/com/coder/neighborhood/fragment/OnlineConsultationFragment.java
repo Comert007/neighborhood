@@ -10,6 +10,7 @@ import com.coder.neighborhood.mvp.vu.VoidView;
  */
 
 public class OnlineConsultationFragment extends BaseFragment<VoidView,VoidModel>{
+
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_online_consultation;

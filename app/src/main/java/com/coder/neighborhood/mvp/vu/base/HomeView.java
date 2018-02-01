@@ -12,6 +12,7 @@ import com.coder.neighborhood.activity.home.HelpActivity;
 import com.coder.neighborhood.activity.home.LivingListActivity;
 import com.coder.neighborhood.activity.home.SecondHandMarketActivity;
 import com.coder.neighborhood.activity.home.TravelActivity;
+import com.coder.neighborhood.activity.user.CustomerServiceActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
 
@@ -70,44 +71,12 @@ public class HomeView extends RefreshView {
 
 
     private void onBannerPosition(){
-        ButterKnife.findById(bannerView,R.id.ll_living).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBannerClick(1);
-
-            }
-        });
-        ButterKnife.findById(bannerView,R.id.ll_second_market).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBannerClick(2);
-
-            }
-        });
-        ButterKnife.findById(bannerView,R.id.ll_travel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBannerClick(4);
-
-            }
-        });
-
-
-        ButterKnife.findById(bannerView,R.id.ll_help).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBannerClick(5);
-
-            }
-        });
-
-        ButterKnife.findById(bannerView,R.id.ll_find_things).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBannerClick(6);
-
-            }
-        });
+        ButterKnife.findById(bannerView,R.id.ll_living).setOnClickListener(v -> onBannerClick(1));
+        ButterKnife.findById(bannerView,R.id.ll_second_market).setOnClickListener(v -> onBannerClick(2));
+        ButterKnife.findById(bannerView,R.id.ll_travel).setOnClickListener(v -> onBannerClick(4));
+        ButterKnife.findById(bannerView,R.id.ll_help).setOnClickListener(v -> onBannerClick(5));
+        ButterKnife.findById(bannerView,R.id.ll_find_things).setOnClickListener(v -> onBannerClick(6));
+        ButterKnife.findById(bannerView,R.id.ll_customer_service).setOnClickListener(v -> onBannerClick(8));
     }
 
     private void onBannerClick(int position){
@@ -132,6 +101,7 @@ public class HomeView extends RefreshView {
             case 7:
                 break;
             case 8:
+                CustomerServiceActivity.start(preActivity);
                 break;
             default:
                 break;

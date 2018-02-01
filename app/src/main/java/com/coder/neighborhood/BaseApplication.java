@@ -2,11 +2,13 @@ package com.coder.neighborhood;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.multidex.MultiDex;
 
 import com.coder.neighborhood.config.AppConfig;
 import com.coder.neighborhood.mvp.WWApplication;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -29,6 +31,12 @@ public class BaseApplication extends WWApplication {
     private static BaseApplication instance;
 
     private ACache cache;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
@@ -88,5 +96,7 @@ public class BaseApplication extends WWApplication {
         EMClient.getInstance().init(getApplicationContext(), options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(true);
+
+        EaseUI.getInstance().init(getApplicationContext(), options);
     }
 }
