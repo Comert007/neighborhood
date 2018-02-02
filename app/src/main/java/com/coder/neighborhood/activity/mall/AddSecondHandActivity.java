@@ -1,8 +1,10 @@
 package com.coder.neighborhood.activity.mall;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -65,8 +67,6 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
     @BindView(R.id.et_goods_detail)
     EditText etGoodsDetail;
 
-    public static final int IMAGE_ADD = 1;
-    public static final int IMAGE_SHOW = 2;
     private final int IMAGE_PICKER = 0x13;
 
     private PermissionDispose dispose;
@@ -115,7 +115,12 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
     public void onAddSecond(View view) {
         switch (view.getId()) {
             case R.id.ll_add_show:
-                startCameraOrPhoto();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    dispose.requestPermission(0x12, Manifest.permission.CAMERA, Manifest
+                            .permission.WRITE_EXTERNAL_STORAGE);
+                } else {
+                    startCameraOrPhoto();
+                }
                 break;
             case R.id.if_close:
                 ivImage.setImageResource(R.mipmap.pic_default);

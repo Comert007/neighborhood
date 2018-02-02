@@ -244,4 +244,15 @@ public class HomeModel extends BaseModel {
 
     }
 
+    public void certification(String userId,
+                              String idCodeName,
+                              String idCode,
+                              LifecycleTransformer transformer,
+                              HttpSubscriber<String> httpSubscriber){
+        HomeApi.certification(userId, idCodeName, idCode)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
 }

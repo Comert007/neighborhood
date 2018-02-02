@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    style="@style/LlayFill"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#cccccc"
-    style="@style/LlayFill">
+    android:background="#cccccc">
 
     <com.coder.neighborhood.widget.TitleView
         android:id="@+id/title_view"
@@ -13,128 +13,194 @@
 
 
     <ImageView android:layout_width="match_parent"
+               android:layout_height="@dimen/wwpx342"
                android:scaleType="centerCrop"
-               android:src="@mipmap/ic_living_certification"
-               android:layout_height="@dimen/wwpx342"/>
+               android:src="@mipmap/ic_living_certification"/>
 
     <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
                   android:background="@color/color_white"
-                  android:paddingTop="@dimen/wwpx20"
                   android:gravity="center_horizontal"
-                  android:paddingBottom="@dimen/wwpx40"
                   android:orientation="vertical"
-                  android:layout_height="match_parent">
+                  android:paddingBottom="@dimen/wwpx40"
+                  android:paddingTop="@dimen/wwpx20">
 
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/wwpx120"
             android:paddingRight="@dimen/wwpx120"
-            android:paddingTop="@dimen/wwpx80"
-            android:layout_height="wrap_content">
-            <EditText android:layout_width="match_parent"
-                      android:hint="姓名"
-                      android:padding="@dimen/wwpx10"
-                      android:gravity="bottom"
-                      android:textSize="@dimen/wwpx26"
-                      android:textColor="@color/color_text"
-                      android:textColorHint="@color/color_text"
-                      android:background="@android:color/transparent"
-                      android:layout_height="wrap_content"/>
+            android:paddingTop="@dimen/wwpx80">
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="bottom"
+                android:hint="姓名"
+                android:lines="1"
+                android:maxLength="10"
+                android:padding="@dimen/wwpx10"
+                android:textColor="@color/color_text"
+                android:textColorHint="@color/color_text"
+                android:textSize="@dimen/wwpx26"/>
 
             <View android:layout_width="match_parent"
-                  android:background="@color/color_gray"
-                  android:layout_height="2px"/>
+                  android:layout_height="2px"
+                  android:background="@color/color_gray"/>
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/wwpx120"
             android:paddingRight="@dimen/wwpx120"
-            android:paddingTop="@dimen/wwpx40"
-            android:layout_height="wrap_content">
-            <EditText android:layout_width="match_parent"
-                      android:hint="身份证号"
-                      android:padding="@dimen/wwpx10"
-                      android:gravity="bottom"
-                      android:textSize="@dimen/wwpx26"
-                      android:textColor="@color/color_text"
-                      android:textColorHint="@color/color_text"
-                      android:background="@android:color/transparent"
-                      android:layout_height="wrap_content"/>
+            android:paddingTop="@dimen/wwpx40">
+            <EditText
+                android:id="@+id/et_id_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="bottom"
+                android:hint="身份证号"
+                android:lines="1"
+                android:padding="@dimen/wwpx10"
+                android:textColor="@color/color_text"
+                android:textColorHint="@color/color_text"
+                android:textSize="@dimen/wwpx26"/>
 
             <View android:layout_width="match_parent"
-                  android:background="@color/color_gray"
-                  android:layout_height="2px"/>
+                  android:layout_height="2px"
+                  android:background="@color/color_gray"/>
         </LinearLayout>
 
 
         <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="@dimen/wwpx50"
                       android:orientation="horizontal"
                       android:paddingLeft="@dimen/wwpx40"
-                      android:paddingRight="@dimen/wwpx40"
-                      android:layout_marginTop="@dimen/wwpx50"
-                      android:layout_height="wrap_content">
-            <LinearLayout
+                      android:paddingRight="@dimen/wwpx40">
+
+            <RelativeLayout android:layout_width="0px"
+                            android:layout_height="@dimen/wwpx160"
+                            android:layout_weight="1"
+                            android:gravity="center">
+                <RelativeLayout
+                    android:id="@+id/rl_positive_image_show"
+                    android:layout_width="@dimen/wwpx230"
+                    android:layout_height="@dimen/wwpx160"
+                    android:visibility="gone">
+                    <ImageView
+                        android:id="@+id/iv_positive_image"
+                        android:layout_width="@dimen/wwpx210"
+                        android:layout_height="@dimen/wwpx130"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_page_bg"
+                        android:scaleType="centerCrop"/>
+                    <com.coder.neighborhood.widget.IconFontTextView
+                        android:id="@+id/if_positive_close"
+                        android:layout_width="@dimen/wwpx20"
+                        android:layout_height="@dimen/wwpx20"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/wwpx8"
+                        android:text="\ue6bf"
+                        android:textSize="@dimen/wwpx20"
+                    />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_positive_add_show"
+                    android:layout_width="@dimen/wwpx230"
+                    android:layout_height="@dimen/wwpx160"
+                    android:background="@color/color_page_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+
+                        android:layout_width="@dimen/wwpx48"
+                        android:layout_height="@dimen/wwpx48"
+                        android:src="@mipmap/ic_add"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="身份证正面照"
+                              android:textColor="@color/color_black"
+                              android:textSize="@dimen/wwpx26"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
                 android:layout_width="0px"
+                android:layout_height="@dimen/wwpx160"
                 android:layout_weight="1"
-                android:layout_height="@dimen/wwpx150"
-                android:layout_margin="@dimen/wwpx20"
-                android:background="@color/color_page_bg"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
+                android:gravity="center">
+                <RelativeLayout
+                    android:id="@+id/rl_opposite_image_show"
+                    android:layout_width="@dimen/wwpx230"
+                    android:layout_height="@dimen/wwpx160"
+                    android:visibility="gone">
+                    <ImageView
+                        android:id="@+id/iv_opposite_image"
+                        android:layout_width="@dimen/wwpx210"
+                        android:layout_height="@dimen/wwpx130"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_page_bg"
+                        android:scaleType="centerCrop"/>
+                    <com.coder.neighborhood.widget.IconFontTextView
+                        android:id="@+id/if_opposite_close"
+                        android:layout_width="@dimen/wwpx20"
+                        android:layout_height="@dimen/wwpx20"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/wwpx8"
+                        android:text="\ue6bf"
+                        android:textSize="@dimen/wwpx20"
+                    />
+                </RelativeLayout>
 
-                    android:layout_width="@dimen/wwpx48"
-                    android:layout_height="@dimen/wwpx48"
-                    android:src="@mipmap/ic_add"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="身份证正面照"
-                          android:textColor="@color/color_black"
-                          android:textSize="@dimen/wwpx26"/>
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_opposite_add_show"
+                    android:layout_width="@dimen/wwpx230"
+                    android:layout_height="@dimen/wwpx160"
+                    android:background="@color/color_page_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
 
+                        android:layout_width="@dimen/wwpx48"
+                        android:layout_height="@dimen/wwpx48"
+                        android:src="@mipmap/ic_add"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="身份证反面照"
+                              android:textColor="@color/color_black"
+                              android:textSize="@dimen/wwpx26"/>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0px"
-                android:layout_weight="1"
-                android:layout_height="@dimen/wwpx150"
-                android:layout_margin="@dimen/wwpx20"
-                android:background="@color/color_page_bg"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-
-                    android:layout_width="@dimen/wwpx48"
-                    android:layout_height="@dimen/wwpx48"
-                    android:src="@mipmap/ic_add"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="身份证反面照"
-                          android:textColor="@color/color_black"
-                          android:textSize="@dimen/wwpx26"/>
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_request_certification"
+            android:layout_width="@dimen/wwpx498"
+            android:layout_height="@dimen/wwpx60"
+            android:layout_marginTop="@dimen/wwpx50"
             android:background="@drawable/green_border_shape"
             android:text="申请"
-            android:textSize="@dimen/wwpx30"
             android:textColor="@color/color_text"
-            android:layout_marginTop="@dimen/wwpx50"
-            android:layout_width="@dimen/wwpx498"
-            android:layout_height="@dimen/wwpx60"/>
+            android:textSize="@dimen/wwpx30"/>
 
         <TextView android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center|bottom"
                   android:text="欢迎使用万家邻里"
                   android:textColor="@color/color_666666"
-                  android:textSize="@dimen/wwpx28"
-                  android:gravity="center|bottom"
-                  android:layout_height="match_parent"/>
+                  android:textSize="@dimen/wwpx28"/>
 
     </LinearLayout>
 

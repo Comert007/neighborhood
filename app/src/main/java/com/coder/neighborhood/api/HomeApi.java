@@ -160,4 +160,16 @@ public class HomeApi extends BaseApi {
 
     }
 
+
+    public static final Observable<ResponseBean> certification(String userId,
+                                                               String idCodeName,
+                                                               String idCode){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("idCodeName",idCodeName);
+        params.addParameters("idCode",idCode);
+
+        return onPost(getActionUrl("app/certificationUser"),params);
+    }
+
 }
