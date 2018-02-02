@@ -131,7 +131,8 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> {
             builder.addAction("签到", new QMUIDialogAction.ActionListener() {
                 @Override
                 public void onClick(QMUIDialog dialog, int index) {
-                   signIn(dialog);
+                    dialog.dismiss();
+                   signIn();
                 }
             });
 
@@ -146,18 +147,12 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> {
     }
 
 
-    private void signIn(QMUIDialog dialog){
+    private void signIn(){
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         m.signIn(user.getUserId(), new HttpSubscriber<ResponseBean>(getContext(),false) {
             @Override
             public void onNext(ResponseBean responseBean) {
                 ToastUtils.showToast(responseBean.getMessage());
-                dialog.dismiss();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                dialog.dismiss();
             }
         });
     }

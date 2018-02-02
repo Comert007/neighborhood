@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.UserApi;
 import com.coder.neighborhood.bean.ResponseBean;
@@ -113,7 +114,9 @@ public class UserModel implements IModel {
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
-                        return responseBean.getData();
+                        JSONObject jsonObject = JSONObject.parseObject(responseBean.getData());
+
+                        return jsonObject.getString("clockInCount");
                     }
                 }).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
