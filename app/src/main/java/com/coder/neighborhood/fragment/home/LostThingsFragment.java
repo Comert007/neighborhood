@@ -11,15 +11,22 @@ import com.coder.neighborhood.mvp.vu.home.HelpView;
 
 import java.util.List;
 
+import ww.com.core.widget.CustomRecyclerView;
+import ww.com.core.widget.CustomSwipeRefreshLayout;
+
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/20
  */
 
-public class LostThingsFragment extends BaseFragment<HelpView,HomeModel>{
+public class LostThingsFragment extends BaseFragment<HelpView, HomeModel> {
 
     private FindThingsAdapter adapter;
     private int page = 1;
+
+
+    private CustomSwipeRefreshLayout csr;
+    private CustomRecyclerView crv;
 
 
     @Override
@@ -29,19 +36,70 @@ public class LostThingsFragment extends BaseFragment<HelpView,HomeModel>{
 
     @Override
     protected void init() {
-        adapter = new FindThingsAdapter(getContext());
-        v.getCrv().setAdapter(adapter);
-
-        lostThings();
-
+        initView();
+        initListener();
+        initData();
     }
 
-    private void lostThings(){
-        m.lostThings("1", page + "", Constants.PAGE_SIZE + "",
-                new HttpSubscriber<List<ThingsBean>>(getContext(),false) {
+    private void initView() {
+        adapter = new FindThingsAdapter(getContext());
+        csr = v.getCsr();
+        crv = v.getCrv();
+        csr.setEnableRefresh(true);
+        csr.setFooterRefreshAble(true);
+    }
+
+    private void initListener() {
+        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
+            @Override
+            public void onHeaderRefreshing() {
+                page = 1;
+                v.getCsr().setFooterRefreshAble(true);
+                lostThings();
+            }
+
+            @Override
+            public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
+                lostThings();
+            }
+        });
+    }
+
+    private void initData() {
+        crv.setAdapter(adapter);
+        lostThings();
+    }
+
+
+    private void lostThings() {
+        m.lostThings("2", page + "", Constants.PAGE_SIZE + "",
+                new HttpSubscriber<List<ThingsBean>>(getContext(), false) {
                     @Override
                     public void onNext(List<ThingsBean> thingsBeans) {
-                        adapter.addList(thingsBeans);
+                        v.getCsr().setRefreshFinished();
+                        if (thingsBeans != null && thingsBeans.size() > 0) {
+                            if (page == 1) {
+                                adapter.addList(thingsBeans);
+                            } else {
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(thingsBeans);
+                            }
+
+                            if (thingsBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        } else {
+                            v.getCsr().setFooterRefreshAble(false);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        v.getCsr().setRefreshFinished();
                     }
                 });
     }

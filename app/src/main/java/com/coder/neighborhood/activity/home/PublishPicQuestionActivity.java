@@ -43,9 +43,12 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
 
     private ImageQuestionAdapter adapter;
 
+    private int type;
 
-    public static void start(Context context) {
+
+    public static void start(Context context,int type) {
         Intent intent = new Intent(context, PublishPicQuestionActivity.class);
+        intent.putExtra("type",type);
         context.startActivity(intent);
     }
 
@@ -56,6 +59,7 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
 
     @Override
     protected void init() {
+        type = getIntent().getIntExtra("type",0);
         adapter = new ImageQuestionAdapter(this);
         crv.setLayoutManager(new GridLayoutManager(this,3));
         List<ImageQuestionBean> images = new ArrayList<>();
@@ -96,7 +100,7 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
             if (paths !=null && paths.size()>0){
                  path = paths.get(0);
             }
-            m.addLostThing(userId, "1", phone, content, path, bindUntilEvent(ActivityEvent.DESTROY)
+            m.addLostThing(userId, type+"", phone, content, path, bindUntilEvent(ActivityEvent.DESTROY)
                     , new HttpSubscriber<String>(this,true) {
                         @Override
                         public void onNext(String s) {

@@ -16,6 +16,7 @@ public class ThingsBean {
      */
 
     private long lostDate;
+    private String imgUrl;
     private String lostId;
     private String lostPhone;
     private String lostInfo;
@@ -59,5 +60,13 @@ public class ThingsBean {
 
     public void setHeaderImgUrl(String headerImgUrl) {
         this.headerImgUrl = headerImgUrl;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

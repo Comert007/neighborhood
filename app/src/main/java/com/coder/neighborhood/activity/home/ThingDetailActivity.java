@@ -8,10 +8,9 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
-import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.bean.home.ThingDetailBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
-import com.coder.neighborhood.mvp.vu.base.BannerView;
+import com.coder.neighborhood.mvp.vu.home.ThingDetailView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.youth.banner.listener.OnBannerListener;
@@ -23,11 +22,11 @@ import butterknife.BindView;
 import ww.com.core.widget.RoundImageView;
 
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/29
  */
 
-public class ThingDetailActivity extends BaseActivity<BannerView,HomeModel> {
+public class ThingDetailActivity extends BaseActivity<ThingDetailView,HomeModel> {
     @BindView(R.id.riv)
     RoundImageView riv;
     @BindView(R.id.tv_content)
@@ -66,6 +65,12 @@ public class ThingDetailActivity extends BaseActivity<BannerView,HomeModel> {
     }
 
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void startBanner(List<ThingDetailBean.ImgUrlBean> bannerBeans) {
         urls.clear();
         for (ThingDetailBean.ImgUrlBean banner : bannerBeans) {
@@ -82,8 +87,6 @@ public class ThingDetailActivity extends BaseActivity<BannerView,HomeModel> {
                 }
             }
         });
-        v.addBanner();
-
     }
 
 

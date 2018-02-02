@@ -40,6 +40,7 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
     private List<Fragment> fragments;
     private FragmentManager fragmentManager;
     private TranslateTabAdapter adapter;
+    private int type =1;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, FindThingsActivity.class);
@@ -86,6 +87,7 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
         public void onPageScrolled(int position, float positionOffset, int
                 positionOffsetPixels) {
 
+            type = position+1;
         }
 
         @Override
@@ -103,7 +105,7 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
     public void onFindThings(View v){
         switch (v.getId()){
             case R.id.btn_ask:
-                PublishPicQuestionActivity.start(this);
+                PublishPicQuestionActivity.start(this,type);
                 break;
             default:
                 break;

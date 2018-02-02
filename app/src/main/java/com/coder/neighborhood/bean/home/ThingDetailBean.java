@@ -1,5 +1,7 @@
 package com.coder.neighborhood.bean.home;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 /**
@@ -24,6 +26,8 @@ public class ThingDetailBean {
     private long questionDate;
     private String lostInfo;
     private String headerImgUrl;
+
+    @Nullable
     private List<ImgUrlBean> imgUrl;
 
     public String getLostId() {
@@ -73,6 +77,7 @@ public class ThingDetailBean {
     public void setImgUrl(List<ImgUrlBean> imgUrl) {
         this.imgUrl = imgUrl;
     }
+
 
     public static class ImgUrlBean {
         /**
