@@ -197,6 +197,18 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+    public void addHelpQuestionReply(String userId,
+                                     String questionId,
+                                     String comments,
+                                     LifecycleTransformer transformer,
+                                     HttpSubscriber<String> httpSubscriber){
+        HomeApi.addHelpQuestionReply(userId, questionId, comments)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
+    }
+
     public void feedBackQuestion(String userId,
                                 String content,
                                 LifecycleTransformer transformer,
@@ -254,5 +266,6 @@ public class HomeModel extends BaseModel {
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
+
 
 }

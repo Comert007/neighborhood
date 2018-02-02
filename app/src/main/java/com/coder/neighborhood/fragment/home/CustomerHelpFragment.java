@@ -19,11 +19,11 @@ import ww.com.core.widget.CustomSwipeRefreshLayout;
  * @Date 2018/1/20
  */
 
-public class CustomerHelpFragment extends BaseFragment<HelpView,HomeModel>{
+public class CustomerHelpFragment extends BaseFragment<HelpView, HomeModel> {
 
     private HelpAdapter adapter;
 
-    private int page= 1;
+    private int page = 1;
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
 
@@ -35,18 +35,26 @@ public class CustomerHelpFragment extends BaseFragment<HelpView,HomeModel>{
 
     @Override
     protected void init() {
+        initView();
+        initListener();
+        initData();
+    }
+
+    private void initView() {
         adapter = new HelpAdapter(getContext());
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
-        initListener();
-        crv.setAdapter(adapter);
-
-        customerQuestions();
+        csr.setFooterRefreshAble(true);
     }
 
 
-    private void initListener(){
+    private void initData() {
+        crv.setAdapter(adapter);
+        customerQuestions();
+    }
+
+    private void initListener() {
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
             @Override
             public void onHeaderRefreshing() {
@@ -57,29 +65,41 @@ public class CustomerHelpFragment extends BaseFragment<HelpView,HomeModel>{
 
             @Override
             public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
                 customerQuestions();
             }
         });
     }
 
 
-    private void customerQuestions(){
+    private void customerQuestions() {
         m.customQuestions(page + "", Constants.PAGE_SIZE + "",
-                new HttpSubscriber<List<QuestionBean>>(getContext(),false) {
+                new HttpSubscriber<List<QuestionBean>>(getContext(), false) {
                     @Override
                     public void onNext(List<QuestionBean> questionBeans) {
                         v.getCsr().setRefreshFinished();
-                        if (questionBeans != null && questionBeans.size()>0) {
-                            if (page == 1) {
-                                adapter.getList().clear();
+                        if (questionBeans!=null && questionBeans.size()>0){
+                            if (page == 1){
                                 adapter.addList(questionBeans);
-                            } else {
-//                                adapter.appendList(friendBeans);
+                            }else {
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(questionBeans);
                             }
-                            page++;
-                        } else {
+
+                            if (questionBeans.size() == Constants.PAGE_SIZE){
+                                page ++;
+                            }else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        }else {
                             v.getCsr().setFooterRefreshAble(false);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        v.getCsr().setRefreshFinished();
                     }
                 });
     }

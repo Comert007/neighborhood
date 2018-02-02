@@ -114,6 +114,20 @@ public class HomeApi extends BaseApi {
     }
 
 
+    public static final Observable<ResponseBean> addHelpQuestionReply(String userId,
+                                                                 String questionId,
+                                                                 String comments){
+
+
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId", userId);
+        params.addParameters("questionId", questionId);
+        params.addParameters("comments", comments);
+
+        return onPost(getActionUrl("app/addQuestionComments"), params);
+
+    }
+
     public static final Observable<ResponseBean> feedBackQuestion(String userId,
                                                                  String content){
 

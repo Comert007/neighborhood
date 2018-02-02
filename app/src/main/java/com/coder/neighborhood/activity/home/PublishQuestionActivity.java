@@ -3,6 +3,7 @@ package com.coder.neighborhood.activity.home;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.coder.neighborhood.utils.ToastUtils;
+import com.coder.neighborhood.widget.CashierInputFilter;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
@@ -70,7 +72,8 @@ public class PublishQuestionActivity extends BaseActivity<VoidView,HomeModel> {
     }
 
     private void initListener(){
-
+        InputFilter[] filters={new CashierInputFilter()};
+        etBounty.setFilters(filters);
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

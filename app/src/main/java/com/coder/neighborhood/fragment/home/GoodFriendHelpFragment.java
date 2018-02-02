@@ -24,11 +24,11 @@ import ww.com.core.widget.CustomSwipeRefreshLayout;
  * @Date 2018/1/20
  */
 
-public class GoodFriendHelpFragment extends BaseFragment<HelpView,HomeModel>{
+public class GoodFriendHelpFragment extends BaseFragment<HelpView, HomeModel> {
 
     private HelpAdapter adapter;
 
-    private int page= 1;
+    private int page = 1;
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
 
@@ -39,21 +39,26 @@ public class GoodFriendHelpFragment extends BaseFragment<HelpView,HomeModel>{
 
     @Override
     protected void init() {
+        initView();
+        initListener();
+        initData();
+    }
+
+    private void initView() {
         adapter = new HelpAdapter(getContext());
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
-        initListener();
-        crv.setAdapter(adapter);
+        csr.setFooterRefreshAble(true);
+    }
 
+
+    private void initData() {
+        crv.setAdapter(adapter);
         friendQuestions();
     }
 
-    private void initData(){
-
-    }
-
-    private void initListener(){
+    private void initListener() {
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
             @Override
             public void onHeaderRefreshing() {
@@ -64,36 +69,42 @@ public class GoodFriendHelpFragment extends BaseFragment<HelpView,HomeModel>{
 
             @Override
             public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
                 friendQuestions();
             }
         });
     }
 
 
-    private void friendQuestions(){
+    private void friendQuestions() {
 
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user ==null || TextUtils.isEmpty(user.getUserId())){
+        if (user == null || TextUtils.isEmpty(user.getUserId())) {
             ToastUtils.showToast("用户信息有误");
             return;
         }
-        m.friendQuestions(user.getUserId(),page + "", Constants.PAGE_SIZE + "",
-                new HttpSubscriber<List<QuestionBean>>(getContext(),false) {
-            @Override
-            public void onNext(List<QuestionBean> questionBeans) {
-                v.getCsr().setRefreshFinished();
-                if (questionBeans != null && questionBeans.size()>0) {
-                    if (page == 1) {
-                        adapter.getList().clear();
-                        adapter.addList(questionBeans);
-                    } else {
-//                                adapter.appendList(friendBeans);
+        m.friendQuestions(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
+                new HttpSubscriber<List<QuestionBean>>(getContext(), false) {
+                    @Override
+                    public void onNext(List<QuestionBean> questionBeans) {
+                        v.getCsr().setRefreshFinished();
+                        if (questionBeans != null && questionBeans.size() > 0) {
+                            if (page == 1) {
+                                adapter.addList(questionBeans);
+                            } else {
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(questionBeans);
+                            }
+
+                            if (questionBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        } else {
+                            v.getCsr().setFooterRefreshAble(false);
+                        }
                     }
-                    page++;
-                } else {
-                    v.getCsr().setFooterRefreshAble(false);
-                }
-            }
 
                     @Override
                     public void onError(Throwable e) {

@@ -8,6 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.mvp.listener.OnEmptyListener;
@@ -39,6 +41,8 @@ public class RefreshView extends BaseView {
 
     protected QMUIEmptyView qmuiEmptyView;
 
+    protected View footerView;
+
     public void setEmptyListener(OnEmptyListener emptyListener) {
         this.emptyListener = emptyListener;
     }
@@ -51,22 +55,27 @@ public class RefreshView extends BaseView {
 
     @Optional
     public void attach() {
-        if (crv!=null){
+        if (crv != null) {
             LinearLayoutManager manager = new LinearLayoutManager(preActivity);
             crv.setLayoutManager(manager);
             crv.setItemAnimator(new DefaultItemAnimator());
 
             View emptyView = LayoutInflater.from(preActivity).inflate(R.layout.layout_empty, null);
-            qmuiEmptyView = ButterKnife.findById(emptyView,R.id.empty_view);
+            qmuiEmptyView = ButterKnife.findById(emptyView, R.id.empty_view);
             qmuiEmptyView.setTitleText("暂无更多商品");
             ScreenUtil.scale(emptyView);
             crv.addEmpty(emptyView);
         }
 
-        if (csr!=null){
+        if (csr != null) {
             csr.setRefreshView(crv);
             csr.setColorSchemeColors(new int[]{Color.parseColor("#14191d"), -65536});
             csr.setEnableRefresh(false);
+
+            footerView = LayoutInflater.from(preActivity).inflate(R.layout.layout_foot_view, null);
+            footerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams
+                    .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            ScreenUtil.scale(footerView);
         }
 
     }
@@ -91,4 +100,7 @@ public class RefreshView extends BaseView {
 
     }
 
+    public View getFooterView() {
+        return footerView;
+    }
 }

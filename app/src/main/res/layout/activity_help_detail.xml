@@ -35,7 +35,7 @@
     
     <TextView
         android:id="@+id/tv_input"
-        android:text="输入"
+        android:hint="输入"
         android:textColor="@color/color_999999"
         android:textSize="@dimen/wwpx26"
         android:gravity="center"
