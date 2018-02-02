@@ -3,9 +3,11 @@ package com.coder.neighborhood.activity.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
+import com.coder.neighborhood.activity.mall.AddSecondHandActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.home.SecondHandMarketAdapter;
 import com.coder.neighborhood.bean.home.BannerBean;
@@ -18,6 +20,7 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.OnClick;
 import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
@@ -27,14 +30,15 @@ import ww.com.core.widget.CustomSwipeRefreshLayout;
  */
 
 @SuppressLint("Registered")
-public class SecondHandMarketActivity extends BaseActivity<SecondMarketView,MallModel> {
+public class SecondHandMarketActivity extends BaseActivity<SecondMarketView, MallModel> {
 
     private SecondHandMarketAdapter adapter;
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
     private List<String> urls;
 
-    private int page =1;
+    private int page = 1;
+    private int requestCode = 0x13;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, SecondHandMarketActivity.class);
@@ -58,7 +62,7 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView,Mall
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         adapter = new SecondHandMarketAdapter(this);
         crv = v.getCrv();
         crv.setAdapter(adapter);
@@ -67,10 +71,11 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView,Mall
         categoryGoods(false);
     }
 
-    private void initListener(){
+    private void initListener() {
         csr = v.getCsr();
 //        csr.setEnableRefresh(true);
-//        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
+//        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener
+// () {
 //            @Override
 //            public void onHeaderRefreshing() {
 //                new Handler().postDelayed(new Runnable() {
@@ -94,8 +99,19 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView,Mall
     }
 
 
-    private void onBanner(){
-        m.onBanner("1", new HttpSubscriber<List<BannerBean>>(SecondHandMarketActivity.this,true) {
+    @OnClick({R.id.btn_publish_goods})
+    public void onPublish(View view) {
+        switch (view.getId()) {
+            case R.id.btn_publish_goods:
+                AddSecondHandActivity.startForResult(this,requestCode);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void onBanner() {
+        m.onBanner("1", new HttpSubscriber<List<BannerBean>>(SecondHandMarketActivity.this, true) {
             @Override
             public void onNext(List<BannerBean> bannerBeans) {
 
@@ -125,13 +141,21 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView,Mall
     }
 
     private void categoryGoods(boolean showDialog) {
-        m.categoryGoods(Constants.TYPE_SECOND_MALL,  page + "",  new
-                HttpSubscriber<List<CategoryGoodsBean>>(this,showDialog) {
+        m.categoryGoods(Constants.TYPE_SECOND_MALL, page + "", new
+                HttpSubscriber<List<CategoryGoodsBean>>(this, showDialog) {
 
                     @Override
                     public void onNext(List<CategoryGoodsBean> categoryGoodsBeans) {
                         adapter.addList(categoryGoodsBeans);
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == this.requestCode){
+            categoryGoods(false);
+        }
     }
 }

@@ -23,9 +23,11 @@
 
 
         <EditText
+            android:id="@+id/et_goods_name"
             android:hint="商品名称"
             android:layout_height="@dimen/wwpx55"
             android:textSize="@dimen/wwpx32"
+            android:singleLine="true"
             android:textColor="@color/color_text"
             android:textColorHint="@color/color_text"
             android:background="@android:color/transparent"
@@ -37,10 +39,12 @@
 
 
         <EditText
+            android:id="@+id/et_goods_price"
             android:layout_marginTop="@dimen/wwpx50"
             android:hint="商品价格"
             android:layout_height="@dimen/wwpx55"
             android:textSize="@dimen/wwpx32"
+            android:lines="1"
             android:textColor="@color/color_text"
             android:textColorHint="@color/color_text"
             android:background="@android:color/transparent"
@@ -51,10 +55,13 @@
               android:background="@color/color_aaaaaa"/>
 
         <EditText
+            android:id="@+id/et_goods_num"
             android:layout_marginTop="@dimen/wwpx50"
             android:hint="商品数量"
             android:layout_height="@dimen/wwpx55"
             android:textSize="@dimen/wwpx32"
+            android:maxLength="10"
+            android:lines="1"
             android:textColor="@color/color_text"
             android:textColorHint="@color/color_text"
             android:background="@android:color/transparent"
@@ -65,10 +72,12 @@
               android:background="@color/color_aaaaaa"/>
 
         <EditText
+            android:id="@+id/et_goods_type"
             android:layout_marginTop="@dimen/wwpx50"
             android:hint="商品类型"
             android:layout_height="@dimen/wwpx55"
             android:textSize="@dimen/wwpx32"
+            android:lines="1"
             android:textColor="@color/color_text"
             android:textColorHint="@color/color_text"
             android:background="@android:color/transparent"
@@ -79,10 +88,12 @@
               android:background="@color/color_aaaaaa"/>
 
         <EditText
+            android:id="@+id/et_goods_detail"
             android:layout_marginTop="@dimen/wwpx50"
             android:hint="商品详情"
             android:layout_height="@dimen/wwpx55"
             android:textSize="@dimen/wwpx32"
+            android:lines="1"
             android:textColor="@color/color_text"
             android:textColorHint="@color/color_text"
             android:background="@android:color/transparent"
@@ -93,27 +104,66 @@
               android:background="@color/color_aaaaaa"/>
 
 
-        <LinearLayout
-            android:layout_width="@dimen/wwpx230"
-            android:layout_height="@dimen/wwpx160"
-            android:layout_marginTop="@dimen/wwpx40"
-            android:background="@color/color_page_bg"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
 
-                android:layout_width="@dimen/wwpx48"
-                android:layout_height="@dimen/wwpx48"
-                android:src="@mipmap/ic_add"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="添加图片"
-                      android:layout_marginTop="@dimen/wwpx19"
-                      android:textColor="@color/color_666666"
-                      android:textSize="@dimen/wwpx24"/>
-        </LinearLayout>
+        <FrameLayout android:layout_width="wrap_content"
+                     android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_add_show"
+                android:layout_width="@dimen/wwpx230"
+                android:layout_height="@dimen/wwpx160"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/wwpx210"
+                    android:layout_height="@dimen/wwpx130"
+                    android:background="@color/color_page_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/wwpx48"
+                        android:layout_height="@dimen/wwpx48"
+                        android:src="@mipmap/ic_add"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/wwpx19"
+                              android:text="添加图片"
+                              android:textColor="@color/color_666666"
+                              android:textSize="@dimen/wwpx24"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_image_show"
+                android:layout_width="@dimen/wwpx230"
+                android:visibility="gone"
+                android:layout_height="@dimen/wwpx160">
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="@dimen/wwpx210"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerCrop"
+                    android:background="@color/color_page_bg"
+                    android:layout_height="@dimen/wwpx130"/>
+                <com.coder.neighborhood.widget.IconFontTextView
+                    android:id="@+id/if_close"
+                    android:layout_width="@dimen/wwpx20"
+                    android:layout_marginTop="@dimen/wwpx8"
+                    android:layout_alignParentRight="true"
+                    android:text="\ue6bf"
+                    android:textSize="@dimen/wwpx20"
+                    android:layout_height="@dimen/wwpx20"
+                />
+            </RelativeLayout>
+
+
+
+        </FrameLayout>
 
         <Button
+            android:id="@+id/btn_publish_goods"
             android:layout_width="match_parent"
             android:layout_height="@dimen/wwpx60"
             android:layout_marginBottom="@dimen/wwpx118"

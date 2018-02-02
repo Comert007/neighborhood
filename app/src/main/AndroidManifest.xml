@@ -49,6 +49,10 @@
         <activity android:name=".activity.user.RegisterActivity"
                   android:screenOrientation="portrait"/>
 
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+                  android:screenOrientation="portrait"/>
+
+
         <!--二手市场-->
         <activity
             android:name=".activity.home.SecondHandMarketActivity"
@@ -197,7 +201,6 @@
         <activity android:name=".activity.mall.AddSecondHandActivity"
                   android:screenOrientation="portrait"/>
 
-        <!--客服中心-->
 
 
     </application>

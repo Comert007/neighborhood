@@ -11,11 +11,11 @@ import android.support.v4.view.ViewPager;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.adapter.user.TranslateTabAdapter;
+import com.coder.neighborhood.fragment.OnlineConsultationFragment;
 import com.coder.neighborhood.fragment.PhoneConsultationFragment;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.ui.EaseChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +51,7 @@ public class CustomerServiceActivity extends BaseActivity<VoidView,VoidModel>{
 
     @Override
     protected void init() {
-        translate.setOnTabChangeListener(new TranslateTabBar.OnTabChangeListener() {
-            @Override
-            public void onChange(int index) {
-                vp.setCurrentItem(index);
-            }
-        });
+        translate.setOnTabChangeListener(index -> vp.setCurrentItem(index));
 //
         fragmentManager = getSupportFragmentManager();
         addFragment();
@@ -82,7 +77,7 @@ public class CustomerServiceActivity extends BaseActivity<VoidView,VoidModel>{
     }
 
     private Fragment getOnlineFragment(){
-        EaseChatFragment chatFragment = new EaseChatFragment();
+        OnlineConsultationFragment chatFragment = new OnlineConsultationFragment();
         //传入参数
         Bundle args = new Bundle();
         args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);

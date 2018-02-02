@@ -228,4 +228,20 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+    public void addSecondGoods(String userId,
+                               String itemName,
+                               String itemPirce,
+                               String itemQuantiry,
+                               String itemType,
+                               String itemDetails,
+                               String path,
+                               LifecycleTransformer transformer,
+                               HttpSubscriber<String> httpSubscriber){
+        HomeApi.addSecondGoods(userId, itemName, itemPirce, itemQuantiry, itemType, itemDetails, path)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
+    }
+
 }

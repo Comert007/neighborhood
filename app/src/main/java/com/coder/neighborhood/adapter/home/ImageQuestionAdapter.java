@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import butterknife.BindView;
-import ww.com.core.Debug;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 import ww.com.core.utils.PermissionDispose;
@@ -100,7 +99,6 @@ public class ImageQuestionAdapter extends RvAdapter<ImageQuestionBean> implement
                     (ImagePicker.EXTRA_RESULT_ITEMS);
 
             int leftSize = 6 - getList().size();
-            Debug.d("leftSize:" + leftSize);
 
             for (int i = 0; i < (leftSize < images.size() ? leftSize : images.size()); i++) {
                 ImageQuestionBean image = new ImageQuestionBean(IMAGE_SHOW);

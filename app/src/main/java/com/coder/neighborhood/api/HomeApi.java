@@ -139,4 +139,25 @@ public class HomeApi extends BaseApi {
     }
 
 
+    public static final Observable<ResponseBean> addSecondGoods(String userId,
+                                                                String itemName,
+                                                                String itemPirce,
+                                                                String itemQuantiry,
+                                                                String itemType,
+                                                                String itemDetails,
+                                                                String path){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("itemName",itemName);
+        params.addParameters("itemPirce",itemPirce);
+        params.addParameters("itemQuantiry",itemQuantiry);
+        params.addParameters("itemType",itemType);
+        params.addParameters("itemDetails",itemDetails);
+        if (!TextUtils.isEmpty(path)){
+            params.addParametersJPG("file",new File(path));
+        }
+        return onPost(getActionUrl("app/addItem"),params);
+
+    }
+
 }
