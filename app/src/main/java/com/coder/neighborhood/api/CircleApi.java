@@ -28,7 +28,7 @@ public class CircleApi extends BaseApi {
         params.addParameters("pageNo",pageNo);
         params.addParameters("pageSize",pageSize);
 
-        return onPost(getActionUrl("app/getCircleList"),params);
+        return onPost(getActionUrl("app/getCommunityCircleList"),params);
     }
 
 
@@ -39,6 +39,6 @@ public class CircleApi extends BaseApi {
         params.addParameters("pageNo",pageNo);
         params.addParameters("pageSize",pageSize);
 
-        return onPost(getActionUrl("app/getCircleList"),params);
+        return onPost(getActionUrl("app/getFriendCircleList"),params);
     }
 }

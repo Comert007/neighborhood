@@ -8,7 +8,6 @@
     <com.coder.neighborhood.widget.TitleView
     android:id="@+id/title_view"
     style="@style/TitleBar"
-    app:titleLeftIco="@mipmap/ic_back"
     app:titleText="圈"/>
 
     <ww.com.core.widget.TranslateTabBar
@@ -18,6 +17,8 @@
         app:textColor="@color/color_666666"
         app:textSize="@dimen/wwpx30"
         android:layout_marginTop="@dimen/wwpx10"
+        app:translateLineHeight="@dimen/wwpx5"
+        app:lineWidth="@dimen/wwpx100"
         android:background="@color/color_white"
         android:layout_height="@dimen/wwpx80"/>
 

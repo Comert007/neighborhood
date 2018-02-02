@@ -3,23 +3,23 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Required -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:name=".BaseApplication"
@@ -40,8 +40,8 @@
         </activity>
 
         <activity android:name=".activity.MainActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".activity.user.LoginActivity"
                   android:screenOrientation="portrait"/>
@@ -56,13 +56,13 @@
         <!--二手市场-->
         <activity
             android:name=".activity.home.SecondHandMarketActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
         <!--邻里直播-->
         <activity
             android:name=".activity.home.LivingListActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
         <!--邻里旅行-->
         <activity android:name=".activity.home.TravelActivity"
                   android:screenOrientation="portrait"/>
@@ -81,8 +81,8 @@
 
         <!--发布带图片的问题-->
         <activity android:name=".activity.home.PublishPicQuestionActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
 
         <!--直播认证-->
         <activity android:name=".activity.home.LivingCertificationActivity"
@@ -105,8 +105,8 @@
 
         <!--好友中心-->
         <activity android:name=".activity.user.GoodFriendsActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
 
         <!--支付显示页面-->
         <activity android:name=".activity.mall.PayShowActivity"
@@ -114,13 +114,13 @@
 
         <!--代取快递-->
         <activity android:name=".activity.home.TakeDeliveryActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
 
         <!--用户认证-->
         <activity android:name=".activity.user.UserAuthenticationActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
 
         <!--关于我们-->
         <activity android:name=".activity.user.AboutUsActivity"
@@ -128,8 +128,8 @@
 
         <!--个人信息-->
         <activity android:name=".activity.user.UserInfoActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
 
         <!--好友信息-->
         <activity android:name=".activity.user.FriendsInfoActivity"
@@ -153,12 +153,12 @@
 
 
         <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="1124171210178033#wanjialinli" />
+        <meta-data android:name="EASEMOB_APPKEY" android:value="1124171210178033#wanjialinli"/>
         <!-- 声明SDK所需的service SDK核心功能-->
         <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
         <service android:name="com.hyphenate.chat.EMJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE"
                  android:exported="true"
+                 android:permission="android.permission.BIND_JOB_SERVICE"
         />
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
@@ -169,7 +169,7 @@
             <!-- 可选filter -->
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.USER_PRESENT"/>
             </intent-filter>
         </receiver>
 
@@ -180,10 +180,10 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":remote"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+            android:value="3ecea51f560650b1ed8a4b99808f52e8"/>
 
         <!--寻物启事详情-->
         <activity android:name=".activity.home.ThingDetailActivity"
@@ -201,6 +201,9 @@
         <activity android:name=".activity.mall.AddSecondHandActivity"
                   android:screenOrientation="portrait"/>
 
+        <!--聊天-->
+        <activity android:name=".activity.message.ChatActivity"
+                  android:screenOrientation="portrait"/>
 
 
     </application>

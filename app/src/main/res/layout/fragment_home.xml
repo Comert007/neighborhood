@@ -8,7 +8,6 @@
     <com.coder.neighborhood.widget.TitleView
     android:id="@+id/title_view"
     style="@style/TitleBar"
-    app:titleLeftIco="@mipmap/ic_back"
     app:titleText="首页"/>
 
     <ww.com.core.widget.CustomRecyclerView

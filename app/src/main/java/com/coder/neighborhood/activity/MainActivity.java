@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.message.ChatActivity;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.fragment.CircleFragment;
 import com.coder.neighborhood.fragment.HomeFragment;
@@ -19,6 +20,7 @@ import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
         fragments.add(new HomeFragment());
         fragments.add(new MallFragment());
         fragments.add(new CircleFragment());
-        fragments.add(new MessageFragment());
+        fragments.add(createMessageFragment());
         fragments.add(new UserFragment());
 
         adapter = new MenuTabAdapter(this, menus, fragments, R.id.main_content);
@@ -115,6 +117,14 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
 
     }
 
+
+    private Fragment createMessageFragment(){
+        MessageFragment messageFragment = new MessageFragment();
+        messageFragment.setConversationListItemClickListener(
+                conversation -> startActivity(new Intent(MainActivity.this,
+                        ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId())));
+        return messageFragment;
+    }
 
     public void changeMenuStatus(int index) {
         int imageSize = images.size();

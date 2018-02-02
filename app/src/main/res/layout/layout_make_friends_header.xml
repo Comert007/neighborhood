@@ -138,13 +138,16 @@
 
     <ww.com.core.widget.TranslateTabBar
         android:id="@+id/translate"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/wwpx80"
-        android:layout_marginTop="@dimen/wwpx10"
-        android:background="@color/color_white"
         app:text="@array/circle_second_text"
+        android:layout_width="match_parent"
         app:textColor="@color/color_666666"
-        app:textSize="@dimen/wwpx30"/>
+        app:textSize="@dimen/wwpx30"
+        android:layout_marginTop="@dimen/wwpx10"
+        app:translateLineHeight="@dimen/wwpx5"
+        app:lineWidth="@dimen/wwpx120"
+        android:background="@color/color_white"
+        android:layout_marginBottom="@dimen/wwpx10"
+        android:layout_height="@dimen/wwpx80"/>
 
 
 

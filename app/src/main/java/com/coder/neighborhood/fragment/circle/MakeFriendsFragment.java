@@ -20,7 +20,7 @@ import ww.com.core.ScreenUtil;
 import ww.com.core.widget.TranslateTabBar;
 
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/16
  */
 
