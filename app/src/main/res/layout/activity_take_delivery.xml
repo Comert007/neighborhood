@@ -21,60 +21,76 @@
         android:paddingRight="@dimen/wwpx125">
 
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx80"
-                  android:hint="姓名"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx80"
+            android:background="@android:color/transparent"
+            android:hint="姓名"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx60"
-                  android:hint="快递编号"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_express_no"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:background="@android:color/transparent"
+            android:hint="快递编号"
+            android:lines="1"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx60"
-                  android:hint="联系方式（收件人）"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:background="@android:color/transparent"
+            android:hint="联系方式（收件人）"
+            android:lines="1"
+            android:maxLength="11"
+            android:inputType="phone"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx60"
-                  android:hint="备注"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_remark"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:background="@android:color/transparent"
+            android:hint="备注"
+            android:lines="1"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
         <Button
+            android:id="@+id/btn_publish"
             android:layout_width="match_parent"
             android:layout_height="@dimen/wwpx60"
             android:layout_marginBottom="@dimen/wwpx118"

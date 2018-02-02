@@ -19,7 +19,7 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 import java.util.List;
 
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/9
  */
 
@@ -51,6 +51,12 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
         onGoodsOrders("0");
     }
 
+
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
 
     private void onGoodsOrders(String orderStatus){
 

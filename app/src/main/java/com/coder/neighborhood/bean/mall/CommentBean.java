@@ -8,7 +8,7 @@ package com.coder.neighborhood.bean.mall;
 public class CommentBean {
     private String content;
     private String imgUrl;
-    private String created;
+    private long created;
 
     public String getContent() {
         return content;
@@ -26,11 +26,11 @@ public class CommentBean {
         this.imgUrl = imgUrl;
     }
 
-    public String getCreated() {
+    public long getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(long created) {
         this.created = created;
     }
 }

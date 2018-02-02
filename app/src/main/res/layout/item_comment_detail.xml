@@ -15,6 +15,7 @@
                   android:layout_height="@dimen/wwpx170">
 
         <ww.com.core.widget.RoundImageView
+            android:id="@+id/riv"
             android:src="@mipmap/ic_default_avatar"
             app:type="type_circle"
             android:layout_width="@dimen/wwpx92"
@@ -26,6 +27,7 @@
                       android:paddingLeft="@dimen/wwpx20"
                       android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tv_content"
                 android:textSize="@dimen/wwpx26"
                 android:textColor="@color/color_666666"
                 android:layout_width="wrap_content"
@@ -36,6 +38,7 @@
 
 
             <TextView
+                android:id="@+id/tv_time"
                 android:textSize="@dimen/wwpx26"
                 android:textColor="@color/color_666666"
                 android:layout_width="wrap_content"

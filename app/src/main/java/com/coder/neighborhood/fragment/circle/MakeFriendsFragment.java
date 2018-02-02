@@ -70,7 +70,6 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView,CircleMode
                 customerCircle();
                 break;
         }
-
     }
 
     private void customerCircle(){

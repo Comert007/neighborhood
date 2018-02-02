@@ -186,4 +186,19 @@ public class HomeApi extends BaseApi {
         return onPost(getActionUrl("app/certificationUser"),params);
     }
 
+    public static final Observable<ResponseBean> delivery(String userId,
+                                                          String name,
+                                                          String expressId,
+                                                          String phone,
+                                                          String remark){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("name",name);
+        params.addParameters("expressId",expressId);
+        params.addParameters("phone",phone);
+        params.addParameters("remark",remark);
+
+        return onPost(getActionUrl("app/addTakeExpress"),params);
+    }
+
 }

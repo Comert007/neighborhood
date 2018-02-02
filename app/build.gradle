@@ -64,4 +64,5 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.6.1'
     implementation project(':easeui')
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
 }

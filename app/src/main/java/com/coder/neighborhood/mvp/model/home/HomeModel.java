@@ -267,5 +267,17 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+    public void delivery(String userId,
+                         String name,
+                         String expressId,
+                         String phone,
+                         String remark,
+                         LifecycleTransformer transformer,
+                         HttpSubscriber<String> httpSubscriber){
+        HomeApi.delivery(userId, name, expressId, phone, remark)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
 
 }

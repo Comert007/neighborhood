@@ -76,10 +76,10 @@
             <LinearLayout
                 android:id="@+id/ll_travel"
                 android:layout_width="0px"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:gravity="center"
-                          android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView android:layout_width="@dimen/wwpx42"
                            android:layout_height="@dimen/wwpx42"
@@ -128,11 +128,13 @@
                     android:text="失物/寻物"/>
             </LinearLayout>
 
-            <LinearLayout android:layout_width="0px"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:gravity="center"
-                          android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_take_delivery"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView android:layout_width="@dimen/wwpx42"
                            android:layout_height="@dimen/wwpx42"
@@ -146,10 +148,10 @@
             <LinearLayout
                 android:id="@+id/ll_customer_service"
                 android:layout_width="0px"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:gravity="center"
-                          android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView android:layout_width="@dimen/wwpx42"
                            android:layout_height="@dimen/wwpx42"

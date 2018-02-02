@@ -11,6 +11,7 @@ import com.coder.neighborhood.activity.home.FindThingsActivity;
 import com.coder.neighborhood.activity.home.HelpActivity;
 import com.coder.neighborhood.activity.home.LivingListActivity;
 import com.coder.neighborhood.activity.home.SecondHandMarketActivity;
+import com.coder.neighborhood.activity.home.TakeDeliveryActivity;
 import com.coder.neighborhood.activity.home.TravelActivity;
 import com.coder.neighborhood.activity.user.CustomerServiceActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -76,6 +77,7 @@ public class HomeView extends RefreshView {
         ButterKnife.findById(bannerView,R.id.ll_travel).setOnClickListener(v -> onBannerClick(4));
         ButterKnife.findById(bannerView,R.id.ll_help).setOnClickListener(v -> onBannerClick(5));
         ButterKnife.findById(bannerView,R.id.ll_find_things).setOnClickListener(v -> onBannerClick(6));
+        ButterKnife.findById(bannerView,R.id.ll_take_delivery).setOnClickListener(v -> onBannerClick(7));
         ButterKnife.findById(bannerView,R.id.ll_customer_service).setOnClickListener(v -> onBannerClick(8));
     }
 
@@ -99,6 +101,7 @@ public class HomeView extends RefreshView {
                 FindThingsActivity.start(preActivity);
                 break;
             case 7:
+                TakeDeliveryActivity.start(preActivity);
                 break;
             case 8:
                 CustomerServiceActivity.start(preActivity);

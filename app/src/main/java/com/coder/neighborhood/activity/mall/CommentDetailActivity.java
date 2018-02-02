@@ -15,22 +15,28 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
+import ww.com.core.widget.CustomRecyclerView;
+import ww.com.core.widget.CustomSwipeRefreshLayout;
+
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/9
- *
  */
 
-public class CommentDetailActivity extends BaseActivity<CommentDetailView,MallModel> {
+public class CommentDetailActivity extends BaseActivity<CommentDetailView, MallModel> {
 
     private CommentDetailAdapter adapter;
     private int page = 1;
 
     private String goodSid;
 
-    public static void start(Context context,String goodSid) {
+    private CustomSwipeRefreshLayout csr;
+    private CustomRecyclerView crv;
+
+
+    public static void start(Context context, String goodSid) {
         Intent intent = new Intent(context, CommentDetailActivity.class);
-        intent.putExtra("goodSid",goodSid);
+        intent.putExtra("goodSid", goodSid);
         context.startActivity(intent);
     }
 
@@ -42,27 +48,72 @@ public class CommentDetailActivity extends BaseActivity<CommentDetailView,MallMo
     @Override
     protected void init() {
         goodSid = getIntent().getStringExtra("goodSid");
+        initView();
+        initListener();
         initData();
+
     }
 
-    private void initData(){
+    private void initView() {
         adapter = new CommentDetailAdapter(this);
-        v.getCrv().setAdapter(adapter);
+        csr = v.getCsr();
+        crv = v.getCrv();
+        csr.setEnableRefresh(true);
+        csr.setFooterRefreshAble(true);
+    }
 
+    private void initListener() {
+        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
+            @Override
+            public void onHeaderRefreshing() {
+                page = 1;
+                v.getCsr().setFooterRefreshAble(true);
+                comments();
+            }
+
+            @Override
+            public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
+                comments();
+            }
+        });
+    }
+
+    private void initData() {
+        crv.setAdapter(adapter);
         comments();
     }
 
 
-    private void comments(){
-        m.comments(goodSid, page+"", Constants.PAGE_SIZE+"", bindUntilEvent(ActivityEvent.DESTROY)
-                , new HttpSubscriber<List<CommentBean>>(this,false) {
+    private void comments() {
+        m.comments(goodSid, page + "", Constants.PAGE_SIZE + "", bindUntilEvent(ActivityEvent
+                        .DESTROY)
+                , new HttpSubscriber<List<CommentBean>>(this, false) {
                     @Override
                     public void onNext(List<CommentBean> commentBeans) {
-                        if (commentBeans!=null && commentBeans.size()>0){
-                            adapter.addList(commentBeans);
-                        }else {
+                        v.getCsr().setRefreshFinished();
+                        if (commentBeans != null && commentBeans.size() > 0) {
+                            if (page == 1) {
+                                adapter.addList(commentBeans);
+                            } else {
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(commentBeans);
+                            }
 
+                            if (commentBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        } else {
+                            v.getCsr().setFooterRefreshAble(false);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        v.getCsr().setRefreshFinished();
                     }
                 });
     }
