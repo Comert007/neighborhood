@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.home.TravelDetailActivity;
 import com.coder.neighborhood.bean.home.TravelBean;
@@ -58,7 +59,7 @@ public class TravelAdapter extends RvAdapter<TravelBean> {
             tvTravelRoute.setText(bean.getTraveRoute());
             tvTravelPrice.setText(bean.getTravePrice()+"元/人起");
 
-            ImageLoader.getInstance().displayImage(bean.getImgUrl(),ivBg);
+            ImageLoader.getInstance().displayImage(bean.getImgUrl(),ivBg, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
