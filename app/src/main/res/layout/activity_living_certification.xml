@@ -115,8 +115,8 @@
 
                 <LinearLayout
                     android:id="@+id/ll_positive_add_show"
-                    android:layout_width="@dimen/wwpx230"
-                    android:layout_height="@dimen/wwpx160"
+                    android:layout_width="@dimen/wwpx210"
+                    android:layout_height="@dimen/wwpx130"
                     android:background="@color/color_page_bg"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -165,8 +165,8 @@
 
                 <LinearLayout
                     android:id="@+id/ll_opposite_add_show"
-                    android:layout_width="@dimen/wwpx230"
-                    android:layout_height="@dimen/wwpx160"
+                    android:layout_width="@dimen/wwpx210"
+                    android:layout_height="@dimen/wwpx130"
                     android:background="@color/color_page_bg"
                     android:gravity="center"
                     android:orientation="vertical">

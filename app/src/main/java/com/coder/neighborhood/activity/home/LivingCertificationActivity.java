@@ -147,10 +147,12 @@ public class LivingCertificationActivity extends BaseActivity<VoidView, HomeMode
                 }
                 break;
             case R.id.if_positive_close:
+                pathType =1;
                 ivPositiveImage.setImageResource(R.mipmap.pic_default);
                 showImageType(pathType,true);
                 break;
             case R.id.if_opposite_close:
+                pathType =2;
                 ivOppositeImage.setImageResource(R.mipmap.pic_default);
                 showImageType(pathType,true);
                 break;
