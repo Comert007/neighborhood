@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/toast_relative"
+                android:background="@drawable/toast_shape"
+                android:layout_width="@dimen/wwpx300"
+                android:gravity="center"
+                android:layout_height="@dimen/wwpx250">
+    <LinearLayout
+        android:id="@+id/toast_linear"
+        android:orientation="vertical"
+        android:layout_width="@dimen/wwpx200"
+        android:gravity="center"
+        android:layout_height="@dimen/wwpx200">
+        <ImageView
+            android:id="@+id/toast_iv"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginBottom="@dimen/wwpx20"
+            android:src="@mipmap/toast_ok" />
+        <TextView
+            android:id="@+id/tv_toast_clear"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:textSize="@dimen/wwpx28"
+            android:textColor="#fff"/>
+    </LinearLayout>
+</RelativeLayout>

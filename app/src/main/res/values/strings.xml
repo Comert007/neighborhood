@@ -11,4 +11,5 @@
     <string name="str_empty_detail">请检查网络是否正常</string>
     <string name="str_empty_btn">点击重试</string>
     <string name="str_test">问题是这样的问题是这样的问题是这样的问题是这样的问题是这样的问题是这样的！</string>
+    <string name="toast_sdcard_exception">SdCard异常</string>
 </resources>

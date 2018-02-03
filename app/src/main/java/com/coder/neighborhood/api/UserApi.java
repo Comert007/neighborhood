@@ -1,6 +1,10 @@
 package com.coder.neighborhood.api;
 
+import android.text.TextUtils;
+
 import com.coder.neighborhood.bean.ResponseBean;
+
+import java.io.File;
 
 import rx.Observable;
 import ww.com.http.core.AjaxParams;
@@ -74,5 +78,38 @@ public class UserApi extends BaseApi {
 
         return onPost(getActionUrl("app/addFriend"),params);
 
+    }
+
+
+    public static final Observable<ResponseBean> modifyUserInfo(String userId,
+                                                                String nickName,
+                                                                String phone,
+                                                                String addressDisplayFlag,
+                                                                String userInfo){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        if (!TextUtils.isEmpty(nickName)){
+            params.addParameters("nickName",nickName);
+        }
+        if (!TextUtils.isEmpty(phone)) {
+            params.addParameters("phone", phone);
+        }
+        if (!TextUtils.isEmpty(addressDisplayFlag)) {
+            params.addParameters("addressDisplayFlag", addressDisplayFlag);
+        }
+        if (!TextUtils.isEmpty(userInfo)) {
+            params.addParameters("userInfo", userInfo);
+        }
+
+        return onPost(getActionUrl("app/modifyUserInfo"),params);
+
+    }
+
+    public static final Observable<ResponseBean> modifyAvatar(String userId,String path){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParametersJPG("file",new File(path));
+
+        return onPost(getActionUrl("app/editImg"),params);
     }
 }

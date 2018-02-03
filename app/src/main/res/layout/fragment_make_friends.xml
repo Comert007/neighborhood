@@ -18,11 +18,13 @@
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_alignParentRight="true"
-                      android:layout_centerVertical="true"
+                      android:layout_alignParentBottom="true"
                       android:orientation="vertical"
                       android:paddingRight="@dimen/wwpx20">
 
-            <Button android:layout_width="@dimen/wwpx88"
+            <Button
+                android:id="@+id/btn_circle"
+                android:layout_width="@dimen/wwpx88"
                     android:layout_height="@dimen/wwpx88"
                     android:background="@drawable/yellow_circle_shape"
                     android:gravity="center"
@@ -30,7 +32,9 @@
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/wwpx22"/>
 
-            <Button android:layout_width="@dimen/wwpx88"
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="@dimen/wwpx88"
                     android:layout_height="@dimen/wwpx88"
                     android:layout_marginTop="@dimen/wwpx20"
                     android:text="+"

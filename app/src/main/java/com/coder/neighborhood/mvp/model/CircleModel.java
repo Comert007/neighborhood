@@ -59,4 +59,8 @@ public class CircleModel extends BaseModel {
                 }).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
+
+    public void addCircle(){
+
+    }
 }

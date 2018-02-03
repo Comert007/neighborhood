@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <View
-        android:background="@color/color_666666"
+        android:background="@color/color_999999"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/wwpx2"/>
+        android:layout_height="1px"/>
 </LinearLayout>

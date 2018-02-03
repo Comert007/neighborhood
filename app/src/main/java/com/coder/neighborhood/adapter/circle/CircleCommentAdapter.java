@@ -1,6 +1,7 @@
 package com.coder.neighborhood.adapter.circle;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,7 +9,6 @@ import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.circle.CircleBean;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
@@ -52,7 +52,12 @@ public class CircleCommentAdapter extends RvAdapter<CircleBean.CommentsBean>{
         public void onBindData(int position, CircleBean.CommentsBean bean) {
             tvName.setText(bean.getNickname());
             tvContent.setText(bean.getCommentsContent());
-            tvTime.setText(TimeUtils.milliseconds2String(new Date().getTime(),new SimpleDateFormat("yyyy.MM.dd")));
+            if (!TextUtils.isEmpty(bean.getCommentsDate())){
+                tvTime.setText(TimeUtils.milliseconds2String(
+                        TimeUtils.string2Milliseconds(bean.getCommentsDate(),new SimpleDateFormat("yyyy-MM-dd")),
+                        new SimpleDateFormat("yyyy.MM.dd")));
+            }
+
         }
     }
 }

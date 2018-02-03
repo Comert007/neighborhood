@@ -25,7 +25,7 @@ public class CircleBean {
     private String nickName;
     private String circleInfo;
     private String circleId;
-    private long circleDate;
+    private String circleDate;
     private List<CommentsBean> comments;
 
     public String getImgUrl() {
@@ -76,11 +76,11 @@ public class CircleBean {
         this.circleId = circleId;
     }
 
-    public long getCircleDate() {
+    public String getCircleDate() {
         return circleDate;
     }
 
-    public void setCircleDate(long circleDate) {
+    public void setCircleDate(String circleDate) {
         this.circleDate = circleDate;
     }
 
@@ -101,6 +101,7 @@ public class CircleBean {
 
         private String commentsContent;
         private String nickname;
+        private String commentsDate;
 
         public String getCommentsContent() {
             return commentsContent;
@@ -116,6 +117,14 @@ public class CircleBean {
 
         public void setNickname(String nickname) {
             this.nickname = nickname;
+        }
+
+        public String getCommentsDate() {
+            return commentsDate;
+        }
+
+        public void setCommentsDate(String commentsDate) {
+            this.commentsDate = commentsDate;
         }
     }
 }

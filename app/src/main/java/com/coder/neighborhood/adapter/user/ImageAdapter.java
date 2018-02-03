@@ -2,9 +2,13 @@ package com.coder.neighborhood.adapter.user;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 
@@ -31,12 +35,16 @@ public class ImageAdapter extends RvAdapter<String> {
 
     class ImageViewHolder extends RvViewHolder<String>{
 
+        @BindView(R.id.iv)
+        ImageView iv;
+
         public ImageViewHolder(View itemView) {
             super(itemView);
         }
 
         @Override
         public void onBindData(int position, String bean) {
+            ImageLoader.getInstance().displayImage(bean,iv, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
         }
     }

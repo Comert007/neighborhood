@@ -20,7 +20,7 @@
         android:paddingRight="@dimen/wwpx83">
 
 
-        <EditText
+        <com.coder.neighborhood.widget.SpaceEditText
             android:id="@+id/et_mobile"
             android:hint="手机号码"
             android:layout_height="@dimen/wwpx55"
@@ -28,7 +28,8 @@
             android:textColor="@color/color_text"
             android:textColorHint="@color/color_text"
             android:maxLength="11"
-            android:inputType="number"
+            android:inputType="phone"
+            app:editType="phone"
             android:background="@android:color/transparent"
             android:layout_width="match_parent"/>
 

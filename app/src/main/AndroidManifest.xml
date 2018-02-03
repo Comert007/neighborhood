@@ -205,6 +205,10 @@
         <activity android:name=".activity.message.ChatActivity"
                   android:screenOrientation="portrait"/>
 
+        <!--发布圈消息-->
+        <activity android:name=".activity.circle.PublicCircleActivity"
+                  android:screenOrientation="portrait"/>
+
 
     </application>
 

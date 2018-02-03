@@ -21,48 +21,60 @@
         android:paddingRight="@dimen/wwpx125">
 
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx80"
-                  android:hint="昵称"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx80"
+            android:background="@android:color/transparent"
+            android:hint="昵称"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx60"
-                  android:hint="联系方式"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <com.coder.neighborhood.widget.SpaceEditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:background="@android:color/transparent"
+            android:hint="联系方式"
+            android:inputType="phone"
+            android:maxLength="11"
+            app:editType ="phone"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:gravity="center_vertical"
-                      android:layout_marginTop="@dimen/wwpx60"
-                      android:layout_height="wrap_content">
-            <EditText android:layout_width="0px"
-                      android:layout_weight="1"
-                      android:background="@android:color/transparent"
-                      android:layout_height="@dimen/wwpx80"
-                      android:hint="显示居住地"
-                      android:textColor="@color/color_title_text"
-                      android:textColorHint="@color/color_title_text"
-                      android:textSize="@dimen/wwpx28"/>
+        <LinearLayout
+            android:id="@+id/ll_address_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_address_type"
+                android:layout_width="0px"
+                android:layout_height="@dimen/wwpx80"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="显示居住地"
+                android:textColor="@color/color_title_text"
+                android:textColorHint="@color/color_title_text"
+                android:textSize="@dimen/wwpx28"/>
 
             <ImageView android:layout_width="@dimen/wwpx16"
-                       android:src="@mipmap/ic_trigon_green"
-                       android:layout_height="@dimen/wwpx14"/>
+                       android:layout_height="@dimen/wwpx14"
+                       android:src="@mipmap/ic_trigon_green"/>
 
         </LinearLayout>
 
@@ -71,27 +83,33 @@
               android:background="@color/color_aaaaaa"/>
 
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx60"
-                  android:background="@android:color/transparent"
-                  android:hint="个人简介"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:background="@android:color/transparent"
+            android:hint="个人简介"
+            android:lines="1"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <TextView android:layout_width="match_parent"
-                  android:text="切换账号"
-                  android:gravity="right"
+        <TextView
+            android:layout_width="match_parent"
+            android:visibility="gone"
+                  android:layout_height="wrap_content"
                   android:layout_marginTop="@dimen/wwpx40"
-                  android:textColor="@color/color_999999"
-                  android:layout_height="wrap_content"/>
+                  android:gravity="right"
+                  android:text="切换账号"
+                  android:textColor="@color/color_999999"/>
 
         <Button
+            android:id="@+id/btn_ok"
             android:layout_width="match_parent"
             android:layout_height="@dimen/wwpx60"
             android:layout_marginBottom="@dimen/wwpx118"

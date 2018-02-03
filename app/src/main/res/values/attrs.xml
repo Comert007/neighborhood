@@ -7,4 +7,28 @@
         <attr name="titleRightText" format="reference|string" />
         <attr name="titleText" format="reference|string" />
     </declare-styleable>
+
+
+    <declare-styleable name="SpaceEditText">
+        <attr name="editType" format="enum">
+            <enum name="phone" value="0"/>
+            <enum name="card" value="1"/>
+            <enum name="IDCard" value="2"/>
+        </attr>
+    </declare-styleable>
+
+
+    <!--indicator-->
+    <attr name="tab_color_normal" format="color"/>
+    <attr name="tab_color_light" format="color"/>
+    <attr name="cursor_color" format="color"/>
+    <attr name="cursor_height" format="dimension"/>
+    <attr name="cursor_offset" format="dimension"/>
+    <declare-styleable name="Indicator">
+        <attr name="tab_color_normal"/>
+        <attr name="tab_color_light"/>
+        <attr name="cursor_color"/>
+        <attr name="cursor_height"/>
+        <attr name="cursor_offset"/>
+    </declare-styleable>
 </resources>

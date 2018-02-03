@@ -127,13 +127,33 @@ public class UserModel implements IModel {
                           HttpSubscriber<String> httpSubscriber){
 
         UserApi.addFriend(userId, freindId, easemodUsername)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void modifyUserInfo(String userId,
+                               String nickName,
+                               String phone,
+                               String addressDisplayFlag,
+                               String userInfo,LifecycleTransformer transformer,
+                               HttpSubscriber<String> httpSubscriber){
+        UserApi.modifyUserInfo(userId, nickName, phone, addressDisplayFlag, userInfo)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void modifyAvatar(String userId,String path,
+                             HttpSubscriber<String> httpSubscriber){
+
+        UserApi.modifyAvatar(userId, path)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
                         return responseBean.getMessage();
                     }
                 }).compose(RxHelper.cutMain())
-                .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 }

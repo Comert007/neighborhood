@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:indicator="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -136,19 +137,58 @@
 
     </LinearLayout>
 
-    <ww.com.core.widget.TranslateTabBar
-        android:id="@+id/translate"
-        app:text="@array/circle_second_text"
+    <!--<ww.com.core.widget.TranslateTabBar-->
+        <!--android:id="@+id/translate"-->
+        <!--app:text="@array/circle_second_text"-->
+        <!--android:layout_width="match_parent"-->
+        <!--app:textColor="@color/color_666666"-->
+        <!--app:textSize="@dimen/wwpx30"-->
+        <!--android:layout_marginTop="@dimen/wwpx10"-->
+        <!--app:translateLineHeight="@dimen/wwpx5"-->
+        <!--app:lineWidth="@dimen/wwpx120"-->
+        <!--android:background="@color/color_white"-->
+        <!--android:layout_marginBottom="@dimen/wwpx10"-->
+        <!--android:layout_height="@dimen/wwpx80"/>-->
+
+    <LinearLayout
+        android:id="@+id/ll_indicator"
         android:layout_width="match_parent"
-        app:textColor="@color/color_666666"
-        app:textSize="@dimen/wwpx30"
-        android:layout_marginTop="@dimen/wwpx10"
-        app:translateLineHeight="@dimen/wwpx5"
-        app:lineWidth="@dimen/wwpx120"
         android:background="@color/color_white"
+        android:layout_marginTop="@dimen/wwpx10"
         android:layout_marginBottom="@dimen/wwpx10"
-        android:layout_height="@dimen/wwpx80"/>
+        android:orientation="horizontal"
+        android:layout_height="@dimen/wwpx80" >
+
+        <TextView
+            android:id="@+id/tv_community"
+            android:text="小区圈"
+            android:gravity="center"
+            android:textColor="@drawable/circle_name_selector"
+            android:textSize="@dimen/wwpx30"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_friends"
+            android:text="好友圈"
+            android:textColor="@drawable/circle_name_selector"
+            android:textSize="@dimen/wwpx30"
+            android:layout_width="0px"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
 
 
+        <TextView
+            android:id="@+id/tv_customer"
+            android:text="游客圈"
+            android:textColor="@drawable/circle_name_selector"
+            android:textSize="@dimen/wwpx30"
+            android:layout_width="0px"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </LinearLayout>

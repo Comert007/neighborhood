@@ -5,11 +5,12 @@
 
 
     <TextView
+        android:id="@+id/tv_phone"
         android:gravity="center"
         android:textColor="@color/color_666666"
         android:background="@color/color_white"
         android:layout_width="match_parent"
-        android:text="联系电话："
+        android:text="联系电话：15735655474"
         android:textSize="@dimen/wwpx30"
         android:layout_height="@dimen/wwpx356"/>
 

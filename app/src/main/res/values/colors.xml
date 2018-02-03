@@ -27,6 +27,7 @@
     <color name="color_text">#29D829</color>
     <color name="color_gray">#666666</color>
     <color name="color_black">#333333</color>
+    <color name="color_transport_black">#80333333</color>
     <color name="color_yellow">#FF7F21</color>
     <color name="color_red">#e72f35</color>
 
@@ -38,5 +39,6 @@
     <color name="color_1d65a2">#1d65a2</color>
     
     <color name="color_c7fea416">#c7fea416</color>
+    <color name="color_0b86ee">#0b86ee</color>
 
 </resources>

@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity<VoidView,UserModel> {
      * login up to the app.
      */
     private void loginup(){
-        String username = etMobile.getText().toString().trim();
+        String username = etMobile.getText().toString().trim().replaceAll(" ","");
         String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(username)){
@@ -106,4 +106,6 @@ public class LoginActivity extends BaseActivity<VoidView,UserModel> {
         });
 
     }
+
+
 }

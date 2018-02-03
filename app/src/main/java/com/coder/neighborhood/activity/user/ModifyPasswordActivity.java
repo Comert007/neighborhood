@@ -52,7 +52,7 @@ public class ModifyPasswordActivity extends BaseActivity<VoidView, UserModel> {
 
     @OnClick(R.id.btn_modify_password)
     public void modify() {
-        String mobile = etMobile.getText().toString();
+        String mobile = etMobile.getText().toString().trim().replaceAll(" ","");
         String password = etPassword.getText().toString();
         if (TextUtils.isEmpty(mobile) || mobile.length() != 11) {
             ToastUtils.showToast("请输入正确的手机号");

@@ -14,12 +14,14 @@ import com.coder.neighborhood.adapter.user.ImageAdapter;
 import com.coder.neighborhood.bean.circle.CircleBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
+import ww.com.core.utils.TimeUtils;
 import ww.com.core.widget.RoundImageView;
 
 /**
@@ -87,8 +89,12 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
             ImageLoader.getInstance().displayImage(bean.getHeadImg(),riv,
                     BaseApplication.getDisplayImageOptions(R.mipmap.ic_default_avatar));
             tvName.setText(bean.getNickName());
-            tvSubScribe.setText(bean.getCircleInfo());
-//            tvSubScribe.setText(TimeUtils.milliseconds2String(bean.getCircleDate(),new SimpleDateFormat("yyyy.MM.dd")));
+            tvContent.setText(bean.getCircleInfo());
+            if (!TextUtils.isEmpty(bean.getCircleDate())){
+                tvSubScribe.setText(TimeUtils.milliseconds2String(
+                        TimeUtils.string2Milliseconds(bean.getCircleDate(),new SimpleDateFormat("yyyy-MM-dd")),
+                        new SimpleDateFormat("yyyy.MM.dd")));
+            }
             tvPrise.setText(TextUtils.isEmpty(bean.getCircleLike())?"0":bean.getCircleLike());
 
         }
