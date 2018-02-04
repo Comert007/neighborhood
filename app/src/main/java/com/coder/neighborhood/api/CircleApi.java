@@ -64,4 +64,79 @@ public class CircleApi extends BaseApi {
 
         return onPost(getActionUrl("app/addCircle"),params);
     }
+
+    public static final Observable<ResponseBean> addCircleComment(String userId,
+                                                                  String circleId,
+                                                                  String comments){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("circleId",circleId);
+        params.addParameters("comments",comments);
+
+        return onPost(getActionUrl("app/addCircleComments"),params);
+    }
+
+
+    public static final Observable<ResponseBean> addCircleLike(String userId,
+                                                                  String circleId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("circleId",circleId);
+
+        return onPost(getActionUrl("app/likeCircle"),params);
+    }
+
+
+    public static final Observable<ResponseBean> events(String userId,String pageNo,String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getEventsList"),params);
+    }
+
+
+    public static final Observable<ResponseBean> addEvent(String userId,String content,String path){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("content",content);
+        params.addParametersJPG("file",new File(path));
+
+        return onPost(getActionUrl("app/addEvents"),params);
+    }
+
+    public static final Observable<ResponseBean> avtivities(String userId,String pageNo,String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getActiviyList"),params);
+    }
+
+    public static final Observable<ResponseBean> addActivity(String userId,String content,String path){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("content",content);
+        params.addParametersJPG("file",new File(path));
+
+        return onPost(getActionUrl("app/addActivity"),params);
+    }
+
+
+    public static final Observable<ResponseBean> eventDetail(String eventsId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("eventsId",eventsId);
+
+        return onPost(getActionUrl("app/getEventsInfo"),params);
+    }
+
+
+    public static final Observable<ResponseBean> activityDetail(String activityId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("activityId",activityId);
+
+        return onPost(getActionUrl("app/getActivityInfo"),params);
+    }
 }

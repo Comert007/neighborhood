@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
-import com.coder.neighborhood.activity.circle.EventDetailActivity;
+import com.coder.neighborhood.activity.circle.DoingsDetailActivity;
 import com.coder.neighborhood.adapter.user.ImageAdapter;
 import com.coder.neighborhood.bean.circle.EventBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,9 +28,9 @@ import ww.com.core.widget.RoundImageView;
  * @Date 2018/1/29
  */
 
-public class EventAdapter extends RvAdapter<EventBean>{
+public class DoingThingsAdapter extends RvAdapter<EventBean>{
 
-    public EventAdapter(Context context) {
+    public DoingThingsAdapter(Context context) {
         super(context);
     }
 
@@ -81,7 +81,7 @@ public class EventAdapter extends RvAdapter<EventBean>{
                 tvSubScribe.setText(TimeUtils.milliseconds2String(bean.getActivityDate(),new SimpleDateFormat("yyyy.MM.dd")));
             }
 
-            itemView.setOnClickListener(v -> EventDetailActivity.start(getContext(),bean.getActivityId()));
+            itemView.setOnClickListener(v -> DoingsDetailActivity.start(getContext(),bean.getActivityId()));
         }
     }
 }

@@ -206,7 +206,22 @@
                   android:screenOrientation="portrait"/>
 
         <!--发布圈消息-->
-        <activity android:name=".activity.circle.PublicCircleActivity"
+        <activity android:name=".activity.circle.PublishCircleActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--发布事件-->
+        <activity android:name=".activity.circle.PublishEventActivity"
+                  android:screenOrientation="portrait"/>
+        <!--发布活动-->
+        <activity android:name=".activity.circle.PublishDoingThingActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--事件详情-->
+        <activity android:name=".activity.circle.EventDetailActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!--活动详情-->
+        <activity android:name=".activity.circle.DoingsDetailActivity"
                   android:screenOrientation="portrait"/>
 
 

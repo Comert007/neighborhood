@@ -56,7 +56,7 @@
                       android:layout_weight="1"
                       android:gravity="center"
                       android:textColor="@color/color_666666"
-                      android:text="大事件相关文字"
+                      android:text="暂无大事件相关信息"
                       android:background="@color/color_page_bg"
                       android:layout_height="match_parent"/>
 
@@ -64,7 +64,7 @@
                       android:layout_weight="1"
                       android:gravity="center"
                       android:textColor="@color/color_666666"
-                      android:text="大事件相关文字"
+                      android:text="暂无大事件相关信息"
                       android:layout_marginLeft="@dimen/wwpx20"
                       android:background="@color/color_page_bg"
                       android:layout_height="match_parent"/>
@@ -88,7 +88,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_centerHorizontal="true"
-                      android:text="大事件"
+                      android:text="活动"
                       android:textColor="@color/color_666666"
                       android:textSize="@dimen/wwpx34"/>
 
@@ -121,7 +121,7 @@
                       android:layout_weight="1"
                       android:gravity="center"
                       android:textColor="@color/color_666666"
-                      android:text="大事件相关文字"
+                      android:text="暂无活动相关信息"
                       android:background="@color/color_page_bg"
                       android:layout_height="match_parent"/>
 
@@ -129,7 +129,7 @@
                       android:layout_weight="1"
                       android:gravity="center"
                       android:textColor="@color/color_666666"
-                      android:text="大事件相关文字"
+                      android:text="暂无活动相关信息"
                       android:layout_marginLeft="@dimen/wwpx20"
                       android:background="@color/color_page_bg"
                       android:layout_height="match_parent"/>

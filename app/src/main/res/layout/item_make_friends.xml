@@ -54,7 +54,7 @@
                               android:gravity="right"
                               android:textColor="@color/color_999999"
                               android:textSize="@dimen/wwpx26"
-                              android:text="LV.15"
+                              android:text="LV.0"
                               android:layout_height="wrap_content"/>
 
                 </LinearLayout>
@@ -94,7 +94,9 @@
                       android:layout_height="wrap_content">
 
 
-            <ImageView android:layout_width="@dimen/wwpx31"
+            <ImageView
+                android:id="@+id/iv_prise"
+                android:layout_width="@dimen/wwpx31"
                        android:src="@mipmap/ic_like"
                        android:layout_height="@dimen/wwpx31"/>
 
@@ -107,11 +109,14 @@
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/wwpx26"/>
 
-            <ImageView
-                android:layout_width="@dimen/wwpx40"
-                android:src="@mipmap/ic_reply"
-                android:layout_marginLeft="@dimen/wwpx54"
-                android:layout_height="@dimen/wwpx34"/>
+            <com.coder.neighborhood.widget.IconFontTextView
+                android:id="@+id/icon_comment"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/wwpx36"
+                android:layout_marginLeft="@dimen/wwpx20"
+                android:hint="\ue659"
+                android:textColorHint="@color/color_c7c7c7"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

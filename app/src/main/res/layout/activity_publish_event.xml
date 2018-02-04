@@ -9,7 +9,7 @@
         android:id="@+id/title_view"
         style="@style/TitleBar"
         app:titleLeftIco="@mipmap/ic_back"
-        app:titleText="发布动态"/>
+        app:titleText="发布事件"/>
 
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="vertical"
@@ -110,7 +110,7 @@
         <Button
             android:id="@+id/btn_publish"
             android:background="@drawable/green_border_shape"
-            android:text="发布动态"
+            android:text="发布事件"
             android:textSize="@dimen/wwpx30"
             android:textColor="@color/color_text"
             android:layout_marginTop="@dimen/wwpx40"

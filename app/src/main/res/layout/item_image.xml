@@ -8,6 +8,7 @@
         android:id="@+id/iv"
         android:src="@mipmap/pic_default"
         android:layout_width="match_parent"
+        android:scaleType="centerCrop"
         android:layout_height="@dimen/wwpx171"/>
     
 </LinearLayout>

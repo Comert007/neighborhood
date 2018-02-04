@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
-import com.coder.neighborhood.mvp.model.home.HomeModel;
+import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.mvp.model.CircleModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.coder.neighborhood.utils.OwnerImageLoader;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -29,6 +31,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.download.ImageDownloader;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -44,7 +47,7 @@ import ww.com.core.utils.PermissionDispose;
  */
 
 @SuppressLint("Registered")
-public class PublicCircleActivity extends BaseActivity<VoidView, HomeModel> implements
+public class PublishEventActivity extends BaseActivity<VoidView, CircleModel> implements
         PermissionDispose.OnPermissionListener {
 
     @BindView(R.id.ll_add_show)
@@ -67,17 +70,18 @@ public class PublicCircleActivity extends BaseActivity<VoidView, HomeModel> impl
     private String path;
 
     public static void startForResult(Activity context,int requestCode) {
-        Intent intent = new Intent(context, PublicCircleActivity.class);
+        Intent intent = new Intent(context, PublishEventActivity.class);
         context.startActivityForResult(intent,requestCode);
     }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_publish_circle;
+        return R.layout.activity_publish_event;
     }
 
     @Override
     protected void init() {
+        setTitleText("发布事件");
         dispose = PermissionDispose.init(this, this);
         initImagePicker();
         initListener();
@@ -173,9 +177,9 @@ public class PublicCircleActivity extends BaseActivity<VoidView, HomeModel> impl
 
             if (images != null && images.size() > 0) {
                 showImageType(false);
-                path = ImageDownloader.Scheme.FILE.wrap(images.get(0).path);
+                path = images.get(0).path;
                 Debug.d("path:"+path);
-                ImageLoader.getInstance().displayImage(path, ivImage,
+                ImageLoader.getInstance().displayImage(ImageDownloader.Scheme.FILE.wrap(images.get(0).path), ivImage,
                         BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             } else {
                 ToastUtils.showToast("未选择图片");
@@ -212,6 +216,18 @@ public class PublicCircleActivity extends BaseActivity<VoidView, HomeModel> impl
         }
 
         //
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null &&!TextUtils.isEmpty(user.getUserId())){
+            m.addEvent(user.getUserId(), content, path , bindUntilEvent(ActivityEvent.DESTROY),
+                    new HttpSubscriber<String>(this,true) {
+                        @Override
+                        public void onNext(String s) {
+                            ToastUtils.showToast(s,true);
+                            finishActivity();
+                        }
+                    });
+        }
+
     }
 
 

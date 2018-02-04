@@ -4,6 +4,36 @@
     style="@style/LlayFill"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+        <ww.com.core.widget.CustomSwipeRefreshLayout
+            android:id="@+id/csr"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/wwpx20"
+            android:layout_height="wrap_content">
+            <ww.com.core.widget.CustomRecyclerView
+                android:id="@+id/crv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </ww.com.core.widget.CustomSwipeRefreshLayout>
+
+        <Button
+            android:id="@+id/btn_ask"
+            android:layout_width="@dimen/wwpx88"
+            android:layout_height="@dimen/wwpx88"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/wwpx90"
+            android:layout_marginRight="@dimen/wwpx20"
+            android:layout_marginTop="@dimen/wwpx20"
+            android:background="@drawable/yellow_circle_shape"
+            android:padding="@dimen/wwpx10"
+            android:text="我要发布"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/wwpx24"/>
+    </RelativeLayout>
+
 
 
 </LinearLayout>

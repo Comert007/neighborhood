@@ -266,6 +266,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
                 @Override
                 public void onNext(String s) {
                     ToastUtils.showToast(s, true);
+                    onResume();
                 }
             });
         }

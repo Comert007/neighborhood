@@ -1,14 +1,17 @@
 package com.coder.neighborhood.mvp.model;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.CircleApi;
-import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.circle.CircleBean;
+import com.coder.neighborhood.bean.circle.DoingsDetailBean;
+import com.coder.neighborhood.bean.circle.EventBean;
+import com.coder.neighborhood.bean.circle.EventDetailBean;
+import com.trello.rxlifecycle.LifecycleTransformer;
 
 import java.util.List;
 
-import rx.functions.Func1;
 import ww.com.http.rx.RxHelper;
 
 /**
@@ -23,12 +26,7 @@ public class CircleModel extends BaseModel {
                        HttpSubscriber<List<CircleBean>> httpSubscriber){
 
         CircleApi.customerCircle(pageNo, pageSize)
-                .map(new Func1<ResponseBean, List<CircleBean>>() {
-                    @Override
-                    public List<CircleBean> call(ResponseBean responseBean) {
-                        return JSON.parseArray(responseBean.getData(),CircleBean.class);
-                    }
-                }).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),CircleBean.class)).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
 
@@ -37,12 +35,7 @@ public class CircleModel extends BaseModel {
                                 HttpSubscriber<List<CircleBean>> httpSubscriber){
 
         CircleApi.communityCircle(userId,communityId,pageNo, pageSize)
-                .map(new Func1<ResponseBean, List<CircleBean>>() {
-                    @Override
-                    public List<CircleBean> call(ResponseBean responseBean) {
-                        return JSON.parseArray(responseBean.getData(),CircleBean.class);
-                    }
-                }).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),CircleBean.class)).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
 
@@ -51,16 +44,89 @@ public class CircleModel extends BaseModel {
                                 HttpSubscriber<List<CircleBean>> httpSubscriber){
 
         CircleApi.friendsCircle(userId,pageNo, pageSize)
-                .map(new Func1<ResponseBean, List<CircleBean>>() {
-                    @Override
-                    public List<CircleBean> call(ResponseBean responseBean) {
-                        return JSON.parseArray(responseBean.getData(),CircleBean.class);
-                    }
-                }).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),CircleBean.class)).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
 
-    public void addCircle(){
+    public void addCircle(String userId,
+                          String path,
+                          String content,
+                          String circleType,
+                          String communityId,
+                          LifecycleTransformer transformer,
+                          HttpSubscriber<String> httpSubscriber){
 
+        CircleApi.addCircle(userId, path, content, circleType, communityId)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
+    }
+
+    public void addCircleComment(String userId,
+                                 String circleId,
+                                 String comments,
+                                 HttpSubscriber<String> httpSubscriber){
+
+        CircleApi.addCircleComment(userId, circleId, comments)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void addCircleLike(String userId,
+                                 String circleId,
+                                 HttpSubscriber<String> httpSubscriber){
+
+        CircleApi.addCircleLike(userId, circleId)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void events(String userId,String pageNo,String pageSize,HttpSubscriber<List<EventBean>> httpSubscriber){
+        CircleApi.events(userId, pageNo, pageSize)
+                .map(responseBean -> JSONArray.parseArray(responseBean.getData(),EventBean.class)).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+
+    public void activities(String userId,String pageNo,String pageSize,HttpSubscriber<List<EventBean>> httpSubscriber){
+        CircleApi.avtivities(userId, pageNo, pageSize)
+                .map(responseBean -> JSONArray.parseArray(responseBean.getData(),EventBean.class)).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void addEvent(String userId,String content,String path,LifecycleTransformer transformer,
+                         HttpSubscriber<String> httpSubscriber){
+        CircleApi.addEvent(userId, content, path)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+
+    public void addActivity(String userId,String content,String path,LifecycleTransformer transformer,
+                            HttpSubscriber<String> httpSubscriber){
+        CircleApi.addActivity(userId, content, path)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void eventDetail(String eventsId,LifecycleTransformer transformer,
+                            HttpSubscriber<EventDetailBean> httpSubscriber){
+
+        CircleApi.eventDetail(eventsId)
+                .map(responseBean -> JSON.parseObject(responseBean.getData(),EventDetailBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void activityDetail(String activityId,LifecycleTransformer transformer,
+                            HttpSubscriber<DoingsDetailBean> httpSubscriber){
+
+        CircleApi.activityDetail(activityId)
+                .map(responseBean -> JSON.parseObject(responseBean.getData(),DoingsDetailBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
     }
 }

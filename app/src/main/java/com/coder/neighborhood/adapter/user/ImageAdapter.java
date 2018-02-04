@@ -1,6 +1,7 @@
 package com.coder.neighborhood.adapter.user;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -44,6 +45,7 @@ public class ImageAdapter extends RvAdapter<String> {
 
         @Override
         public void onBindData(int position, String bean) {
+            iv.setVisibility(TextUtils.isEmpty(bean)?View.GONE:View.VISIBLE);
             ImageLoader.getInstance().displayImage(bean,iv, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
         }

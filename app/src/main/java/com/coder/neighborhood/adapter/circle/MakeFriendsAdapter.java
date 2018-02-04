@@ -6,12 +6,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.adapter.user.ImageAdapter;
 import com.coder.neighborhood.bean.circle.CircleBean;
+import com.coder.neighborhood.mvp.listener.OnActionListener;
+import com.coder.neighborhood.mvp.listener.OnActionStrListener;
+import com.coder.neighborhood.widget.EditDialog;
+import com.coder.neighborhood.widget.IconFontTextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.SimpleDateFormat;
@@ -31,9 +36,21 @@ import ww.com.core.widget.RoundImageView;
 
 public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
 
+    private OnActionStrListener strListener;
+    private OnActionListener actionListener;
+
+    public void setStrListener(OnActionStrListener strListener) {
+        this.strListener = strListener;
+    }
+
+    public void setActionListener(OnActionListener actionListener) {
+        this.actionListener = actionListener;
+    }
+
     public MakeFriendsAdapter(Context context) {
         super(context);
     }
+
 
     @Override
     protected int getItemLayoutResId(int viewType) {
@@ -58,6 +75,10 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
         TextView tvContent;
         @BindView(R.id.tv_prise)
         TextView tvPrise;
+        @BindView(R.id.icon_comment)
+        IconFontTextView iconComment;
+        @BindView(R.id.iv_prise)
+        ImageView ivPrise;
 
 
         @BindView(R.id.rv_comment)
@@ -96,7 +117,22 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
                         new SimpleDateFormat("yyyy.MM.dd")));
             }
             tvPrise.setText(TextUtils.isEmpty(bean.getCircleLike())?"0":bean.getCircleLike());
-
+            iconComment.setOnClickListener(v -> {
+                EditDialog editDialog = new EditDialog(getContext(),4);
+                editDialog.setNums(true,200);
+                editDialog.setParms(iconComment,"请输入您的评价");
+                editDialog.setEdiClickInterface(str -> {
+                    if (strListener!=null){
+                        strListener.onActionStr(position,str);
+                    }
+                });
+                editDialog.show();
+            });
+            ivPrise.setOnClickListener(v ->{
+                if (actionListener!=null){
+                    actionListener.onAction(position,ivPrise);
+                }
+            });
         }
     }
 

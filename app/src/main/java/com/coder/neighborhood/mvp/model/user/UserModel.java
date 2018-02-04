@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.UserApi;
 import com.coder.neighborhood.bean.ResponseBean;
+import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.user.FriendBean;
 import com.coder.neighborhood.mvp.model.IModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -148,11 +150,13 @@ public class UserModel implements IModel {
                              HttpSubscriber<String> httpSubscriber){
 
         UserApi.modifyAvatar(userId, path)
-                .map(new Func1<ResponseBean, String>() {
-                    @Override
-                    public String call(ResponseBean responseBean) {
-                        return responseBean.getMessage();
+                .map(responseBean -> {
+                    UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+                    if (user!=null){
+                        user.setImgUrl(JSON.parseObject(responseBean.getData()).getString("imgUrl"));
+                        BaseApplication.getInstance().saveUserInfo(user);
                     }
+                    return responseBean.getMessage();
                 }).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }

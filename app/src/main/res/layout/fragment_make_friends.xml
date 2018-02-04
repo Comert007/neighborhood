@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/LlayFill"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-                    android:layout_height="0px"
-                    android:layout_weight="1"
-                    tools:ignore="Suspicious0dp">
+        android:layout_height="0px"
+        android:layout_weight="1"
+        tools:ignore="Suspicious0dp">
 
         <include layout="@layout/layout_refresh"/>
 
 
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:layout_alignParentRight="true"
                       android:layout_alignParentBottom="true"
+                      android:layout_alignParentRight="true"
                       android:orientation="vertical"
                       android:paddingRight="@dimen/wwpx20">
 
             <Button
                 android:id="@+id/btn_circle"
                 android:layout_width="@dimen/wwpx88"
-                    android:layout_height="@dimen/wwpx88"
-                    android:background="@drawable/yellow_circle_shape"
-                    android:gravity="center"
-                    android:text="我的历史动态"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/wwpx22"/>
+                android:layout_height="@dimen/wwpx88"
+                android:background="@drawable/yellow_circle_shape"
+                android:gravity="center"
+                android:text="我的历史动态"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/wwpx22"/>
 
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="@dimen/wwpx88"
-                    android:layout_height="@dimen/wwpx88"
-                    android:layout_marginTop="@dimen/wwpx20"
-                    android:text="+"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/wwpx44"
-                    android:background="@drawable/yellow_circle_shape"/>
+                android:layout_height="@dimen/wwpx88"
+                android:layout_marginTop="@dimen/wwpx20"
+                android:background="@drawable/yellow_circle_shape"
+                android:text="+"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/wwpx44"/>
 
         </LinearLayout>
     </RelativeLayout>
 
 
     <LinearLayout android:layout_width="match_parent"
-                  android:background="@color/color_white"
+                  android:layout_height="@dimen/wwpx80"
                   android:layout_margin="@dimen/wwpx20"
-                  android:paddingLeft="@dimen/wwpx20"
-                  android:paddingRight="@dimen/wwpx20"
+                  android:background="@color/color_white"
                   android:gravity="center_vertical"
-                  android:layout_height="@dimen/wwpx80">
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20">
 
         <ImageView android:layout_width="@dimen/wwpx20"
-                   android:src="@mipmap/ic_microphone"
-                   android:layout_height="@dimen/wwpx30"/>
+                   android:layout_height="@dimen/wwpx30"
+                   android:src="@mipmap/ic_microphone"/>
 
         <TextView android:layout_width="0px"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:background="@android:color/transparent"
+                  android:gravity="center"
                   android:paddingLeft="@dimen/wwpx20"
                   android:paddingRight="@dimen/wwpx20"
-                  android:textColor="@color/color_999999"
                   android:text="输入"
-                  android:gravity="center"
-                  android:background="@android:color/transparent"
-                  android:textSize="@dimen/wwpx26"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"/>
+                  android:textColor="@color/color_999999"
+                  android:textSize="@dimen/wwpx26"/>
 
         <ImageView android:layout_width="@dimen/wwpx33"
-                   android:src="@mipmap/ic_camera"
-                   android:layout_height="@dimen/wwpx30"/>
+                   android:layout_height="@dimen/wwpx30"
+                   android:src="@mipmap/ic_camera"/>
     </LinearLayout>
 
 </LinearLayout>
