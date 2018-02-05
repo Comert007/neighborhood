@@ -21,65 +21,75 @@
         android:paddingRight="@dimen/wwpx125">
 
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx80"
-                  android:hint="姓名"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx80"
+            android:background="@android:color/transparent"
+            android:hint="姓名"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="@dimen/wwpx80"
-                  android:layout_marginTop="@dimen/wwpx60"
-                  android:hint="身份证号"
-                  android:background="@android:color/transparent"
-                  android:textColor="@color/color_title_text"
-                  android:textColorHint="@color/color_title_text"
-                  android:textSize="@dimen/wwpx28"/>
+        <com.coder.neighborhood.widget.SpaceEditText
+            android:id="@+id/et_id_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wwpx80"
+            android:layout_marginTop="@dimen/wwpx60"
+            android:background="@android:color/transparent"
+            android:hint="身份证号"
+            app:editType="IDCard"
+            android:textColor="@color/color_title_text"
+            android:textColorHint="@color/color_title_text"
+            android:textSize="@dimen/wwpx28"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:gravity="center_vertical"
+        <LinearLayout
+            android:id="@+id/ll_community_selector"
+            android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
                       android:layout_marginTop="@dimen/wwpx60"
-                      android:layout_height="wrap_content">
-            <EditText android:layout_width="0px"
-                      android:layout_weight="1"
-                      android:background="@android:color/transparent"
-                      android:layout_height="@dimen/wwpx80"
-                      android:hint="小区选择"
-                      android:textColor="@color/color_title_text"
-                      android:textColorHint="@color/color_title_text"
-                      android:textSize="@dimen/wwpx28"/>
+                      android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_community"
+                android:layout_width="0px"
+                android:layout_height="@dimen/wwpx80"
+                android:layout_weight="1"
+                android:hint="小区选择"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_title_text"
+                android:textColorHint="@color/color_title_text"
+                android:textSize="@dimen/wwpx28"/>
 
             <ImageView android:layout_width="@dimen/wwpx16"
-                       android:src="@mipmap/ic_trigon_green"
-                       android:layout_height="@dimen/wwpx14"/>
-            
+                       android:layout_height="@dimen/wwpx14"
+                       android:src="@mipmap/ic_trigon_green"/>
+
         </LinearLayout>
-       
+
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:background="@color/color_aaaaaa"/>
 
 
         <TextView
-            android:textColor="@color/color_999999"
-            android:textSize="@dimen/wwpx24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx60"
             android:text="用户认证是用户获取小区成员身份的唯一途径，小区管理员会对用户身份进行认证已确定用户是否属于该小区的医院，认证结果请留意个人信息"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/wwpx24"/>
 
         <Button
+            android:id="@+id/btn_verified"
             android:layout_width="match_parent"
             android:layout_height="@dimen/wwpx60"
             android:layout_marginBottom="@dimen/wwpx118"

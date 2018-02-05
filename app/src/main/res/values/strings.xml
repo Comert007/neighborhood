@@ -12,4 +12,5 @@
     <string name="str_empty_btn">点击重试</string>
     <string name="str_test">问题是这样的问题是这样的问题是这样的问题是这样的问题是这样的问题是这样的！</string>
     <string name="toast_sdcard_exception">SdCard异常</string>
+    <string name="str_wx_no_install">请下载安装最新版微信</string>
 </resources>

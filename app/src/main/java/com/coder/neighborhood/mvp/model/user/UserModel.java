@@ -7,9 +7,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.UserApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.bean.user.CommunityBean;
 import com.coder.neighborhood.bean.user.FriendBean;
 import com.coder.neighborhood.mvp.model.IModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -160,4 +162,25 @@ public class UserModel implements IModel {
                 }).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
+
+    public void userCertification(String userId,
+                              String idCodeName,
+                              String idCode,
+                              String communityId,
+                              LifecycleTransformer transformer,
+                              HttpSubscriber<String> httpSubscriber){
+        HomeApi.certification(userId, idCodeName, idCode,communityId)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void communities(LifecycleTransformer transformer,
+                            HttpSubscriber<List<CommunityBean>> httpSubscriber){
+        UserApi.communities()
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),CommunityBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
 }

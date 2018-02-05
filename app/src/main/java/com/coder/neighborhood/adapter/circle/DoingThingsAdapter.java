@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.circle.DoingsDetailActivity;
+import com.coder.neighborhood.activity.circle.ImageShowActivity;
 import com.coder.neighborhood.adapter.user.ImageAdapter;
 import com.coder.neighborhood.bean.circle.EventBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -71,6 +72,9 @@ public class DoingThingsAdapter extends RvAdapter<EventBean>{
             rvImages.setAdapter(adapter);
             List<String> images = new ArrayList<>();
             images.add(bean.getImgUrl());
+            adapter.setOnActionListener((position1, view) -> {
+                ImageShowActivity.start(getContext(),position1, (ArrayList<String>) images);
+            });
             adapter.addList(images);
 
             ImageLoader.getInstance().displayImage(bean.getHeadImg(),riv,

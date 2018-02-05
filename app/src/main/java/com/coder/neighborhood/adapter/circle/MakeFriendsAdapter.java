@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.circle.ImageShowActivity;
 import com.coder.neighborhood.adapter.user.ImageAdapter;
 import com.coder.neighborhood.bean.circle.CircleBean;
 import com.coder.neighborhood.mvp.listener.OnActionListener;
@@ -93,10 +94,14 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
         @Override
         public void onBindData(int position, CircleBean bean) {
             ImageAdapter adapter = new ImageAdapter(getContext());
+
             GridLayoutManager manager = new GridLayoutManager(getContext(),3);
             rvImages.setLayoutManager(manager);
             rvImages.setAdapter(adapter);
             List<String> images = new ArrayList<>();
+            adapter.setOnActionListener((position1, view) -> {
+                ImageShowActivity.start(getContext(),position1, (ArrayList<String>) images);
+            });
             images.add(bean.getImgUrl());
             adapter.addList(images);
 

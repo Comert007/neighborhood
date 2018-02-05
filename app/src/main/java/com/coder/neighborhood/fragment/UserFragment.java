@@ -19,6 +19,7 @@ import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.AboutUsActivity;
 import com.coder.neighborhood.activity.user.GoodFriendsActivity;
 import com.coder.neighborhood.activity.user.LoginActivity;
+import com.coder.neighborhood.activity.user.UserAuthenticationActivity;
 import com.coder.neighborhood.activity.user.UserInfoActivity;
 import com.coder.neighborhood.api.BaseApi;
 import com.coder.neighborhood.bean.ResponseBean;
@@ -44,7 +45,9 @@ import ww.com.core.utils.PermissionDispose;
 import ww.com.core.widget.RoundImageView;
 
 /**
- * Created by feng on 2017/12/23.
+ *
+ * @author feng
+ * @date 2017/12/23
  */
 
 public class UserFragment extends BaseFragment<VoidView, UserModel> implements ImagePick
@@ -57,6 +60,8 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
     TextView tvName;
     @BindView(R.id.tv_grade)
     TextView tvGrade;
+    @BindView(R.id.tv_verified)
+    TextView tvVerified;
 
     private ImagePick pick;
     private PermissionDispose dispose;
@@ -64,6 +69,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
     private BottomSheetDialog bottomDialog;
 
     private final int PERMISSION_REQUEST_CODE = 0x14;
+    private final int REQUEST_AUTHEN_CODE = 0X19;
 
     private String path;
 
@@ -88,11 +94,12 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
             tvName.setText(TextUtils.isEmpty(user.getNickName()) ? user.getPhone() + "用户" : user
                     .getNickName());
             tvGrade.setText("LV." + user.getUserStatus());
+            tvVerified.setText(TextUtils.equals("1",user.getUserStatus())?"已认证":"未认证");
         }
     }
 
     @OnClick({R.id.btn_loginout, R.id.ll_sign, R.id.rl_about_us, R.id.ll_cart, R.id.ll_order,
-            R.id.rl_feedback, R.id.ll_user_info, R.id.riv_header})
+            R.id.rl_feedback, R.id.ll_user_info, R.id.riv_header,R.id.tv_verified})
     public void onUser(View v) {
         switch (v.getId()) {
             case R.id.btn_loginout:
@@ -118,6 +125,9 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
                 break;
             case R.id.riv_header:
                 gainPermission();
+                break;
+            case R.id.tv_verified:
+                UserAuthenticationActivity.start(getPresenterActivity());
                 break;
             default:
                 break;
@@ -178,7 +188,6 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
 
         DialogUtils.showDialog(getContext(), "退出", "是否退出玩家邻里", true,
                 "退出", (dialog, which) -> {
-
                     BaseApplication.getInstance().saveUserInfo(null);
                     BaseApplication.getInstance().exitApp();
                     LoginActivity.start(getContext());

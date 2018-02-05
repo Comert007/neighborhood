@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
-import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
@@ -28,7 +27,6 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.download.ImageDownloader;
-import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -236,14 +234,6 @@ public class LivingCertificationActivity extends BaseActivity<VoidView, HomeMode
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user!=null && !TextUtils.isEmpty(user.getUserId())){
 
-            m.certification(user.getUserId(), name, idCard, bindUntilEvent(ActivityEvent.DESTROY)
-                    , new HttpSubscriber<String>(this,true) {
-                        @Override
-                        public void onNext(String s) {
-                            ToastUtils.showToast(s);
-                            finish();
-                        }
-                    });
         }
 
 

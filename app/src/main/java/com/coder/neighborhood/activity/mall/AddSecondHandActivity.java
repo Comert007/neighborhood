@@ -37,7 +37,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import ww.com.core.Debug;
 import ww.com.core.utils.PermissionDispose;
 
 /**
@@ -166,9 +165,8 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
 
             if (images != null && images.size() > 0) {
                 showImageType(false);
-                path = ImageDownloader.Scheme.FILE.wrap(images.get(0).path);
-                Debug.d("path:"+path);
-                ImageLoader.getInstance().displayImage(path, ivImage,
+                path = images.get(0).path;
+                ImageLoader.getInstance().displayImage(ImageDownloader.Scheme.FILE.wrap(images.get(0).path), ivImage,
                         BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             } else {
                 ToastUtils.showToast("未选择图片");

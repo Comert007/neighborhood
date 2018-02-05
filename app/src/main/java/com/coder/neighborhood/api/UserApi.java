@@ -112,4 +112,9 @@ public class UserApi extends BaseApi {
 
         return onPost(getActionUrl("app/editImg"),params);
     }
+
+    public static final Observable<ResponseBean> communities(){
+        AjaxParams params = getBaseParams();
+        return onPost(getActionUrl("app/getCommunityList"),params);
+    }
 }

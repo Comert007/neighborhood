@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.mvp.listener.OnActionListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -14,14 +15,20 @@ import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 
 /**
- * @Author feng
+ * @author feng
  * @Date 2018/1/16
  */
 
 public class ImageAdapter extends RvAdapter<String> {
 
+    private OnActionListener onActionListener;
+
     public ImageAdapter(Context context) {
         super(context);
+    }
+
+    public void setOnActionListener(OnActionListener onActionListener) {
+        this.onActionListener = onActionListener;
     }
 
     @Override
@@ -48,6 +55,11 @@ public class ImageAdapter extends RvAdapter<String> {
             iv.setVisibility(TextUtils.isEmpty(bean)?View.GONE:View.VISIBLE);
             ImageLoader.getInstance().displayImage(bean,iv, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
+            iv.setOnClickListener(v -> {
+                if (onActionListener!=null) {
+                    onActionListener.onAction(position, v);
+                }
+            });
         }
     }
 }
