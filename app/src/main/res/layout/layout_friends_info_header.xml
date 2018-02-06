@@ -26,31 +26,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx10"
-            android:text="我是一只小小鸟"
             android:textColor="@color/color_black"
             android:textSize="@dimen/wwpx32"/>
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx24"
-            android:text="18200131081"
             android:textColor="@color/color_666666"
             android:textSize="@dimen/wwpx24"/>
 
         <TextView
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx20"
-            android:text="四川省成都市"
             android:textColor="@color/color_666666"
             android:textSize="@dimen/wwpx24"/>
 
         <TextView
+            android:id="@+id/tv_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx32"
-            android:text="个人介绍"
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/color_666666"
@@ -70,4 +69,8 @@
 
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx2"/>
 </LinearLayout>

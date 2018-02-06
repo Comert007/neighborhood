@@ -38,6 +38,7 @@
                 android:layout_height="0px"/>
 
             <TextView
+                android:id="@+id/tv_num"
                 android:text="0/200"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/wwpx22"

@@ -49,7 +49,7 @@ public class GoodFriendHelpFragment extends BaseFragment<HelpView, HomeModel> {
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
-        csr.setFooterRefreshAble(true);
+        csr.setFooterRefreshAble(false);
     }
 
 
@@ -64,6 +64,7 @@ public class GoodFriendHelpFragment extends BaseFragment<HelpView, HomeModel> {
             public void onHeaderRefreshing() {
                 page = 1;
                 v.getCsr().setFooterRefreshAble(true);
+                csr.setFooterRefreshAble(false);
                 friendQuestions();
             }
 
@@ -91,6 +92,7 @@ public class GoodFriendHelpFragment extends BaseFragment<HelpView, HomeModel> {
                         if (questionBeans != null && questionBeans.size() > 0) {
                             if (page == 1) {
                                 adapter.addList(questionBeans);
+                                csr.setFooterRefreshAble(true);
                             } else {
                                 v.getCrv().removeFooterView(v.getFooterView());
                                 adapter.appendList(questionBeans);

@@ -123,7 +123,7 @@ public class PublishQuestionActivity extends BaseActivity<VoidView,HomeModel> {
                     , new HttpSubscriber<String>(this,true) {
                         @Override
                         public void onNext(String s) {
-                            ToastUtils.showToast(s);
+                            ToastUtils.showToast(s,true);
                             finish();
                         }
                     });

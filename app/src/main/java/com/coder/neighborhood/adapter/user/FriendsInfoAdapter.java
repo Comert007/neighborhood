@@ -14,8 +14,8 @@ import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 
 /**
- * @Author feng
- * @Date 2018/1/9
+ * @author feng
+ * @date 2018/1/9
  */
 
 public class FriendsInfoAdapter extends RvAdapter<String> {

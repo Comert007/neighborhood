@@ -147,12 +147,7 @@ public class HomeModel extends BaseModel {
                              HttpSubscriber<String> httpSubscriber){
 
         HomeApi.addLostThing(userId, type, phone, questionContent, filePath)
-                .map(new Func1<ResponseBean, String>() {
-                    @Override
-                    public String call(ResponseBean responseBean) {
-                        return responseBean.getData();
-                    }
-                }).compose(RxHelper.cutMain())
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }

@@ -66,7 +66,7 @@ public class HelpDetailActivity extends BaseActivity<HelpDetailView, HomeModel> 
         adapter = new HelpDetailAdapter(this);
         v.getCrv().setAdapter(adapter);
         v.getCsr().setEnableRefresh(true);
-        v.getCsr().setFooterRefreshAble(true);
+        v.getCsr().setFooterRefreshAble(false);
     }
 
     @Override
@@ -88,6 +88,7 @@ public class HelpDetailActivity extends BaseActivity<HelpDetailView, HomeModel> 
                     public void onHeaderRefreshing() {
                         page = 1;
                         v.getCsr().setFooterRefreshAble(true);
+                        v.getCsr().setFooterRefreshAble(false);
                         questionsComment(questionId);
                     }
 
@@ -109,6 +110,7 @@ public class HelpDetailActivity extends BaseActivity<HelpDetailView, HomeModel> 
                         if (helpDetailBeans != null && helpDetailBeans.size() > 0) {
                             if (page == 1) {
                                 adapter.addList(helpDetailBeans);
+                                v.getCsr().setFooterRefreshAble(true);
                             } else {
                                 v.getCrv().removeFooterView(v.getFooterView());
                                 adapter.appendList(helpDetailBeans);

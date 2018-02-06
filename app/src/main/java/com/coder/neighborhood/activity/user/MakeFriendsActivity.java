@@ -1,13 +1,17 @@
-package com.coder.neighborhood.fragment.home;
+package com.coder.neighborhood.activity.user;
+
+import android.content.Context;
+import android.content.Intent;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
-import com.coder.neighborhood.adapter.home.HelpAdapter;
-import com.coder.neighborhood.bean.home.QuestionBean;
+import com.coder.neighborhood.adapter.user.GoodFriendsAdapter;
+import com.coder.neighborhood.bean.user.FriendBean;
 import com.coder.neighborhood.config.Constants;
-import com.coder.neighborhood.fragment.BaseFragment;
-import com.coder.neighborhood.mvp.model.home.HomeModel;
-import com.coder.neighborhood.mvp.vu.home.HelpView;
+import com.coder.neighborhood.mvp.model.user.UserModel;
+import com.coder.neighborhood.mvp.vu.user.GoodFriendsView;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
@@ -16,21 +20,28 @@ import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 /**
  * @author feng
- * @Date 2018/1/20
+ * @date 2018/1/9
  */
 
-public class CustomerHelpFragment extends BaseFragment<HelpView, HomeModel> {
+public class MakeFriendsActivity extends BaseActivity<GoodFriendsView, UserModel> {
 
-    private HelpAdapter adapter;
-
+    private GoodFriendsAdapter adapter;
     private int page = 1;
+
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
 
+    private String username;
+
+    public static void start(Context context,String username) {
+        Intent intent = new Intent(context, MakeFriendsActivity.class);
+        intent.putExtra("username",username);
+        context.startActivity(intent);
+    }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_good_friend_help;
+        return R.layout.activity_make_friends;
     }
 
     @Override
@@ -39,9 +50,8 @@ public class CustomerHelpFragment extends BaseFragment<HelpView, HomeModel> {
         initListener();
         initData();
     }
-
     private void initView() {
-        adapter = new HelpAdapter(getContext());
+        adapter = new GoodFriendsAdapter(this);
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
@@ -50,8 +60,15 @@ public class CustomerHelpFragment extends BaseFragment<HelpView, HomeModel> {
 
 
     private void initData() {
+        username = getIntent().getStringExtra("username");
         crv.setAdapter(adapter);
-        customerQuestions();
+        onFriends();
+    }
+
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
     }
 
     private void initListener() {
@@ -61,39 +78,39 @@ public class CustomerHelpFragment extends BaseFragment<HelpView, HomeModel> {
                 page = 1;
                 v.getCsr().setFooterRefreshAble(true);
                 csr.setFooterRefreshAble(false);
-                customerQuestions();
+                onFriends();
             }
 
             @Override
             public void onFooterRefreshing() {
                 v.getCrv().addFooterView(v.getFooterView());
-                customerQuestions();
+                onFriends();
             }
         });
     }
 
-
-    private void customerQuestions() {
-        m.customQuestions(page + "", Constants.PAGE_SIZE + "",
-                new HttpSubscriber<List<QuestionBean>>(getContext(), false) {
+    private void onFriends() {
+        m.searchFriends(username, page + "", Constants.PAGE_SIZE + "",
+                bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<FriendBean>>(this,
+                        true) {
                     @Override
-                    public void onNext(List<QuestionBean> questionBeans) {
+                    public void onNext(List<FriendBean> friendBeans) {
                         v.getCsr().setRefreshFinished();
-                        if (questionBeans!=null && questionBeans.size()>0){
-                            if (page == 1){
-                                adapter.addList(questionBeans);
+                        if (friendBeans != null && friendBeans.size() > 0) {
+                            if (page == 1) {
+                                adapter.addList(friendBeans);
                                 csr.setFooterRefreshAble(true);
-                            }else {
+                            } else {
                                 v.getCrv().removeFooterView(v.getFooterView());
-                                adapter.appendList(questionBeans);
+                                adapter.appendList(friendBeans);
                             }
 
-                            if (questionBeans.size() == Constants.PAGE_SIZE){
-                                page ++;
-                            }else {
+                            if (friendBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
                                 v.getCsr().setFooterRefreshAble(false);
                             }
-                        }else {
+                        } else {
                             v.getCsr().setFooterRefreshAble(false);
                         }
                     }
@@ -104,5 +121,6 @@ public class CustomerHelpFragment extends BaseFragment<HelpView, HomeModel> {
                         v.getCsr().setRefreshFinished();
                     }
                 });
+
     }
 }

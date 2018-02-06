@@ -14,10 +14,14 @@
             android:layout_height="@dimen/wwpx60"
             android:gravity="center"
             android:hint="搜索"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
             android:textColor="@color/color_gray"
             android:textSize="@dimen/wwpx28"/>
 
-        <ImageView android:layout_width="@dimen/wwpx40"
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/wwpx40"
                    android:layout_height="@dimen/wwpx40"
                    android:layout_alignParentRight="true"
                    android:layout_centerVertical="true"

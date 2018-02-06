@@ -1,6 +1,7 @@
 package com.coder.neighborhood.activity.home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -24,13 +25,12 @@ import butterknife.OnClick;
 import ww.com.core.widget.TranslateTabBar;
 
 /**
- *
  * @author feng
  * @date 2018/1/8
  */
 
 @SuppressLint("Registered")
-public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
+public class FindThingsActivity extends BaseActivity<VoidView, VoidModel> {
 
     @BindView(R.id.translate)
     TranslateTabBar translate;
@@ -40,7 +40,7 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
     private List<Fragment> fragments;
     private FragmentManager fragmentManager;
     private TranslateTabAdapter adapter;
-    private int type =1;
+    private int type = 1;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, FindThingsActivity.class);
@@ -69,12 +69,14 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
 
         vp.setOnPageChangeListener(pageChangeListener);
     }
+
     @Override
     public void onTitleLeft() {
         finish();
     }
-    private void addFragment(){
-        if (fragments==null){
+
+    private void addFragment() {
+        if (fragments == null) {
             fragments = new ArrayList<>();
         }
         fragments.add(new FindThingsFragment());
@@ -87,7 +89,7 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
         public void onPageScrolled(int position, float positionOffset, int
                 positionOffsetPixels) {
 
-            type = position+1;
+            type = position + 1;
         }
 
         @Override
@@ -102,13 +104,24 @@ public class FindThingsActivity extends BaseActivity<VoidView,VoidModel> {
     };
 
     @OnClick({R.id.btn_ask})
-    public void onFindThings(View v){
-        switch (v.getId()){
+    public void onFindThings(View v) {
+        switch (v.getId()) {
             case R.id.btn_ask:
-                PublishPicQuestionActivity.start(this,type);
+                PublishPicQuestionActivity.start(this, type);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0x21 && resultCode == Activity.RESULT_OK) {
+            int type = data.getIntExtra("type",0);
+            if (type > 0){
+                fragments.get(type-1).onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 }

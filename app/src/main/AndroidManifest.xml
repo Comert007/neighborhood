@@ -248,6 +248,10 @@
         <activity
             android:name=".activity.circle.ImageShowActivity"
             android:screenOrientation="portrait"/>
+
+        <!--交友中心-->
+        <activity android:name=".activity.user.MakeFriendsActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

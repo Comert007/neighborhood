@@ -1,5 +1,7 @@
 package com.coder.neighborhood.fragment.home;
 
+import android.content.Intent;
+
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.home.FindThingsAdapter;
@@ -43,7 +45,7 @@ public class FindThingsFragment extends BaseFragment<HelpView, HomeModel> {
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
-        csr.setFooterRefreshAble(true);
+        csr.setFooterRefreshAble(false);
     }
 
     private void initListener() {
@@ -52,6 +54,7 @@ public class FindThingsFragment extends BaseFragment<HelpView, HomeModel> {
             public void onHeaderRefreshing() {
                 page = 1;
                 v.getCsr().setFooterRefreshAble(true);
+                csr.setFooterRefreshAble(false);
                 lostThings();
             }
 
@@ -77,6 +80,7 @@ public class FindThingsFragment extends BaseFragment<HelpView, HomeModel> {
                         if (thingsBeans != null && thingsBeans.size() > 0) {
                             if (page == 1) {
                                 adapter.addList(thingsBeans);
+                                csr.setFooterRefreshAble(true);
                             } else {
                                 v.getCrv().removeFooterView(v.getFooterView());
                                 adapter.appendList(thingsBeans);
@@ -98,5 +102,15 @@ public class FindThingsFragment extends BaseFragment<HelpView, HomeModel> {
                         v.getCsr().setRefreshFinished();
                     }
                 });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        page = 1;
+        v.getCsr().setFooterRefreshAble(true);
+        csr.setFooterRefreshAble(false);
+        lostThings();
     }
 }

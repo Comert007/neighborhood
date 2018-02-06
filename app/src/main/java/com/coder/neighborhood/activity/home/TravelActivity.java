@@ -16,6 +16,9 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
+import ww.com.core.widget.CustomRecyclerView;
+import ww.com.core.widget.CustomSwipeRefreshLayout;
+
 /**
  *
  * @author feng
@@ -28,6 +31,8 @@ public class TravelActivity extends BaseActivity<TravelView,HomeModel> {
     private TravelAdapter adapter;
 
     private int page =1;
+    private CustomSwipeRefreshLayout csr;
+    private CustomRecyclerView crv;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, TravelActivity.class);
@@ -46,19 +51,72 @@ public class TravelActivity extends BaseActivity<TravelView,HomeModel> {
 
     @Override
     protected void init() {
-        adapter = new TravelAdapter(this);
-        v.getCrv().setAdapter(adapter);
+        initView();
+        initListener();
+        initData();
+    }
 
+    private void initView() {
+        adapter = new TravelAdapter(this);
+        csr = v.getCsr();
+        crv = v.getCrv();
+        csr.setEnableRefresh(true);
+        csr.setFooterRefreshAble(false);
+    }
+
+    private void initListener() {
+        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
+            @Override
+            public void onHeaderRefreshing() {
+                page = 1;
+                v.getCsr().setFooterRefreshAble(true);
+                csr.setFooterRefreshAble(false);
+                onTravels();
+            }
+
+            @Override
+            public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
+                onTravels();
+            }
+        });
+    }
+
+    private void initData() {
+        crv.setAdapter(adapter);
         onTravels();
     }
+
 
     private void onTravels(){
         m.travels(page + "", Constants.PAGE_SIZE + "", bindUntilEvent(ActivityEvent.DESTROY)
                 , new HttpSubscriber<List<TravelBean>>(this,true) {
                     @Override
                     public void onNext(List<TravelBean> travelBeans) {
-                        adapter.addList(travelBeans);
+                        v.getCsr().setRefreshFinished();
+                        if (travelBeans != null && travelBeans.size() > 0) {
+                            if (page == 1) {
+                                adapter.addList(travelBeans);
+                                csr.setFooterRefreshAble(true);
+                            } else {
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(travelBeans);
+                            }
 
+                            if (travelBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        } else {
+                            v.getCsr().setFooterRefreshAble(false);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        v.getCsr().setRefreshFinished();
                     }
                 });
     }

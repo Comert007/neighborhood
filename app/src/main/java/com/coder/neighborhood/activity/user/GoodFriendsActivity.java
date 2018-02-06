@@ -2,6 +2,9 @@ package com.coder.neighborhood.activity.user;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -18,17 +21,26 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 /**
- * @Author feng
- * @Date 2018/1/9
+ * @author feng
+ * @date 2018/1/9
  */
 
 public class GoodFriendsActivity extends BaseActivity<GoodFriendsView, UserModel> {
 
+    @BindView(R.id.et_search)
+    EditText etSearch;
+
     private GoodFriendsAdapter adapter;
     private int page = 1;
+
+    private CustomSwipeRefreshLayout csr;
+    private CustomRecyclerView crv;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, GoodFriendsActivity.class);
@@ -42,14 +54,21 @@ public class GoodFriendsActivity extends BaseActivity<GoodFriendsView, UserModel
 
     @Override
     protected void init() {
+        initView();
+        initListener();
         initData();
     }
+    private void initView() {
+        adapter = new GoodFriendsAdapter(this);
+        csr = v.getCsr();
+        crv = v.getCrv();
+        csr.setEnableRefresh(true);
+        csr.setFooterRefreshAble(false);
+    }
+
 
     private void initData() {
-        adapter = new GoodFriendsAdapter(this);
-
-        v.getCrv().setAdapter(adapter);
-        initListener();
+        crv.setAdapter(adapter);
         onFriends();
     }
 
@@ -60,21 +79,45 @@ public class GoodFriendsActivity extends BaseActivity<GoodFriendsView, UserModel
     }
 
     private void initListener() {
-        v.getCsr().setEnableRefresh(true);
-        v.getCsr().setOnSwipeRefreshListener(new CustomSwipeRefreshLayout
-                .OnSwipeRefreshLayoutListener() {
+        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
             @Override
             public void onHeaderRefreshing() {
                 page = 1;
                 v.getCsr().setFooterRefreshAble(true);
+                csr.setFooterRefreshAble(false);
                 onFriends();
             }
 
             @Override
             public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
                 onFriends();
             }
         });
+
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_SEARCH)
+            {
+
+                String searchContent = etSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(searchContent)){
+                    ToastUtils.showToast("输入搜索内容");
+                    return false;
+                }
+                MakeFriendsActivity.start(GoodFriendsActivity.this,searchContent);
+            }
+            return false;
+        });
+    }
+
+    @OnClick(R.id.iv_search)
+    public void onSearch(){
+        String searchContent = etSearch.getText().toString().trim();
+        if (TextUtils.isEmpty(searchContent)){
+            ToastUtils.showToast("输入搜索内容");
+            return;
+        }
+        MakeFriendsActivity.start(GoodFriendsActivity.this,searchContent);
     }
 
     private void onFriends() {
@@ -89,17 +132,29 @@ public class GoodFriendsActivity extends BaseActivity<GoodFriendsView, UserModel
                     @Override
                     public void onNext(List<FriendBean> friendBeans) {
                         v.getCsr().setRefreshFinished();
-                        if (friendBeans != null && friendBeans.size()>0) {
+                        if (friendBeans != null && friendBeans.size() > 0) {
                             if (page == 1) {
-                                adapter.getList().clear();
                                 adapter.addList(friendBeans);
+                                csr.setFooterRefreshAble(true);
                             } else {
-//                                adapter.appendList(friendBeans);
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(friendBeans);
                             }
-                            page++;
+
+                            if (friendBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
                         } else {
                             v.getCsr().setFooterRefreshAble(false);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        v.getCsr().setRefreshFinished();
                     }
                 });
 

@@ -17,7 +17,7 @@ import butterknife.BindView;
  * @Date 2018/1/16
  */
 
-public class PhoneConsultationFragment extends BaseFragment<VoidView,VoidModel> {
+public class PhoneConsultationFragment extends BaseFragment<VoidView, VoidModel> {
 
     @BindView(R.id.tv_phone)
     TextView tvPhone;
@@ -31,16 +31,19 @@ public class PhoneConsultationFragment extends BaseFragment<VoidView,VoidModel> 
 
     @Override
     protected void init() {
-        tvPhone.setText(Html.fromHtml("联系电话：<font color='#e72f35'>"+phone+"</font>"));
+        tvPhone.setText(Html.fromHtml("联系电话：<font color='#e72f35'>" + phone + "</font>"));
         tvPhone.setOnClickListener(v -> {
             DialogUtils.showDialog(getContext(), "提示", "是否进行电话咨询？",
-                    true, "咨询", (dialog, which) -> call(phone),
+                    true, "咨询", (dialog, which) -> {
+                        call(phone);
+                        dialog.dismiss();
+                    },
                     true, "取消", (dialog, which) -> dialog.dismiss()).show();
         });
     }
 
     private void call(String phone) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phone));
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

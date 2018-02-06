@@ -1,12 +1,15 @@
 package com.coder.neighborhood.activity.home;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -38,6 +41,8 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
 
     @BindView(R.id.crv)
     CustomRecyclerView crv;
+    @BindView(R.id.tv_num)
+    TextView tvNum;
     @BindView(R.id.et_question)
     EditText etQuestion;
 
@@ -46,10 +51,10 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
     private int type;
 
 
-    public static void start(Context context,int type) {
+    public static void start(Activity context, int type) {
         Intent intent = new Intent(context, PublishPicQuestionActivity.class);
         intent.putExtra("type",type);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,0x21);
     }
 
     @Override
@@ -59,6 +64,17 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
 
     @Override
     protected void init() {
+       initView();
+       initListener();
+       initData();
+    }
+
+
+    private void initView(){
+
+    }
+
+    private void initData(){
         type = getIntent().getIntExtra("type",0);
         adapter = new ImageQuestionAdapter(this);
         crv.setLayoutManager(new GridLayoutManager(this,3));
@@ -66,6 +82,26 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
         images.add(new ImageQuestionBean(ImageQuestionAdapter.IMAGE_ADD));
         adapter.addList(images);
         crv.setAdapter(adapter);
+    }
+
+
+    private void initListener(){
+        etQuestion.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                tvNum.setText(s.toString().length()+"/200");
+            }
+        });
     }
 
 
@@ -104,7 +140,10 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
                     , new HttpSubscriber<String>(this,true) {
                         @Override
                         public void onNext(String s) {
-                            ToastUtils.showToast(s);
+                            ToastUtils.showToast(s,true);
+                            Intent intent = getIntent();
+                            setResult(Activity.RESULT_OK,intent);
+                            finish();
                         }
                     });
         }

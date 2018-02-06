@@ -13,6 +13,7 @@ import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.user.CommunityBean;
 import com.coder.neighborhood.bean.user.FriendBean;
+import com.coder.neighborhood.bean.user.FriendInfoBean;
 import com.coder.neighborhood.mvp.model.IModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
@@ -107,6 +108,17 @@ public class UserModel implements IModel {
                 .subscribe(httpSubscriber);
     }
 
+    public void searchFriends(String userName,
+                              String pageNo,
+                              String pageSize,
+                              LifecycleTransformer transformer,
+                              HttpSubscriber<List<FriendBean>> httpSubscriber){
+        UserApi.searchFriends(userName, pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),FriendBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
     public void signIn(String userId,HttpSubscriber<ResponseBean> httpSubscriber){
         UserApi.signIn(userId)
                 .compose(RxHelper.cutMain())
@@ -132,6 +144,15 @@ public class UserModel implements IModel {
 
         UserApi.addFriend(userId, freindId, easemodUsername)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void friendInfo(String userId,LifecycleTransformer transformer,
+                           HttpSubscriber<FriendInfoBean> httpSubscriber){
+
+        UserApi.friendInfo(userId)
+                .map(responseBean -> JSON.parseObject(responseBean.getData(),FriendInfoBean.class)).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }

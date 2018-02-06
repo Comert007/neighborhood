@@ -63,9 +63,9 @@ public class HomeApi extends BaseApi {
         params.addParameters("userId",userId);
         params.addParameters("type",type);
         params.addParameters("phone",phone);
-        params.addParameters("questionContent",questionContent);
+        params.addParameters("lostContent",questionContent);
         if (!TextUtils.isEmpty(filePath)){
-            params.addParametersJPG("filePath",new File(filePath));
+            params.addParametersJPG("file",new File(filePath));
         }
 
         return onPost(getActionUrl("app/addLostAndRecruit"),params);
