@@ -17,8 +17,8 @@ import ww.com.core.adapter.RvViewHolder;
 import ww.com.core.widget.RoundImageView;
 
 /**
- * @Author feng
- * @Date 2018/1/9
+ * @author feng
+ * @date 2018/1/9
  */
 
 public class GoodFriendsAdapter extends RvAdapter<FriendBean> {

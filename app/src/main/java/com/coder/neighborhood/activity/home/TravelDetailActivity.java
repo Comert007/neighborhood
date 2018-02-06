@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
+import com.coder.neighborhood.activity.mall.CartActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
-import com.coder.neighborhood.api.BaseApi;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.home.TravelDetailBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
@@ -49,6 +49,7 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
     @BindView(R.id.ssw)
     WebView ssw;
 
+    private TravelDetailBean travelDetailBean;
 
 
     private List<String> urls;
@@ -103,9 +104,11 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
                 , new HttpSubscriber<TravelDetailBean>(this,true) {
                     @Override
                     public void onNext(TravelDetailBean goodsDetailBean) {
-                        String url = BaseApi.HOST_URL+ goodsDetailBean.getImgUrl();
+                        travelDetailBean = goodsDetailBean;
                         List<String> urls = new ArrayList<>();
-                        urls.add(url);
+                        for (TravelDetailBean.ImgUrlBean imgUrlBean : goodsDetailBean.getImgUrl()) {
+                            urls.add(imgUrlBean.getImgUrl());
+                        }
                         startBanner(urls);
                         showGoodsDetail(goodsDetailBean);
                     }
@@ -115,33 +118,41 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
     private void showGoodsDetail(TravelDetailBean travelDetailBean){
         tvGoodsName.setText(travelDetailBean.getTravelName());
         tvGoodsPrice.setText(travelDetailBean.getTravelPrice()+"/人");
-//        tvPickCount.setText("已拼购："+travelDetailBean.getItemPickingBuyCount()+"人");
-//        tvGoodsNum.setText("商品数量："+travelDetailBean.getItemInventoryQuantiry());
-//        tvGoodsDealNum.setText("成交量："+travelDetailBean.getItemDealQuantiry());
+        tvPickCount.setText("已拼购："+(TextUtils.isEmpty(travelDetailBean.getTravelPickBuyCount())?"0":travelDetailBean.getTravelPickBuyCount())+"人");
+        tvGoodsNum.setText("商品数量："+travelDetailBean.getItemInventoryQuantiry());
+        tvGoodsDealNum.setText("成交量："+(TextUtils.isEmpty(travelDetailBean.getItemDealQuantiry())?"0":travelDetailBean.getItemDealQuantiry()));
     }
 
 
-    @OnClick({R.id.ll_add_cart})
+    @OnClick({R.id.ll_add_cart,R.id.ll_single_cart,R.id.ll_more_cart})
     public void onGoodsClick(View view){
         switch (view.getId()){
             case R.id.ll_add_cart:
-                addCart();
+                CartActivity.start(this);
+                break;
+            case R.id.ll_single_cart:
+                addCart("1");
+                break;
+            case R.id.ll_more_cart:
+                addCart(travelDetailBean.getItemDealQuantiry());
+                break;
+            default:
                 break;
         }
     }
 
-    private void addCart(){
+    private void addCart(String num){
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user==null){
-            ToastUtils.showToast("添加购物车失败");
+            ToastUtils.showToast("添加失败",false);
             return;
         }
         String userId = user.getUserId();
-        m.addCart(userId, travelId, "1", "2", bindUntilEvent(ActivityEvent.DESTROY),
+        m.addCart(userId, travelId, num, bindUntilEvent(ActivityEvent.DESTROY),
                 new HttpSubscriber<String>(this,true) {
             @Override
             public void onNext(String s) {
-                ToastUtils.showToast("添加购物车成功");
+                ToastUtils.showToast("添加成功",true);
             }
         });
     }

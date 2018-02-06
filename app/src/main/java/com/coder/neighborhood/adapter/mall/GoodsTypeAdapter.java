@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.mall.GoodsDetailActivity;
-import com.coder.neighborhood.bean.mall.CategoryGoodsItemBean;
+import com.coder.neighborhood.bean.mall.GoodsTypeBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -17,29 +17,28 @@ import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
 
 /**
- * @author Administrator
- * @Author feng
- * @Date 2018/1/19
+ * @author feng
+ * @Date 2018/1/5.
  */
 
-public class CategoryGoodsItemAdapter extends RvAdapter<CategoryGoodsItemBean> {
+public class GoodsTypeAdapter extends RvAdapter<GoodsTypeBean> {
 
-    public CategoryGoodsItemAdapter(Context context) {
+    public GoodsTypeAdapter(Context context) {
         super(context);
     }
 
+
     @Override
     protected int getItemLayoutResId(int viewType) {
-        return R.layout.item_mall_content;
+        return R.layout.item_goods_type;
     }
 
     @Override
-    protected RvViewHolder<CategoryGoodsItemBean> getViewHolder(int viewType, View view) {
-        return new CategoryGoodsItemViewHolder(view);
+    protected RvViewHolder<GoodsTypeBean> getViewHolder(int viewType, View view) {
+        return new MallViewHolder(view);
     }
 
-
-    class CategoryGoodsItemViewHolder extends RvViewHolder<CategoryGoodsItemBean> {
+    class MallViewHolder extends RvViewHolder<GoodsTypeBean> {
         @BindView(R.id.iv_goods_image)
         ImageView ivGoodsImage;
         @BindView(R.id.tv_goods_title)
@@ -50,25 +49,22 @@ public class CategoryGoodsItemAdapter extends RvAdapter<CategoryGoodsItemBean> {
         TextView tvGoodsType;
         @BindView(R.id.tv_goods_use)
         TextView tvGoodsUse;
-        public CategoryGoodsItemViewHolder(View itemView) {
-            super(itemView);
 
+
+        public MallViewHolder(View itemView) {
+            super(itemView);
         }
 
         @Override
-        public void onBindData(int position, final CategoryGoodsItemBean bean) {
+        public void onBindData(int position, GoodsTypeBean bean) {
             ImageLoader.getInstance().displayImage(bean.getImgUrl(), ivGoodsImage,
                     BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             tvGoodsTitle.setText(TextUtils.isEmpty(bean.getItemName())?"":bean.getItemName());
             tvGoodsPrice.setText(TextUtils.isEmpty(bean.getItemPrice())?"":bean.getItemPrice());
-//            tvGoodsType.setText(TextUtils.isEmpty(bean.getItemCategoryName())?"":bean.getItemCategoryName());
+            tvGoodsType.setText(TextUtils.isEmpty(bean.getItemCategoryName())?"":bean.getItemCategoryName());
 //            tvGoodsUse.setText(TextUtils.isEmpty(bean.getItemPickingPrice())?"":bean.getItemPickingPrice());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    GoodsDetailActivity.start(getContext(),bean.getItemId());
-                }
-            });
+            itemView.setOnClickListener(v -> GoodsDetailActivity.start(getContext(),bean.getItemId()));
         }
     }
+
 }

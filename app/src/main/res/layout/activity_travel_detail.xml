@@ -156,6 +156,7 @@
                       android:gravity="right">
 
             <LinearLayout
+                android:id="@+id/ll_more_cart"
                 android:layout_width="@dimen/wwpx192"
                 android:layout_height="@dimen/wwpx60"
                 android:background="@drawable/green_border_shape"
@@ -174,6 +175,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_single_cart"
                 android:layout_width="@dimen/wwpx192"
                 android:layout_height="@dimen/wwpx60"
                 android:layout_marginLeft="@dimen/wwpx20"

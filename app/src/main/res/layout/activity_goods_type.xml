@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LlayFill">
+
+
+    <com.coder.neighborhood.widget.TitleView
+    android:id="@+id/title_view"
+    style="@style/TitleBar"
+    app:titleText="商品类别"/>
+
+    <ww.com.core.widget.CustomSwipeRefreshLayout
+        android:id="@+id/csr"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/wwpx20"
+        android:layout_height="match_parent">
+        <ww.com.core.widget.CustomRecyclerView
+            android:id="@+id/crv"
+            android:paddingRight="@dimen/wwpx20"
+            android:background="@color/color_f4f4f4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </ww.com.core.widget.CustomSwipeRefreshLayout>
+
+
+</LinearLayout>

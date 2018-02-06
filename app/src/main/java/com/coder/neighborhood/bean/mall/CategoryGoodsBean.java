@@ -3,8 +3,8 @@ package com.coder.neighborhood.bean.mall;
 import java.util.List;
 
 /**
- * @Author feng
- * @Date 2018/1/19
+ * @author feng
+ * @date 2018/1/19
  */
 
 public class CategoryGoodsBean {

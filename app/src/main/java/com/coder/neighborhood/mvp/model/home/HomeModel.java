@@ -90,17 +90,16 @@ public class HomeModel extends BaseModel {
     public void addCart(String userId,
                         String itemId,
                         String quantity,
-                        String itemType,
                         LifecycleTransformer transformer,
                         HttpSubscriber<String> httpSubscriber){
 
 
-        MallApi.addCart(userId, itemId, quantity, itemType)
+        MallApi.addCart(userId, itemId, quantity)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
                         responseBean.getData();
-                        return responseBean.getData();
+                        return responseBean.getMessage();
                     }
                 }).compose(RxHelper.<String>cutMain())
                 .compose(transformer)

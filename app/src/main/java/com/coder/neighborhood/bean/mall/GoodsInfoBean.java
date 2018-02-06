@@ -1,35 +1,38 @@
-package com.coder.neighborhood.bean.home;
+package com.coder.neighborhood.bean.mall;
 
 /**
- * Created by feng on 2018/1/9.
+ * @author feng
+ * @Date 2018/2/6.
  */
 
-public class GoodsBean {
+public class GoodsInfoBean {
+
 
     /**
-     * imgUrl : http://39.106.109.134:80/linli/userfiles/1/images/photo/2017/12
-     * /5a22acfaNf7222715.jpg
-     * itemName : 一加手机5T （A5010） 6GB＋64GB 星辰黑 全网通
-     * itemCategoryName : 日用品
-     * itemPrice : 2999
-     * itmeId : a7d5c766c8cf48aeaf242e3d527f299d
+     * imgUrl : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/rongxin001.jpg
+     * itemId : 5a5945e9f01c46fab95643b2fcdeea05
+     * itemName : 农心 方便面 辛拉面 香菇牛肉口味 120g*5袋 五连包
+     * itemCategoryName : 食品类
+     * itemDealQuantiry : 999
+     * itemPrice : 22.9
+     * itemInventoryQuantiry : 900
+     * itemPickingCount : 10
      * itemPickingBuyCount : 0
-     * sellType : 0
-     * itemPickingPrice : 2899
+     * sellType : 1
+     * itemPickingPrice : 19.9
      */
 
     private String imgUrl;
+    private String itemId;
     private String itemName;
     private String itemCategoryName;
+    private String itemDealQuantiry;
     private String itemPrice;
+    private String itemInventoryQuantiry;
+    private String itemPickingCount;
     private String itemPickingBuyCount;
     private String sellType;
     private String itemPickingPrice;
-    /**
-     * itemId : 42790c7c1b0942eab1eee7941b89904
-     */
-
-    private String itemId;
 
     public String getImgUrl() {
         return imgUrl;
@@ -37,6 +40,14 @@ public class GoodsBean {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getItemName() {
@@ -55,12 +66,36 @@ public class GoodsBean {
         this.itemCategoryName = itemCategoryName;
     }
 
+    public String getItemDealQuantiry() {
+        return itemDealQuantiry;
+    }
+
+    public void setItemDealQuantiry(String itemDealQuantiry) {
+        this.itemDealQuantiry = itemDealQuantiry;
+    }
+
     public String getItemPrice() {
         return itemPrice;
     }
 
     public void setItemPrice(String itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public String getItemInventoryQuantiry() {
+        return itemInventoryQuantiry;
+    }
+
+    public void setItemInventoryQuantiry(String itemInventoryQuantiry) {
+        this.itemInventoryQuantiry = itemInventoryQuantiry;
+    }
+
+    public String getItemPickingCount() {
+        return itemPickingCount;
+    }
+
+    public void setItemPickingCount(String itemPickingCount) {
+        this.itemPickingCount = itemPickingCount;
     }
 
     public String getItemPickingBuyCount() {
@@ -85,13 +120,5 @@ public class GoodsBean {
 
     public void setItemPickingPrice(String itemPickingPrice) {
         this.itemPickingPrice = itemPickingPrice;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
     }
 }

@@ -19,12 +19,15 @@ public class MallApi extends BaseApi {
      * @return
      */
     public static final Observable<ResponseBean> goods(String mallType,
-                                                       String hotFlag,
-                                                       String pageNo){
+                                                       String itemCategoryId,
+                                                       String pageNo,
+                                                       String pageSize){
         AjaxParams params = getBaseParams();
         params.addParameters("mallType",mallType);
-        params.addParameters("hotFlag",hotFlag);
+        params.addParameters("itemCategoryId",itemCategoryId);
         params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
         return onPost(getActionUrl("app/getItemList"),params);
     }
 
@@ -49,6 +52,13 @@ public class MallApi extends BaseApi {
         AjaxParams params = getBaseParams();
         params.addParameters("itemId",itemId);
 
+        return onPost(getActionUrl("app/getItemDetails"),params);
+    }
+
+    public static final Observable<ResponseBean> goodsInfo(String itemId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("itemId",itemId);
+
         return onPost(getActionUrl("app/getItemInfo"),params);
     }
 
@@ -67,14 +77,12 @@ public class MallApi extends BaseApi {
 
     public static final Observable<ResponseBean> addCart(String userId,
                                                          String itemId,
-                                                         String quantity,
-                                                         String itemType){
+                                                         String quantity){
 
         AjaxParams params = getBaseParams();
-        params.addParameters("itemId",itemId);
         params.addParameters("userId",userId);
+        params.addParameters("itemId",itemId);
         params.addParameters("quantity",quantity);
-        params.addParameters("itemType",itemType);
 
         return onPost(getActionUrl("app/addCart"),params);
     }

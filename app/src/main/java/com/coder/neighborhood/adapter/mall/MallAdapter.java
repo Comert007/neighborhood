@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.mall.GoodsTypeActivity;
 import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 
 import butterknife.BindView;
@@ -41,6 +42,8 @@ public class MallAdapter extends RvAdapter<CategoryGoodsBean> {
         TextView tvTitle;
         @BindView(R.id.rv)
         RecyclerView rv;
+        @BindView(R.id.tv_goods_more)
+        TextView tvGoodsMore;
 
 
         public MallViewHolder(View itemView) {
@@ -56,6 +59,9 @@ public class MallAdapter extends RvAdapter<CategoryGoodsBean> {
             CategoryGoodsItemAdapter adapter = new CategoryGoodsItemAdapter(getContext());
             adapter.addList(bean.getItem());
             rv.setAdapter(adapter);
+            tvGoodsMore.setOnClickListener(v -> {
+                GoodsTypeActivity.start(getContext(),"1",bean.getItemCategoryId(),bean.getItemCategoryName());
+            });
         }
     }
 

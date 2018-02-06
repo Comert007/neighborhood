@@ -126,10 +126,11 @@
                     android:id="@+id/rl_part_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/wwpx20"
                     android:visibility="gone">
 
                     <ww.com.core.widget.RoundImageView
-                        android:id="@+id/riv_header"
+                        android:id="@+id/riv"
                         android:layout_width="@dimen/wwpx80"
                         android:layout_height="@dimen/wwpx80"
                         android:src="@mipmap/ic_default_avatar"
@@ -148,6 +149,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_comment"
@@ -210,6 +212,7 @@
                       android:gravity="right">
 
             <LinearLayout
+                android:id="@+id/ll_single_cart"
                 android:layout_width="@dimen/wwpx192"
                 android:layout_height="wrap_content"
                 android:background="@drawable/green_border_shape"
@@ -235,6 +238,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_more_cart"
                 android:layout_width="@dimen/wwpx192"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/wwpx20"

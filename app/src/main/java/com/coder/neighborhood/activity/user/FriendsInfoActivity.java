@@ -25,8 +25,6 @@ import com.coder.neighborhood.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.util.Arrays;
-
 import butterknife.ButterKnife;
 import ww.com.core.ScreenUtil;
 import ww.com.core.widget.RoundImageView;
@@ -92,7 +90,6 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
         adapter = new FriendsInfoAdapter(this);
         v.getCrv().setAdapter(adapter);
         v.getCrv().addHeadView(vi);
-        adapter.addList(Arrays.asList("1", "2", "3"));
     }
 
     private void initData() {
@@ -118,9 +115,8 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
     }
 
     private void friendInfo() {
-        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user != null) {
-            m.friendInfo(user.getUserId(), bindUntilEvent(ActivityEvent.DESTROY)
+        if (friendBean != null && !TextUtils.isEmpty(friendBean.getUserId())) {
+            m.friendInfo(friendBean.getUserId(), bindUntilEvent(ActivityEvent.DESTROY)
                     , new HttpSubscriber<FriendInfoBean>(this, true) {
                         @Override
                         public void onNext(FriendInfoBean friendInfoBean) {

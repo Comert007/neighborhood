@@ -1,11 +1,13 @@
 package com.coder.neighborhood.bean.mall;
 
+import java.io.Serializable;
+
 /**
  * @Author feng
  * @Date 2018/1/19
  */
 
-public class CategoryGoodsItemBean {
+public class CategoryGoodsItemBean implements Serializable{
 
     /**
      * imgUrl : http://39.106.109.134:80/linli/userfiles/1/images/photo/2018/01/boss001.jpg

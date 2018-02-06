@@ -118,7 +118,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
                 CartActivity.start(getContext());
                 break;
             case R.id.ll_order:
-                OrderStatusActivity.start(getContext());
+                OrderStatusActivity.start(getContext(),0);
                 break;
             case R.id.rl_feedback:
                 FeedBackQuestionActivity.start(getContext());
@@ -239,25 +239,27 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
     public void onUserClick(View v) {
         switch (v.getId()) {
             case R.id.ll_wait_pay:
-                OrderStatusActivity.start(getContext());
+                OrderStatusActivity.start(getContext(),1);
                 break;
             case R.id.ll_wait_send:
-                OrderStatusActivity.start(getContext());
+                OrderStatusActivity.start(getContext(),2);
                 break;
             case R.id.ll_wait_gain:
-                OrderStatusActivity.start(getContext());
+                OrderStatusActivity.start(getContext(),3);
                 break;
             case R.id.ll_wait_comment:
-                OrderStatusActivity.start(getContext());
+                OrderStatusActivity.start(getContext(),4);
                 break;
             case R.id.ll_return_goods:
-                OrderStatusActivity.start(getContext());
+                OrderStatusActivity.start(getContext(),5);
                 break;
             case R.id.ll_good_friends:
                 GoodFriendsActivity.start(getContext());
                 break;
             case R.id.rl_setting:
                 cacheRel();
+                break;
+            default:
                 break;
         }
     }

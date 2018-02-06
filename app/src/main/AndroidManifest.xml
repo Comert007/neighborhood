@@ -252,6 +252,10 @@
         <!--交友中心-->
         <activity android:name=".activity.user.MakeFriendsActivity"
                   android:screenOrientation="portrait"/>
+
+        <!--商品列表-->
+        <activity android:name=".activity.mall.GoodsTypeActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

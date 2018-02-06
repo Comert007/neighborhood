@@ -6,11 +6,13 @@ import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.MallApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
-import com.coder.neighborhood.bean.home.GoodsBean;
 import com.coder.neighborhood.bean.mall.CartBean;
 import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.bean.mall.CommentBean;
 import com.coder.neighborhood.bean.mall.GoodsDetailBean;
+import com.coder.neighborhood.bean.mall.GoodsInfoBean;
+import com.coder.neighborhood.bean.mall.GoodsTypeBean;
+import com.coder.neighborhood.bean.user.OrderBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
@@ -59,23 +61,22 @@ public class MallModel extends BaseModel{
     /**
      * 商品列表
      * @param mallType 商场类型（1商城2二手商城）
-     * @param hotFlag 热门标记（0正常1热门）
      * @param pageNo 当前页码
      *
      */
     public void goods(String mallType,
-                      String hotFlag,
+                      String itemCategoryId,
                       String pageNo,
-                      HttpSubscriber<List<GoodsBean>> httpSubscriber){
+                      String pageSize,
+                      LifecycleTransformer transformer,
+                      HttpSubscriber<List<GoodsTypeBean>> httpSubscriber){
 
-        MallApi.goods(mallType, hotFlag, pageNo)
-                .map(new Func1<ResponseBean, List<GoodsBean>>() {
-                    @Override
-                    public List<GoodsBean> call(ResponseBean responseBean) {
-                        List<GoodsBean> beans = JSON.parseArray(responseBean.getData(),GoodsBean.class);
-                        return beans;
-                    }
-                }).compose(RxHelper.<List<GoodsBean>>cutMain())
+        MallApi.goods(mallType, itemCategoryId, pageNo, pageSize)
+                .map(responseBean -> {
+                    List<GoodsTypeBean> beans = JSON.parseArray(responseBean.getData(),GoodsTypeBean.class);
+                    return beans;
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
@@ -118,12 +119,18 @@ public class MallModel extends BaseModel{
                              HttpSubscriber<GoodsDetailBean> httpSubscriber){
 
         MallApi.goodsDetail(itemId)
-                .map(new Func1<ResponseBean, GoodsDetailBean>() {
-                    @Override
-                    public GoodsDetailBean call(ResponseBean responseBean) {
-                        return JSON.parseObject(responseBean.getData(),GoodsDetailBean.class);
-                    }
-                }).compose(RxHelper.<GoodsDetailBean>cutMain())
+                .map(responseBean -> JSON.parseObject(responseBean.getData(),GoodsDetailBean.class)).compose(RxHelper.<GoodsDetailBean>cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
+    }
+
+    public void  goodsInfo(String itemId,
+                             LifecycleTransformer transformer,
+                             HttpSubscriber<GoodsInfoBean> httpSubscriber){
+
+        MallApi.goodsInfo(itemId)
+                .map(responseBean -> JSON.parseObject(responseBean.getData(),GoodsInfoBean.class)).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
 
@@ -134,13 +141,7 @@ public class MallModel extends BaseModel{
                          LifecycleTransformer transformer,
                          HttpSubscriber<List<CommentBean>> httpSubscriber){
         MallApi.comments(itemId, pageNo, pageSize)
-                .map(new Func1<ResponseBean, List<CommentBean>>() {
-                    @Override
-                    public List<CommentBean> call(ResponseBean responseBean) {
-                        List<CommentBean> commentBeans = JSON.parseArray(responseBean.getData(), CommentBean.class);
-                        return commentBeans;
-                    }
-                }).compose(RxHelper.<List<CommentBean>>cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(), CommentBean.class)).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
@@ -148,17 +149,16 @@ public class MallModel extends BaseModel{
     public void addCart(String userId,
                         String itemId,
                         String quantity,
-                        String itemType,
                         LifecycleTransformer transformer,
                         HttpSubscriber<String> httpSubscriber){
 
 
-        MallApi.addCart(userId, itemId, quantity, itemType)
+        MallApi.addCart(userId, itemId, quantity)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
                         responseBean.getData();
-                        return responseBean.getData();
+                        return responseBean.getMessage();
                     }
                 }).compose(RxHelper.<String>cutMain())
                 .compose(transformer)
@@ -212,17 +212,12 @@ public class MallModel extends BaseModel{
                           String pageNo,
                           String pageSize,
                           LifecycleTransformer transformer,
-                          HttpSubscriber<List<CartBean>> httpSubscriber){
+                          HttpSubscriber<List<OrderBean>> httpSubscriber){
 
 
         MallApi.goodsOrders(userId, orderStatus, pageNo, pageSize)
-                .map(new Func1<ResponseBean, List<CartBean>>() {
-                    @Override
-                    public List<CartBean> call(ResponseBean responseBean) {
-                        return JSON.parseArray(responseBean.getData(), CartBean.class);
-                    }
-                })
-                .compose(RxHelper.<List<CartBean>>cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(), OrderBean.class))
+                .compose(RxHelper.cutMain())
                 .compose(transformer).subscribe(httpSubscriber);
     }
 

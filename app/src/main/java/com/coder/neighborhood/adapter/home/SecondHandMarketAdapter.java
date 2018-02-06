@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.mall.GoodsTypeActivity;
 import com.coder.neighborhood.adapter.mall.CategoryGoodsItemAdapter;
 import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 
@@ -41,6 +42,9 @@ public class SecondHandMarketAdapter extends RvAdapter<CategoryGoodsBean> {
         TextView tvTitle;
         @BindView(R.id.rv)
         RecyclerView rv;
+        @BindView(R.id.tv_goods_more)
+        TextView tvGoodsMore;
+
         public SecondHandMarketViewHolder(View itemView) {
             super(itemView);
         }
@@ -54,6 +58,10 @@ public class SecondHandMarketAdapter extends RvAdapter<CategoryGoodsBean> {
             CategoryGoodsItemAdapter adapter = new CategoryGoodsItemAdapter(getContext());
             adapter.addList(bean.getItem());
             rv.setAdapter(adapter);
+
+            tvGoodsMore.setOnClickListener(v -> {
+                GoodsTypeActivity.start(getContext(),"2",bean.getItemCategoryId(),bean.getItemCategoryName());
+            });
         }
     }
 }

@@ -1,35 +1,31 @@
-package com.coder.neighborhood.bean.home;
+package com.coder.neighborhood.bean.mall;
 
 /**
- * Created by feng on 2018/1/9.
+ * @author feng
+ * @Date 2018/2/6.
  */
 
-public class GoodsBean {
+public class GoodsTypeBean {
 
     /**
-     * imgUrl : http://39.106.109.134:80/linli/userfiles/1/images/photo/2017/12
-     * /5a22acfaNf7222715.jpg
-     * itemName : 一加手机5T （A5010） 6GB＋64GB 星辰黑 全网通
-     * itemCategoryName : 日用品
-     * itemPrice : 2999
-     * itmeId : a7d5c766c8cf48aeaf242e3d527f299d
+     * imgUrl : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/x2700001.jpg
+     * itemId : 42790c7c1b0942eab1eee7941b89904
+     * itemName : ThinkPad X270（3BCD）12.5英寸轻薄笔记本电脑（i5-7200U 8G 128GSSD+500G Win10）
+     * itemCategoryName : 电脑
+     * itemPrice : 7999
      * itemPickingBuyCount : 0
-     * sellType : 0
-     * itemPickingPrice : 2899
+     * sellType :
+     * itemPickingPrice : 7888
      */
 
     private String imgUrl;
+    private String itemId;
     private String itemName;
     private String itemCategoryName;
     private String itemPrice;
     private String itemPickingBuyCount;
     private String sellType;
     private String itemPickingPrice;
-    /**
-     * itemId : 42790c7c1b0942eab1eee7941b89904
-     */
-
-    private String itemId;
 
     public String getImgUrl() {
         return imgUrl;
@@ -37,6 +33,14 @@ public class GoodsBean {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getItemName() {
@@ -85,13 +89,5 @@ public class GoodsBean {
 
     public void setItemPickingPrice(String itemPickingPrice) {
         this.itemPickingPrice = itemPickingPrice;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
     }
 }

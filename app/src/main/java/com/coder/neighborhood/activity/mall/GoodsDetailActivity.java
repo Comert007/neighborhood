@@ -11,31 +11,33 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
-import com.coder.neighborhood.api.BaseApi;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.mall.CommentBean;
-import com.coder.neighborhood.bean.mall.GoodsDetailBean;
+import com.coder.neighborhood.bean.mall.GoodsInfoBean;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.GoodsDetailView;
 import com.coder.neighborhood.utils.ToastUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.smtt.sdk.WebView;
 import com.trello.rxlifecycle.android.ActivityEvent;
-import com.youth.banner.listener.OnBannerListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import ww.com.core.Debug;
+import ww.com.core.utils.TimeUtils;
+import ww.com.core.widget.RoundImageView;
 import ww.com.core.widget.TranslateTabBar;
 
 /**
- * @Author feng
- * @Date 2018/1/9
- *
+ * @author feng
+ * @date 2018/1/9
  */
 
-public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel> {
+public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel> {
 
     @BindView(R.id.tv_goods_name)
     TextView tvGoodsName;
@@ -47,6 +49,8 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
     TextView tvGoodsNum;
     @BindView(R.id.tv_pick_price)
     TextView tvPickPrice;
+    @BindView(R.id.tv_goods_type)
+    TextView tvGoodsType;
     @BindView(R.id.tv_single_price)
     TextView tvSinglePrice;
     @BindView(R.id.tv_goods_deal_num)
@@ -57,16 +61,22 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
     WebView ssw;
     @BindView(R.id.rl_part_comment)
     RelativeLayout rlPartComment;
-
+    @BindView(R.id.riv)
+    RoundImageView riv;
+    @BindView(R.id.tv_comment)
+    TextView tvComment;
+    @BindView(R.id.tv_time)
+    TextView tvTime;
 
 
     private List<String> urls;
-    private  String goodSid;
+    private String goodSid;
+    private GoodsInfoBean goodsInfoBean;
 
 
-    public static void start(Context context,String goodSid) {
+    public static void start(Context context, String goodSid) {
         Intent intent = new Intent(context, GoodsDetailActivity.class);
-        intent.putExtra("goodSid",goodSid);
+        intent.putExtra("goodSid", goodSid);
         context.startActivity(intent);
     }
 
@@ -88,18 +98,13 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
         comment();
     }
 
-    private void initListener(){
-        translate.setOnTabChangeListener(new TranslateTabBar.OnTabChangeListener() {
-            @Override
-            public void onChange(int index) {
-                showGoodsInfo(index);
-            }
-        });
+    private void initListener() {
+        translate.setOnTabChangeListener(index -> showGoodsInfo(index));
     }
 
-    private void showGoodsInfo(int index){
-        ssw.setVisibility(index == 0? View.VISIBLE:View.GONE);
-        rlPartComment.setVisibility(index == 0?View.GONE:View.VISIBLE);
+    private void showGoodsInfo(int index) {
+        ssw.setVisibility(index == 0 ? View.VISIBLE : View.GONE);
+        rlPartComment.setVisibility(index == 0 ? View.GONE : View.VISIBLE);
     }
 
 
@@ -108,27 +113,25 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
         urls = bannerBeans;
         v.setUrls(urls);
         v.startBanner();
-        v.getBanner().setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                if (urls.size() > 0) {
+        v.getBanner().setOnBannerListener(position -> {
+            if (urls.size() > 0) {
 
-                }
             }
         });
     }
 
-    private void onGoodsDetail(){
-        if (TextUtils.isEmpty(goodSid)){
+    private void onGoodsDetail() {
+        if (TextUtils.isEmpty(goodSid)) {
             ToastUtils.showToast("当前商品不存在或已下架");
             return;
         }
 
-        m.goodsDetail(goodSid, bindUntilEvent(ActivityEvent.DESTROY)
-                , new HttpSubscriber<GoodsDetailBean>(this,true) {
+        m.goodsInfo(goodSid, bindUntilEvent(ActivityEvent.DESTROY)
+                , new HttpSubscriber<GoodsInfoBean>(this, true) {
                     @Override
-                    public void onNext(GoodsDetailBean goodsDetailBean) {
-                        String url = BaseApi.HOST_URL+ goodsDetailBean.getImgUrl();
+                    public void onNext(GoodsInfoBean goodsDetailBean) {
+                        goodsInfoBean = goodsDetailBean;
+                        String url = goodsDetailBean.getImgUrl();
                         List<String> urls = new ArrayList<>();
                         urls.add(url);
                         startBanner(urls);
@@ -137,57 +140,80 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView,MallModel>
                 });
     }
 
-    private void showGoodsDetail(GoodsDetailBean goodsDetailBean){
+    private void showGoodsDetail(GoodsInfoBean goodsDetailBean) {
         tvGoodsName.setText(goodsDetailBean.getItemName());
-        tvGoodsPrice.setText(goodsDetailBean.getItemPrice()+"/"+goodsDetailBean.getItemUnit());
-        tvPickCount.setText("已拼购："+goodsDetailBean.getItemPickingBuyCount()+"人");
-        tvGoodsNum.setText("商品数量："+goodsDetailBean.getItemInventoryQuantiry());
-        tvSinglePrice.setText(goodsDetailBean.getItemBasePrice());
+        tvGoodsPrice.setText(goodsDetailBean.getItemPrice());
+        tvPickCount.setText("已拼购：" + goodsDetailBean.getItemPickingBuyCount() + "人");
+        tvGoodsType.setText("商品类型：" + goodsDetailBean.getItemCategoryName());
+        tvGoodsNum.setText("商品数量：" + goodsDetailBean.getItemInventoryQuantiry());
+        tvSinglePrice.setText(goodsDetailBean.getItemPrice());
         tvPickPrice.setText(goodsDetailBean.getItemPickingPrice());
-        tvGoodsDealNum.setText("成交量："+goodsDetailBean.getItemDealQuantiry());
+        tvGoodsDealNum.setText("成交量：" + goodsDetailBean.getItemDealQuantiry());
     }
 
 
-    @OnClick({R.id.ll_add_cart,R.id.btn_more_comment})
-    public void onGoodsClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.ll_add_cart, R.id.btn_more_comment,R.id.ll_single_cart,R.id.ll_more_cart})
+    public void onGoodsClick(View view) {
+        switch (view.getId()) {
             case R.id.ll_add_cart:
-                addCart();
+                CartActivity.start(this);
                 break;
             case R.id.btn_more_comment:
-                CommentDetailActivity.start(this,goodSid);
+                CommentDetailActivity.start(this, goodSid);
+                break;
+            case R.id.ll_single_cart:
+                addCart("1");
+                break;
+            case R.id.ll_more_cart:
+                addCart(goodsInfoBean.getItemPickingCount());
+                break;
+            default:
                 break;
         }
     }
 
-    private void addCart(){
+    private void addCart(String num) {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user==null){
-            ToastUtils.showToast("添加购物车失败");
+        if (user == null) {
+            ToastUtils.showToast("添加失败");
             return;
         }
         String userId = user.getUserId();
-        m.addCart(userId, goodSid, "1", "1", bindUntilEvent(ActivityEvent.DESTROY),
-                new HttpSubscriber<String>(this,true) {
-            @Override
-            public void onNext(String s) {
-                ToastUtils.showToast("添加购物车成功");
-            }
-        });
+        m.addCart(userId, goodSid, num, bindUntilEvent(ActivityEvent.DESTROY),
+                new HttpSubscriber<String>(this, true) {
+                    @Override
+                    public void onNext(String s) {
+                        ToastUtils.showToast("添加成功",true);
+                    }
+                });
     }
 
-    private void comment(){
+    private void comment() {
         m.comments(goodSid, "1", "1", bindUntilEvent(ActivityEvent.DESTROY)
-                , new HttpSubscriber<List<CommentBean>>(this,false) {
+                , new HttpSubscriber<List<CommentBean>>(this, false) {
                     @Override
                     public void onNext(List<CommentBean> commentBeans) {
-                        if (commentBeans!=null && commentBeans.size()>0){
+                        if (commentBeans != null && commentBeans.size() > 0) {
+                            Debug.d(commentBeans.size() + "");
                             rlPartComment.setVisibility(View.VISIBLE);
-                        }else {
+                            showComment(commentBeans.get(0));
+                        } else {
                             rlPartComment.setVisibility(View.GONE);
                         }
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        rlPartComment.setVisibility(View.GONE);
+                    }
                 });
+    }
+
+    private void showComment(CommentBean commentBean) {
+        ImageLoader.getInstance().displayImage(commentBean.getImgUrl(), riv, BaseApplication
+                .getDisplayImageOptions(R.mipmap.ic_default_avatar));
+        tvComment.setText(commentBean.getContent());
+        tvTime.setText(TimeUtils.milliseconds2String(commentBean.getCreated(), new SimpleDateFormat("yyyy.MM.dd")));
     }
 
 }

@@ -111,7 +111,7 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView, Mal
     }
 
     private void onBanner() {
-        m.onBanner("1", new HttpSubscriber<List<BannerBean>>(SecondHandMarketActivity.this, true) {
+        m.onBanner("2", new HttpSubscriber<List<BannerBean>>(SecondHandMarketActivity.this, true) {
             @Override
             public void onNext(List<BannerBean> bannerBeans) {
 

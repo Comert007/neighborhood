@@ -61,12 +61,7 @@ public class TravelAdapter extends RvAdapter<TravelBean> {
 
             ImageLoader.getInstance().displayImage(bean.getImgUrl(),ivBg, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TravelDetailActivity.start(getContext(),bean.getTravelId());
-                }
-            });
+            itemView.setOnClickListener(v -> TravelDetailActivity.start(getContext(),bean.getTravelId()));
         }
     }
 }
