@@ -93,7 +93,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
                             .getDisplayImageOptions(R.mipmap.ic_default_avatar));
             tvName.setText(TextUtils.isEmpty(user.getNickName()) ? user.getPhone() + "用户" : user
                     .getNickName());
-            tvGrade.setText("LV." + user.getUserStatus());
+            tvGrade.setText("LV.0");
             tvVerified.setText(TextUtils.equals("1",user.getUserStatus())?"已认证":"未认证");
         }
     }

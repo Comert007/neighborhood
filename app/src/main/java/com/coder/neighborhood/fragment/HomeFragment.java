@@ -1,8 +1,12 @@
 package com.coder.neighborhood.fragment;
 
+import android.text.TextUtils;
+
+import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.HomeAdapter;
+import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.base.HomeView;
@@ -37,6 +41,10 @@ public class HomeFragment extends BaseFragment<HomeView,HomeModel>{
     }
 
     private void initData(){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null ){
+            setTitleText(TextUtils.isEmpty(user.getCommunityName())?"首页":user.getCommunityName());
+        }
         urls = new ArrayList<>();
         crv = v.getCrv();
         adapter = new HomeAdapter(getContext());

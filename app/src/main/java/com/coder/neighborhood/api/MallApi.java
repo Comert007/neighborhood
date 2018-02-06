@@ -97,12 +97,10 @@ public class MallApi extends BaseApi {
         return onPost(getActionUrl("app/deleteCart"),params);
     }
     public static final Observable<ResponseBean> cartGoods(String userId,
-                                                           String selectFlag,
                                                            String pageNo,
                                                            String pageSize){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-        params.addParameters("selectFlag",selectFlag);
         params.addParameters("pageNo",pageNo);
         params.addParameters("pageSize",pageSize);
 

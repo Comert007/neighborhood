@@ -188,14 +188,13 @@ public class MallModel extends BaseModel{
 
 
     public void cartGoods(String userId,
-                          String selectFlag,
                           String pageNo,
                           String pageSize,
                           LifecycleTransformer transformer,
                           HttpSubscriber<List<CartBean>> httpSubscriber){
 
 
-        MallApi.cartGoods(userId, selectFlag, pageNo, pageSize)
+        MallApi.cartGoods(userId, pageNo, pageSize)
                 .map(new Func1<ResponseBean, List<CartBean>>() {
                     @Override
                     public List<CartBean> call(ResponseBean responseBean) {

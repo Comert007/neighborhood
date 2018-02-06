@@ -16,6 +16,6 @@
         android:layout_marginBottom="@dimen/wwpx250"
         android:indeterminate="true"
         android:indeterminateBehavior="repeat"
-        android:indeterminateDrawable="@drawable/anim_loading" />
+        android:indeterminateDrawable="@drawable/anim_launcher_loading" />
 
 </RelativeLayout>

@@ -18,11 +18,17 @@ public class CartBean {
 
     private String itemName;
     private String buyCount;
-    private String headImg;
     private String cartId;
     private String ItemId;
 
     private boolean isCheck;
+    /**
+     * imgUrl : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/haifeishi0001.jpg
+     * itemGroupUnit :
+     */
+
+    private String imgUrl;
+    private String itemGroupUnit;
 
     public String getItemName() {
         return itemName;
@@ -38,14 +44,6 @@ public class CartBean {
 
     public void setBuyCount(String buyCount) {
         this.buyCount = buyCount;
-    }
-
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg;
     }
 
     public String getCartId() {
@@ -70,5 +68,21 @@ public class CartBean {
 
     public void setCheck(boolean check) {
         isCheck = check;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getItemGroupUnit() {
+        return itemGroupUnit;
+    }
+
+    public void setItemGroupUnit(String itemGroupUnit) {
+        this.itemGroupUnit = itemGroupUnit;
     }
 }

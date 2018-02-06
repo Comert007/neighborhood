@@ -79,29 +79,19 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.tab_home_layout:
-                        adapter.changeMenuStatus(0);
-                        changeMenuStatus(0);
-                        adapter.changeMenu(0);
+                        changeMenu(0);
                         break;
                     case R.id.tab_cart_layout:
-                        adapter.changeMenuStatus(1);
-                        changeMenuStatus(1);
-                        adapter.changeMenu(1);
+                        changeMenu(1);
                         break;
                     case R.id.tab_circle_layout:
-                        adapter.changeMenuStatus(2);
-                        changeMenuStatus(2);
-                        adapter.changeMenu(2);
+                        changeMenu(2);
                         break;
                     case R.id.tab_message_layout:
-                        adapter.changeMenuStatus(3);
-                        adapter.changeMenu(3);
-                        changeMenuStatus(3);
+                        changeMenu(3);
                         break;
                     case R.id.tab_user_layout:
-                        adapter.changeMenuStatus(4);
-                        adapter.changeMenu(4);
-                        changeMenuStatus(4);
+                        changeMenu(4);
                         break;
                     default:
                         break;
@@ -111,10 +101,13 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
 
         initEMClient();
 
-        adapter.changeMenuStatus(0);
-        changeMenuStatus(0);
-        adapter.changeMenu(0);
+        changeMenu(0);
+    }
 
+    public void changeMenu(int index){
+        adapter.changeMenuStatus(index);
+        changeMenuStatus(index);
+        adapter.changeMenu(index);
     }
 
 

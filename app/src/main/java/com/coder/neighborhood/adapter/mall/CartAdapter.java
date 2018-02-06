@@ -67,40 +67,35 @@ public class CartAdapter extends RvAdapter<CartBean>{
 
         public CartViewHolder(View itemView) {
             super(itemView);
-            llCheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onItemClickListener !=null){
-                        onItemClickListener.onClick(position,v);
-                    }
-                }
-            });
-
-            itvDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onActionListener !=null){
-                        onActionListener.onAction(position,v);
-                    }
-                }
-            });
         }
 
         @Override
         public void onBindData(int position, CartBean bean) {
 
-            ImageLoader.getInstance().displayImage(bean.getHeadImg(),ivGoodsImage,
+            ImageLoader.getInstance().displayImage(bean.getImgUrl(),ivGoodsImage,
                     BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
             tvGoodsName.setText(bean.getItemName());
             tvGoodsNum.setText("数量："+bean.getBuyCount());
             if (bean.isCheck()){
-                itvCheck.setText("\ue6a5");
+                itvCheck.setText("\ue677");
                 itvCheck.setTextColor(ContextCompat.getColor(getContext(),R.color.color_text));
             }else {
                 itvCheck.setText("\ue678");
                 itvCheck.setTextColor(ContextCompat.getColor(getContext(),R.color.color_aaaaaa));
             }
+
+            llCheck.setOnClickListener(v -> {
+                if (onItemClickListener !=null){
+                    onItemClickListener.onClick(position,v);
+                }
+            });
+
+            itvDelete.setOnClickListener(v -> {
+                if (onActionListener !=null){
+                    onActionListener.onAction(position,v);
+                }
+            });
 
         }
     }

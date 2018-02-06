@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.MainActivity;
 import com.coder.neighborhood.activity.home.FindThingsActivity;
 import com.coder.neighborhood.activity.home.HelpActivity;
 import com.coder.neighborhood.activity.home.LivingListActivity;
@@ -74,6 +75,7 @@ public class HomeView extends RefreshView {
     private void onBannerPosition(){
         ButterKnife.findById(bannerView,R.id.ll_living).setOnClickListener(v -> onBannerClick(1));
         ButterKnife.findById(bannerView,R.id.ll_second_market).setOnClickListener(v -> onBannerClick(2));
+        ButterKnife.findById(bannerView,R.id.ll_mall).setOnClickListener(v-> onBannerClick(3));
         ButterKnife.findById(bannerView,R.id.ll_travel).setOnClickListener(v -> onBannerClick(4));
         ButterKnife.findById(bannerView,R.id.ll_help).setOnClickListener(v -> onBannerClick(5));
         ButterKnife.findById(bannerView,R.id.ll_find_things).setOnClickListener(v -> onBannerClick(6));
@@ -90,6 +92,7 @@ public class HomeView extends RefreshView {
                 SecondHandMarketActivity.start(preActivity);
                 break;
             case 3:
+                ((MainActivity)getPreActivity()).changeMenu(1);
                 break;
             case 4:
                 TravelActivity.start(preActivity);

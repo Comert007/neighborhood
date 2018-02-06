@@ -83,10 +83,10 @@ public class UserApi extends BaseApi {
         return onPost(getActionUrl("app/getClockIn"),params);
     }
 
-    public static final Observable<ResponseBean> addFriend(String userId,String freindId,String easemodUsername){
+    public static final Observable<ResponseBean> addFriend(String userId,String friendId,String easemodUsername){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-        params.addParameters("freindId",freindId);
+        params.addParameters("friendId",friendId);
         params.addParameters("easemodUsername",easemodUsername);
 
         return onPost(getActionUrl("app/addFriend"),params);

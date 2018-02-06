@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -14,8 +13,6 @@ import com.coder.neighborhood.adapter.mall.CartAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.mall.CartBean;
 import com.coder.neighborhood.config.Constants;
-import com.coder.neighborhood.mvp.listener.OnActionListener;
-import com.coder.neighborhood.mvp.listener.OnItemClickListener;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.CartView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -27,6 +24,9 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import ww.com.core.widget.CustomRecyclerView;
+import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 /**
  * @Author feng
@@ -41,8 +41,13 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
 
 
     private CartAdapter adapter;
-    private int page;
+    private int page = 1;
+    private CustomSwipeRefreshLayout csr;
+    private CustomRecyclerView crv;
+
     private QMUIDialog quiteDialog;
+
+    private boolean isWhole = false;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, CartActivity.class);
@@ -56,43 +61,73 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
 
     @Override
     protected void init() {
-        adapter = new CartAdapter(this);
-        v.getCrv().setAdapter(adapter);
+
+        initView();
         initListener();
-        onCartGoods();
+        initData();
+    }
+
+    private void initView() {
+        adapter = new CartAdapter(this);
+        csr = v.getCsr();
+        crv = v.getCrv();
+        csr.setEnableRefresh(true);
+        csr.setFooterRefreshAble(false);
     }
 
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void initListener(){
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onClick(int position, View view) {
-               CartBean cartBean = adapter.getItem(position);
-               cartBean.setCheck(!cartBean.isCheck());
-               setWhole();
-               adapter.notifyItemChanged(position);
-            }
+        adapter.setOnItemClickListener((position, view) -> {
+           CartBean cartBean = adapter.getItem(position);
+           cartBean.setCheck(!cartBean.isCheck());
+           setWhole();
+           adapter.notifyItemChanged(position);
         });
 
-        adapter.setOnActionListener(new OnActionListener() {
+        adapter.setOnActionListener((position, view) -> {
+            CartBean cartBean = adapter.getItem(position);
+            showDialog(cartBean);
+        });
+
+        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
             @Override
-            public void onAction(int position, View view) {
-                CartBean cartBean = adapter.getItem(position);
-                showDialog(cartBean);
+            public void onHeaderRefreshing() {
+                page = 1;
+                v.getCsr().setFooterRefreshAble(true);
+                csr.setFooterRefreshAble(false);
+                onCartGoods();
+            }
+
+            @Override
+            public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
+                onCartGoods();
             }
         });
+    }
+
+
+    private void initData() {
+        crv.setAdapter(adapter);
+        onCartGoods();
     }
 
 
     private void setWhole(){
         if (isWhole()){
-            if (isWhole()){
-                itvWhole.setText("\ue6a5");
-                itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this,R.color.color_text));
-            }else {
-                itvWhole.setText("\ue678");
-                itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this,R.color.color_aaaaaa));
-            }
+            itvWhole.setText("\ue677");
+            itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this,R.color.color_text));
+            isWhole = true;
+        }else {
+            itvWhole.setText("\ue678");
+            itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this,R.color.color_aaaaaa));
+            isWhole = false;
         }
     }
 
@@ -108,6 +143,19 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
     }
 
 
+    @OnClick(R.id.itv_whole)
+    public void modifyWhole(){
+        isWhole = !isWhole;
+        itvWhole.setText(isWhole?"\ue677":"\ue678");
+        itvWhole.setTextColor(isWhole?ContextCompat.getColor(this,R.color.color_text):ContextCompat.getColor(this,R.color.color_aaaaaa));
+        for (CartBean cartBean : adapter.getList()) {
+            cartBean.setCheck(isWhole);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+
+
     private void onCartGoods(){
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user == null){
@@ -115,12 +163,38 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
             return;
         }
 
-        m.cartGoods(user.getUserId(), "1", page+"",
+        m.cartGoods(user.getUserId(),page+"",
                 Constants.PAGE_SIZE+"", bindUntilEvent(ActivityEvent.DESTROY),
                 new HttpSubscriber<List<CartBean>>(this,true) {
                     @Override
                     public void onNext(List<CartBean> cartBeans) {
-                        adapter.addList(cartBeans);
+                        v.getCsr().setRefreshFinished();
+                        if (cartBeans != null && cartBeans.size() > 0) {
+                            if (page == 1) {
+                                adapter.addList(cartBeans);
+                                csr.setFooterRefreshAble(true);
+                            } else {
+                                v.getCrv().removeFooterView(v.getFooterView());
+                                adapter.appendList(cartBeans);
+                            }
+
+                            if (cartBeans.size() == Constants.PAGE_SIZE) {
+                                page++;
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        } else {
+                            v.getCsr().setFooterRefreshAble(false);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        adapter.getList().clear();
+                        adapter.notifyDataSetChanged();
+                        v.getCsr().setRefreshFinished();
+                        v.getCsr().setFooterRefreshAble(false);
                     }
                 });
 
@@ -139,6 +213,7 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
                     @Override
                     public void onNext(String s) {
                         ToastUtils.showToast("删除商品成功");
+                        page =1;
                         onCartGoods();
                     }
                 });
@@ -159,7 +234,7 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
             builder.addAction("删除", new QMUIDialogAction.ActionListener() {
                 @Override
                 public void onClick(QMUIDialog dialog, int index) {
-                   onDeleteGoods(cartBean);
+                    onDeleteGoods(cartBean);
                     dialog.dismiss();
                 }
             });

@@ -126,8 +126,7 @@
                     android:id="@+id/rl_part_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/wwpx20"
-                    android:visibility="gone">
+                    android:paddingLeft="@dimen/wwpx20">
 
                     <ww.com.core.widget.RoundImageView
                         android:id="@+id/riv"
@@ -142,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@id/riv_header"
                         android:layout_marginLeft="@dimen/wwpx24"
-                        android:layout_toRightOf="@id/riv_header"
+                        android:layout_toRightOf="@id/riv"
                         android:text="这好喝"
                         android:textColor="@color/color_666666"
                         android:textSize="@dimen/wwpx24"/>
@@ -155,7 +154,7 @@
                         android:layout_below="@id/tv_comment"
                         android:layout_marginLeft="@dimen/wwpx24"
                         android:layout_marginTop="@dimen/wwpx10"
-                        android:layout_toRightOf="@id/riv_header"
+                        android:layout_toRightOf="@id/riv"
                         android:text="2017.2.30"
                         android:textColor="@color/color_999999"/>
 
@@ -164,7 +163,7 @@
                         android:id="@+id/btn_more_comment"
                         android:layout_width="@dimen/wwpx197"
                         android:layout_height="@dimen/wwpx54"
-                        android:layout_below="@id/riv_header"
+                        android:layout_below="@id/riv"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="@dimen/wwpx40"
                         android:background="@drawable/green_border_shape"
