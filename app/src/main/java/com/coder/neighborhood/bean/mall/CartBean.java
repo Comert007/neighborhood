@@ -28,6 +28,7 @@ public class CartBean {
      */
 
     private String imgUrl;
+    private String ItemPrice;
     private String itemGroupUnit;
 
     public String getItemName() {
@@ -84,5 +85,26 @@ public class CartBean {
 
     public void setItemGroupUnit(String itemGroupUnit) {
         this.itemGroupUnit = itemGroupUnit;
+    }
+
+    public String getItemPrice() {
+        return ItemPrice;
+    }
+
+    public void setItemPrice(String itemPrice) {
+        ItemPrice = itemPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "CartBean{" +
+                "itemName='" + itemName + '\'' +
+                ", buyCount='" + buyCount + '\'' +
+                ", cartId='" + cartId + '\'' +
+                ", ItemId='" + ItemId + '\'' +
+                ", isCheck=" + isCheck +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", itemGroupUnit='" + itemGroupUnit + '\'' +
+                '}';
     }
 }

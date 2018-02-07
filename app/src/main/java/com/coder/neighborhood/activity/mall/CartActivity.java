@@ -15,16 +15,17 @@ import com.coder.neighborhood.bean.mall.CartBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.CartView;
+import com.coder.neighborhood.utils.DialogUtils;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.coder.neighborhood.widget.IconFontTextView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import ww.com.core.Debug;
 import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
@@ -34,7 +35,7 @@ import ww.com.core.widget.CustomSwipeRefreshLayout;
  */
 
 @SuppressLint("Registered")
-public class CartActivity extends BaseActivity<CartView,MallModel> {
+public class CartActivity extends BaseActivity<CartView, MallModel> {
 
     @BindView(R.id.itv_whole)
     IconFontTextView itvWhole;
@@ -82,17 +83,18 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
         finish();
     }
 
-    private void initListener(){
+    private void initListener() {
         adapter.setOnItemClickListener((position, view) -> {
-           CartBean cartBean = adapter.getItem(position);
-           cartBean.setCheck(!cartBean.isCheck());
-           setWhole();
-           adapter.notifyItemChanged(position);
+            CartBean cartBean = adapter.getItem(position);
+            cartBean.setCheck(!cartBean.isCheck());
+            setWhole();
+            adapter.notifyItemChanged(position);
         });
 
         adapter.setOnActionListener((position, view) -> {
-            CartBean cartBean = adapter.getItem(position);
-            showDialog(cartBean);
+            CartBean cartBean = adapter.getList().get(position);
+            Debug.d("cardId:"+cartBean.getCartId());
+            showDeleteDialog(cartBean.getCartId());
         });
 
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
@@ -119,24 +121,24 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
     }
 
 
-    private void setWhole(){
-        if (isWhole()){
+    private void setWhole() {
+        if (isWhole()) {
             itvWhole.setText("\ue677");
-            itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this,R.color.color_text));
+            itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this, R.color.color_text));
             isWhole = true;
-        }else {
+        } else {
             itvWhole.setText("\ue678");
-            itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this,R.color.color_aaaaaa));
+            itvWhole.setTextColor(ContextCompat.getColor(CartActivity.this, R.color.color_aaaaaa));
             isWhole = false;
         }
     }
 
-    private boolean isWhole(){
+    private boolean isWhole() {
         boolean isOk = true;
         List<CartBean> cartBeans = adapter.getList();
         for (CartBean cartBean : cartBeans) {
-            if (!cartBean.isCheck()){
-               isOk = false;
+            if (!cartBean.isCheck()) {
+                isOk = false;
             }
         }
         return isOk;
@@ -144,10 +146,11 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
 
 
     @OnClick(R.id.itv_whole)
-    public void modifyWhole(){
+    public void modifyWhole() {
         isWhole = !isWhole;
-        itvWhole.setText(isWhole?"\ue677":"\ue678");
-        itvWhole.setTextColor(isWhole?ContextCompat.getColor(this,R.color.color_text):ContextCompat.getColor(this,R.color.color_aaaaaa));
+        itvWhole.setText(isWhole ? "\ue677" : "\ue678");
+        itvWhole.setTextColor(isWhole ? ContextCompat.getColor(this, R.color.color_text) :
+                ContextCompat.getColor(this, R.color.color_aaaaaa));
         for (CartBean cartBean : adapter.getList()) {
             cartBean.setCheck(isWhole);
         }
@@ -155,17 +158,16 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
     }
 
 
-
-    private void onCartGoods(){
+    private void onCartGoods() {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user == null){
+        if (user == null) {
             ToastUtils.showToast("用户信息有误");
             return;
         }
 
-        m.cartGoods(user.getUserId(),page+"",
-                Constants.PAGE_SIZE+"", bindUntilEvent(ActivityEvent.DESTROY),
-                new HttpSubscriber<List<CartBean>>(this,true) {
+        m.cartGoods(user.getUserId(), page + "",
+                Constants.PAGE_SIZE + "", bindUntilEvent(ActivityEvent.DESTROY),
+                new HttpSubscriber<List<CartBean>>(this, true) {
                     @Override
                     public void onNext(List<CartBean> cartBeans) {
                         v.getCsr().setRefreshFinished();
@@ -201,51 +203,34 @@ public class CartActivity extends BaseActivity<CartView,MallModel> {
     }
 
 
-    private void onDeleteGoods(CartBean cartBean){
+    private void onDeleteGoods(String cardId) {
+        Debug.d("cardId:"+cardId);
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user == null){
+        if (user == null) {
             ToastUtils.showToast("用户信息有误");
             return;
         }
 
-        m.deleteCart(user.getUserId(), cartBean.getCartId(), bindUntilEvent(ActivityEvent.DESTROY)
-                , new HttpSubscriber<String>(this,true) {
+        m.deleteCart(user.getUserId(), cardId, bindUntilEvent(ActivityEvent.DESTROY)
+                , new HttpSubscriber<String>(this, true) {
                     @Override
                     public void onNext(String s) {
                         ToastUtils.showToast("删除商品成功");
-                        page =1;
+                        page = 1;
                         onCartGoods();
                     }
                 });
     }
 
-    private void showDialog(final CartBean cartBean ){
-        if (quiteDialog ==null){
-            QMUIDialog.MessageDialogBuilder builder = new QMUIDialog.MessageDialogBuilder(this);
-            builder.setTitle("提示");
-            builder.setMessage("确定删除当前商品？");
-            builder.addAction("取消", new QMUIDialogAction.ActionListener() {
-                @Override
-                public void onClick(QMUIDialog dialog, int index) {
+    private void showDeleteDialog(String cardId) {
+        DialogUtils.showDialog(this, "提示", "确定删除当前商品？", true,
+                "删除", (dialog, which) -> {
+                    Debug.d("cardId:"+cardId);
+                    onDeleteGoods(cardId);
                     dialog.dismiss();
-                }
-            });
-
-            builder.addAction("删除", new QMUIDialogAction.ActionListener() {
-                @Override
-                public void onClick(QMUIDialog dialog, int index) {
-                    onDeleteGoods(cartBean);
+                }, true, "取消", (dialog, which) -> {
                     dialog.dismiss();
-                }
-            });
-            quiteDialog = builder.create();
-        }
-
-        if (quiteDialog.isShowing()){
-            quiteDialog.dismiss();
-        }else {
-            quiteDialog.show();
-        }
+                }).show();
     }
 
 }

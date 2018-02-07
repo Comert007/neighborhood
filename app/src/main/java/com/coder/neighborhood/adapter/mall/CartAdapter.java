@@ -2,6 +2,7 @@ package com.coder.neighborhood.adapter.mall;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,6 +59,10 @@ public class CartAdapter extends RvAdapter<CartBean>{
         TextView tvGoodsName;
         @BindView(R.id.tv_goods_num)
         TextView tvGoodsNum;
+        @BindView(R.id.tv_goods_type)
+        TextView tvGoodsType;
+        @BindView(R.id.tv_goods_price)
+        TextView tvGoodsPrice;
         @BindView(R.id.itv_check)
         IconFontTextView itvCheck;
         @BindView(R.id.ll_check)
@@ -76,7 +81,9 @@ public class CartAdapter extends RvAdapter<CartBean>{
                     BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 
             tvGoodsName.setText(bean.getItemName());
+            tvGoodsType.setText(bean.getItemGroupUnit());
             tvGoodsNum.setText("数量："+bean.getBuyCount());
+            tvGoodsPrice.setText(TextUtils.isEmpty(bean.getItemPrice())?"":bean.getItemPrice()+"元");
             if (bean.isCheck()){
                 itvCheck.setText("\ue677");
                 itvCheck.setTextColor(ContextCompat.getColor(getContext(),R.color.color_text));

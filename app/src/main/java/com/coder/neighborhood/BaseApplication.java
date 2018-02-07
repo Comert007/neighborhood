@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.qiniu.pili.droid.streaming.StreamingEnv;
 
 import ww.com.core.Debug;
 import ww.com.core.utils.ACache;
@@ -49,6 +50,7 @@ public class BaseApplication extends WWApplication {
         Debug.setTag("Neighbor");
         initImageLoader(getApplicationContext());
         initEMOptions();
+        initStreaming();
         OkHttpRequest.setLogging(AppConfig.DEBUG);
     }
 
@@ -98,5 +100,12 @@ public class BaseApplication extends WWApplication {
         EMClient.getInstance().setDebugMode(true);
 
         EaseUI.getInstance().init(getApplicationContext(), options);
+    }
+
+    /**
+     * 七牛直播
+     */
+    private void initStreaming(){
+        StreamingEnv.init(getApplicationContext());
     }
 }

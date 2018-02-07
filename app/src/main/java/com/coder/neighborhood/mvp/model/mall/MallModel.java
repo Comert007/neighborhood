@@ -11,6 +11,7 @@ import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.bean.mall.CommentBean;
 import com.coder.neighborhood.bean.mall.GoodsDetailBean;
 import com.coder.neighborhood.bean.mall.GoodsInfoBean;
+import com.coder.neighborhood.bean.mall.GoodsSearchBean;
 import com.coder.neighborhood.bean.mall.GoodsTypeBean;
 import com.coder.neighborhood.bean.user.OrderBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
@@ -72,12 +73,24 @@ public class MallModel extends BaseModel{
                       HttpSubscriber<List<GoodsTypeBean>> httpSubscriber){
 
         MallApi.goods(mallType, itemCategoryId, pageNo, pageSize)
-                .map(responseBean -> {
-                    List<GoodsTypeBean> beans = JSON.parseArray(responseBean.getData(),GoodsTypeBean.class);
-                    return beans;
-                }).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),GoodsTypeBean.class)).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
+    }
+
+
+    public void goodsSearch(String mallType,
+                            String itemName,
+                            String pageNo,
+                            String pageSize,
+                            LifecycleTransformer transformer,
+                            HttpSubscriber<List<GoodsSearchBean>> httpSubscriber){
+
+        MallApi.goodsSearch(mallType, itemName, pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),GoodsSearchBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
     }
 
 

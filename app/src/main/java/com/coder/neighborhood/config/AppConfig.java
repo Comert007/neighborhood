@@ -9,4 +9,6 @@ public class AppConfig {
     public static final boolean DEBUG = true;
     public static final String WECHAT_APP_ID ="";
     public static final String ALIPAY_APP_ID="";
+
+    public static final String STREAMING_SERVER = "Your app server";
 }

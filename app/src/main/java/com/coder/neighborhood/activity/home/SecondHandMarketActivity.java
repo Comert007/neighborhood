@@ -3,11 +3,15 @@ package com.coder.neighborhood.activity.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.mall.AddSecondHandActivity;
+import com.coder.neighborhood.activity.mall.GoodsSearchActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.home.SecondHandMarketAdapter;
 import com.coder.neighborhood.bean.home.BannerBean;
@@ -15,11 +19,13 @@ import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.home.SecondMarketView;
+import com.coder.neighborhood.utils.ToastUtils;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
@@ -31,6 +37,9 @@ import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 @SuppressLint("Registered")
 public class SecondHandMarketActivity extends BaseActivity<SecondMarketView, MallModel> {
+
+    @BindView(R.id.et_search)
+    EditText etSearch;
 
     private SecondHandMarketAdapter adapter;
     private CustomSwipeRefreshLayout csr;
@@ -73,37 +82,35 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView, Mal
 
     private void initListener() {
         csr = v.getCsr();
-//        csr.setEnableRefresh(true);
-//        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener
-// () {
-//            @Override
-//            public void onHeaderRefreshing() {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        csr.setRefreshFinished();
-//                    }
-//                },2000);
-//            }
-//
-//            @Override
-//            public void onFooterRefreshing() {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        csr.setRefreshFinished();
-//                    }
-//                },2000);
-//            }
-//        });
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_SEARCH)
+            {
+
+                String searchContent = etSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(searchContent)){
+                    ToastUtils.showToast("输入搜索内容");
+                    return false;
+                }
+                GoodsSearchActivity.start(SecondHandMarketActivity.this,"2",searchContent);
+            }
+            return false;
+        });
     }
 
 
-    @OnClick({R.id.btn_publish_goods})
+    @OnClick({R.id.btn_publish_goods,R.id.iv_search})
     public void onPublish(View view) {
         switch (view.getId()) {
             case R.id.btn_publish_goods:
                 AddSecondHandActivity.startForResult(this,requestCode);
+                break;
+            case R.id.iv_search:
+                String searchContent = etSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(searchContent)){
+                    ToastUtils.showToast("输入搜索内容");
+                    return;
+                }
+                GoodsSearchActivity.start(SecondHandMarketActivity.this,"2",searchContent);
                 break;
             default:
                 break;
