@@ -54,7 +54,7 @@ public class DoingsFragment extends BaseFragment<RefreshView,CircleModel> {
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
-        csr.setFooterRefreshAble(true);
+        csr.setFooterRefreshAble(false);
     }
 
     private void initListener() {
@@ -62,7 +62,8 @@ public class DoingsFragment extends BaseFragment<RefreshView,CircleModel> {
             @Override
             public void onHeaderRefreshing() {
                 page = 1;
-                v.getCsr().setFooterRefreshAble(true);
+                csr.setEnableRefresh(true);
+                csr.setFooterRefreshAble(false);
                 doingThings();
             }
 
@@ -91,6 +92,7 @@ public class DoingsFragment extends BaseFragment<RefreshView,CircleModel> {
                             if (eventBeans != null && eventBeans.size() > 0) {
                                 if (page == 1) {
                                     adapter.addList(eventBeans);
+                                    csr.setFooterRefreshAble(true);
                                 } else {
                                     v.getCrv().removeFooterView(v.getFooterView());
                                     adapter.appendList(eventBeans);

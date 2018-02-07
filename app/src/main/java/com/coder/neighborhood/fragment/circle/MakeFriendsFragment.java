@@ -69,7 +69,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
-        csr.setFooterRefreshAble(true);
+        csr.setFooterRefreshAble(false);
         crv.setAdapter(adapter);
         crv.addHeadView(view);
     }
@@ -89,7 +89,8 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
             @Override
             public void onHeaderRefreshing() {
                 page = 1;
-                v.getCsr().setFooterRefreshAble(true);
+                v.getCsr().setEnableRefresh(true);
+                csr.setFooterRefreshAble(false);
                 circle(circleIndex);
             }
 
@@ -243,6 +244,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         if (circleBeans != null && circleBeans.size() > 0) {
             if (page == 1) {
                 adapter.addList(circleBeans);
+                csr.setFooterRefreshAble(true);
             } else {
                 v.getCrv().removeFooterView(v.getFooterView());
                 adapter.appendList(circleBeans);
