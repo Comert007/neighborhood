@@ -308,6 +308,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
             DialogUtils.showDialog(getContext(), "是否清理缓存", outCacheSize, true,
                     "清理", (dialog, which) -> {
                         DataCleanManager.clearAllCache(getContext());
+                        ToastUtils.showToast("清除成功",true);
                         dialog.dismiss();
                     }, true, "返回", (dialog, which) -> {
                         dialog.dismiss();

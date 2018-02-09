@@ -67,11 +67,15 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
     TextView tvComment;
     @BindView(R.id.tv_time)
     TextView tvTime;
+    @BindView(R.id.tv_no_more_comment)
+    TextView tvNoMoreComment;
 
 
     private List<String> urls;
     private String goodSid;
     private GoodsInfoBean goodsInfoBean;
+
+    private boolean isComment = false;
 
 
     public static void start(Context context, String goodSid) {
@@ -93,6 +97,12 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
         initData();
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void initData() {
         onGoodsDetail();
         comment();
@@ -104,7 +114,14 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
 
     private void showGoodsInfo(int index) {
         ssw.setVisibility(index == 0 ? View.VISIBLE : View.GONE);
-        rlPartComment.setVisibility(index == 0 ? View.GONE : View.VISIBLE);
+
+        if (isComment){
+            rlPartComment.setVisibility(index == 0 ? View.GONE : View.VISIBLE);
+            tvNoMoreComment.setVisibility(View.GONE);
+        }else {
+            rlPartComment.setVisibility(View.GONE);
+            tvNoMoreComment.setVisibility(index == 0 ? View.GONE : View.VISIBLE);
+        }
     }
 
 
@@ -193,18 +210,19 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
                 , new HttpSubscriber<List<CommentBean>>(this, false) {
                     @Override
                     public void onNext(List<CommentBean> commentBeans) {
+                        Debug.d(commentBeans.size() + "");
                         if (commentBeans != null && commentBeans.size() > 0) {
-                            Debug.d(commentBeans.size() + "");
-                            rlPartComment.setVisibility(View.VISIBLE);
                             showComment(commentBeans.get(0));
+                            isComment = true;
                         } else {
-                            rlPartComment.setVisibility(View.GONE);
+                            isComment = false;
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        rlPartComment.setVisibility(View.GONE);
+                        e.printStackTrace();
+                        isComment = false;
                     }
                 });
     }
