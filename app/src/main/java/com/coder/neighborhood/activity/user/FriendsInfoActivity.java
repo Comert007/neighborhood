@@ -17,16 +17,21 @@ import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.user.FriendsInfoAdapter;
 import com.coder.neighborhood.bean.UserBean;
-import com.coder.neighborhood.bean.user.FriendBean;
+import com.coder.neighborhood.bean.circle.CircleBean;
 import com.coder.neighborhood.bean.user.FriendInfoBean;
+import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.user.UserModel;
 import com.coder.neighborhood.mvp.vu.user.FriendsInfoView;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import ww.com.core.ScreenUtil;
+import ww.com.core.widget.CustomRecyclerView;
+import ww.com.core.widget.CustomSwipeRefreshLayout;
 import ww.com.core.widget.RoundImageView;
 
 /**
@@ -38,7 +43,6 @@ import ww.com.core.widget.RoundImageView;
 public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel> {
 
     private FriendsInfoAdapter adapter;
-    private FriendBean friendBean;
     private FriendInfoBean friendInfoBean;
 
     private RoundImageView rivHeader;
@@ -48,10 +52,16 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
     private TextView tvIntroduction;
     private Button btnAdd;
 
+    private int  page = 1;
+    private CustomSwipeRefreshLayout csr;
+    private CustomRecyclerView crv;
+    private String userId;
 
-    public static void start(Context context, FriendBean friendBean) {
+
+
+    public static void start(Context context, String userId) {
         Intent intent = new Intent(context, FriendsInfoActivity.class);
-        intent.putExtra("friendBean", friendBean);
+        intent.putExtra("userId", userId);
         context.startActivity(intent);
     }
 
@@ -62,8 +72,9 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
 
     @Override
     protected void init() {
-        friendBean = (FriendBean) getIntent().getSerializableExtra("friendBean");
+        userId = getIntent().getStringExtra("userId");
         initView();
+        initListener();
         initData();
     }
 
@@ -88,12 +99,68 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         ScreenUtil.scale(vi);
         adapter = new FriendsInfoAdapter(this);
-        v.getCrv().setAdapter(adapter);
-        v.getCrv().addHeadView(vi);
+        csr = v.getCsr();
+        crv = v.getCrv();
+        csr.setEnableRefresh(true);
+        csr.setFooterRefreshAble(false);
+        crv.setAdapter(adapter);
+        crv.addHeadView(vi);
+    }
+
+
+    private void initListener(){
+        csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
+            @Override
+            public void onHeaderRefreshing() {
+                page = 1;
+                v.getCsr().setFooterRefreshAble(true);
+                csr.setFooterRefreshAble(false);
+                profileCircles();
+            }
+
+            @Override
+            public void onFooterRefreshing() {
+                v.getCrv().addFooterView(v.getFooterView());
+                profileCircles();
+            }
+        });
+
+        adapter.setStrListener((position, str) -> {
+            CircleBean circleBean = adapter.getItem(position);
+            UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+            if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+
+                m.addCircleComment(user.getUserId(), (circleBean.getCircleId()), str, new HttpSubscriber<String>(this,true) {
+                    @Override
+                    public void onNext(String s) {
+                        ToastUtils.showToast(s,true);
+                        page =1;
+                        profileCircles();
+                    }
+                });
+            }
+        });
+
+        adapter.setActionListener((position, view) -> {
+            CircleBean circleBean = adapter.getItem(position);
+            UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+            if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+                m.addCircleLike(user.getUserId(), circleBean.getCircleId(), new HttpSubscriber<String>(this,true) {
+                    @Override
+                    public void onNext(String s) {
+                        ToastUtils.showToast(s,true);
+                        page =1;
+                        profileCircles();
+                    }
+                });
+            }
+
+        });
     }
 
     private void initData() {
         friendInfo();
+        profileCircles();
     }
 
     private void addFriend() {
@@ -115,13 +182,48 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
     }
 
     private void friendInfo() {
-        if (friendBean != null && !TextUtils.isEmpty(friendBean.getUserId())) {
-            m.friendInfo(friendBean.getUserId(), bindUntilEvent(ActivityEvent.DESTROY)
+        if ( !TextUtils.isEmpty(userId)) {
+            m.friendInfo(userId, bindUntilEvent(ActivityEvent.DESTROY)
                     , new HttpSubscriber<FriendInfoBean>(this, true) {
                         @Override
                         public void onNext(FriendInfoBean friendInfoBean) {
                             FriendsInfoActivity.this.friendInfoBean = friendInfoBean;
                             setFriendInfo();
+                        }
+                    });
+        }
+    }
+
+    private void profileCircles(){
+        if (!TextUtils.isEmpty(userId)) {
+            m.profileCircles(userId, page + "", Constants.PAGE_SIZE + "",
+                    bindUntilEvent(ActivityEvent.DESTROY) , new HttpSubscriber<List<CircleBean>>(this,false) {
+                        @Override
+                        public void onNext(List<CircleBean> circleBeans) {
+                            v.getCsr().setRefreshFinished();
+                            if (circleBeans != null && circleBeans.size() > 0) {
+                                if (page == 1) {
+                                    adapter.addList(circleBeans);
+                                    csr.setFooterRefreshAble(true);
+                                } else {
+                                    v.getCrv().removeFooterView(v.getFooterView());
+                                    adapter.appendList(circleBeans);
+                                }
+
+                                if (circleBeans.size() == Constants.PAGE_SIZE) {
+                                    page++;
+                                } else {
+                                    v.getCsr().setFooterRefreshAble(false);
+                                }
+                            } else {
+                                v.getCsr().setFooterRefreshAble(false);
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            v.getCsr().setRefreshFinished();
                         }
                     });
         }

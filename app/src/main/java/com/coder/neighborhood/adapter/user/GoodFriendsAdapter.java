@@ -56,7 +56,7 @@ public class GoodFriendsAdapter extends RvAdapter<FriendBean> {
             tvName.setText(TextUtils.isEmpty(bean.getNickName())?"未设置":bean.getNickName());
             tvGrade.setText(TextUtils.isEmpty(bean.getLevel())?"LV.0":("LV."+bean.getLevel()));
             itemView.setOnClickListener(v -> {
-                FriendsInfoActivity.start(getContext(),bean);
+                FriendsInfoActivity.start(getContext(),bean.getUserId());
             });
         }
     }

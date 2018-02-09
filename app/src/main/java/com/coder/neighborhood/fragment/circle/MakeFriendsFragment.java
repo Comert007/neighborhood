@@ -11,6 +11,7 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.circle.PublishCircleActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.activity.user.FriendsInfoActivity;
 import com.coder.neighborhood.adapter.circle.MakeFriendsAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.circle.CircleBean;
@@ -147,6 +148,10 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
                 PublishCircleActivity.startForResult(getPresenterActivity(),circleIndex+1,REQUEST_CODE);
                 break;
             case R.id.btn_circle:
+                UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+                if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+                    FriendsInfoActivity.start(getContext(),user.getUserId());
+                }
                 break;
             default:
                 break;

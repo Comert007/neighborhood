@@ -23,8 +23,8 @@ import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 /**
- * @Author feng
- * @Date 2018/1/16
+ * @author feng
+ * @date 2018/1/16
  */
 
 public class DoingsFragment extends BaseFragment<RefreshView,CircleModel> {

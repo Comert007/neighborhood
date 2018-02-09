@@ -21,7 +21,7 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wwpx410"
-                android:background="@color/color_b3b3b3"/>
+                android:background="@android:color/transparent"/>
 
 
             <LinearLayout android:layout_width="match_parent"

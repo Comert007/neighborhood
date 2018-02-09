@@ -148,9 +148,10 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
                     @Override
                     public void onNext(GoodsInfoBean goodsDetailBean) {
                         goodsInfoBean = goodsDetailBean;
-                        String url = goodsDetailBean.getImgUrl();
                         List<String> urls = new ArrayList<>();
-                        urls.add(url);
+                        for (GoodsInfoBean.ImgUrlsBean imgUrlsBean : goodsDetailBean.getImgUrls()) {
+                            urls.add(imgUrlsBean.getImgUrl());
+                        }
                         startBanner(urls);
                         showGoodsDetail(goodsDetailBean);
                     }

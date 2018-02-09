@@ -3,6 +3,7 @@ package com.coder.neighborhood.adapter.circle;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -35,6 +36,7 @@ public class PhotoAdapter extends PagerAdapter {
     @Override
     public View instantiateItem(ViewGroup container, int position) {
         PhotoView photoView = new PhotoView(container.getContext());
+        photoView.setScaleType(ImageView.ScaleType.CENTER);
         ImageLoader.getInstance().displayImage(photos.get(position),photoView,
                 BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
 

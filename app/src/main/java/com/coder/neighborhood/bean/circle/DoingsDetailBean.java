@@ -18,7 +18,8 @@ public class DoingsDetailBean {
 
     private String activityId;
     private String activityInfo;
-    private List<ImgUrlBean> imgUrl;
+    private List<ImgUrlsBean> imgUrls;
+
 
     public String getActivityId() {
         return activityId;
@@ -36,17 +37,18 @@ public class DoingsDetailBean {
         this.activityInfo = activityInfo;
     }
 
-    public List<ImgUrlBean> getImgUrl() {
-        return imgUrl;
+    public List<ImgUrlsBean> getImgUrls() {
+        return imgUrls;
     }
 
-    public void setImgUrl(List<ImgUrlBean> imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUrls(List<ImgUrlsBean> imgUrls) {
+        this.imgUrls = imgUrls;
     }
 
-    public static class ImgUrlBean {
+
+    public static class ImgUrlsBean {
         /**
-         * imgUrl : http://39.106.140.31:80/linli/userfiles/images/20180204/20180204215711_585.jpg
+         * imgUrl : http://39.106.140.31:80/linli/userfiles/images/20180209/20180209140750_30.jpg
          */
 
         private String imgUrl;

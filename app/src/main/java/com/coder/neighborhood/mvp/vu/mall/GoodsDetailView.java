@@ -43,6 +43,7 @@ public class GoodsDetailView extends BaseView {
         banner.setImageLoader(new com.youth.banner.loader.ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
+                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 ImageLoader.getInstance().displayImage((String) path, imageView, BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             }
         });

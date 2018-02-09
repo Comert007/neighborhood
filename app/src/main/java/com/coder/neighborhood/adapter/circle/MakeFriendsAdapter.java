@@ -99,11 +99,15 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
             rvImages.setLayoutManager(manager);
             rvImages.setAdapter(adapter);
             List<String> images = new ArrayList<>();
+
+            for (CircleBean.ImgUrlsBean imgUrlsBean : bean.getImgUrls()) {
+                images.add(imgUrlsBean.getImgUrl());
+            }
+            adapter.addList(images);
+
             adapter.setOnActionListener((position1, view) -> {
                 ImageShowActivity.start(getContext(),position1, (ArrayList<String>) images);
             });
-            images.add(bean.getImgUrl());
-            adapter.addList(images);
 
             CircleCommentAdapter commentAdapter = new CircleCommentAdapter(getContext());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

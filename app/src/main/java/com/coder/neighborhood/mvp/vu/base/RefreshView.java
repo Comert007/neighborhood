@@ -55,8 +55,8 @@ public class RefreshView extends BaseView {
 
     @Optional
     public void attach() {
+        LinearLayoutManager manager = new LinearLayoutManager(preActivity);
         if (crv != null) {
-            LinearLayoutManager manager = new LinearLayoutManager(preActivity);
             crv.setLayoutManager(manager);
             crv.setItemAnimator(new DefaultItemAnimator());
 

@@ -1,5 +1,7 @@
 package com.coder.neighborhood.bean.mall;
 
+import java.util.List;
+
 /**
  * @author feng
  * @Date 2018/2/6.
@@ -22,7 +24,6 @@ public class GoodsInfoBean {
      * itemPickingPrice : 19.9
      */
 
-    private String imgUrl;
     private String itemId;
     private String itemName;
     private String itemCategoryName;
@@ -33,14 +34,8 @@ public class GoodsInfoBean {
     private String itemPickingBuyCount;
     private String sellType;
     private String itemPickingPrice;
+    private List<ImgUrlsBean> imgUrls;
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
 
     public String getItemId() {
         return itemId;
@@ -120,5 +115,30 @@ public class GoodsInfoBean {
 
     public void setItemPickingPrice(String itemPickingPrice) {
         this.itemPickingPrice = itemPickingPrice;
+    }
+
+    public List<ImgUrlsBean> getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(List<ImgUrlsBean> imgUrls) {
+        this.imgUrls = imgUrls;
+    }
+
+
+    public static class ImgUrlsBean {
+        /**
+         * imgUrl : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/boss001.jpg
+         */
+
+        private String imgUrl;
+
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
     }
 }

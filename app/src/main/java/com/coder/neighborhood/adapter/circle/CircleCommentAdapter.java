@@ -53,9 +53,12 @@ public class CircleCommentAdapter extends RvAdapter<CircleBean.CommentsBean>{
             tvName.setText(bean.getNickname());
             tvContent.setText(bean.getCommentsContent());
             if (!TextUtils.isEmpty(bean.getCommentsDate())){
+                tvTime.setVisibility(View.VISIBLE);
                 tvTime.setText(TimeUtils.milliseconds2String(
                         TimeUtils.string2Milliseconds(bean.getCommentsDate(),new SimpleDateFormat("yyyy-MM-dd")),
                         new SimpleDateFormat("yyyy.MM.dd")));
+            }else {
+                tvTime.setVisibility(View.GONE);
             }
 
         }

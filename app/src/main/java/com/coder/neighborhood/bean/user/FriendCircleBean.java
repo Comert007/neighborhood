@@ -1,4 +1,4 @@
-package com.coder.neighborhood.bean.circle;
+package com.coder.neighborhood.bean.user;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import java.util.List;
  * @Date 2018/1/29
  */
 
-public class CircleBean {
+public class FriendCircleBean {
 
     /**
      * imgUrl :
@@ -19,16 +19,23 @@ public class CircleBean {
      * circleDate : 1517218078000
      */
 
+    private String imgUrl;
     private String circleLike;
     private String headImg;
     private String nickName;
     private String circleInfo;
     private String circleId;
     private String circleAuthor;
-    private String circleDate;
+    private long circleDate;
     private List<CommentsBean> comments;
-    private List<ImgUrlsBean> imgUrls;
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public String getCircleLike() {
         return circleLike;
@@ -70,11 +77,11 @@ public class CircleBean {
         this.circleId = circleId;
     }
 
-    public String getCircleDate() {
+    public long getCircleDate() {
         return circleDate;
     }
 
-    public void setCircleDate(String circleDate) {
+    public void setCircleDate(long circleDate) {
         this.circleDate = circleDate;
     }
 
@@ -92,14 +99,6 @@ public class CircleBean {
 
     public void setCircleAuthor(String circleAuthor) {
         this.circleAuthor = circleAuthor;
-    }
-
-    public List<ImgUrlsBean> getImgUrls() {
-        return imgUrls;
-    }
-
-    public void setImgUrls(List<ImgUrlsBean> imgUrls) {
-        this.imgUrls = imgUrls;
     }
 
     public static class CommentsBean {
@@ -139,19 +138,4 @@ public class CircleBean {
     }
 
 
-    public static class ImgUrlsBean {
-        /**
-         * imgUrl : http://39.106.140.31:80/linli/userfiles/images/20180206/20180206171549_551.png
-         */
-
-        private String imgUrl;
-
-        public String getImgUrl() {
-            return imgUrl;
-        }
-
-        public void setImgUrl(String imgUrl) {
-            this.imgUrl = imgUrl;
-        }
-    }
 }

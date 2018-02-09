@@ -7,10 +7,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.api.CircleApi;
 import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.UserApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.bean.circle.CircleBean;
 import com.coder.neighborhood.bean.user.CommunityBean;
 import com.coder.neighborhood.bean.user.FriendBean;
 import com.coder.neighborhood.bean.user.FriendInfoBean;
@@ -35,7 +37,7 @@ public class UserModel implements IModel {
 
     public void signup(String username,
                        String password,
-                       LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber){
+                       LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber) {
 
         UserApi.signup(username, password)
                 .map(new Func1<ResponseBean, String>() {
@@ -51,8 +53,9 @@ public class UserModel implements IModel {
 
 
     public void findPassword(String username,
-                       String password,
-                       LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber){
+                             String password,
+                             LifecycleTransformer transformer, HttpSubscriber<String>
+                                     httpSubscriber) {
 
         UserApi.findPassword(username, password)
                 .map(new Func1<ResponseBean, String>() {
@@ -67,13 +70,13 @@ public class UserModel implements IModel {
     }
 
 
-
     public void modifyPass(String username,
-                       String oldPassword,
+                           String oldPassword,
                            String newPassword,
-                       LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber){
+                           LifecycleTransformer transformer, HttpSubscriber<String>
+                                   httpSubscriber) {
 
-        UserApi.modifyPassword(username, oldPassword,newPassword)
+        UserApi.modifyPassword(username, oldPassword, newPassword)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
@@ -88,22 +91,23 @@ public class UserModel implements IModel {
     public void loginUp(String username,
                         String password,
                         LifecycleTransformer transformer,
-                        HttpSubscriber<ResponseBean> httpSubscriber){
+                        HttpSubscriber<ResponseBean> httpSubscriber) {
 
         UserApi.loginup(username, password)
                 .compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
-    
-    
+
+
     public void friends(String userId,
                         String pageNo,
                         String pageSize,
                         LifecycleTransformer transformer,
-                        HttpSubscriber<List<FriendBean>> httpSubscriber){
+                        HttpSubscriber<List<FriendBean>> httpSubscriber) {
         UserApi.friends(userId, pageNo, pageSize)
-                .map(responseBean -> JSON.parseArray(responseBean.getData(),FriendBean.class)).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(), FriendBean.class))
+                .compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
@@ -112,20 +116,21 @@ public class UserModel implements IModel {
                               String pageNo,
                               String pageSize,
                               LifecycleTransformer transformer,
-                              HttpSubscriber<List<FriendBean>> httpSubscriber){
+                              HttpSubscriber<List<FriendBean>> httpSubscriber) {
         UserApi.searchFriends(userName, pageNo, pageSize)
-                .map(responseBean -> JSON.parseArray(responseBean.getData(),FriendBean.class)).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(), FriendBean.class))
+                .compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
-    public void signIn(String userId,HttpSubscriber<ResponseBean> httpSubscriber){
+    public void signIn(String userId, HttpSubscriber<ResponseBean> httpSubscriber) {
         UserApi.signIn(userId)
                 .compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
 
-    public void querySign(String userId,HttpSubscriber<String> httpSubscriber){
+    public void querySign(String userId, HttpSubscriber<String> httpSubscriber) {
         UserApi.querySign(userId)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
@@ -138,9 +143,9 @@ public class UserModel implements IModel {
                 .subscribe(httpSubscriber);
     }
 
-    public void addFriend(String userId,String freindId,String easemodUsername,
+    public void addFriend(String userId, String freindId, String easemodUsername,
                           LifecycleTransformer transformer,
-                          HttpSubscriber<String> httpSubscriber){
+                          HttpSubscriber<String> httpSubscriber) {
 
         UserApi.addFriend(userId, freindId, easemodUsername)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
@@ -148,11 +153,20 @@ public class UserModel implements IModel {
                 .subscribe(httpSubscriber);
     }
 
-    public void friendInfo(String userId,LifecycleTransformer transformer,
-                           HttpSubscriber<FriendInfoBean> httpSubscriber){
+    public void friendInfo(String userId, LifecycleTransformer transformer,
+                           HttpSubscriber<FriendInfoBean> httpSubscriber) {
 
         UserApi.friendInfo(userId)
-                .map(responseBean -> JSON.parseObject(responseBean.getData(),FriendInfoBean.class)).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseObject(responseBean.getData(), FriendInfoBean
+                        .class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void profileCircles(String userId, String pageNo, String pageSize, LifecycleTransformer
+            transformer, HttpSubscriber<List<CircleBean>> httpSubscriber) {
+        UserApi.profileCircles(userId, pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),CircleBean.class)).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
@@ -161,22 +175,23 @@ public class UserModel implements IModel {
                                String nickName,
                                String phone,
                                String addressDisplayFlag,
-                               String userInfo,LifecycleTransformer transformer,
-                               HttpSubscriber<String> httpSubscriber){
+                               String userInfo, LifecycleTransformer transformer,
+                               HttpSubscriber<String> httpSubscriber) {
         UserApi.modifyUserInfo(userId, nickName, phone, addressDisplayFlag, userInfo)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
-    public void modifyAvatar(String userId,String path,
-                             HttpSubscriber<String> httpSubscriber){
+    public void modifyAvatar(String userId, String path,
+                             HttpSubscriber<String> httpSubscriber) {
 
         UserApi.modifyAvatar(userId, path)
                 .map(responseBean -> {
                     UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-                    if (user!=null){
-                        user.setImgUrl(JSON.parseObject(responseBean.getData()).getString("imgUrl"));
+                    if (user != null) {
+                        user.setImgUrl(JSON.parseObject(responseBean.getData()).getString
+                                ("imgUrl"));
                         BaseApplication.getInstance().saveUserInfo(user);
                     }
                     return responseBean.getMessage();
@@ -185,22 +200,42 @@ public class UserModel implements IModel {
     }
 
     public void userCertification(String userId,
-                              String idCodeName,
-                              String idCode,
-                              String communityId,
-                              LifecycleTransformer transformer,
-                              HttpSubscriber<String> httpSubscriber){
-        HomeApi.certification(userId, idCodeName, idCode,communityId)
+                                  String idCodeName,
+                                  String idCode,
+                                  String communityId,
+                                  LifecycleTransformer transformer,
+                                  HttpSubscriber<String> httpSubscriber) {
+        HomeApi.certification(userId, idCodeName, idCode, communityId)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
     public void communities(LifecycleTransformer transformer,
-                            HttpSubscriber<List<CommunityBean>> httpSubscriber){
+                            HttpSubscriber<List<CommunityBean>> httpSubscriber) {
         UserApi.communities()
-                .map(responseBean -> JSON.parseArray(responseBean.getData(),CommunityBean.class)).compose(RxHelper.cutMain())
+                .map(responseBean -> JSON.parseArray(responseBean.getData(), CommunityBean.class)
+                ).compose(RxHelper.cutMain())
                 .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void addCircleComment(String userId,
+                                 String circleId,
+                                 String comments,
+                                 HttpSubscriber<String> httpSubscriber){
+
+        CircleApi.addCircleComment(userId, circleId, comments)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .subscribe(httpSubscriber);
+    }
+
+    public void addCircleLike(String userId,
+                              String circleId,
+                              HttpSubscriber<String> httpSubscriber){
+
+        CircleApi.addCircleLike(userId, circleId)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .subscribe(httpSubscriber);
     }
 

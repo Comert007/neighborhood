@@ -106,7 +106,7 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
                     public void onNext(TravelDetailBean goodsDetailBean) {
                         travelDetailBean = goodsDetailBean;
                         List<String> urls = new ArrayList<>();
-                        for (TravelDetailBean.ImgUrlBean imgUrlBean : goodsDetailBean.getImgUrl()) {
+                        for (TravelDetailBean.ImgUrlBean imgUrlBean : goodsDetailBean.getImgUrls()) {
                             urls.add(imgUrlBean.getImgUrl());
                         }
                         startBanner(urls);

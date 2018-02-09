@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
+              android:gravity="center"
               android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv"
         android:src="@mipmap/pic_default"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/wwpx200"
         android:scaleType="centerCrop"
-        android:layout_height="@dimen/wwpx171"/>
+        android:layout_marginTop="@dimen/wwpx20"
+        android:layout_height="@dimen/wwpx200"/>
     
 </LinearLayout>

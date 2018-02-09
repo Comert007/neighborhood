@@ -52,18 +52,18 @@ public class DoingsDetailActivity extends BaseActivity<DetailBannerView,CircleMo
     protected void init() {
         activityId = getIntent().getStringExtra("activityId");
         urls = new ArrayList<>();
-        actvityDetail(activityId);
+        activityDetail(activityId);
     }
 
 
     private void showData(DoingsDetailBean doingsDetailBean){
-        startBanner(doingsDetailBean.getImgUrl());
+        startBanner(doingsDetailBean.getImgUrls());
         tvContent.setText(doingsDetailBean.getActivityInfo());
     }
 
-    private void startBanner(List<DoingsDetailBean.ImgUrlBean> bannerBeans) {
+    private void startBanner(List<DoingsDetailBean.ImgUrlsBean> bannerBeans) {
         urls.clear();
-        for (DoingsDetailBean.ImgUrlBean banner : bannerBeans) {
+        for (DoingsDetailBean.ImgUrlsBean banner : bannerBeans) {
             urls.add(banner.getImgUrl());
         }
 
@@ -77,7 +77,7 @@ public class DoingsDetailActivity extends BaseActivity<DetailBannerView,CircleMo
     }
 
 
-    private void actvityDetail(String activityId){
+    private void activityDetail(String activityId){
         m.activityDetail(activityId, bindUntilEvent(ActivityEvent.DESTROY),
                 new HttpSubscriber<DoingsDetailBean>(this,true) {
                     @Override

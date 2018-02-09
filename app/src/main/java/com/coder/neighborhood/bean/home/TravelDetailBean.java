@@ -38,7 +38,7 @@ public class TravelDetailBean {
     private String itemInventoryQuantiry;
     private String sellType;
     private String travePickingCount;
-    private List<ImgUrlBean> imgUrl;
+    private List<ImgUrlBean> imgUrls;
     private List<TraveRouteBean> traveRoute;
 
     public String getTravelPickBuyCount() {
@@ -113,12 +113,12 @@ public class TravelDetailBean {
         this.travePickingCount = travePickingCount;
     }
 
-    public List<ImgUrlBean> getImgUrl() {
-        return imgUrl;
+    public List<ImgUrlBean> getImgUrls() {
+        return imgUrls;
     }
 
-    public void setImgUrl(List<ImgUrlBean> imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUrls(List<ImgUrlBean> imgUrls) {
+        this.imgUrls = imgUrls;
     }
 
     public List<TraveRouteBean> getTraveRoute() {

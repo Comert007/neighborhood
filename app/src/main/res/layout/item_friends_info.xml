@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginBottom="@dimen/wwpx2"
     android:layout_height="wrap_content">
@@ -14,15 +15,8 @@
                   android:paddingLeft="@dimen/wwpx20"
                   android:paddingRight="@dimen/wwpx20"
                   android:paddingTop="@dimen/wwpx40"
-                  android:paddingBottom="@dimen/wwpx40"
                   android:layout_height="wrap_content">
 
-        <TextView android:layout_width="match_parent"
-                  android:gravity="right"
-                  android:textColor="@color/color_999999"
-                  android:textSize="@dimen/wwpx26"
-                  android:text="近期动态"
-                  android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:id="@+id/ll_user_info"
@@ -32,8 +26,8 @@
             android:orientation="horizontal">
             <ww.com.core.widget.RoundImageView
                 android:id="@+id/riv_header"
-                android:layout_width="@dimen/wwpx150"
-                android:layout_height="@dimen/wwpx150"
+                android:layout_width="@dimen/wwpx90"
+                android:layout_height="@dimen/wwpx90"
                 android:src="@mipmap/pic_default"
                 app:type="type_circle"/>
 
@@ -44,21 +38,34 @@
                           android:layout_marginLeft="@dimen/wwpx25"
                           android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="昵称"
-                    android:textColor="@color/color_1d65a2"
-                    android:textSize="@dimen/wwpx26"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="昵称"
+                        android:textColor="@color/color_1d65a2"
+                        android:textSize="@dimen/wwpx26"/>
+
+                    <TextView
+                        android:id="@+id/tv_grade"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/wwpx26"
+                        android:text="LV.0"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
 
+
                 <TextView
-                    android:id="@+id/tv_grade"
+                    android:id="@+id/tv_subscribe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/wwpx10"
-                    android:text="今天给大家解释一下什么是老铁"
                     android:textColor="@color/color_999999"
                     android:textSize="@dimen/wwpx30"/>
 
@@ -67,10 +74,10 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/wwpx16"
-            android:text="老铁，网络流行词，东北方言，对“哥们”的别称，类似的变形称呼还有“铁子”，“铁哥们”等称呼，意思都是一样的，说的是关系亲近，牢靠，值得信任。解释形容朋友之间的关系非常好。网络流行新词语，亲切而有亲和力"
             android:textColor="@color/color_666666"
             android:textSize="@dimen/wwpx28"/>
 
@@ -86,24 +93,37 @@
                       android:layout_height="wrap_content">
 
 
-            <ImageView android:layout_width="@dimen/wwpx31"
-                       android:src="@mipmap/ic_like"
-                       android:layout_height="@dimen/wwpx31"/>
+            <ImageView
+                android:id="@+id/iv_prise"
+                android:layout_width="@dimen/wwpx31"
+                android:src="@mipmap/ic_like"
+                android:layout_height="@dimen/wwpx31"/>
 
             <TextView
+                android:id="@+id/tv_prise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/wwpx10"
-                android:text="23"
+                android:text="0"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/wwpx26"/>
 
-            <ImageView android:layout_width="@dimen/wwpx40"
-                       android:src="@mipmap/ic_reply"
-                       android:layout_marginLeft="@dimen/wwpx54"
-                       android:layout_height="@dimen/wwpx34"/>
+            <com.coder.neighborhood.widget.IconFontTextView
+                android:id="@+id/icon_comment"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/wwpx36"
+                android:layout_marginLeft="@dimen/wwpx20"
+                android:hint="\ue659"
+                android:textColorHint="@color/color_c7c7c7"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_comment"
+            android:layout_marginTop="@dimen/wwpx40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
