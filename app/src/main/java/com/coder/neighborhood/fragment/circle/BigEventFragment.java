@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.MainActivity;
 import com.coder.neighborhood.activity.circle.PublishEventActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.circle.EventAdapter;
@@ -89,6 +90,9 @@ public class BigEventFragment extends BaseFragment<RefreshView,CircleModel> {
 
                 @Override
                 public void onNext(List<EventBean> eventBeans) {
+                    if (page ==1){
+                        ((MainActivity) getPresenterActivity()).showEventTopContent(eventBeans);
+                    }
                     v.getCsr().setRefreshFinished();
                     if (eventBeans != null && eventBeans.size() > 0) {
                         if (page == 1) {

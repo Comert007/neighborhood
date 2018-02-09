@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.adapter.user.TranslateTabAdapter;
+import com.coder.neighborhood.bean.circle.EventBean;
 import com.coder.neighborhood.fragment.circle.BigEventFragment;
 import com.coder.neighborhood.fragment.circle.DoingsFragment;
 import com.coder.neighborhood.fragment.circle.MakeFriendsFragment;
@@ -34,6 +35,7 @@ public class CircleFragment extends BaseFragment<VoidView,VoidModel>{
     private List<Fragment> fragments;
     private FragmentManager fragmentManager;
     private TranslateTabAdapter adapter;
+    private MakeFriendsFragment makeFriendsFragment;
 
     @Override
     protected int getLayoutResId() {
@@ -64,12 +66,24 @@ public class CircleFragment extends BaseFragment<VoidView,VoidModel>{
         if (fragments==null){
             fragments = new ArrayList<>();
         }
-        fragments.add(new MakeFriendsFragment());
+        makeFriendsFragment = new MakeFriendsFragment();
+        fragments.add(makeFriendsFragment);
         fragments.add(new BigEventFragment());
         fragments.add(new TopicFragment());
         fragments.add(new DoingsFragment());
     }
 
+    public void showEventTopContent(List<EventBean> eventBeans){
+        makeFriendsFragment.showEventTopContent(eventBeans);
+    }
+
+    public void showActivityTopContent(List<EventBean> activityBeans){
+        makeFriendsFragment.showActivityTopContent(activityBeans);
+    }
+
+    public void changeCircleMnue(int position){
+        vp.setCurrentItem(position);
+    }
 
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override

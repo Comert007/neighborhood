@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.MainActivity;
 import com.coder.neighborhood.activity.circle.PublishDoingThingActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.circle.DoingThingsAdapter;
@@ -88,6 +89,9 @@ public class DoingsFragment extends BaseFragment<RefreshView,CircleModel> {
 
                         @Override
                         public void onNext(List<EventBean> eventBeans) {
+                            if (page ==1){
+                                ((MainActivity) getPresenterActivity()).showActivityTopContent(eventBeans);
+                            }
                             v.getCsr().setRefreshFinished();
                             if (eventBeans != null && eventBeans.size() > 0) {
                                 if (page == 1) {

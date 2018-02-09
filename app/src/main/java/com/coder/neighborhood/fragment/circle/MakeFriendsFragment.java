@@ -5,16 +5,19 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.MainActivity;
 import com.coder.neighborhood.activity.circle.PublishCircleActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.FriendsInfoActivity;
 import com.coder.neighborhood.adapter.circle.MakeFriendsAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.circle.CircleBean;
+import com.coder.neighborhood.bean.circle.EventBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.fragment.BaseFragment;
 import com.coder.neighborhood.mvp.model.CircleModel;
@@ -47,6 +50,14 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
 
+    private TextView eventTop1;
+    private TextView eventTop2;
+    private TextView activityTop1;
+    private TextView activityTop2;
+
+    private LinearLayout llEventMore;
+    private LinearLayout llActivityMore;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_make_friends;
@@ -63,6 +74,17 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         adapter = new MakeFriendsAdapter(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout
                 .layout_make_friends_header, null);
+        eventTop1 = ButterKnife.findById(view,R.id.event_top_1);
+        eventTop2 = ButterKnife.findById(view,R.id.event_top_2);
+
+        activityTop1 = ButterKnife.findById(view,R.id.activity_top_1);
+        activityTop2 = ButterKnife.findById(view,R.id.activity_top_2);
+
+        llEventMore = ButterKnife.findById(view,R.id.ll_event_more);
+        llEventMore.setOnClickListener(v -> ((MainActivity) getPresenterActivity()).changeCircleMnue(1));
+        llActivityMore = ButterKnife.findById(view,R.id.ll_activity_more);
+        llActivityMore.setOnClickListener(v -> ((MainActivity) getPresenterActivity()).changeCircleMnue(3));
+
         circleViews.add(ButterKnife.findById(view, R.id.tv_community));
         circleViews.add(ButterKnife.findById(view, R.id.tv_friends));
         circleViews.add(ButterKnife.findById(view, R.id.tv_customer));
@@ -139,6 +161,24 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         initIndicator(0);
     }
 
+
+    public void showEventTopContent(List<EventBean> eventBeans){
+        if (eventBeans!=null && eventBeans.size()>0){
+            eventTop1.setText(eventBeans.get(0).getActivityInfo());
+            if (eventBeans.size()>1){
+                eventTop2.setText(eventBeans.get(1).getActivityInfo());
+            }
+        }
+    }
+
+    public void showActivityTopContent(List<EventBean> activityBeans){
+        if (activityBeans!=null && activityBeans.size()>0){
+            activityTop1.setText(activityBeans.get(0).getActivityInfo());
+            if (activityBeans.size()>1){
+                activityTop2.setText(activityBeans.get(1).getActivityInfo());
+            }
+        }
+    }
 
 
     @OnClick({R.id.btn_add,R.id.btn_circle})
@@ -285,4 +325,5 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
             }
         }
     }
+
 }

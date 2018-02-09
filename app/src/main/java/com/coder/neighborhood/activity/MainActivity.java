@@ -11,6 +11,7 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.message.ChatActivity;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.bean.circle.EventBean;
 import com.coder.neighborhood.fragment.CircleFragment;
 import com.coder.neighborhood.fragment.HomeFragment;
 import com.coder.neighborhood.fragment.MallFragment;
@@ -48,6 +49,8 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
     private MenuTabAdapter adapter;
     private List<Fragment> fragments;
 
+    private CircleFragment circleFragment;
+
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
@@ -63,7 +66,8 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new MallFragment());
-        fragments.add(new CircleFragment());
+        circleFragment = new CircleFragment();
+        fragments.add(circleFragment);
         fragments.add(createMessageFragment());
         fragments.add(new UserFragment());
 
@@ -175,5 +179,16 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
         }
     }
 
+    public void showEventTopContent(List<EventBean> eventBeans){
+        circleFragment.showEventTopContent(eventBeans);
+    }
 
+    public void showActivityTopContent(List<EventBean> activityBeans){
+        circleFragment.showActivityTopContent(activityBeans);
+    }
+
+
+    public void changeCircleMnue(int position){
+        circleFragment.changeCircleMnue(position);
+    }
 }
