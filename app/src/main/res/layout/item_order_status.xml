@@ -18,6 +18,7 @@
                       android:background="@drawable/gray_border_shape"
                       android:padding="@dimen/wwpx1">
             <ImageView
+                android:id="@+id/iv"
                 android:layout_width="@dimen/wwpx220"
                 android:layout_height="@dimen/wwpx220"
                 android:src="@mipmap/pic_default"/>

@@ -113,9 +113,6 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
                     public void onNext(List<OrderBean> orderBeans) {
                         v.getCsr().setRefreshFinished();
                         if (orderBeans != null && orderBeans.size() > 0) {
-                            for (OrderBean orderBean : orderBeans) {
-                                orderBean.setOrderStatus(status);
-                            }
                             if (page == 1) {
                                 adapter.addList(orderBeans);
                                 csr.setFooterRefreshAble(true);

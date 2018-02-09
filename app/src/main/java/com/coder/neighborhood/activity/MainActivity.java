@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
                 Toast.makeText(getApplicationContext(), "再按一次退出应用", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                BaseApplication.getInstance().clearTopTask(MainActivity.this);
+                BaseApplication.getInstance().exitApp();
                 onBackPressed();
                 System.exit(0);
             }
