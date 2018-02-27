@@ -234,4 +234,23 @@ public class MallModel extends BaseModel{
     }
 
 
+    public void addOrderAlipay(String userId,
+                               String cartIds,
+                               String recipientId,
+                               String payment,
+                               String postFee,
+                               String buyerMessage,LifecycleTransformer transformer,
+                               HttpSubscriber<String> httpSubscriber){
+
+        MallApi.addOrderAlipay(userId, cartIds, recipientId, payment, postFee, buyerMessage)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getData();
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer).subscribe(httpSubscriber);
+    }
+
+
 }

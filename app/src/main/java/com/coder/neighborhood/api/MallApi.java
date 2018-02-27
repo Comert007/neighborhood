@@ -1,5 +1,7 @@
 package com.coder.neighborhood.api;
 
+import android.text.TextUtils;
+
 import com.coder.neighborhood.bean.ResponseBean;
 
 import rx.Observable;
@@ -133,6 +135,27 @@ public class MallApi extends BaseApi {
         params.addParameters("pageSize",pageSize);
 
         return onPost(getActionUrl("app/getOrderList"),params);
+    }
+
+    public static final Observable<ResponseBean> addOrderAlipay(String userId,
+                                                                String cartIds,
+                                                                String recipientId,
+                                                                String payment,
+                                                                String postFee,
+                                                                String buyerMessage){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("cartIds",cartIds);
+        params.addParameters("recipientId",recipientId);
+        params.addParameters("payment",payment);
+        if (!TextUtils.isEmpty(postFee)){
+            params.addParameters("postFee",postFee);
+        }
+
+        if (!TextUtils.isEmpty(buyerMessage)){
+            params.addParameters("buyerMessage",buyerMessage);
+        }
+        return onPost(getActionUrl("app/addOrder"),params);
     }
 
 

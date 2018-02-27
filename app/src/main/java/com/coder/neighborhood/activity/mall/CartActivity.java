@@ -232,5 +232,4 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                     dialog.dismiss();
                 }).show();
     }
-
 }
