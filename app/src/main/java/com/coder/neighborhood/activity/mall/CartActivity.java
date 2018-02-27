@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -231,5 +232,28 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                 }, true, "取消", (dialog, which) -> {
                     dialog.dismiss();
                 }).show();
+    }
+
+    private void addOrderAlipay(){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+
+        }
+    }
+
+    private String cardIds(){
+        String cardIds ="";
+
+        List<CartBean> list = adapter.getList();
+        if (list.size()>0){
+            for (int i = 0; i < list.size(); i++) {
+                CartBean cartBean = list.get(i);
+                cardIds=cardIds + cartBean.getCartId();
+                if (i < list.size()-1){
+                    cardIds = cardIds +",";
+                }
+            }
+        }
+        return cardIds;
     }
 }

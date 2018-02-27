@@ -22,7 +22,7 @@ public class WWAlipay {
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
-        @SuppressWarnings("unused")
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SDK_PAY_FLAG: {

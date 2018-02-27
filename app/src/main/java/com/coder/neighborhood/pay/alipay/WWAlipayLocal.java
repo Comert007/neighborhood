@@ -15,7 +15,9 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 /**
- * Created by fighter on 2016/10/26.
+ *
+ * @author fighter
+ * @date 2016/10/26
  */
 
 public class WWAlipayLocal {
@@ -23,7 +25,7 @@ public class WWAlipayLocal {
     /**
      * 支付宝支付业务：入参app_id
      */
-    public static final String APPID = "2016101902241684";
+    public static final String APPID = "2018020102122654";
 
     // 商户私钥，pkcs8格式
     public static final String RSA_PRIVATE =

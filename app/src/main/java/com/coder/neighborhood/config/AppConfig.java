@@ -8,7 +8,7 @@ package com.coder.neighborhood.config;
 public class AppConfig {
     public static final boolean DEBUG = true;
     public static final String WECHAT_APP_ID ="";
-    public static final String ALIPAY_APP_ID="";
+    public static final String ALIPAY_APP_ID="2018020102122654";
 
     public static final String STREAMING_SERVER = "Your app server";
 }
