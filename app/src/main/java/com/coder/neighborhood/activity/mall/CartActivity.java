@@ -247,10 +247,16 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
         List<CartBean> list = adapter.getList();
         if (list.size()>0){
             for (int i = 0; i < list.size(); i++) {
-                CartBean cartBean = list.get(i);
-                cardIds=cardIds + cartBean.getCartId();
-                if (i < list.size()-1){
-                    cardIds = cardIds +",";
+                if (i == 0) {
+                    cardIds = cardIds + "[";
+                }
+                cardIds = cardIds + "{id:";
+                cardIds = cardIds + "\""+list.get(i).getCartId()+ "\""+ "}";
+
+                if (i != list.size() - 1) {
+                    cardIds = cardIds + ",";
+                } else {
+                    cardIds = cardIds + "]";
                 }
             }
         }
