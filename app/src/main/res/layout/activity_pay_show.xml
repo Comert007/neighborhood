@@ -41,12 +41,14 @@
                       android:layout_height="match_parent">
             
             <Button
+                android:id="@+id/btn_alipay"
                 android:layout_width="@dimen/wwpx130"
                 android:background="@mipmap/ic_alipay"
                 android:layout_height="@dimen/wwpx130"/>
 
 
             <Button
+                android:id="@+id/btn_wechat"
                 android:layout_width="@dimen/wwpx130"
                 android:layout_marginLeft="@dimen/wwpx209"
                 android:background="@mipmap/ic_wechat"

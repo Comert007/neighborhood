@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    style="@style/LlayFill"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/LlayFill">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.coder.neighborhood.widget.TitleView
         android:id="@+id/title_view"
         style="@style/TitleBar"
-        app:titleLeftIco="@mipmap/ic_back"
         android:layout_marginBottom="@dimen/wwpx10"
+        app:titleLeftIco="@mipmap/ic_back"
         app:titleText="购物车"/>
 
     <ww.com.core.widget.CustomSwipeRefreshLayout
@@ -24,47 +24,49 @@
 
 
     <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx98"
+                  android:layout_marginTop="@dimen/wwpx10"
                   android:background="@color/color_white"
                   android:gravity="center_vertical"
                   android:paddingLeft="@dimen/wwpx20"
-                  android:paddingRight="@dimen/wwpx20"
-                  android:layout_marginTop="@dimen/wwpx10"
-                  android:layout_height="@dimen/wwpx98">
+                  android:paddingRight="@dimen/wwpx20">
 
         <com.coder.neighborhood.widget.IconFontTextView
             android:id="@+id/itv_whole"
-            android:textSize="@dimen/wwpx40"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="\ue678"
             android:textColor="@color/color_aaaaaa"
-            android:layout_height="wrap_content"/>
+            android:textSize="@dimen/wwpx40"/>
 
         <TextView android:layout_width="wrap_content"
-                  android:textColor="@color/color_666666"
-                  android:textSize="@dimen/wwpx24"
+                  android:layout_height="wrap_content"
                   android:layout_marginLeft="@dimen/wwpx16"
                   android:text="全选"
-                  android:layout_height="wrap_content"/>
+                  android:textColor="@color/color_666666"
+                  android:textSize="@dimen/wwpx24"/>
 
 
         <TextView android:layout_width="wrap_content"
-                  android:textColor="@color/color_666666"
-                  android:textSize="@dimen/wwpx30"
+                  android:layout_height="wrap_content"
                   android:layout_marginLeft="@dimen/wwpx20"
                   android:text="合计：0.00"
-                  android:layout_height="wrap_content"/>
+                  android:textColor="@color/color_666666"
+                  android:textSize="@dimen/wwpx30"/>
 
         <LinearLayout android:layout_width="match_parent"
-                      android:gravity="right"
-                      android:layout_height="wrap_content">
+                      android:layout_height="wrap_content"
+                      android:gravity="right">
 
-            <TextView android:layout_width="@dimen/wwpx192"
-                      android:gravity="center"
-                      android:textColor="@color/color_yellow"
-                      android:textSize="@dimen/wwpx30"
-                      android:text="结算"
-                      android:background="@drawable/yellow_border_shape"
-                      android:layout_height="@dimen/wwpx60"/>
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="@dimen/wwpx192"
+                android:layout_height="@dimen/wwpx60"
+                android:background="@drawable/yellow_border_shape"
+                android:gravity="center"
+                android:text="结算"
+                android:textColor="@color/color_yellow"
+                android:textSize="@dimen/wwpx30"/>
         </LinearLayout>
 
 

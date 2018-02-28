@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -22,6 +21,7 @@ import com.coder.neighborhood.widget.IconFontTextView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -158,6 +158,19 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
         adapter.notifyDataSetChanged();
     }
 
+    @OnClick(R.id.tv_result)
+    public void orderResult(){
+        HashMap map = new HashMap();
+        map.put("cardIds",cardIds());
+        map.put("recipientId","58e56686b88741f680a116f948e26088");
+        map.put("payment","5");
+        map.put("postFee","0");
+        //buyerMessage
+        map.put("buyerMessage","尽快送达");
+
+        PayShowActivity.start(this,map);
+    }
+
 
     private void onCartGoods() {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
@@ -234,12 +247,7 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                 }).show();
     }
 
-    private void addOrderAlipay(){
-        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user!=null && !TextUtils.isEmpty(user.getUserId())){
 
-        }
-    }
 
     private String cardIds(){
         String cardIds ="";
