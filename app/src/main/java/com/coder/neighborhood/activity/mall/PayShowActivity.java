@@ -92,7 +92,7 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
                                 @Override
                                 public void onPaySuccess(String info) {
                                     Debug.d("info:"+info);
-                                    ToastUtils.showToast(info,true);
+                                    ToastUtils.showToast("支付成功",true);
                                     finish();
                                 }
 

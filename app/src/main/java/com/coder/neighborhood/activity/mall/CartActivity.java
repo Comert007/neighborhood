@@ -268,6 +268,7 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                 }
             }
         }
+        Debug.d("cardIds:"+cardIds);
         return cardIds;
     }
 }
