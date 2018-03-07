@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/LlayFill"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="确认订单"/>
+
+    <include layout="@layout/layout_split_fine"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:paddingTop="@dimen/wwpx48"
+                    android:background="@color/color_white"
+                  android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/rv_name"
+            android:text="收货人：张珊"
+            android:layout_marginLeft="@dimen/wwpx70"
+            android:textSize="@dimen/wwpx32"
+            android:textColor="@color/color_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:text="18200131081"
+            android:textSize="@dimen/wwpx32"
+            android:textColor="@color/color_black"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/wwpx92"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.coder.neighborhood.widget.IconFontTextView
+            android:id="@+id/icon_address"
+            android:layout_marginTop="@dimen/wwpx25"
+            android:text="\ue624"
+            android:layout_width="wrap_content"
+            android:textColor="@color/color_797979"
+            android:layout_marginLeft="@dimen/wwpx20"
+            android:layout_below="@id/rv_name"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:text="收货地址：山西市太原市远东大街337号菜市场门口三悔超市门口宏达便利店"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/wwpx30"
+            android:layout_alignLeft="@id/rv_name"
+            android:layout_marginRight="@dimen/wwpx48"
+            android:layout_alignBaseline="@id/icon_address"
+            android:textColor="@color/color_999999"/>
+
+
+        <com.coder.neighborhood.widget.IconFontTextView
+            android:id="@+id/icon_right"
+            android:text="\ue642"
+            android:layout_marginTop="@dimen/wwpx25"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/wwpx27"
+            android:textColor="@color/color_b4b4b4"
+            android:layout_below="@id/rv_name"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:text="(收货不方便时，可选择免费代收服务)"
+            android:textColor="@color/color_title_text"
+            android:layout_below="@id/tv_address"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/wwpx24"
+            android:layout_marginTop="@dimen/wwpx29"
+            android:layout_marginBottom="@dimen/wwpx49"
+            android:layout_alignLeft="@id/icon_address"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
