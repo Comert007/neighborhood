@@ -168,7 +168,9 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
         //buyerMessage
         map.put("buyerMessage","尽快送达");
 
-        PayShowActivity.start(this,map);
+        CommitOrderActivity.start(this);
+
+//        PayShowActivity.start(this,map);
     }
 
 

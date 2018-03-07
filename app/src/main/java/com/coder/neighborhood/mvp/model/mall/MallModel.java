@@ -6,6 +6,7 @@ import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.MallApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
+import com.coder.neighborhood.bean.mall.AddressBean;
 import com.coder.neighborhood.bean.mall.CartBean;
 import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.bean.mall.CommentBean;
@@ -252,5 +253,16 @@ public class MallModel extends BaseModel{
                 .compose(transformer).subscribe(httpSubscriber);
     }
 
+
+    public void getRecipientList(String userId,String pageNo,
+                                 String pageSize, LifecycleTransformer transformer,
+                                 HttpSubscriber<List<AddressBean>> httpSubscriber){
+        MallApi.getRecipientList(userId, pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),AddressBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
+
+    }
 
 }

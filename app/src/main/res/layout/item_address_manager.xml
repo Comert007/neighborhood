@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:paddingTop="@dimen/wwpx48"
+                    android:paddingBottom="@dimen/wwpx48"
+                    android:background="@color/color_white"
+                    android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:text="收货人：张珊"
+            android:layout_marginLeft="@dimen/wwpx20"
+            android:textSize="@dimen/wwpx32"
+            android:textColor="@color/color_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:text="18200131081"
+            android:textSize="@dimen/wwpx32"
+            android:textColor="@color/color_black"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/wwpx20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_marginTop="@dimen/wwpx20"
+            android:layout_width="match_parent"
+            android:text="山西市太原市远东大街337号菜市场门口三悔超市门口宏达便利店"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/wwpx30"
+            android:layout_marginRight="@dimen/wwpx20"
+            android:layout_marginLeft="@dimen/wwpx20"
+            android:layout_below="@id/tv_name"
+            android:textColor="@color/color_999999"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

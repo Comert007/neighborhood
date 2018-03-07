@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/LlayFill"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="确认订单"/>
+
+    <ww.com.core.widget.CustomSwipeRefreshLayout
+        android:id="@+id/csr"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+        <ww.com.core.widget.CustomRecyclerView
+            android:id="@+id/crv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </ww.com.core.widget.CustomSwipeRefreshLayout>
+
+</LinearLayout>

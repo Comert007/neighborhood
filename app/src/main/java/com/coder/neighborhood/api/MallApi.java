@@ -16,7 +16,6 @@ public class MallApi extends BaseApi {
     /**
      * 商品列表
      * @param mallType 商场类型（1商城2二手商城）
-     * @param hotFlag 热门标记（0正常1热门）
      * @param pageNo 当前页码
      * @return
      */
@@ -156,6 +155,19 @@ public class MallApi extends BaseApi {
             params.addParameters("buyerMessage",buyerMessage);
         }
         return onPost(getActionUrl("app/addOrder"),params);
+    }
+
+
+    ///app/getRecipientList
+    public static final Observable<ResponseBean> getRecipientList(String userId,String pageNo,
+                                                                  String pageSize){
+
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("cartIds",pageNo);
+        params.addParameters("recipientId",pageSize);
+
+        return onPost(getActionUrl("app/getRecipientList"),params);
     }
 
 

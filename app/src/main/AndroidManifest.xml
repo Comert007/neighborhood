@@ -267,7 +267,14 @@
 
         <!--订单提交-->
         <activity android:name=".activity.mall.CommitOrderActivity"
+                  android:windowSoftInputMode="adjustPan"
                   android:screenOrientation="portrait"/>
+
+        <!--地址管理-->
+        <activity android:name=".activity.mall.AddressManagerActivity"
+                  android:screenOrientation="portrait"/>
+
+
     </application>
 
 </manifest>
