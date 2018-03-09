@@ -47,7 +47,9 @@
                   android:textSize="@dimen/wwpx24"/>
 
 
-        <TextView android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="@dimen/wwpx20"
                   android:text="合计：0.00"

@@ -84,7 +84,7 @@ public class CartAdapter extends RvAdapter<CartBean>{
             tvGoodsType.setText(bean.getItemGroupUnit());
             tvGoodsNum.setText("数量："+bean.getBuyCount());
             tvGoodsPrice.setText(TextUtils.isEmpty(bean.getItemPrice())?"":bean.getItemPrice()+"元");
-            if (bean.isCheck()){
+            if (TextUtils.equals("1",bean.getSelectFlag())){
                 itvCheck.setText("\ue677");
                 itvCheck.setTextColor(ContextCompat.getColor(getContext(),R.color.color_text));
             }else {

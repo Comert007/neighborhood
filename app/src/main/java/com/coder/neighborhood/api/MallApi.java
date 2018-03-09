@@ -137,14 +137,12 @@ public class MallApi extends BaseApi {
     }
 
     public static final Observable<ResponseBean> addOrderAlipay(String userId,
-                                                                String cartIds,
                                                                 String recipientId,
                                                                 String payment,
                                                                 String postFee,
                                                                 String buyerMessage){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-        params.addParameters("cartIds",cartIds);
         params.addParameters("recipientId",recipientId);
         params.addParameters("payment",payment);
         if (!TextUtils.isEmpty(postFee)){
@@ -158,7 +156,6 @@ public class MallApi extends BaseApi {
     }
 
 
-    ///app/getRecipientList
     public static final Observable<ResponseBean> getRecipientList(String userId,String pageNo,
                                                                   String pageSize){
 
@@ -170,5 +167,48 @@ public class MallApi extends BaseApi {
         return onPost(getActionUrl("app/getRecipientList"),params);
     }
 
+    public static final Observable<ResponseBean> addRecipient(String userId,
+                                                              String name,
+                                                              String phone,
+                                                              String province,
+                                                              String city,
+                                                              String area,
+                                                              String details,
+                                                              String defaultFlag){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("name",name);
+        params.addParameters("phone",phone);
+        params.addParameters("province",province);
+        params.addParameters("city",city);
+        params.addParameters("area",area);
+        params.addParameters("details",details);
+        params.addParameters("defaultFlag",defaultFlag);
+
+        return onPost(getActionUrl("app/addRecipient"),params);
+    }
+
+    public static final Observable<ResponseBean> cartList(String userId,
+                                                          String selectFlag,
+                                                          String pageNo,
+                                                          String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("selectFlag",selectFlag);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+        return onPost(getActionUrl("app/getCartList"),params);
+    }
+
+    public static final Observable<ResponseBean> editCart(String userId,
+                                                          String cartId,
+                                                          String selectFlag){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("cartId",cartId);
+        params.addParameters("selectFlag",selectFlag);
+
+        return onPost(getActionUrl("app/editCart"),params);
+    }
 
 }

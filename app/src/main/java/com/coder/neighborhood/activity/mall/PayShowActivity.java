@@ -66,21 +66,16 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
     }
 
     private void addOrderAlipay() {
-        String cardIds = (String) map.get("cardIds");
         String recipientId = (String) map.get("recipientId");
         String payment = (String) map.get("payment");
         String postFee = (String) map.get("postFee");
         String buyerMessage = (String) map.get("buyerMessage");
 
-        if (TextUtils.isEmpty(cardIds)) {
-            ToastUtils.showToast("暂无可提交商品");
-            return;
-        }
 
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user != null && !TextUtils.isEmpty(user.getUserId())) {
 
-            m.addOrderAlipay(user.getUserId(), cardIds, recipientId,
+            m.addOrderAlipay(user.getUserId(), recipientId,
                     payment, postFee, buyerMessage, bindUntilEvent(ActivityEvent.DESTROY),
                     new HttpSubscriber<String>(this, true) {
                         @Override

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.mall.AddressBean;
+import com.coder.neighborhood.mvp.listener.OnActionListener;
 
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
@@ -20,8 +21,14 @@ import ww.com.core.adapter.RvViewHolder;
 
 public class AddressManagerAdapter extends RvAdapter<AddressBean> {
 
+    private OnActionListener onActionListener;
+
     public AddressManagerAdapter(Context context) {
         super(context);
+    }
+
+    public void setOnActionListener(OnActionListener onActionListener) {
+        this.onActionListener = onActionListener;
     }
 
     @Override
@@ -55,10 +62,17 @@ public class AddressManagerAdapter extends RvAdapter<AddressBean> {
             String address = bean.getProvince() + "，" + bean.getCity() + "，" + bean.getArea() +
                     "," + bean.getDetails();
             if (TextUtils.equals("1", flag)) {
-                tvAddress.setText(Html.fromHtml("<font color='#ff7f21'>[默认地址]</font>"+address));
-            }else {
+                tvAddress.setText(Html.fromHtml("<font color='#ff7f21'>[默认地址]</font>" + address));
+            } else {
                 tvAddress.setText(address);
             }
+
+            itemView.setOnClickListener(v -> {
+                if (onActionListener!=null){
+                    onActionListener.onAction(position,itemView);
+                }
+            });
         }
     }
+
 }

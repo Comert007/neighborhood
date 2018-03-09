@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/et_price"
+            android:id="@+id/et_post_fee"
             android:textColor="@color/color_black"
             android:hint="0"
             android:textColorHint="@color/color_black"

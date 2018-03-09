@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -15,13 +17,13 @@ import com.coder.neighborhood.bean.mall.CartBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.CartView;
+import com.coder.neighborhood.utils.ArithmeticUtils;
 import com.coder.neighborhood.utils.DialogUtils;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.coder.neighborhood.widget.IconFontTextView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +42,8 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
 
     @BindView(R.id.itv_whole)
     IconFontTextView itvWhole;
+    @BindView(R.id.tv_total_price)
+    TextView tvTotalPrice;
 
 
     private CartAdapter adapter;
@@ -87,14 +91,15 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
     private void initListener() {
         adapter.setOnItemClickListener((position, view) -> {
             CartBean cartBean = adapter.getItem(position);
-            cartBean.setCheck(!cartBean.isCheck());
-            setWhole();
-            adapter.notifyItemChanged(position);
+            editCart(cartBean,position);
+//            cartBean.setCheck(!cartBean.isCheck());
+//            setWhole();
+//            adapter.notifyItemChanged(position);
         });
 
         adapter.setOnActionListener((position, view) -> {
             CartBean cartBean = adapter.getList().get(position);
-            Debug.d("cardId:"+cartBean.getCartId());
+            Debug.d("cardId:" + cartBean.getCartId());
             showDeleteDialog(cartBean.getCartId());
         });
 
@@ -114,6 +119,28 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
             }
         });
     }
+
+
+    private void editCart(CartBean cartBean,int position){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user == null) {
+            ToastUtils.showToast("用户信息有误");
+            return;
+        }
+        String flag = TextUtils.equals("1",cartBean.getSelectFlag())?"0":"1";
+        m.editCart(user.getUserId(), cartBean.getCartId(), flag, bindUntilEvent(ActivityEvent.DESTROY)
+                , new HttpSubscriber<String>(this,true) {
+                    @Override
+                    public void onNext(String s) {
+                        cartBean.setSelectFlag(flag);
+                        adapter.notifyItemChanged(position);
+                        setWhole();
+                        tvTotalPrice.setText(getTotalPrice()+"");
+                    }
+                });
+    }
+
+
 
 
     private void initData() {
@@ -138,11 +165,27 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
         boolean isOk = true;
         List<CartBean> cartBeans = adapter.getList();
         for (CartBean cartBean : cartBeans) {
-            if (!cartBean.isCheck()) {
+            if ("0".equals(cartBean.getSelectFlag())) {
                 isOk = false;
             }
         }
         return isOk;
+    }
+
+
+    private double getTotalPrice(){
+        double price = 0;
+        List<CartBean> cartBeans =adapter.getList();
+        for (int i = 0; i < cartBeans.size(); i++) {
+            if ("1".equals(cartBeans.get(i).getSelectFlag())){
+                double perPrice = ArithmeticUtils.mul(cartBeans.get(i)
+                        .getItemPrice(), cartBeans.get(i).getBuyCount())
+                        .doubleValue();
+                price = ArithmeticUtils.add(perPrice,price);
+            }
+        }
+
+        return price;
     }
 
 
@@ -159,18 +202,8 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
     }
 
     @OnClick(R.id.tv_result)
-    public void orderResult(){
-        HashMap map = new HashMap();
-        map.put("cardIds",cardIds());
-        map.put("recipientId","58e56686b88741f680a116f948e26088");
-        map.put("payment","5");
-        map.put("postFee","0");
-        //buyerMessage
-        map.put("buyerMessage","尽快送达");
-
+    public void orderResult() {
         CommitOrderActivity.start(this);
-
-//        PayShowActivity.start(this,map);
     }
 
 
@@ -204,6 +237,9 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                         } else {
                             v.getCsr().setFooterRefreshAble(false);
                         }
+
+                        setWhole();
+                        tvTotalPrice.setText(getTotalPrice()+"");
                     }
 
                     @Override
@@ -220,7 +256,7 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
 
 
     private void onDeleteGoods(String cardId) {
-        Debug.d("cardId:"+cardId);
+        Debug.d("cardId:" + cardId);
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user == null) {
             ToastUtils.showToast("用户信息有误");
@@ -241,7 +277,7 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
     private void showDeleteDialog(String cardId) {
         DialogUtils.showDialog(this, "提示", "确定删除当前商品？", true,
                 "删除", (dialog, which) -> {
-                    Debug.d("cardId:"+cardId);
+                    Debug.d("cardId:" + cardId);
                     onDeleteGoods(cardId);
                     dialog.dismiss();
                 }, true, "取消", (dialog, which) -> {
@@ -250,18 +286,17 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
     }
 
 
-
-    private String cardIds(){
-        String cardIds ="";
+    private String cardIds() {
+        String cardIds = "";
 
         List<CartBean> list = adapter.getList();
-        if (list.size()>0){
+        if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
                 if (i == 0) {
                     cardIds = cardIds + "[";
                 }
                 cardIds = cardIds + "{id:";
-                cardIds = cardIds + "\""+list.get(i).getCartId()+ "\""+ "}";
+                cardIds = cardIds + "\"" + list.get(i).getCartId() + "\"" + "}";
 
                 if (i != list.size() - 1) {
                     cardIds = cardIds + ",";
@@ -270,7 +305,7 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                 }
             }
         }
-        Debug.d("cardIds:"+cardIds);
+        Debug.d("cardIds:" + cardIds);
         return cardIds;
     }
 }

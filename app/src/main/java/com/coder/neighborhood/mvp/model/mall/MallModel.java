@@ -8,6 +8,7 @@ import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.bean.mall.AddressBean;
 import com.coder.neighborhood.bean.mall.CartBean;
+import com.coder.neighborhood.bean.mall.CartFlagBean;
 import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.bean.mall.CommentBean;
 import com.coder.neighborhood.bean.mall.GoodsDetailBean;
@@ -236,14 +237,13 @@ public class MallModel extends BaseModel{
 
 
     public void addOrderAlipay(String userId,
-                               String cartIds,
                                String recipientId,
                                String payment,
                                String postFee,
                                String buyerMessage,LifecycleTransformer transformer,
                                HttpSubscriber<String> httpSubscriber){
 
-        MallApi.addOrderAlipay(userId, cartIds, recipientId, payment, postFee, buyerMessage)
+        MallApi.addOrderAlipay(userId,  recipientId, payment, postFee, buyerMessage)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
@@ -262,7 +262,47 @@ public class MallModel extends BaseModel{
                 .compose(transformer)
                 .subscribe(httpSubscriber);
 
+    }
+
+    public void addRecipient(String userId,
+                             String name,
+                             String phone,
+                             String province,
+                             String city,
+                             String area,
+                             String details,
+                             String defaultFlag,
+                             LifecycleTransformer transformer,
+                             HttpSubscriber<String> httpSubscriber){
+
+        MallApi.addRecipient(userId, name, phone, province, city, area, details, defaultFlag)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
 
     }
+
+    public void cartList(String userId,
+                         String selectFlag,
+                         String pageNo,
+                         String pageSize,LifecycleTransformer transformer,
+                         HttpSubscriber<List<CartFlagBean>> httpSubscriber){
+        MallApi.cartList(userId, selectFlag, pageNo, pageSize)
+                .map(responseBean -> JSON.parseArray(responseBean.getData(),CartFlagBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void editCart(String userId,
+                         String cartId,
+                         String selectFlag,LifecycleTransformer transformer,
+                         HttpSubscriber<String> httpSubscriber){
+
+        MallApi.editCart(userId, cartId, selectFlag)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
 
 }

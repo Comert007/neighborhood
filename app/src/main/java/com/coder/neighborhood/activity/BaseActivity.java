@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
@@ -34,6 +35,12 @@ public abstract class BaseActivity<V extends IView,M extends IModel> extends Pre
     @Nullable
     @BindView(R.id.tv_title)
     public TextView tvTitle;
+    @Nullable
+    @BindView(R.id.btn_title_right)
+    public Button btnTitleRight;
+    @Nullable
+    @BindView(R.id.btn_title_left)
+    public Button btnTitleLeft;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,7 +92,6 @@ public abstract class BaseActivity<V extends IView,M extends IModel> extends Pre
     }
 
     public void onTitleLeft() {
-
     }
 
     public void onTitleRight() {
@@ -96,6 +102,17 @@ public abstract class BaseActivity<V extends IView,M extends IModel> extends Pre
     public void setTitleText(String titleText){
         if (tvTitle!=null){
             tvTitle.setText(titleText);
+        }
+    }
+
+    public void setTitleLeftText(String titleLeftText){
+        if (btnTitleLeft !=null){
+            btnTitleLeft.setText(titleLeftText);
+        }
+    }
+    public void setTitleRightText(String titleRightText){
+        if (btnTitleRight !=null){
+            btnTitleRight.setText(titleRightText);
         }
     }
 

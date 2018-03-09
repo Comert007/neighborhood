@@ -1,6 +1,6 @@
 package com.coder.neighborhood.activity.mall;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 
 import com.coder.neighborhood.BaseApplication;
@@ -34,9 +34,9 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
 
     private int page = 1;
 
-    public static void start(Context context) {
+    public static void start(Activity context) {
         Intent intent = new Intent(context, AddressManagerActivity.class);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,0x23);
     }
 
     @Override
@@ -50,6 +50,11 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
         finish();
     }
 
+    @Override
+    public void onTitleRight() {
+        super.onTitleRight();
+        AddAddressActivity.start(this);
+    }
 
     @Override
     protected void init() {
@@ -59,6 +64,7 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
     }
 
     private void initView() {
+        setTitleRightText("管理");
         adapter = new AddressManagerAdapter(this);
         csr = v.getCsr();
         crv = v.getCrv();
@@ -68,6 +74,13 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
 
 
     private void initListener() {
+        adapter.setOnActionListener((position, view) -> {
+           AddressBean bean= adapter.getItem(position);
+           Intent intent = getIntent();
+           intent.putExtra("address",bean);
+           AddressManagerActivity.this.setResult(Activity.RESULT_OK,intent);
+           finish();
+        });
 
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
             @Override
@@ -131,5 +144,12 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
                     }
                 });
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        onAddress();
     }
 }

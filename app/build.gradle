@@ -56,4 +56,5 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    compile 'liji.library.dev:citypickerview:3.1.5'
 }

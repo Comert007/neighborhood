@@ -1,11 +1,13 @@
 package com.coder.neighborhood.bean.mall;
 
+import java.io.Serializable;
+
 /**
  * @author feng
  * @Date 2018/3/7.
  */
 
-public class AddressBean {
+public class AddressBean implements Serializable{
 
     /**
      * area : 金牛区
@@ -26,6 +28,15 @@ public class AddressBean {
     private String recipientId;
     private String recipientName;
     private String details;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getArea() {
         return area;

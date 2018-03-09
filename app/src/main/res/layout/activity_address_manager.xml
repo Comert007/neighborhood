@@ -8,7 +8,7 @@
         style="@style/TitleBar"
         app:titleLeftIco="@mipmap/ic_back"
         app:titleText="确认订单"/>
-
+    <include layout="@layout/layout_split_fine"/>
     <ww.com.core.widget.CustomSwipeRefreshLayout
         android:id="@+id/csr"
         android:layout_width="match_parent"

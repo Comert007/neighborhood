@@ -30,6 +30,11 @@ public class CartBean {
     private String imgUrl;
     private String ItemPrice;
     private String itemGroupUnit;
+    /**
+     * selectFlag : 0
+     */
+
+    private String selectFlag;
 
     public String getItemName() {
         return itemName;
@@ -106,5 +111,13 @@ public class CartBean {
                 ", imgUrl='" + imgUrl + '\'' +
                 ", itemGroupUnit='" + itemGroupUnit + '\'' +
                 '}';
+    }
+
+    public String getSelectFlag() {
+        return selectFlag;
+    }
+
+    public void setSelectFlag(String selectFlag) {
+        this.selectFlag = selectFlag;
     }
 }

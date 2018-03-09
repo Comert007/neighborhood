@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/LlayFill"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="添加新地址"/>
+
+    <include layout="@layout/layout_split_fine"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx100"
+                  android:background="@color/color_white"
+                  android:focusable="true"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20">
+
+        <TextView android:layout_width="0px"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:text="收件人"
+                  android:textColor="@color/color_black"
+                  android:textSize="@dimen/wwpx30"/>
+
+        <EditText
+            android:id="@+id/et_recipient_name"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/wwpx30"/>
+
+    </LinearLayout>
+    <include layout="@layout/layout_split_fine"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx100"
+                  android:background="@color/color_white"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20">
+
+        <TextView android:layout_width="0px"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:text="联系电话"
+                  android:textColor="@color/color_black"
+                  android:textSize="@dimen/wwpx30"/>
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/color_black"
+            android:maxLength="11"
+            android:inputType="number"
+            android:textSize="@dimen/wwpx30"/>
+    </LinearLayout>
+    <include layout="@layout/layout_split_fine"/>
+    <LinearLayout
+        android:id="@+id/ll_address"
+        android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx100"
+                  android:background="@color/color_white"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:gravity="center_vertical"
+                  android:text="所在地区"
+                  android:textColor="@color/color_black"
+                  android:textSize="@dimen/wwpx30"/>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:lines="1"
+            android:text="请选择"
+            android:textColor="@color/gray_pressed"
+            android:textSize="@dimen/wwpx30"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_arrow_right"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_split_fine"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx100"
+                  android:background="@color/color_white"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20"
+                  android:visibility="gone">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:gravity="center_vertical"
+                  android:text="街道"
+                  android:textColor="@color/color_black"
+                  android:textSize="@dimen/wwpx30"/>
+
+        <TextView android:layout_width="0px"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:ellipsize="end"
+                  android:gravity="center_vertical|right"
+                  android:lines="1"
+                  android:text="请选择"
+                  android:textColor="@color/gray_pressed"
+                  android:textSize="@dimen/wwpx30"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_arrow_right"/>
+
+    </LinearLayout>
+    <include layout="@layout/layout_split_fine"/>
+    <EditText
+        android:id="@+id/et_details"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx200"
+        android:background="@color/color_white"
+        android:gravity="start"
+        android:hint="详细地址"
+        android:padding="@dimen/wwpx20"
+        android:textColor="@color/color_black"
+        android:textColorHint="@color/gray_pressed"
+        android:textSize="@dimen/wwpx30"/>
+    <include layout="@layout/layout_split_fine"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx100"
+                  android:background="@color/color_white"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20">
+
+        <TextView android:layout_width="0px"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:text="设置默认地址"
+                  android:textColor="@color/color_black"
+                  android:textSize="@dimen/wwpx30"/>
+
+        <com.coder.neighborhood.widget.IconFontTextView
+            android:id="@+id/icon_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\ue678"
+            android:textColor="@color/color_aaaaaa"
+            android:textSize="@dimen/wwpx32"/>
+
+    </LinearLayout>
+</LinearLayout>
