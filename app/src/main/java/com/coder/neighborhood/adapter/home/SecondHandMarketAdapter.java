@@ -37,7 +37,7 @@ public class SecondHandMarketAdapter extends RvAdapter<CategoryGoodsBean> {
         return new SecondHandMarketViewHolder(view);
     }
 
-    class SecondHandMarketViewHolder extends RvViewHolder<CategoryGoodsBean>{
+    class SecondHandMarketViewHolder extends RvViewHolder<CategoryGoodsBean> {
         @BindView(R.id.tv_title)
         TextView tvTitle;
         @BindView(R.id.rv)
@@ -52,15 +52,20 @@ public class SecondHandMarketAdapter extends RvAdapter<CategoryGoodsBean> {
         @Override
         public void onBindData(int position, CategoryGoodsBean bean) {
             tvTitle.setText(bean.getItemCategoryName());
-            GridLayoutManager manager = new GridLayoutManager(getContext(),2);
+            GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
             rv.setLayoutManager(manager);
             rv.setItemAnimator(new DefaultItemAnimator());
             CategoryGoodsItemAdapter adapter = new CategoryGoodsItemAdapter(getContext());
-            adapter.addList(bean.getItem());
+            if (bean.getItem().size() > 2) {
+                adapter.addList(bean.getItem().subList(0, 2));
+            } else {
+                adapter.addList(bean.getItem());
+            }
             rv.setAdapter(adapter);
 
             tvGoodsMore.setOnClickListener(v -> {
-                GoodsTypeActivity.start(getContext(),"2",bean.getItemCategoryId(),bean.getItemCategoryName());
+                GoodsTypeActivity.start(getContext(), "2", bean.getItemCategoryId(), bean
+                        .getItemCategoryName());
             });
         }
     }

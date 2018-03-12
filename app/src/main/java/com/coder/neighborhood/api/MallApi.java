@@ -188,6 +188,15 @@ public class MallApi extends BaseApi {
         return onPost(getActionUrl("app/addRecipient"),params);
     }
 
+
+    public  static final Observable<ResponseBean> deleteRecipient (String userId,String recipientId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("recipientId",recipientId);
+
+        return onPost(getActionUrl("app/deleteRecipient"),params);
+    }
+
     public static final Observable<ResponseBean> cartList(String userId,
                                                           String selectFlag,
                                                           String pageNo,
@@ -209,6 +218,25 @@ public class MallApi extends BaseApi {
         params.addParameters("selectFlag",selectFlag);
 
         return onPost(getActionUrl("app/editCart"),params);
+    }
+
+    public static final Observable<ResponseBean>  addPickOrder(String userId,
+                                                               String itemId,
+                                                               String itemQuantity,
+                                                               String recipientId,
+                                                               String payment,
+                                                               String postFee,
+                                                               String buyerMessage){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("itemId",itemId);
+        params.addParameters("itemQuantity",itemQuantity);
+        params.addParameters("recipientId",recipientId);
+        params.addParameters("payment",payment);
+        params.addParameters("postFee",postFee);
+        params.addParameters("buyerMessage",buyerMessage);
+
+        return onPost(getActionUrl("app/addPickOrder"),params);
     }
 
 }

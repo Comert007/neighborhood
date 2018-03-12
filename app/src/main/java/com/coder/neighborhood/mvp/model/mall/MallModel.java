@@ -282,6 +282,20 @@ public class MallModel extends BaseModel{
 
     }
 
+
+    public void deleteRecipient (String userId,String recipientId,LifecycleTransformer transformer,
+                                 HttpSubscriber<String> httpSubscriber){
+        MallApi.deleteRecipient(userId, recipientId)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getMessage();
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
     public void cartList(String userId,
                          String selectFlag,
                          String pageNo,
@@ -304,5 +318,19 @@ public class MallModel extends BaseModel{
                 .subscribe(httpSubscriber);
     }
 
+    public void addPickOrder(String userId,
+                             String itemId,
+                             String itemQuantity,
+                             String recipientId,
+                             String payment,
+                             String postFee,
+                             String buyerMessage,
+                             String selectFlag,LifecycleTransformer transformer,
+                             HttpSubscriber<String> httpSubscriber){
+        MallApi.addPickOrder(userId, itemId, itemQuantity, recipientId, payment, postFee, buyerMessage)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
 
 }

@@ -2,6 +2,7 @@ package com.coder.neighborhood.activity.mall;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -13,6 +14,7 @@ import com.coder.neighborhood.bean.mall.AddressBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.AddressManagerView;
+import com.coder.neighborhood.utils.DialogUtils;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
@@ -36,7 +38,7 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
 
     public static void start(Activity context) {
         Intent intent = new Intent(context, AddressManagerActivity.class);
-        context.startActivityForResult(intent,0x23);
+        context.startActivityForResult(intent, 0x23);
     }
 
     @Override
@@ -75,11 +77,17 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
 
     private void initListener() {
         adapter.setOnActionListener((position, view) -> {
-           AddressBean bean= adapter.getItem(position);
-           Intent intent = getIntent();
-           intent.putExtra("address",bean);
-           AddressManagerActivity.this.setResult(Activity.RESULT_OK,intent);
-           finish();
+            AddressBean bean = adapter.getItem(position);
+            Intent intent = getIntent();
+            intent.putExtra("address", bean);
+            AddressManagerActivity.this.setResult(Activity.RESULT_OK, intent);
+            finish();
+        });
+
+        adapter.setOnLongActionListener((position, view) -> {
+            AddressBean address = adapter.getItem(position);
+            showDeleteDialog(address);
+
         });
 
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
@@ -104,14 +112,15 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
         onAddress();
     }
 
-    private void onAddress(){
+    private void onAddress() {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user == null) {
             ToastUtils.showToast("用户信息有误");
             return;
         }
-        m.getRecipientList(user.getUserId(), page+"", Constants.PAGE_SIZE + "", bindUntilEvent(ActivityEvent.DESTROY)
-                , new HttpSubscriber<List<AddressBean>>(this,false) {
+        m.getRecipientList(user.getUserId(), page + "", Constants.PAGE_SIZE + "", bindUntilEvent
+                        (ActivityEvent.DESTROY)
+                , new HttpSubscriber<List<AddressBean>>(this, false) {
                     @Override
                     public void onNext(List<AddressBean> addressBeans) {
                         v.getCsr().setRefreshFinished();
@@ -151,5 +160,32 @@ public class AddressManagerActivity extends BaseActivity<AddressManagerView, Mal
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         onAddress();
+    }
+
+
+    private void showDeleteDialog(AddressBean address) {
+
+        DialogUtils.showDialog(this, "删除", "是否删除收件人地址", true,
+                "删除", (dialog, which) -> {
+                    deleteAddress(address);
+                    dialog.dismiss();
+                }, true, "取消", (dialog, which) -> {
+                    dialog.dismiss();
+                }).show();
+    }
+
+    private void deleteAddress(AddressBean address) {
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user != null && !TextUtils.isEmpty(user.getUserId())) {
+            m.deleteRecipient(user.getUserId(), address.getRecipientId(), bindUntilEvent(ActivityEvent.DESTROY),
+                    new HttpSubscriber<String>(this, true) {
+
+                        @Override
+                        public void onNext(String s) {
+                            adapter.removeItem(address);
+                            ToastUtils.showToast("删除成功",true);
+                        }
+                    });
+        }
     }
 }

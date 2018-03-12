@@ -19,7 +19,6 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import ww.com.core.Debug;
 
 /**
  * @author feng
@@ -116,7 +115,7 @@ public class ModifyPasswordActivity extends BaseActivity<VoidView, UserModel> {
         m.sendMsg(mobile, bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<String>(this,true) {
             @Override
             public void onNext(String s) {
-                Debug.d("code:"+s);
+                ToastUtils.showToast("发送成功",true);
                 countDown();
             }
         });

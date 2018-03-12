@@ -59,7 +59,7 @@ public class OrderStatusAdapter extends RvAdapter<OrderBean> {
         public void onBindData(int position, OrderBean bean) {
             /**
              *
-             * 订单状态(1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭',)
+             * 订单状态(1、待付款，2、待发货，3、待收货，4、待评价、5、已完成)
              */
             ImageLoader.getInstance().displayImage(bean.getImgUrl(), iv, BaseApplication
                     .getDisplayImageOptions(R.mipmap.pic_default));
@@ -84,10 +84,7 @@ public class OrderStatusAdapter extends RvAdapter<OrderBean> {
                     btnOrder.setText("评价");
                     break;
                 case "5":
-                    btnOrder.setText("退货");
-                    break;
-                case "6":
-                    btnOrder.setText("已关闭");
+                    btnOrder.setVisibility(View.GONE);
                     break;
                 default:
                     break;

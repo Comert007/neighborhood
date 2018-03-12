@@ -1,5 +1,6 @@
 package com.coder.neighborhood.bean.mall;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @Date 2018/2/6.
  */
 
-public class GoodsInfoBean {
+public class GoodsInfoBean implements Serializable{
 
 
     /**

@@ -12,6 +12,7 @@
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/wwpx60"
+            android:cursorVisible="false"
             android:gravity="center"
             android:hint="搜索"
             android:imeOptions="actionSearch"

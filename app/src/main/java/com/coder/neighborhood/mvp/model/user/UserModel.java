@@ -40,7 +40,7 @@ public class UserModel implements IModel {
                         HttpSubscriber<String> httpSubscriber){
 
         UserApi.sendMsg(phone)
-                .map(responseBean -> responseBean.getData()).compose(RxHelper.cutMain())
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }

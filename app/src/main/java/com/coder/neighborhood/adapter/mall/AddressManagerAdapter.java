@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.mall.AddressBean;
 import com.coder.neighborhood.mvp.listener.OnActionListener;
+import com.coder.neighborhood.mvp.listener.OnLongActionListener;
 
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
@@ -22,6 +23,7 @@ import ww.com.core.adapter.RvViewHolder;
 public class AddressManagerAdapter extends RvAdapter<AddressBean> {
 
     private OnActionListener onActionListener;
+    private OnLongActionListener onLongActionListener;
 
     public AddressManagerAdapter(Context context) {
         super(context);
@@ -29,6 +31,10 @@ public class AddressManagerAdapter extends RvAdapter<AddressBean> {
 
     public void setOnActionListener(OnActionListener onActionListener) {
         this.onActionListener = onActionListener;
+    }
+
+    public void setOnLongActionListener(OnLongActionListener onLongActionListener) {
+        this.onLongActionListener = onLongActionListener;
     }
 
     @Override
@@ -71,6 +77,13 @@ public class AddressManagerAdapter extends RvAdapter<AddressBean> {
                 if (onActionListener!=null){
                     onActionListener.onAction(position,itemView);
                 }
+            });
+
+            itemView.setOnLongClickListener(v -> {
+                if (onLongActionListener !=null){
+                    onLongActionListener.onLongAction(position,itemView);
+                }
+                return true;
             });
         }
     }

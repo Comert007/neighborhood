@@ -183,7 +183,7 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
                 addCart("1");
                 break;
             case R.id.ll_more_cart:
-                addCart(goodsInfoBean.getItemPickingCount());
+                CommitPickOrderActivity.start(this);
                 break;
             default:
                 break;

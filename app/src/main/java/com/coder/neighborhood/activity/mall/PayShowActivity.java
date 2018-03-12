@@ -65,6 +65,17 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
         }
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
+
+    private void addPickOrderAlipay(){
+
+    }
+
     private void addOrderAlipay() {
         String recipientId = (String) map.get("recipientId");
         String payment = (String) map.get("payment");
@@ -94,7 +105,7 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
                                 @Override
                                 public void onPayFail(String status, String errInfo) {
                                     Debug.d("errInfo:"+errInfo);
-                                    ToastUtils.showToast(errInfo,false);
+                                    ToastUtils.showToast("支付失败",false);
                                 }
                             }).pay(orderString);
                         }
