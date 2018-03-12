@@ -35,11 +35,22 @@ public class UserModel implements IModel {
 
     }
 
+    public void sendMsg(String phone,
+                        LifecycleTransformer transformer,
+                        HttpSubscriber<String> httpSubscriber){
+
+        UserApi.sendMsg(phone)
+                .map(responseBean -> responseBean.getData()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
     public void signup(String username,
+                       String code,
                        String password,
                        LifecycleTransformer transformer, HttpSubscriber<String> httpSubscriber) {
 
-        UserApi.signup(username, password)
+        UserApi.signup(username, code,password)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
@@ -53,11 +64,12 @@ public class UserModel implements IModel {
 
 
     public void findPassword(String username,
+                             String code,
                              String password,
                              LifecycleTransformer transformer, HttpSubscriber<String>
                                      httpSubscriber) {
 
-        UserApi.findPassword(username, password)
+        UserApi.findPassword(username, code,password)
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {

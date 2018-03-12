@@ -15,16 +15,27 @@ import ww.com.http.core.AjaxParams;
 
 public class UserApi extends BaseApi {
 
-    public static final Observable<ResponseBean> signup(String username,String password){
+//POST /app/sendMsg
+    public static final Observable<ResponseBean> sendMsg(String phone){
+        AjaxParams params = getBaseParams();
+        params.addParameters("phone",phone);
+        params.addParameters("safeCode","wanjialinli*2018");
+
+        return onPost(getActionUrl("app/sendMsg"),params);
+    }
+
+    public static final Observable<ResponseBean> signup(String username,String code,String password){
         AjaxParams params = getBaseParams();
         params.addParameters("username",username);
+        params.addParameters("code",code);
         params.addParameters("password",password);
         return onPost(getActionUrl("app/signup"),params);
     }
 
-    public static final Observable<ResponseBean> findPassword(String username,String password){
+    public static final Observable<ResponseBean> findPassword(String username,String code,String password){
         AjaxParams params = getBaseParams();
         params.addParameters("username",username);
+        params.addParameters("code",code);
         params.addParameters("password",password);
         return onPost(getActionUrl("app/findPassword"),params);
     }
