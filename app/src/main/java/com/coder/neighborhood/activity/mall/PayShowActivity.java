@@ -33,6 +33,8 @@ import ww.com.core.Debug;
 public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
 
     private HashMap map;
+    private String status;
+    // 1:普通商品支付。2：拼单
 
     public static void start(Context context, HashMap map) {
         Intent intent = new Intent(context, PayShowActivity.class);
@@ -48,16 +50,22 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
     @Override
     protected void init() {
         map = (HashMap) getIntent().getSerializableExtra("map");
+        status = (String) map.get("status");
     }
 
-    @OnClick({R.id.btn_alipay,R.id.btn_wechat})
-    public void onPay(View view){
-        switch (view.getId()){
+    @OnClick({R.id.btn_alipay, R.id.btn_wechat})
+    public void onPay(View view) {
+        switch (view.getId()) {
             case R.id.btn_alipay:
+                if ("1".equals(status)){
+                    addOrderAlipay();
+                }else {
+                    addPickOrderAlipay();
+                }
                 addOrderAlipay();
                 break;
             case R.id.btn_wechat:
-
+                //
                 break;
             default:
                 ToastUtils.showToast("the pay is error");
@@ -72,7 +80,41 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
     }
 
 
-    private void addPickOrderAlipay(){
+    private void addPickOrderAlipay() {
+        String itemId = (String) map.get("itemId");
+        String itemQuantity = (String) map.get("itemQuantity");
+        String recipientId = (String) map.get("recipientId");
+        String payment = (String) map.get("payment");
+        String postFee = (String) map.get("postFee");
+        String buyerMessage = (String) map.get("buyerMessage");
+
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user != null && !TextUtils.isEmpty(user.getUserId())) {
+            m.addPickOrder(user.getUserId(), itemId, itemQuantity, recipientId, payment, postFee,
+                    buyerMessage,
+                    bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<String>(this, true) {
+                        @Override
+                        public void onNext(String s) {
+                            JSONObject json = JSON.parseObject(s);
+                            String orderString = json.getString("orderString");
+                            WWAlipay.cretateAlipay(PayShowActivity.this, new WWAlipay
+                                    .AliPayListener() {
+                                @Override
+                                public void onPaySuccess(String info) {
+                                    Debug.d("info:" + info);
+                                    ToastUtils.showToast("支付成功", true);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onPayFail(String status, String errInfo) {
+                                    Debug.d("errInfo:" + errInfo);
+                                    ToastUtils.showToast("支付失败", false);
+                                }
+                            }).pay(orderString);
+                        }
+                    });
+        }
 
     }
 
@@ -93,19 +135,20 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
                         public void onNext(String s) {
 
                             JSONObject json = JSON.parseObject(s);
-                            String orderString  = json.getString("orderString");
-                            WWAlipay.cretateAlipay(PayShowActivity.this, new WWAlipay.AliPayListener() {
+                            String orderString = json.getString("orderString");
+                            WWAlipay.cretateAlipay(PayShowActivity.this, new WWAlipay
+                                    .AliPayListener() {
                                 @Override
                                 public void onPaySuccess(String info) {
-                                    Debug.d("info:"+info);
-                                    ToastUtils.showToast("支付成功",true);
+                                    Debug.d("info:" + info);
+                                    ToastUtils.showToast("支付成功", true);
                                     finish();
                                 }
 
                                 @Override
                                 public void onPayFail(String status, String errInfo) {
-                                    Debug.d("errInfo:"+errInfo);
-                                    ToastUtils.showToast("支付失败",false);
+                                    Debug.d("errInfo:" + errInfo);
+                                    ToastUtils.showToast("支付失败", false);
                                 }
                             }).pay(orderString);
                         }

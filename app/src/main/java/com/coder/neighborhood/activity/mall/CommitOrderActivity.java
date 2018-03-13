@@ -123,6 +123,7 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
                 }
 
                 HashMap map = new HashMap();
+                map.put("status","1");
                 map.put("recipientId", recipientId);
                 map.put("payment",price+"");
                 map.put("postFee",TextUtils.isEmpty(etPostFee.getText().toString())?"0":etPostFee.getText().toString());

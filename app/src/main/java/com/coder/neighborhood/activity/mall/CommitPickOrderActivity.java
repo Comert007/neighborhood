@@ -156,6 +156,7 @@ public class CommitPickOrderActivity extends BaseActivity<VoidView, MallModel> {
                 }
 
                 HashMap map = new HashMap();
+                map.put("status","2");
                 map.put("itemId",goodsInfoBean.getItemId());
                 map.put("itemQuantity","1");
                 map.put("recipientId", recipientId);
