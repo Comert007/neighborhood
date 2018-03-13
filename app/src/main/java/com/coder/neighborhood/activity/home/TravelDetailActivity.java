@@ -11,6 +11,7 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.mall.CartActivity;
+import com.coder.neighborhood.activity.mall.CommitTravelPickOrderActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.home.TravelDetailBean;
@@ -134,7 +135,7 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
                 addCart("1");
                 break;
             case R.id.ll_more_cart:
-                addCart(travelDetailBean.getItemDealQuantiry());
+                CommitTravelPickOrderActivity.start(this,travelDetailBean);
                 break;
             default:
                 break;

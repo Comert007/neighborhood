@@ -57,7 +57,7 @@ public class MallAdapter extends RvAdapter<CategoryGoodsBean> {
             rv.setLayoutManager(manager);
             rv.setItemAnimator(new DefaultItemAnimator());
             CategoryGoodsItemAdapter adapter = new CategoryGoodsItemAdapter(getContext());
-            if (bean.getItem().size()>2){
+            if (bean.getItem()!=null&& bean.getItem().size()>2){
                 adapter.addList(bean.getItem().subList(0,2));
             }else {
                 adapter.addList(bean.getItem());

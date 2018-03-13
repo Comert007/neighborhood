@@ -327,7 +327,7 @@ public class MallModel extends BaseModel{
                              String buyerMessage,LifecycleTransformer transformer,
                              HttpSubscriber<String> httpSubscriber){
         MallApi.addPickOrder(userId, itemId, itemQuantity, recipientId, payment, postFee, buyerMessage)
-                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .map(responseBean -> responseBean.getData()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }

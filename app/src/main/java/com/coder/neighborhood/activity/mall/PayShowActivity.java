@@ -62,7 +62,6 @@ public class PayShowActivity extends BaseActivity<VoidView, MallModel> {
                 }else {
                     addPickOrderAlipay();
                 }
-                addOrderAlipay();
                 break;
             case R.id.btn_wechat:
                 //

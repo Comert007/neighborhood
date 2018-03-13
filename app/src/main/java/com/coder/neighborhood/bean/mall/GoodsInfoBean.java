@@ -127,7 +127,7 @@ public class GoodsInfoBean implements Serializable{
     }
 
 
-    public static class ImgUrlsBean {
+    public static class ImgUrlsBean implements Serializable {
         /**
          * imgUrl : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/boss001.jpg
          */

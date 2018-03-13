@@ -1,5 +1,6 @@
 package com.coder.neighborhood.bean.home;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @Date 2018/1/20
  */
 
-public class TravelDetailBean {
+public class TravelDetailBean implements Serializable{
 
 
     /**
@@ -129,7 +130,7 @@ public class TravelDetailBean {
         this.traveRoute = traveRoute;
     }
 
-    public static class ImgUrlBean {
+    public static class ImgUrlBean implements Serializable{
         /**
          * imgUrl : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/swiss0001.jpeg
          */
@@ -145,7 +146,7 @@ public class TravelDetailBean {
         }
     }
 
-    public static class TraveRouteBean {
+    public static class TraveRouteBean implements Serializable{
         /**
          * traveRoute : http://39.106.140.31:80/linli/userfiles/1/images/photo/2018/01/swiss0001.jpeg
          */
