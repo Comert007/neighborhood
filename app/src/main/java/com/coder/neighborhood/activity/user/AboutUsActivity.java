@@ -31,4 +31,10 @@ public class AboutUsActivity extends BaseActivity<VoidView,VoidModel> {
     protected void init() {
 
     }
+
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
 }

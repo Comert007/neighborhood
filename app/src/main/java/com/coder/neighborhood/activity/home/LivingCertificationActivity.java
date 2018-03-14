@@ -79,6 +79,12 @@ public class LivingCertificationActivity extends BaseActivity<VoidView, HomeMode
     }
 
     @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
+    @Override
     protected void init() {
         dispose = PermissionDispose.init(this, this);
 

@@ -121,9 +121,16 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
             tvName.setText(bean.getNickName());
             tvContent.setText(bean.getCircleInfo());
             if (!TextUtils.isEmpty(bean.getCircleDate())){
-                tvSubScribe.setText(TimeUtils.milliseconds2String(
-                        TimeUtils.string2Milliseconds(bean.getCircleDate(),new SimpleDateFormat("yyyy-MM-dd")),
-                        new SimpleDateFormat("yyyy.MM.dd")));
+
+                if (bean.getCircleDate().length()>10){
+                    tvSubScribe.setText(TimeUtils.milliseconds2String(Long.valueOf(bean.getCircleDate()).longValue(),
+                            new SimpleDateFormat("yyyy.MM.dd")));
+                }else {
+                    tvSubScribe.setText(TimeUtils.milliseconds2String(
+                            TimeUtils.string2Milliseconds(bean.getCircleDate(),new SimpleDateFormat("yyyy-MM-dd")),
+                            new SimpleDateFormat("yyyy.MM.dd")));
+                }
+
             }
             tvPrise.setText(TextUtils.isEmpty(bean.getCircleLike())?"0":bean.getCircleLike());
             iconComment.setOnClickListener(v -> {

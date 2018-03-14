@@ -6,19 +6,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.adapter.user.CategoryAdapter;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.bean.mall.CategoryBean;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.coder.neighborhood.utils.OwnerImageLoader;
@@ -33,11 +39,15 @@ import com.nostra13.universalimageloader.core.download.ImageDownloader;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ww.com.core.ScreenUtil;
 import ww.com.core.utils.PermissionDispose;
+import ww.com.core.widget.CustomRecyclerView;
 
 /**
  * @author feng
@@ -61,8 +71,12 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
     EditText etGoodsPrice;
     @BindView(R.id.et_goods_num)
     EditText etGoodsNum;
-    @BindView(R.id.et_goods_type)
-    EditText etGoodsType;
+//    @BindView(R.id.et_goods_type)
+//    EditText etGoodsType;
+    @BindView(R.id.ll_goodsType_selector)
+    LinearLayout llGoodsTypeSelector;
+    @BindView(R.id.tv_goods_type)
+    TextView tvGoodsType;
     @BindView(R.id.et_goods_detail)
     EditText etGoodsDetail;
 
@@ -70,6 +84,9 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
 
     private PermissionDispose dispose;
     private String path;
+    private String categoryId;
+    private BottomSheetDialog sheetDialog;
+    private List<CategoryBean> categoryBeans;
 
     public static void startForResult(Activity context,int requestCode) {
         Intent intent = new Intent(context, AddSecondHandActivity.class);
@@ -84,6 +101,7 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
     @Override
     protected void init() {
         dispose = PermissionDispose.init(this, this);
+        goodsType();
         initImagePicker();
         initListener();
     }
@@ -110,7 +128,7 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
         finish();
     }
 
-    @OnClick({R.id.ll_add_show, R.id.if_close,R.id.btn_publish_goods})
+    @OnClick({R.id.ll_add_show, R.id.if_close,R.id.btn_publish_goods,R.id.ll_goodsType_selector})
     public void onAddSecond(View view) {
         switch (view.getId()) {
             case R.id.ll_add_show:
@@ -127,6 +145,9 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
                 break;
             case R.id.btn_publish_goods:
                 publishGoods();
+                break;
+            case R.id.ll_goodsType_selector:
+                showSheetDialog();
                 break;
             default:
                 break;
@@ -193,7 +214,6 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
         String name = etGoodsName.getText().toString().trim();
         String price= etGoodsPrice.getText().toString().trim();
         String num = etGoodsNum.getText().toString().trim();
-        String type = etGoodsType.getText().toString().trim();
         String detail = etGoodsDetail.getText().toString().trim();
 
         if (TextUtils.isEmpty(name)){
@@ -210,8 +230,8 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
             return;
         }
 
-        if (TextUtils.isEmpty(type)){
-            ToastUtils.showToast("请输入商品类型");
+        if (TextUtils.isEmpty(categoryId)){
+            ToastUtils.showToast("请选择商品类型");
             return;
         }
         if (TextUtils.isEmpty(detail)){
@@ -220,7 +240,7 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
         }
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user!=null && !TextUtils.isEmpty(user.getUserId())){
-            m.addSecondGoods(user.getUserId(), name, price,num , type, detail, path, bindUntilEvent(ActivityEvent.DESTROY)
+            m.addSecondGoods(user.getUserId(), name, price,num , categoryId, detail, path, bindUntilEvent(ActivityEvent.DESTROY)
 
                     , new HttpSubscriber<String>(this,true) {
                         @Override
@@ -238,4 +258,36 @@ public class AddSecondHandActivity extends BaseActivity<VoidView, HomeModel> imp
         finish();
     }
 
+
+    private void goodsType(){
+        m.goodsType(bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<CategoryBean>>(this,true) {
+
+            @Override
+            public void onNext(List<CategoryBean> categoryBeans) {
+                AddSecondHandActivity.this.categoryBeans = categoryBeans;
+            }
+        });
+    }
+
+
+    private void showSheetDialog() {
+        if (sheetDialog == null) {
+            sheetDialog = new BottomSheetDialog(this,R.style.CustomerDialogStyle);
+            View view = LayoutInflater.from(this).inflate(R.layout.layout_community, null);
+            ScreenUtil.scale(view);
+            CustomRecyclerView crv = ButterKnife.findById(view, R.id.crv);
+            crv.setLayoutManager(new LinearLayoutManager(this));
+            CategoryAdapter adapter = new CategoryAdapter(this);
+            adapter.setOnActionListener((position, view1) -> {
+                CategoryBean bean = adapter.getItem(position);
+                tvGoodsType.setText(bean.getItemCategoryName());
+                categoryId = bean.getItemCategoryId();
+                sheetDialog.dismiss();
+            });
+            adapter.addList(categoryBeans);
+            crv.setAdapter(adapter);
+            sheetDialog.setContentView(view);
+        }
+        sheetDialog.show();
+    }
 }

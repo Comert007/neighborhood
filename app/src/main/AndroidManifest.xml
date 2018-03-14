@@ -279,12 +279,18 @@
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustPan"/>
 
+        <!--拼单商品提交-->
         <activity android:name=".activity.mall.CommitPickOrderActivity"
         android:screenOrientation="portrait"
         android:windowSoftInputMode="adjustPan"/>
 
-
+        <!--拼单旅游提交-->
         <activity android:name=".activity.mall.CommitTravelPickOrderActivity"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
+
+        <!--评价商品-->
+        <activity android:name=".activity.user.CommentGoodsActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustPan"/>
 

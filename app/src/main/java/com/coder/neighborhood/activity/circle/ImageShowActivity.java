@@ -41,6 +41,12 @@ public class ImageShowActivity extends BaseActivity<VoidView,VoidModel> {
     }
 
     @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
+    @Override
     protected void init() {
         index = getIntent().getIntExtra("index", 0);
         photos = (ArrayList<String>) getIntent().getSerializableExtra("photos");

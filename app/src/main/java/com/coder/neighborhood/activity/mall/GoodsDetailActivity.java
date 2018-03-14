@@ -21,14 +21,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.smtt.sdk.WebView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import ww.com.core.Debug;
-import ww.com.core.utils.TimeUtils;
 import ww.com.core.widget.RoundImageView;
 import ww.com.core.widget.TranslateTabBar;
 
@@ -231,8 +229,8 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
     private void showComment(CommentBean commentBean) {
         ImageLoader.getInstance().displayImage(commentBean.getImgUrl(), riv, BaseApplication
                 .getDisplayImageOptions(R.mipmap.ic_default_avatar));
-        tvComment.setText(commentBean.getContent());
-        tvTime.setText(TimeUtils.milliseconds2String(commentBean.getCreated(), new SimpleDateFormat("yyyy.MM.dd")));
+        tvComment.setText(commentBean.getCommentsContent());
+        tvTime.setText(commentBean.getCommentsDate());
     }
 
 }

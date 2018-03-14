@@ -21,7 +21,6 @@ import com.coder.neighborhood.activity.user.GoodFriendsActivity;
 import com.coder.neighborhood.activity.user.LoginActivity;
 import com.coder.neighborhood.activity.user.UserAuthenticationActivity;
 import com.coder.neighborhood.activity.user.UserInfoActivity;
-import com.coder.neighborhood.api.BaseApi;
 import com.coder.neighborhood.bean.ResponseBean;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.mvp.model.user.UserModel;
@@ -88,7 +87,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
     private void initData() {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user != null) {
-            ImageLoader.getInstance().displayImage(BaseApi.HOST_URL + user.getImgUrl(),
+            ImageLoader.getInstance().displayImage(user.getImgUrl(),
                     rivHeader, BaseApplication
                             .getDisplayImageOptions(R.mipmap.ic_default_avatar));
             tvName.setText(TextUtils.isEmpty(user.getNickName()) ? user.getPhone() + "用户" : user

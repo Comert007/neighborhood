@@ -61,6 +61,11 @@ public class GoodsSearchActivity extends BaseActivity<RefreshView, MallModel> {
         initData();
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
 
     private void initView() {
         adapter = new GoodsSearchAdapter(this);

@@ -140,6 +140,17 @@ public class HomeApi extends BaseApi {
 
     }
 
+    public static final Observable<ResponseBean> commentGoods(String userId,String itemId,
+                                                                  String comments){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId", userId);
+        params.addParameters("itemId", itemId);
+        params.addParameters("comments", comments);
+
+        return onPost(getActionUrl("app/addItemComments"), params);
+
+    }
+
 
     public static final Observable<ResponseBean> questionsComment(String questionId,
                                                                   String pageNo,
@@ -201,6 +212,12 @@ public class HomeApi extends BaseApi {
         params.addParameters("remark",remark);
 
         return onPost(getActionUrl("app/addTakeExpress"),params);
+    }
+
+    public static final Observable<ResponseBean> goodsType(){
+        //app/getItemCategoryArray
+        AjaxParams params = getBaseParams();
+        return onPost(getActionUrl("app/getItemCategoryArray"),params);
     }
 
 }

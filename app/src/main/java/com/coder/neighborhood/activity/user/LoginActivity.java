@@ -54,6 +54,7 @@ public class LoginActivity extends BaseActivity<VoidView,UserModel> {
 
     }
 
+
     @OnClick({R.id.btn_enter,R.id.btn_register,R.id.tv_reset_password})
     public void onLoginClick(View v){
         switch (v.getId()){

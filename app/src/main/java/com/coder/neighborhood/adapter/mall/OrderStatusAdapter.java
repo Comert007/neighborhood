@@ -1,5 +1,6 @@
 package com.coder.neighborhood.adapter.mall;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.user.CommentGoodsActivity;
 import com.coder.neighborhood.bean.user.OrderBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -64,9 +66,19 @@ public class OrderStatusAdapter extends RvAdapter<OrderBean> {
             ImageLoader.getInstance().displayImage(bean.getImgUrl(), iv, BaseApplication
                     .getDisplayImageOptions(R.mipmap.pic_default));
             tvGoodsName.setText(bean.getItemName());
-            tvGoodsPrice.setText(bean.getOrderPayment() + "元"+(TextUtils.isEmpty(bean.getItemGroupUnit())?"":"/"+bean.getItemGroupUnit()));
-            tvGoodsNum.setText(TextUtils.isEmpty(bean.getBuyCount())?"":"x"+bean.getBuyCount());
+            tvGoodsPrice.setText(bean.getOrderPayment() + "元" + (TextUtils.isEmpty(bean
+                    .getItemGroupUnit()) ? "" : "/" + bean.getItemGroupUnit()));
+            tvGoodsNum.setText(TextUtils.isEmpty(bean.getBuyCount()) ? "" : "x" + bean
+                    .getBuyCount());
             showStatus(bean.getOrderStatus());
+
+            btnOrder.setOnClickListener(v -> {
+                if ("4".equals(bean.getOrderStatus())) {
+                    CommentGoodsActivity.start((Activity) getContext(), bean.getItemId());
+                }
+            });
+
+
         }
 
         private void showStatus(String status) {
@@ -91,6 +103,10 @@ public class OrderStatusAdapter extends RvAdapter<OrderBean> {
             }
         }
 
+
+        private void onClick() {
+
+        }
 
     }
 }

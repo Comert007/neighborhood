@@ -129,7 +129,9 @@ public class MallApi extends BaseApi {
                                                            String pageSize){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-        params.addParameters("orderStatus",orderStatus);
+        if (!orderStatus.equals("0")){
+            params.addParameters("orderStatus",orderStatus);
+        }
         params.addParameters("pageNo",pageNo);
         params.addParameters("pageSize",pageSize);
 
@@ -238,5 +240,8 @@ public class MallApi extends BaseApi {
 
         return onPost(getActionUrl("app/addPickOrder"),params);
     }
+
+
+
 
 }

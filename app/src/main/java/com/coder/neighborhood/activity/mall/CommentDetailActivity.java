@@ -62,6 +62,12 @@ public class CommentDetailActivity extends BaseActivity<CommentDetailView, MallM
         csr.setFooterRefreshAble(false);
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void initListener() {
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
             @Override

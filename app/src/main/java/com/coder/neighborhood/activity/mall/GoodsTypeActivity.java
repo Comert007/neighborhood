@@ -63,6 +63,12 @@ public class GoodsTypeActivity extends BaseActivity<GoodsTypeView,MallModel> {
         initData();
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void initView() {
         adapter = new GoodsTypeAdapter(this);
         csr = v.getCsr();

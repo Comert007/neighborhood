@@ -9,12 +9,9 @@ import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.mall.CommentBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.text.SimpleDateFormat;
-
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
-import ww.com.core.utils.TimeUtils;
 import ww.com.core.widget.RoundImageView;
 
 /**
@@ -54,9 +51,8 @@ public class CommentDetailAdapter extends RvAdapter<CommentBean> {
 
         @Override
         public void onBindData(int position, CommentBean bean) {
-            tvContent.setText(bean.getContent());
-            tvTime.setText(TimeUtils.milliseconds2String(bean.getCreated(), new SimpleDateFormat
-                    ("yyyy.MM.dd")));
+            tvContent.setText(bean.getCommentsContent());
+            tvTime.setText(bean.getCommentsDate());
             ImageLoader.getInstance().displayImage(bean.getImgUrl(), riv, BaseApplication
                     .getDisplayImageOptions(R.mipmap.ic_default_avatar));
         }

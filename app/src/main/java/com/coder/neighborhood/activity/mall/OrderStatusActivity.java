@@ -1,5 +1,6 @@
 package com.coder.neighborhood.activity.mall;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -90,6 +91,24 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
     private void initData(){
         crv.setAdapter(adapter);
         onGoodsOrders(status+"");
+        setTitleText(getTitle(status));
+    }
+
+    private String getTitle(int status){
+        String title = "我的订单";
+        if (status == 1){
+            title = "待付款";
+        }else if (status ==2){
+            title = "待发货";
+        }else if (status ==3){
+            title = "待收货";
+        }else if (status ==4){
+            title = "待评价";
+        }else if (status ==5){
+            title = "已完成";
+        }
+
+        return title;
     }
 
 
@@ -137,5 +156,16 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
                         v.getCsr().setRefreshFinished();
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK){
+            page = 1;
+            v.getCsr().setFooterRefreshAble(true);
+            csr.setFooterRefreshAble(false);
+            onGoodsOrders(status+"");
+        }
     }
 }

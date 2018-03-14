@@ -1,6 +1,7 @@
 package com.coder.neighborhood.mvp.model.home;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.api.HomeApi;
 import com.coder.neighborhood.api.MallApi;
@@ -12,6 +13,7 @@ import com.coder.neighborhood.bean.home.ThingDetailBean;
 import com.coder.neighborhood.bean.home.ThingsBean;
 import com.coder.neighborhood.bean.home.TravelBean;
 import com.coder.neighborhood.bean.home.TravelDetailBean;
+import com.coder.neighborhood.bean.mall.CategoryBean;
 import com.coder.neighborhood.mvp.model.BaseModel;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
@@ -211,7 +213,21 @@ public class HomeModel extends BaseModel {
                 .map(new Func1<ResponseBean, String>() {
                     @Override
                     public String call(ResponseBean responseBean) {
-                        return responseBean.getData();
+                        return responseBean.getMessage();
+                    }
+                }).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
+    public void commentGoods(String userId,String itemId,
+                             String comments,LifecycleTransformer transformer,
+                             HttpSubscriber<String> httpSubscriber){
+        HomeApi.commentGoods(userId, itemId, comments)
+                .map(new Func1<ResponseBean, String>() {
+                    @Override
+                    public String call(ResponseBean responseBean) {
+                        return responseBean.getMessage();
                     }
                 }).compose(RxHelper.cutMain())
                 .compose(transformer)
@@ -271,4 +287,14 @@ public class HomeModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
+
+    public void goodsType(LifecycleTransformer transformer,
+                          HttpSubscriber<List<CategoryBean>> httpSubscriber){
+
+        HomeApi.goodsType()
+                .map(responseBean -> JSONArray.parseArray(responseBean.getData(),CategoryBean.class)).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+
+    }
 }

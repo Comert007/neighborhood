@@ -95,6 +95,12 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
         });
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void onGoodsDetail(){
         if (TextUtils.isEmpty(travelId)){
             ToastUtils.showToast("当前商品不存在或已下架");
