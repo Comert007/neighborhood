@@ -15,6 +15,7 @@ import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.mall.CommentBean;
 import com.coder.neighborhood.bean.mall.GoodsInfoBean;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.GoodsDetailView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -186,13 +187,19 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
                 addCart("1");
                 break;
             case R.id.ll_more_cart:
-                CommitPickOrderActivity.start(this,goodsInfoBean);
+
                 break;
             default:
                 break;
         }
     }
 
+    @CheckUser
+    private void commitPick(){
+        CommitPickOrderActivity.start(this,goodsInfoBean);
+    }
+
+    @CheckUser
     private void addCart(String num) {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user == null) {

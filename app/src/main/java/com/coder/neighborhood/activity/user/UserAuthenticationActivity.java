@@ -1,7 +1,7 @@
 package com.coder.neighborhood.activity.user;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,7 +50,7 @@ public class UserAuthenticationActivity extends BaseActivity<VoidView, UserModel
     private List<CommunityBean> communityBeans;
     private String communityId;
 
-    public static void start(Activity context) {
+    public static void start(Context context) {
         Intent intent = new Intent(context, UserAuthenticationActivity.class);
         context.startActivity(intent);
     }
