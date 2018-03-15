@@ -17,6 +17,7 @@ import com.coder.neighborhood.adapter.home.SecondHandMarketAdapter;
 import com.coder.neighborhood.bean.home.BannerBean;
 import com.coder.neighborhood.bean.mall.CategoryGoodsBean;
 import com.coder.neighborhood.config.Constants;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.home.SecondMarketView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -102,7 +103,7 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView, Mal
     public void onPublish(View view) {
         switch (view.getId()) {
             case R.id.btn_publish_goods:
-                AddSecondHandActivity.startForResult(this,requestCode);
+                publishGoods();
                 break;
             case R.id.iv_search:
                 String searchContent = etSearch.getText().toString().trim();
@@ -115,6 +116,11 @@ public class SecondHandMarketActivity extends BaseActivity<SecondMarketView, Mal
             default:
                 break;
         }
+    }
+
+    @CheckUser
+    private void publishGoods(){
+        AddSecondHandActivity.startForResult(this,requestCode);
     }
 
     private void onBanner() {
