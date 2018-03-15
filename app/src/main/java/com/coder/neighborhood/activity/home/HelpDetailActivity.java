@@ -13,6 +13,7 @@ import com.coder.neighborhood.adapter.home.HelpDetailAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.home.HelpDetailBean;
 import com.coder.neighborhood.config.Constants;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.home.HelpDetailView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -134,6 +135,7 @@ public class HelpDetailActivity extends BaseActivity<HelpDetailView, HomeModel> 
                 });
     }
 
+    @CheckUser
     @OnClick(R.id.btn_ask)
     public void onHelp() {
         EditDialog editDialog = new EditDialog(this, 4);

@@ -195,12 +195,12 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
     }
 
     @CheckUser
-    private void commitPick(){
+    public void commitPick(){
         CommitPickOrderActivity.start(this,goodsInfoBean);
     }
 
     @CheckUser
-    private void addCart(String num) {
+    public void addCart(String num) {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user == null) {
             ToastUtils.showToast("添加失败");

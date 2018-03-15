@@ -13,6 +13,7 @@ import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.circle.EventBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.fragment.BaseFragment;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.CircleModel;
 import com.coder.neighborhood.mvp.vu.base.RefreshView;
 
@@ -122,6 +123,7 @@ public class BigEventFragment extends BaseFragment<RefreshView,CircleModel> {
         }
     }
 
+    @CheckUser
     @OnClick(R.id.btn_ask)
     public void onPublish(){
         PublishEventActivity.startForResult(getPresenterActivity(),REQUEST_CODE);

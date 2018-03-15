@@ -23,6 +23,7 @@ import com.coder.neighborhood.bean.circle.CircleBean;
 import com.coder.neighborhood.bean.circle.EventBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.fragment.BaseFragment;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.CircleModel;
 import com.coder.neighborhood.mvp.vu.circle.MakeFriendsView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -214,8 +215,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     public void onMakeFriends(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
-                PublishCircleActivity.startForResult(getPresenterActivity(), circleIndex + 1,
-                        REQUEST_CODE);
+                publish();
                 break;
             case R.id.btn_circle:
                 UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
@@ -228,6 +228,11 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         }
     }
 
+    @CheckUser
+    private void publish(){
+        PublishCircleActivity.startForResult(getPresenterActivity(), circleIndex + 1,
+                REQUEST_CODE);
+    }
 
     private void initIndicator(int index) {
         for (TextView circleView : circleViews) {
@@ -273,20 +278,20 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
 
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user != null) {
-            m.communityCircle(user.getUserId(), user.getCommunityId(), page + "", Constants
-                            .PAGE_SIZE + "",
-                    new HttpSubscriber<List<CircleBean>>(getContext(), false) {
-                        @Override
-                        public void onNext(List<CircleBean> circleBeans) {
-                            onNextCircles(circleBeans);
-                        }
+                m.communityCircle(user.getUserId(), user.getCommunityId(), page + "", Constants
+                                .PAGE_SIZE + "",
+                        new HttpSubscriber<List<CircleBean>>(getContext(), false) {
+                            @Override
+                            public void onNext(List<CircleBean> circleBeans) {
+                                onNextCircles(circleBeans);
+                            }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                            onErrorCircles();
-                        }
-                    });
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                onErrorCircles();
+                            }
+                        });
         }
 
     }
@@ -295,19 +300,19 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     private void friendsCircle() {
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user != null) {
-            m.friendsCircle(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
-                    new HttpSubscriber<List<CircleBean>>(getContext(), false) {
-                        @Override
-                        public void onNext(List<CircleBean> circleBeans) {
-                            onNextCircles(circleBeans);
-                        }
+                m.friendsCircle(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
+                        new HttpSubscriber<List<CircleBean>>(getContext(), false) {
+                            @Override
+                            public void onNext(List<CircleBean> circleBeans) {
+                                onNextCircles(circleBeans);
+                            }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                            onErrorCircles();
-                        }
-                    });
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                onErrorCircles();
+                            }
+                        });
         }
 
     }

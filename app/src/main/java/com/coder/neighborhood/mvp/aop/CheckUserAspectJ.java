@@ -1,6 +1,8 @@
 package com.coder.neighborhood.mvp.aop;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.activity.user.UserAuthenticationActivity;
@@ -21,7 +23,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class CheckUserAspectJ {
 
-    private static final String TAG = "CheckUser";
 
     /**
      * 找到处理的切点
@@ -43,16 +44,23 @@ public class CheckUserAspectJ {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         CheckUser checkUser = signature.getMethod().getAnnotation(CheckUser.class);
         if (checkUser != null) {
-            Context context = (Context) joinPoint.getThis();
+            Object obj = joinPoint.getThis();
+             Context context = null;
+            if (obj instanceof Activity){
+                context = (Context) obj;
+            }else if (obj instanceof Fragment){
+                context = ((Fragment) obj).getContext();
+            }
             UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
             if (user!=null && "1".equals(user.getUserStatus())) {
                 return joinPoint.proceed();
             } else {
+                Context finalContext = context;
                 DialogUtils.showDialog(context, "用户认证", "该操作需先进行用户认证", true,
-                        "取消", (dialog, which) -> {
-                            UserAuthenticationActivity.start(context);
+                        "认证", (dialog, which) -> {
+                            UserAuthenticationActivity.start(finalContext);
                             dialog.dismiss();
-                        }, true, "认证", (dialog, which) -> {
+                        }, true, "取消", (dialog, which) -> {
                             dialog.dismiss();
                         }).show();
                 return null;

@@ -14,6 +14,7 @@ import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.bean.UserBean;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -84,6 +85,8 @@ public class FeedBackQuestionActivity extends BaseActivity<VoidView,HomeModel> {
     }
 
 
+
+    @CheckUser
     @OnClick({R.id.btn_publish})
     public void onPublish(View view){
         switch (view.getId()){

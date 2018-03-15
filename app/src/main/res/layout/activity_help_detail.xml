@@ -34,6 +34,7 @@
 
     
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_input"
         android:hint="输入"
         android:textColor="@color/color_999999"

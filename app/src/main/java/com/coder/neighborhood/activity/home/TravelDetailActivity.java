@@ -15,6 +15,7 @@ import com.coder.neighborhood.activity.mall.CommitTravelPickOrderActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.home.TravelDetailBean;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.mall.GoodsDetailView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -141,13 +142,20 @@ public class TravelDetailActivity extends BaseActivity<GoodsDetailView,HomeModel
                 addCart("1");
                 break;
             case R.id.ll_more_cart:
-                CommitTravelPickOrderActivity.start(this,travelDetailBean);
+                commitPick();
                 break;
             default:
                 break;
         }
     }
 
+
+    @CheckUser
+    private void commitPick(){
+        CommitTravelPickOrderActivity.start(this,travelDetailBean);
+    }
+
+    @CheckUser
     private void addCart(String num){
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user==null){

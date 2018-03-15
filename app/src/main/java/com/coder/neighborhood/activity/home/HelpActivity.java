@@ -13,6 +13,7 @@ import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.adapter.user.TranslateTabAdapter;
 import com.coder.neighborhood.fragment.home.CustomerHelpFragment;
 import com.coder.neighborhood.fragment.home.GoodFriendHelpFragment;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.VoidModel;
 import com.coder.neighborhood.mvp.vu.VoidView;
 
@@ -106,6 +107,7 @@ public class HelpActivity extends BaseActivity<VoidView,VoidModel> {
         }
     };
 
+    @CheckUser
     @OnClick({R.id.btn_ask})
     public void onHelp(View v){
         switch (v.getId()){

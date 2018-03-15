@@ -20,6 +20,7 @@ import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.circle.CircleBean;
 import com.coder.neighborhood.bean.user.FriendInfoBean;
 import com.coder.neighborhood.config.Constants;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.user.UserModel;
 import com.coder.neighborhood.mvp.vu.user.FriendsInfoView;
 import com.coder.neighborhood.utils.ToastUtils;
@@ -171,6 +172,7 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
         profileCircles();
     }
 
+    @CheckUser
     private void addFriend() {
         if (friendInfoBean==null){
             ToastUtils.showToast("system error");
