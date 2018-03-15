@@ -2,15 +2,18 @@ package com.coder.neighborhood.activity.user;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.user.GoodFriendsAdapter;
+import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.user.FriendBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.user.UserModel;
 import com.coder.neighborhood.mvp.vu.user.GoodFriendsView;
+import com.coder.neighborhood.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
@@ -90,7 +93,12 @@ public class MakeFriendsActivity extends BaseActivity<GoodFriendsView, UserModel
     }
 
     private void onFriends() {
-        m.searchFriends(username, page + "", Constants.PAGE_SIZE + "",
+        UserBean user = (UserBean) baseApp.getUserInfo();
+        if (user == null || TextUtils.isEmpty(user.getUserId())){
+            ToastUtils.showToast("用户信息有误");
+            return;
+        }
+        m.searchFriends(user.getUserId(),username, page + "", Constants.PAGE_SIZE + "",
                 bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<FriendBean>>(this,
                         true) {
                     @Override

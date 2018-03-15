@@ -23,6 +23,8 @@ public class FriendInfoBean {
     private String phone;
     private String nickname;
     private String userId;
+    private String friendFlag;
+
 
     public String getUserInfo() {
         return userInfo;
@@ -72,15 +74,11 @@ public class FriendInfoBean {
         this.userId = userId;
     }
 
-    @Override
-    public String toString() {
-        return "FriendInfoBean{" +
-                "userInfo='" + userInfo + '\'' +
-                ", address='" + address + '\'' +
-                ", headImgUrl='" + headImgUrl + '\'' +
-                ", phone='" + phone + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", userId='" + userId + '\'' +
-                '}';
+    public String getFriendFlag() {
+        return friendFlag;
+    }
+
+    public void setFriendFlag(String friendFlag) {
+        this.friendFlag = friendFlag;
     }
 }

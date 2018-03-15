@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.MainActivity;
+import com.coder.neighborhood.activity.circle.DoingsDetailActivity;
+import com.coder.neighborhood.activity.circle.EventDetailActivity;
 import com.coder.neighborhood.activity.circle.PublishCircleActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.FriendsInfoActivity;
@@ -23,6 +26,7 @@ import com.coder.neighborhood.fragment.BaseFragment;
 import com.coder.neighborhood.mvp.model.CircleModel;
 import com.coder.neighborhood.mvp.vu.circle.MakeFriendsView;
 import com.coder.neighborhood.utils.ToastUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +48,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     private MakeFriendsAdapter adapter;
     private int page = 1;
 
-    private int circleIndex =0;
+    private int circleIndex = 0;
     private final int REQUEST_CODE = 0x16;
 
     private CustomSwipeRefreshLayout csr;
@@ -54,6 +58,11 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     private TextView eventTop2;
     private TextView activityTop1;
     private TextView activityTop2;
+
+    private ImageView ivEventTop1;
+    private ImageView ivEventTop2;
+    private ImageView ivActivityTop1;
+    private ImageView ivActivityTop2;
 
     private LinearLayout llEventMore;
     private LinearLayout llActivityMore;
@@ -74,16 +83,22 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         adapter = new MakeFriendsAdapter(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout
                 .layout_make_friends_header, null);
-        eventTop1 = ButterKnife.findById(view,R.id.event_top_1);
-        eventTop2 = ButterKnife.findById(view,R.id.event_top_2);
+        eventTop1 = ButterKnife.findById(view, R.id.event_top_1);
+        eventTop2 = ButterKnife.findById(view, R.id.event_top_2);
+        ivEventTop1 = ButterKnife.findById(view, R.id.iv_event_top_1);
+        ivEventTop2 = ButterKnife.findById(view, R.id.iv_event_top_2);
 
-        activityTop1 = ButterKnife.findById(view,R.id.activity_top_1);
-        activityTop2 = ButterKnife.findById(view,R.id.activity_top_2);
+        activityTop1 = ButterKnife.findById(view, R.id.activity_top_1);
+        activityTop2 = ButterKnife.findById(view, R.id.activity_top_2);
+        ivActivityTop1 = ButterKnife.findById(view, R.id.iv_activity_top_1);
+        ivActivityTop2 = ButterKnife.findById(view, R.id.iv_activity_top_2);
 
-        llEventMore = ButterKnife.findById(view,R.id.ll_event_more);
-        llEventMore.setOnClickListener(v -> ((MainActivity) getPresenterActivity()).changeCircleMnue(1));
-        llActivityMore = ButterKnife.findById(view,R.id.ll_activity_more);
-        llActivityMore.setOnClickListener(v -> ((MainActivity) getPresenterActivity()).changeCircleMnue(3));
+        llEventMore = ButterKnife.findById(view, R.id.ll_event_more);
+        llEventMore.setOnClickListener(v -> ((MainActivity) getPresenterActivity())
+                .changeCircleMnue(1));
+        llActivityMore = ButterKnife.findById(view, R.id.ll_activity_more);
+        llActivityMore.setOnClickListener(v -> ((MainActivity) getPresenterActivity())
+                .changeCircleMnue(3));
 
         circleViews.add(ButterKnife.findById(view, R.id.tv_community));
         circleViews.add(ButterKnife.findById(view, R.id.tv_friends));
@@ -103,7 +118,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
             TextView circleView = circleViews.get(i);
             int finalI = i;
             circleView.setOnClickListener(v -> {
-                page =1;
+                page = 1;
                 initIndicator(finalI);
             });
         }
@@ -127,13 +142,14 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         adapter.setStrListener((position, str) -> {
             CircleBean circleBean = adapter.getItem(position);
             UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-            if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+            if (user != null && !TextUtils.isEmpty(user.getUserId())) {
 
-                m.addCircleComment(user.getUserId(), (circleBean.getCircleId()), str, new HttpSubscriber<String>(getContext(),true) {
+                m.addCircleComment(user.getUserId(), (circleBean.getCircleId()), str, new
+                        HttpSubscriber<String>(getContext(), true) {
                     @Override
                     public void onNext(String s) {
-                        ToastUtils.showToast(s,true);
-                        page =1;
+                        ToastUtils.showToast(s, true);
+                        page = 1;
                         circle(circleIndex);
                     }
                 });
@@ -143,12 +159,13 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         adapter.setActionListener((position, view) -> {
             CircleBean circleBean = adapter.getItem(position);
             UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-            if (user!=null && !TextUtils.isEmpty(user.getUserId())){
-                m.addCircleLike(user.getUserId(), circleBean.getCircleId(), new HttpSubscriber<String>(getContext(),true) {
+            if (user != null && !TextUtils.isEmpty(user.getUserId())) {
+                m.addCircleLike(user.getUserId(), circleBean.getCircleId(), new
+                        HttpSubscriber<String>(getContext(), true) {
                     @Override
                     public void onNext(String s) {
-                        ToastUtils.showToast(s,true);
-                        page =1;
+                        ToastUtils.showToast(s, true);
+                        page = 1;
                         circle(circleIndex);
                     }
                 });
@@ -162,35 +179,48 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     }
 
 
-    public void showEventTopContent(List<EventBean> eventBeans){
-        if (eventBeans!=null && eventBeans.size()>0){
+    public void showEventTopContent(List<EventBean> eventBeans) {
+        if (eventBeans != null && eventBeans.size() > 0) {
             eventTop1.setText(eventBeans.get(0).getActivityInfo());
-            if (eventBeans.size()>1){
+            eventTop1.setOnClickListener(v -> EventDetailActivity.start(getContext(),eventBeans.get(0).getActivityId()));
+            ImageLoader.getInstance().displayImage(eventBeans.get(0).getImgUrl(), ivEventTop1,
+                    BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
+            if (eventBeans.size() > 1) {
                 eventTop2.setText(eventBeans.get(1).getActivityInfo());
+                eventTop2.setOnClickListener(v -> EventDetailActivity.start(getContext(),eventBeans.get(1).getActivityId()));
+                ImageLoader.getInstance().displayImage(eventBeans.get(1).getImgUrl(), ivEventTop2,
+                        BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             }
         }
     }
 
-    public void showActivityTopContent(List<EventBean> activityBeans){
-        if (activityBeans!=null && activityBeans.size()>0){
+    public void showActivityTopContent(List<EventBean> activityBeans) {
+        if (activityBeans != null && activityBeans.size() > 0) {
+            activityTop1.setOnClickListener(v -> DoingsDetailActivity.start(getContext(),activityBeans.get(0).getActivityId()));
             activityTop1.setText(activityBeans.get(0).getActivityInfo());
-            if (activityBeans.size()>1){
+            ImageLoader.getInstance().displayImage(activityBeans.get(0).getImgUrl(), ivActivityTop1,
+                    BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
+            if (activityBeans.size() > 1) {
+                activityTop2.setOnClickListener(v -> DoingsDetailActivity.start(getContext(),activityBeans.get(1).getActivityId()));
                 activityTop2.setText(activityBeans.get(1).getActivityInfo());
+                ImageLoader.getInstance().displayImage(activityBeans.get(1).getImgUrl(), ivActivityTop2,
+                        BaseApplication.getDisplayImageOptions(R.mipmap.pic_default));
             }
         }
     }
 
 
-    @OnClick({R.id.btn_add,R.id.btn_circle})
-    public void onMakeFriends(View view){
-        switch (view.getId()){
+    @OnClick({R.id.btn_add, R.id.btn_circle})
+    public void onMakeFriends(View view) {
+        switch (view.getId()) {
             case R.id.btn_add:
-                PublishCircleActivity.startForResult(getPresenterActivity(),circleIndex+1,REQUEST_CODE);
+                PublishCircleActivity.startForResult(getPresenterActivity(), circleIndex + 1,
+                        REQUEST_CODE);
                 break;
             case R.id.btn_circle:
                 UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-                if (user!=null && !TextUtils.isEmpty(user.getUserId())){
-                    FriendsInfoActivity.start(getContext(),user.getUserId());
+                if (user != null && !TextUtils.isEmpty(user.getUserId())) {
+                    FriendsInfoActivity.start(getContext(), user.getUserId());
                 }
                 break;
             default:
@@ -239,7 +269,6 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     }
 
 
-
     private void communityCircle() {
 
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
@@ -284,7 +313,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     }
 
 
-    private void onNextCircles(List<CircleBean> circleBeans){
+    private void onNextCircles(List<CircleBean> circleBeans) {
         v.getCsr().setRefreshFinished();
         if (circleBeans != null && circleBeans.size() > 0) {
             if (page == 1) {
@@ -305,7 +334,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
         }
     }
 
-    private void onErrorCircles(){
+    private void onErrorCircles() {
         if (page == 1) {
             adapter.getList().clear();
             adapter.notifyDataSetChanged();
@@ -317,9 +346,9 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode== Activity.RESULT_OK && requestCode == REQUEST_CODE){
-            int circleType = data.getIntExtra("circleType",0);
-            if (this.circleIndex == circleType -1){
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            int circleType = data.getIntExtra("circleType", 0);
+            if (this.circleIndex == circleType - 1) {
                 page = 1;
                 circle(circleIndex);
             }

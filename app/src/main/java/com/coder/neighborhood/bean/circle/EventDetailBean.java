@@ -19,7 +19,7 @@ public class EventDetailBean {
 
     private String eventsId;
     private String eventsInfo;
-    private List<ImgUrlBean> imgUrl;
+    private List<ImgUrlBean> imgUrls;
 
     public String getEventsId() {
         return eventsId;
@@ -37,12 +37,12 @@ public class EventDetailBean {
         this.eventsInfo = eventsInfo;
     }
 
-    public List<ImgUrlBean> getImgUrl() {
-        return imgUrl;
+    public List<ImgUrlBean> getImgUrls() {
+        return imgUrls;
     }
 
-    public void setImgUrl(List<ImgUrlBean> imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUrls(List<ImgUrlBean> imgUrls) {
+        this.imgUrls = imgUrls;
     }
 
     public static class ImgUrlBean {

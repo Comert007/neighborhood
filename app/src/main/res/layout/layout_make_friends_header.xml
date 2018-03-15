@@ -30,9 +30,9 @@
             <LinearLayout
                 android:id="@+id/ll_event_more"
                 android:layout_width="wrap_content"
-                          android:layout_height="wrap_content" android:layout_alignParentEnd="true"
-                          android:layout_alignParentRight="true"
-                          android:layout_alignParentTop="true">
+                android:layout_height="wrap_content" android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:text="更多"
@@ -54,26 +54,46 @@
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:layout_marginTop="@dimen/wwpx40">
-            <TextView
-                android:id="@+id/event_top_1"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_page_bg"
-                android:gravity="center"
-                android:text="暂无大事件相关信息"
-                android:textColor="@color/color_666666"/>
 
-            <TextView
-                android:id="@+id/event_top_2"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/wwpx20"
-                android:layout_weight="1"
-                android:background="@color/color_page_bg"
-                android:gravity="center"
-                android:text="暂无大事件相关信息"
-                android:textColor="@color/color_666666"/>
+            <FrameLayout android:layout_width="0px"
+                         android:layout_height="match_parent"
+                         android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_event_top_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/pic_default"/>
+                <TextView
+                    android:id="@+id/event_top_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="暂无大事件相关信息"
+                    android:textColor="@color/color_666666"/>
+            </FrameLayout>
+
+            <FrameLayout android:layout_width="0px"
+                         android:layout_height="match_parent"
+                         android:layout_marginLeft="@dimen/wwpx20"
+                         android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_event_top_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/pic_default"/>
+                <TextView
+                    android:id="@+id/event_top_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="暂无大事件相关信息"
+                    android:textColor="@color/color_666666"/>
+
+            </FrameLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -102,9 +122,9 @@
             <LinearLayout
                 android:id="@+id/ll_activity_more"
                 android:layout_width="wrap_content"
-                          android:layout_height="wrap_content" android:layout_alignParentEnd="true"
-                          android:layout_alignParentRight="true"
-                          android:layout_alignParentTop="true">
+                android:layout_height="wrap_content" android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:text="更多"
@@ -126,26 +146,47 @@
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:layout_marginTop="@dimen/wwpx40">
-            <TextView
-                android:id="@+id/activity_top_1"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_page_bg"
-                android:gravity="center"
-                android:text="暂无活动相关信息"
-                android:textColor="@color/color_666666"/>
 
-            <TextView
-                android:id="@+id/activity_top_2"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/wwpx20"
-                android:layout_weight="1"
-                android:background="@color/color_page_bg"
-                android:gravity="center"
-                android:text="暂无活动相关信息"
-                android:textColor="@color/color_666666"/>
+            <FrameLayout android:layout_width="0px"
+                         android:layout_height="match_parent"
+                         android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_activity_top_1"
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/pic_default"/>
+
+                <TextView
+                    android:id="@+id/activity_top_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="暂无活动相关信息"
+                    android:textColor="@color/color_666666"/>
+
+            </FrameLayout>
+            <FrameLayout android:layout_width="0px"
+                         android:layout_height="match_parent"
+                         android:layout_marginLeft="@dimen/wwpx20"
+                         android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_activity_top_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/pic_default"/>
+                <TextView
+                    android:id="@+id/activity_top_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="暂无活动相关信息"
+                    android:textColor="@color/color_666666"/>
+
+            </FrameLayout>
         </LinearLayout>
 
     </LinearLayout>

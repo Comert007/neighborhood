@@ -67,10 +67,11 @@ public class UserApi extends BaseApi {
         return onPost(getActionUrl("app/getFriendList"),params);
     }
 
-    public static final Observable<ResponseBean> searchFriends(String userName,
+    public static final Observable<ResponseBean> searchFriends(String userId,String userName,
                                                          String pageNo,
                                                          String pageSize){
         AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
         params.addParameters("userName",userName);
         params.addParameters("pageNo",pageNo);
         params.addParameters("pageSize",pageSize);
@@ -104,10 +105,10 @@ public class UserApi extends BaseApi {
 
     }
 
-    public static final Observable<ResponseBean> friendInfo(String userId){
+    public static final Observable<ResponseBean> friendInfo(String userId,String findUserId){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-
+        params.addParameters("findUserId",findUserId);
         return onPost(getActionUrl("app/getFriendInfo"),params);
     }
 

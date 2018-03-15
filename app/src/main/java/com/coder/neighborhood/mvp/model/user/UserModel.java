@@ -124,12 +124,12 @@ public class UserModel implements IModel {
                 .subscribe(httpSubscriber);
     }
 
-    public void searchFriends(String userName,
+    public void searchFriends(String userId,String userName,
                               String pageNo,
                               String pageSize,
                               LifecycleTransformer transformer,
                               HttpSubscriber<List<FriendBean>> httpSubscriber) {
-        UserApi.searchFriends(userName, pageNo, pageSize)
+        UserApi.searchFriends(userId,userName, pageNo, pageSize)
                 .map(responseBean -> JSON.parseArray(responseBean.getData(), FriendBean.class))
                 .compose(RxHelper.cutMain())
                 .compose(transformer)
@@ -165,10 +165,10 @@ public class UserModel implements IModel {
                 .subscribe(httpSubscriber);
     }
 
-    public void friendInfo(String userId, LifecycleTransformer transformer,
+    public void friendInfo(String userId, String findUserId,LifecycleTransformer transformer,
                            HttpSubscriber<FriendInfoBean> httpSubscriber) {
 
-        UserApi.friendInfo(userId)
+        UserApi.friendInfo(userId,findUserId)
                 .map(responseBean -> JSON.parseObject(responseBean.getData(), FriendInfoBean
                         .class)).compose(RxHelper.cutMain())
                 .compose(transformer)

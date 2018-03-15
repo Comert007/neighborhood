@@ -56,7 +56,7 @@ public class EventDetailActivity extends BaseActivity<DetailBannerView,CircleMod
     }
 
     private void showData(EventDetailBean eventDetailBean){
-        startBanner(eventDetailBean.getImgUrl());
+        startBanner(eventDetailBean.getImgUrls());
         tvContent.setText(eventDetailBean.getEventsInfo());
     }
 

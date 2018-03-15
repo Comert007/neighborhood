@@ -85,6 +85,7 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
     }
 
     private void initView() {
+
         View vi = LayoutInflater.from(this).inflate(R.layout.layout_friends_info_header, null);
         rivHeader = ButterKnife.findById(vi, R.id.riv_header);
         tvName = ButterKnife.findById(vi, R.id.tv_name);
@@ -104,7 +105,14 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
         csr.setEnableRefresh(true);
         csr.setFooterRefreshAble(false);
         crv.setAdapter(adapter);
-        crv.addHeadView(vi);
+
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null){
+            setTitleText(userId.equals(user.getUserId())?"我的历史动态":"好友信息");
+            if (!userId.equals(user.getUserId())){
+                crv.addHeadView(vi);
+            }
+        }
     }
 
 
@@ -176,22 +184,27 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
                         @Override
                         public void onNext(String s) {
                             ToastUtils.showToast(s, true);
+                            btnAdd.setVisibility(View.GONE);
                         }
                     });
         }
     }
 
     private void friendInfo() {
-        if ( !TextUtils.isEmpty(userId)) {
-            m.friendInfo(userId, bindUntilEvent(ActivityEvent.DESTROY)
-                    , new HttpSubscriber<FriendInfoBean>(this, true) {
-                        @Override
-                        public void onNext(FriendInfoBean friendInfoBean) {
-                            FriendsInfoActivity.this.friendInfoBean = friendInfoBean;
-                            setFriendInfo();
-                        }
-                    });
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+            if ( !TextUtils.isEmpty(userId)) {
+                m.friendInfo(user.getUserId(), userId,bindUntilEvent(ActivityEvent.DESTROY)
+                        , new HttpSubscriber<FriendInfoBean>(this, true) {
+                            @Override
+                            public void onNext(FriendInfoBean friendInfoBean) {
+                                FriendsInfoActivity.this.friendInfoBean = friendInfoBean;
+                                setFriendInfo();
+                            }
+                        });
+            }
         }
+
     }
 
     private void profileCircles(){
@@ -230,6 +243,7 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
     }
 
     private void setFriendInfo() {
+        btnAdd.setVisibility("1".equals(friendInfoBean.getFriendFlag())?View.GONE:View.VISIBLE);
         tvName.setText(friendInfoBean.getNickname());
         ImageLoader.getInstance().displayImage(friendInfoBean.getHeadImgUrl(), rivHeader,
                 BaseApplication
