@@ -17,6 +17,7 @@ import com.coder.neighborhood.activity.mall.CartActivity;
 import com.coder.neighborhood.activity.mall.OrderStatusActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.AboutUsActivity;
+import com.coder.neighborhood.activity.user.CustomerServiceActivity;
 import com.coder.neighborhood.activity.user.GoodFriendsActivity;
 import com.coder.neighborhood.activity.user.LoginActivity;
 import com.coder.neighborhood.activity.user.UserAuthenticationActivity;
@@ -98,7 +99,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
     }
 
     @OnClick({R.id.btn_loginout, R.id.ll_sign, R.id.rl_about_us, R.id.ll_cart, R.id.ll_order,
-            R.id.rl_feedback, R.id.ll_user_info, R.id.riv_header,R.id.tv_verified})
+            R.id.rl_feedback, R.id.ll_user_info, R.id.riv_header,R.id.tv_verified,R.id.rl_my_question})
     public void onUser(View v) {
         switch (v.getId()) {
             case R.id.btn_loginout:
@@ -127,6 +128,9 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
                 break;
             case R.id.tv_verified:
                 UserAuthenticationActivity.start(getPresenterActivity());
+                break;
+            case R.id.rl_my_question:
+                CustomerServiceActivity.start(getContext());
                 break;
             default:
                 break;

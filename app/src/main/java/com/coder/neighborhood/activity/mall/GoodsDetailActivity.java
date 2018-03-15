@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -67,6 +68,9 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
     TextView tvTime;
     @BindView(R.id.tv_no_more_comment)
     TextView tvNoMoreComment;
+    @BindView(R.id.ll_more_cart)
+    LinearLayout llMoreCart;
+
 
 
     private List<String> urls;
@@ -163,6 +167,7 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
         tvGoodsType.setText("商品类型：" + goodsDetailBean.getItemCategoryName());
         tvGoodsNum.setText("商品数量：" + goodsDetailBean.getItemInventoryQuantiry());
         tvSinglePrice.setText(goodsDetailBean.getItemPrice());
+        llMoreCart.setVisibility(TextUtils.isEmpty(goodsDetailBean.getItemPickingPrice())?View.GONE:View.VISIBLE);
         tvPickPrice.setText(goodsDetailBean.getItemPickingPrice());
         tvGoodsDealNum.setText("成交量：" + goodsDetailBean.getItemDealQuantiry());
     }
