@@ -187,7 +187,7 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
                 addCart("1");
                 break;
             case R.id.ll_more_cart:
-
+                commitPick();
                 break;
             default:
                 break;
