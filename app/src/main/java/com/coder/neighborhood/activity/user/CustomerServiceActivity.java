@@ -81,7 +81,7 @@ public class CustomerServiceActivity extends BaseActivity<VoidView,VoidModel>{
         //传入参数
         Bundle args = new Bundle();
         args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-        args.putString(EaseConstant.EXTRA_USER_ID, "18782957571");
+        args.putString(EaseConstant.EXTRA_USER_ID, "10000");
         chatFragment.setArguments(args);
         return chatFragment;
     }

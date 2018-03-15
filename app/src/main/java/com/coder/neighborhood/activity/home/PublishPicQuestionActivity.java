@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -45,6 +47,10 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
     TextView tvNum;
     @BindView(R.id.et_question)
     EditText etQuestion;
+    @BindView(R.id.btn_publish)
+    Button btnPublish;
+    @BindView(R.id.et_phone)
+    EditText etPhone;
 
     private ImageQuestionAdapter adapter;
 
@@ -76,12 +82,22 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
 
     private void initData(){
         type = getIntent().getIntExtra("type",0);
+        if (type == 1){
+            btnPublish.setText("寻物启事");
+        }else if (type ==2){
+            btnPublish.setText("失物招领");
+        }
         adapter = new ImageQuestionAdapter(this);
         crv.setLayoutManager(new GridLayoutManager(this,3));
         List<ImageQuestionBean> images = new ArrayList<>();
         images.add(new ImageQuestionBean(ImageQuestionAdapter.IMAGE_ADD));
         adapter.addList(images);
         crv.setAdapter(adapter);
+
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null){
+            etPhone.setText(user.getPhone());
+        }
     }
 
 
@@ -128,10 +144,14 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
             }
         }
 
+        String phone = etPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)){
+            ToastUtils.showToast("请输入联系方式");
+            return;
+        }
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user!=null){
             String userId = user.getUserId();
-            String phone = user.getPhone();
             String path ="";
             if (paths !=null && paths.size()>0){
                  path = paths.get(0);
