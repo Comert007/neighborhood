@@ -22,7 +22,6 @@ import com.coder.neighborhood.utils.ArithmeticUtils;
 import com.coder.neighborhood.utils.DialogUtils;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.coder.neighborhood.widget.IconFontTextView;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
@@ -52,7 +51,6 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
 
-    private QMUIDialog quiteDialog;
 
     private boolean isWhole = false;
 
@@ -192,14 +190,19 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
 
     @OnClick(R.id.itv_whole)
     public void modifyWhole() {
-        isWhole = !isWhole;
-        itvWhole.setText(isWhole ? "\ue677" : "\ue678");
-        itvWhole.setTextColor(isWhole ? ContextCompat.getColor(this, R.color.color_text) :
-                ContextCompat.getColor(this, R.color.color_aaaaaa));
-        for (CartBean cartBean : adapter.getList()) {
-            cartBean.setCheck(isWhole);
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user == null) {
+            ToastUtils.showToast("用户信息有误");
+            return;
         }
-        adapter.notifyDataSetChanged();
+        isWhole = !isWhole;
+        m.cartAll(user.getUserId(), isWhole ? "" : "0", bindUntilEvent(ActivityEvent.DESTROY),
+                new HttpSubscriber<String>(this,true) {
+            @Override
+            public void onNext(String s) {
+                onCartGoods();
+            }
+        });
     }
 
     @CheckUser

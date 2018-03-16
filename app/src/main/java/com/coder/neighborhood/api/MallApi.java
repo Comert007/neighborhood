@@ -242,6 +242,15 @@ public class MallApi extends BaseApi {
     }
 
 
+    public static final Observable<ResponseBean> cartAll(String userId,String selectFlag){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        if (!TextUtils.isEmpty(selectFlag)){
+            params.addParameters("selectFlag",selectFlag);
+        }
+
+        return onPost(getActionUrl("app/selectAllCart"),params);
+    }
 
 
 }

@@ -332,4 +332,12 @@ public class MallModel extends BaseModel{
                 .subscribe(httpSubscriber);
     }
 
+    public void cartAll (String userId,String selectFlag,LifecycleTransformer transformer,
+                         HttpSubscriber<String> httpSubscriber){
+        MallApi.cartAll(userId, selectFlag)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
 }
