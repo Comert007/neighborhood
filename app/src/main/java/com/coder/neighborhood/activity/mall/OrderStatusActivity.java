@@ -90,7 +90,6 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
 
     private void initData(){
         crv.setAdapter(adapter);
-        onGoodsOrders(status+"");
         setTitleText(getTitle(status));
     }
 
@@ -167,5 +166,11 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
             csr.setFooterRefreshAble(false);
             onGoodsOrders(status+"");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onGoodsOrders(status+"");
     }
 }

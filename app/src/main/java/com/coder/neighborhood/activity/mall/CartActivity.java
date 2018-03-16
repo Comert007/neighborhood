@@ -15,6 +15,7 @@ import com.coder.neighborhood.adapter.mall.CartAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.mall.CartBean;
 import com.coder.neighborhood.config.Constants;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.CartView;
 import com.coder.neighborhood.utils.ArithmeticUtils;
@@ -201,8 +202,13 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
         adapter.notifyDataSetChanged();
     }
 
+    @CheckUser
     @OnClick(R.id.tv_result)
     public void orderResult() {
+        if (adapter.getList().size()<=0){
+            ToastUtils.showToast("购物车里面是空的哦~");
+            return;
+        }
         CommitOrderActivity.start(this);
     }
 
