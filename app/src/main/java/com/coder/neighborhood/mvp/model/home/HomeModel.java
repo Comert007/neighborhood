@@ -256,10 +256,10 @@ public class HomeModel extends BaseModel {
                                String itemQuantiry,
                                String itemType,
                                String itemDetails,
-                               String path,
+                               List<String> paths,
                                LifecycleTransformer transformer,
                                HttpSubscriber<String> httpSubscriber){
-        HomeApi.addSecondGoods(userId, itemName, itemPirce, itemQuantiry, itemType, itemDetails, path)
+        HomeApi.addSecondGoods(userId, itemName, itemPirce, itemQuantiry, itemType, itemDetails, paths)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);

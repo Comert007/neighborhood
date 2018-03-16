@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.coder.neighborhood.bean.ResponseBean;
 
 import java.io.File;
+import java.util.List;
 
 import rx.Observable;
 import ww.com.http.core.AjaxParams;
@@ -48,14 +49,18 @@ public class CircleApi extends BaseApi {
 
 
     public static final Observable<ResponseBean> addCircle(String userId,
-                                                           String path,
+                                                           List<String> paths,
                                                            String content,
                                                            String circleType,
                                                            String communityId){
 
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-        params.addParametersJPG("file",new File(path));
+        if (paths!=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
+        }
         params.addParameters("content",content);
         params.addParameters("circleType",circleType);
         if (!TextUtils.isEmpty(communityId)){
@@ -97,12 +102,15 @@ public class CircleApi extends BaseApi {
     }
 
 
-    public static final Observable<ResponseBean> addEvent(String userId,String content,String path){
+    public static final Observable<ResponseBean> addEvent(String userId,String content,List<String> paths){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
         params.addParameters("content",content);
-        params.addParametersJPG("file",new File(path));
-
+        if (paths!=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
+        }
         return onPost(getActionUrl("app/addEvents"),params);
     }
 
@@ -115,11 +123,15 @@ public class CircleApi extends BaseApi {
         return onPost(getActionUrl("app/getTopicsList"),params);
     }
 
-    public static final Observable<ResponseBean> addTopic(String userId,String content,String path){
+    public static final Observable<ResponseBean> addTopic(String userId,String content,List<String> paths){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
         params.addParameters("content",content);
-        params.addParametersJPG("file",new File(path));
+        if (paths!=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
+        }
 
         return onPost(getActionUrl("app/addTopic"),params);
     }
@@ -135,11 +147,15 @@ public class CircleApi extends BaseApi {
         return onPost(getActionUrl("app/getActiviyList"),params);
     }
 
-    public static final Observable<ResponseBean> addActivity(String userId,String content,String path){
+    public static final Observable<ResponseBean> addActivity(String userId,String content,List<String> paths){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
         params.addParameters("content",content);
-        params.addParametersJPG("file",new File(path));
+        if (paths!=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
+        }
 
         return onPost(getActionUrl("app/addActivity"),params);
     }
@@ -155,11 +171,15 @@ public class CircleApi extends BaseApi {
     }
 
 
-    public static final Observable<ResponseBean> addMakingFriend(String userId,String content,String path){
+    public static final Observable<ResponseBean> addMakingFriend(String userId,String content,List<String> paths){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
         params.addParameters("content",content);
-        params.addParametersJPG("file",new File(path));
+        if (paths!=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
+        }
 
         return onPost(getActionUrl("app/addMakingFriend"),params);
     }

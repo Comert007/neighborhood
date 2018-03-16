@@ -54,9 +54,18 @@
         </LinearLayout>
 
 
+        <ww.com.core.widget.CustomRecyclerView
+            android:id="@+id/crv"
+            android:layout_marginRight="@dimen/wwpx20"
+            android:layout_marginLeft="@dimen/wwpx20"
+            android:layout_marginTop="@dimen/wwpx40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <RelativeLayout android:layout_width="match_parent"
                         android:paddingLeft="@dimen/wwpx50"
                         android:layout_marginTop="@dimen/wwpx40"
+                        android:visibility="gone"
                         android:layout_height="@dimen/wwpx160"
                         android:gravity="center_vertical">
             <RelativeLayout

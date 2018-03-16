@@ -53,14 +53,14 @@ public class CircleModel extends BaseModel {
     }
 
     public void addCircle(String userId,
-                          String path,
+                          List<String> paths,
                           String content,
                           String circleType,
                           String communityId,
                           LifecycleTransformer transformer,
                           HttpSubscriber<String> httpSubscriber){
 
-        CircleApi.addCircle(userId, path, content, circleType, communityId)
+        CircleApi.addCircle(userId, paths, content, circleType, communityId)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
@@ -110,34 +110,34 @@ public class CircleModel extends BaseModel {
                 .subscribe(httpSubscriber);
     }
 
-    public void addMakingFriends(String userId,String content,String path,LifecycleTransformer transformer,
+    public void addMakingFriends(String userId,String content,List<String> paths,LifecycleTransformer transformer,
                          HttpSubscriber<String> httpSubscriber){
-        CircleApi.addMakingFriend(userId, content, path)
+        CircleApi.addMakingFriend(userId, content, paths)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
 
-    public void addEvent(String userId,String content,String path,LifecycleTransformer transformer,
+    public void addEvent(String userId,String content,List<String> paths,LifecycleTransformer transformer,
                          HttpSubscriber<String> httpSubscriber){
-        CircleApi.addEvent(userId, content, path)
+        CircleApi.addEvent(userId, content, paths)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
-    public void addTopic(String userId,String content,String path,LifecycleTransformer transformer,
+    public void addTopic(String userId,String content,List<String> paths,LifecycleTransformer transformer,
                          HttpSubscriber<String> httpSubscriber){
-        CircleApi.addTopic(userId, content, path)
+        CircleApi.addTopic(userId, content, paths)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);
     }
 
-    public void addActivity(String userId,String content,String path,LifecycleTransformer transformer,
+    public void addActivity(String userId,String content,List<String> paths,LifecycleTransformer transformer,
                             HttpSubscriber<String> httpSubscriber){
-        CircleApi.addActivity(userId, content, path)
+        CircleApi.addActivity(userId, content, paths)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);

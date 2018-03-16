@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.coder.neighborhood.bean.ResponseBean;
 
 import java.io.File;
+import java.util.List;
 
 import rx.Observable;
 import ww.com.http.core.AjaxParams;
@@ -170,7 +171,7 @@ public class HomeApi extends BaseApi {
                                                                 String itemQuantiry,
                                                                 String itemType,
                                                                 String itemDetails,
-                                                                String path){
+                                                                List<String> paths){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
         params.addParameters("itemName",itemName);
@@ -178,8 +179,11 @@ public class HomeApi extends BaseApi {
         params.addParameters("itemQuantiry",itemQuantiry);
         params.addParameters("itemType",itemType);
         params.addParameters("itemDetails",itemDetails);
-        if (!TextUtils.isEmpty(path)){
-            params.addParametersJPG("file",new File(path));
+        if (paths!=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
+
         }
         return onPost(getActionUrl("app/addItem"),params);
 

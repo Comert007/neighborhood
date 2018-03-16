@@ -130,7 +130,9 @@
 
 
 
+
         <FrameLayout android:layout_width="wrap_content"
+                     android:visibility="gone"
                      android:layout_height="wrap_content">
 
             <LinearLayout
@@ -187,6 +189,23 @@
 
         </FrameLayout>
 
+
+
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:background="@color/white"
+                  android:layout_height="wrap_content">
+        <ww.com.core.widget.CustomRecyclerView
+            android:id="@+id/crv"
+            android:layout_marginRight="@dimen/wwpx20"
+            android:layout_marginLeft="@dimen/wwpx20"
+            android:layout_marginTop="@dimen/wwpx40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <Button
             android:id="@+id/btn_publish_goods"
             android:layout_width="match_parent"
@@ -195,10 +214,10 @@
             android:layout_marginTop="@dimen/wwpx60"
             android:background="@drawable/green_border_shape"
             android:text="发布商品信息"
+            android:layout_marginLeft="@dimen/wwpx125"
+            android:layout_marginRight="@dimen/wwpx125"
             android:textColor="@color/color_title_text"
             android:textSize="@dimen/wwpx30"/>
-
-
     </LinearLayout>
 
 
