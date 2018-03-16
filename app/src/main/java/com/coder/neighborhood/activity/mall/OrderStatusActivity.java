@@ -11,12 +11,14 @@ import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.adapter.mall.OrderStatusAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.user.OrderBean;
+import com.coder.neighborhood.bean.user.OrderComposeBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.OrderStatusView;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ww.com.core.widget.CustomRecyclerView;
@@ -129,17 +131,20 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
                 bindUntilEvent(ActivityEvent.DESTROY), new HttpSubscriber<List<OrderBean>>(this,true) {
                     @Override
                     public void onNext(List<OrderBean> orderBeans) {
+
+                        List<OrderComposeBean> composeBeans = orderList(orderBeans);
+
                         v.getCsr().setRefreshFinished();
-                        if (orderBeans != null && orderBeans.size() > 0) {
+                        if (composeBeans != null && composeBeans.size() > 0) {
                             if (page == 1) {
-                                adapter.addList(orderBeans);
+                                adapter.addList(composeBeans);
                                 csr.setFooterRefreshAble(true);
                             } else {
                                 v.getCrv().removeFooterView(v.getFooterView());
-                                adapter.appendList(orderBeans);
+                                adapter.appendList(composeBeans);
                             }
 
-                            if (orderBeans.size() == Constants.PAGE_SIZE) {
+                            if (composeBeans.size() == Constants.PAGE_SIZE) {
                                 page++;
                             } else {
                                 v.getCsr().setFooterRefreshAble(false);
@@ -155,6 +160,29 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
                         v.getCsr().setRefreshFinished();
                     }
                 });
+    }
+
+    private List<OrderComposeBean> orderList(List<OrderBean> orderBeans){
+        List<OrderComposeBean> orderComposeBeans = new ArrayList<>();
+
+        for (OrderBean orderBean : orderBeans) {
+            List<OrderBean.ItemsBean> items = orderBean.getItems();
+            for (OrderBean.ItemsBean item : items) {
+                OrderComposeBean composeBean = new OrderComposeBean();
+                composeBean.setOrderId(orderBean.getOrderId());
+                composeBean.setOrderPayment(orderBean.getOrderPayment());
+                composeBean.setOrderStatus(orderBean.getOrderStatus());
+                composeBean.setBuyCount(item.getBuyCount());
+                composeBean.setImgUrl(item.getImgUrl());
+                composeBean.setItemGroupUnit(item.getItemGroupUnit());
+                composeBean.setItemId(item.getItemId());
+                composeBean.setItemName(item.getItemName());
+                composeBean.setItemPrice(item.getItemPrice());
+                orderComposeBeans.add(composeBean);
+            }
+        }
+
+        return orderComposeBeans;
     }
 
     @Override
