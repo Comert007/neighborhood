@@ -127,7 +127,7 @@ public class CommitTravelPickOrderActivity extends BaseActivity<VoidView, MallMo
                 price = ArithmeticUtils.add(perPrice,price);
             }
         }
-
+        tvPostFee.setText(bean.getPostCost());
         tvPrice.setText("合计：￥"+price);
 
     }

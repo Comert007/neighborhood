@@ -132,7 +132,7 @@ public class CommitPickOrderActivity extends BaseActivity<VoidView, MallModel> {
                 price = ArithmeticUtils.add(perPrice,price);
             }
         }
-
+        tvPostFee.setText(bean.getPostCost());
         tvPrice.setText("合计：￥"+price);
 
     }
