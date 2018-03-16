@@ -235,6 +235,8 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                                 v.getCsr().setFooterRefreshAble(false);
                             }
                         } else {
+                            adapter.getList().clear();
+                            adapter.notifyDataSetChanged();
                             v.getCsr().setFooterRefreshAble(false);
                         }
 
@@ -285,27 +287,4 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                 }).show();
     }
 
-
-    private String cardIds() {
-        String cardIds = "";
-
-        List<CartBean> list = adapter.getList();
-        if (list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                if (i == 0) {
-                    cardIds = cardIds + "[";
-                }
-                cardIds = cardIds + "{id:";
-                cardIds = cardIds + "\"" + list.get(i).getCartId() + "\"" + "}";
-
-                if (i != list.size() - 1) {
-                    cardIds = cardIds + ",";
-                } else {
-                    cardIds = cardIds + "]";
-                }
-            }
-        }
-        Debug.d("cardIds:" + cardIds);
-        return cardIds;
-    }
 }

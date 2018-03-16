@@ -5,7 +5,9 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/rl_post_cast"
+        android:layout_width="match_parent"
                   android:padding="@dimen/wwpx20"
                     android:background="@color/color_white"
                   android:layout_height="wrap_content">
@@ -17,8 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/et_post_fee"
+        <TextView
+            android:id="@+id/tv_post_fee"
             android:textColor="@color/color_black"
             android:hint="0"
             android:textColorHint="@color/color_black"
@@ -27,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_toRightOf="@id/tv_transport_name"
             android:layout_toLeftOf="@id/tv_price_unit"
-            android:inputType="number"
             android:gravity="right"
             android:layout_height="wrap_content"/>
 

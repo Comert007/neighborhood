@@ -35,8 +35,17 @@ public class GoodsInfoBean implements Serializable{
     private String itemPickingBuyCount;
     private String sellType;
     private String itemPickingPrice;
+    private String postCost;
     private List<ImgUrlsBean> imgUrls;
 
+
+    public String getPostCost() {
+        return postCost;
+    }
+
+    public void setPostCost(String postCost) {
+        this.postCost = postCost;
+    }
 
     public String getItemId() {
         return itemId;

@@ -24,6 +24,7 @@ public class CartFlagBean {
     private String cartId;
     private String ItemPrice;
     private String itemGroupUnit;
+    private String postCost;
     private String ItemId;
     private String selectFlag;
 
@@ -89,5 +90,13 @@ public class CartFlagBean {
 
     public void setSelectFlag(String selectFlag) {
         this.selectFlag = selectFlag;
+    }
+
+    public String getPostCost() {
+        return postCost;
+    }
+
+    public void setPostCost(String postCost) {
+        this.postCost = postCost;
     }
 }

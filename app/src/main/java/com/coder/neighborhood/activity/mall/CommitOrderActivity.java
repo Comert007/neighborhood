@@ -58,7 +58,7 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
     @BindView(R.id.tv_price)
     TextView tvPrice;
 
-    private EditText etPostFee;
+    private TextView tvPostFee;
     private EditText etMark;
 
     private CommitOrderAdapter adapter;
@@ -95,7 +95,7 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
         crv.setAdapter(adapter);
 
         View view = LayoutInflater.from(this).inflate(R.layout.view_commit_order_info, null);
-        etPostFee = view.findViewById(R.id.et_post_fee);
+        tvPostFee = view.findViewById(R.id.tv_post_fee);
         etMark = view.findViewById(R.id.et_mark);
         ScreenUtil.scale(view);
         crv.addFooterView(view);
@@ -126,7 +126,7 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
                 map.put("status","1");
                 map.put("recipientId", recipientId);
                 map.put("payment",price+"");
-                map.put("postFee",TextUtils.isEmpty(etPostFee.getText().toString())?"0":etPostFee.getText().toString());
+                map.put("postFee",TextUtils.isEmpty(tvPostFee.getText().toString())?"0":tvPostFee.getText().toString());
                 map.put("buyerMessage",etMark.getText().toString());
                 PayShowActivity.start(this, map);
                 finish();
@@ -160,6 +160,7 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
                         public void onNext(List<CartFlagBean> cartFlagBeans) {
                             adapter.addList(cartFlagBeans);
                             price = 0;
+                            int postFee = 0;
 
                             if (cartFlagBeans.size() > 0) {
                                 for (int i = 0; i < cartFlagBeans.size(); i++) {
@@ -167,8 +168,11 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
                                             .getItemPrice(), cartFlagBeans.get(i).getBuyCount())
                                             .doubleValue();
                                     price = ArithmeticUtils.add(perPrice,price);
+                                    String postCast = cartFlagBeans.get(i).getPostCost();
+                                    postFee  = postFee + (TextUtils.isEmpty(postCast)?0:Integer.valueOf(postCast));
                                 }
                             }
+                            tvPostFee.setText(postFee+"");
 
                             tvPrice.setText("合计：￥"+price);
                         }

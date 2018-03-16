@@ -57,7 +57,7 @@ public class CommitTravelPickOrderActivity extends BaseActivity<VoidView, MallMo
     @BindView(R.id.tv_price)
     TextView tvPrice;
 
-    private EditText etPostFee;
+    private TextView tvPostFee;
     private EditText etMark;
 
     private CommitOrderAdapter adapter;
@@ -96,7 +96,8 @@ public class CommitTravelPickOrderActivity extends BaseActivity<VoidView, MallMo
         crv.setAdapter(adapter);
 
         View view = LayoutInflater.from(this).inflate(R.layout.view_commit_order_info, null);
-        etPostFee = view.findViewById(R.id.et_post_fee);
+        view.findViewById(R.id.rl_post_cast).setVisibility(View.GONE);
+        tvPostFee = view.findViewById(R.id.tv_post_fee);
         etMark = view.findViewById(R.id.et_mark);
         ScreenUtil.scale(view);
         crv.addFooterView(view);
@@ -156,7 +157,7 @@ public class CommitTravelPickOrderActivity extends BaseActivity<VoidView, MallMo
                 map.put("itemQuantity","1");
                 map.put("recipientId", recipientId);
                 map.put("payment",price+"");
-                map.put("postFee",TextUtils.isEmpty(etPostFee.getText().toString())?"0":etPostFee.getText().toString());
+                map.put("postFee",TextUtils.isEmpty(tvPostFee.getText().toString())?"0":tvPostFee.getText().toString());
                 map.put("buyerMessage",etMark.getText().toString());
                 PayShowActivity.start(this, map);
                 finish();

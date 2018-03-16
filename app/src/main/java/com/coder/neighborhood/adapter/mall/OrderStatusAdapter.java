@@ -14,6 +14,8 @@ import com.coder.neighborhood.activity.user.CommentGoodsActivity;
 import com.coder.neighborhood.bean.user.OrderBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.List;
+
 import butterknife.BindView;
 import ww.com.core.adapter.RvAdapter;
 import ww.com.core.adapter.RvViewHolder;
@@ -63,21 +65,25 @@ public class OrderStatusAdapter extends RvAdapter<OrderBean> {
              *
              * 订单状态(1、待付款，2、待发货，3、待收货，4、待评价、5、已完成)
              */
-            ImageLoader.getInstance().displayImage(bean.getImgUrl(), iv, BaseApplication
-                    .getDisplayImageOptions(R.mipmap.pic_default));
-            tvGoodsName.setText(bean.getItemName());
-            tvGoodsPrice.setText(bean.getOrderPayment() + "元" + (TextUtils.isEmpty(bean
-                    .getItemGroupUnit()) ? "" : "/" + bean.getItemGroupUnit()));
-            tvGoodsNum.setText(TextUtils.isEmpty(bean.getBuyCount()) ? "" : "x" + bean
-                    .getBuyCount());
-            showStatus(bean.getOrderStatus());
+            List<OrderBean.ItemsBean> items = bean.getItems();
+            if (items!=null  && items.size() >0){
+                ImageLoader.getInstance().displayImage(items.get(0).getImgUrl(), iv, BaseApplication
+                        .getDisplayImageOptions(R.mipmap.pic_default));
 
-            btnOrder.setOnClickListener(v -> {
-                if ("4".equals(bean.getOrderStatus())) {
-                    CommentGoodsActivity.start((Activity) getContext(), bean.getItemId());
-                }
-            });
+                tvGoodsName.setText(items.get(0).getItemName());
+                tvGoodsPrice.setText(bean.getOrderPayment() + "元" + (TextUtils.isEmpty(items.get(0)
+                        .getItemGroupUnit()) ? "" : "/" + items.get(0).getItemGroupUnit()));
+                tvGoodsNum.setText(TextUtils.isEmpty(items.get(0).getBuyCount()) ? "" : "x" + items.get(0)
+                        .getBuyCount());
+                showStatus(bean.getOrderStatus());
 
+                btnOrder.setOnClickListener(v -> {
+                    if ("4".equals(bean.getOrderStatus())) {
+                        CommentGoodsActivity.start((Activity) getContext(), items.get(0).getItemId());
+                    }
+                });
+
+            }
 
         }
 
@@ -101,11 +107,6 @@ public class OrderStatusAdapter extends RvAdapter<OrderBean> {
                 default:
                     break;
             }
-        }
-
-
-        private void onClick() {
-
         }
 
     }
