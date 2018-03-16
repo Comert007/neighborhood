@@ -1,17 +1,17 @@
-package com.coder.neighborhood.fragment.circle;
+package com.coder.neighborhood.activity.circle;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
-import com.coder.neighborhood.activity.circle.PublishTopicActivity;
+import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
-import com.coder.neighborhood.adapter.circle.TopicAdapter;
+import com.coder.neighborhood.adapter.circle.MakingFriendsAdapter;
 import com.coder.neighborhood.bean.UserBean;
-import com.coder.neighborhood.bean.circle.TopicBean;
+import com.coder.neighborhood.bean.circle.MakingFriendsBean;
 import com.coder.neighborhood.config.Constants;
-import com.coder.neighborhood.fragment.BaseFragment;
 import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.CircleModel;
 import com.coder.neighborhood.mvp.vu.base.RefreshView;
@@ -23,23 +23,30 @@ import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 /**
- * @Author feng
- * @Date 2018/1/16
+ * @author feng
+ * @Date 2018/3/16.
  */
 
-public class TopicFragment extends BaseFragment<RefreshView,CircleModel> {
+public class MakingFriendsActivity extends BaseActivity<RefreshView,CircleModel> {
 
-    private TopicAdapter adapter;
+    private MakingFriendsAdapter adapter;
+
     private int page = 1;
 
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
 
-    private final int REQUEST_CODE = 0x19;
+    private final int REQUEST_CODE = 0x21;
+
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MakingFriendsActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_topic;
+        return R.layout.activity_making_friends;
     }
 
     @Override
@@ -49,8 +56,14 @@ public class TopicFragment extends BaseFragment<RefreshView,CircleModel> {
         initData();
     }
 
+    @Override
+    public void onTitleLeft() {
+        super.onTitleLeft();
+        finish();
+    }
+
     private void initView() {
-        adapter = new TopicAdapter(getContext());
+        adapter = new MakingFriendsAdapter(this);
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
@@ -64,41 +77,41 @@ public class TopicFragment extends BaseFragment<RefreshView,CircleModel> {
                 page = 1;
                 csr.setEnableRefresh(true);
                 csr.setFooterRefreshAble(false);
-                topics();
+                makingFriends();
             }
 
             @Override
             public void onFooterRefreshing() {
                 v.getCrv().addFooterView(v.getFooterView());
-                topics();
+                makingFriends();
             }
         });
     }
 
     private void initData() {
         crv.setAdapter(adapter);
-        topics();
+        makingFriends();
     }
 
-    private void topics(){
+    private void makingFriends(){
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user !=null && !TextUtils.isEmpty(user.getUserId())){
-            m.topics(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
-                    new HttpSubscriber<List<TopicBean>>(getContext(),false) {
+            m.makingFriends(user.getUserId(), page + "", Constants.PAGE_SIZE + "",
+                    new HttpSubscriber<List<MakingFriendsBean>>(this,false) {
 
                         @Override
-                        public void onNext(List<TopicBean> topicBeans) {
+                        public void onNext(List<MakingFriendsBean> makingFriendsBeans) {
                             v.getCsr().setRefreshFinished();
-                            if (topicBeans != null && topicBeans.size() > 0) {
+                            if (makingFriendsBeans != null && makingFriendsBeans.size() > 0) {
                                 if (page == 1) {
-                                    adapter.addList(topicBeans);
+                                    adapter.addList(makingFriendsBeans);
                                     csr.setFooterRefreshAble(true);
                                 } else {
                                     v.getCrv().removeFooterView(v.getFooterView());
-                                    adapter.appendList(topicBeans);
+                                    adapter.appendList(makingFriendsBeans);
                                 }
 
-                                if (topicBeans.size() == Constants.PAGE_SIZE) {
+                                if (makingFriendsBeans.size() == Constants.PAGE_SIZE) {
                                     page++;
                                 } else {
                                     v.getCsr().setFooterRefreshAble(false);
@@ -120,7 +133,7 @@ public class TopicFragment extends BaseFragment<RefreshView,CircleModel> {
     @CheckUser
     @OnClick(R.id.btn_ask)
     public void onPublish(){
-        PublishTopicActivity.startForResult(getPresenterActivity(),REQUEST_CODE);
+        PublishMakingFriendsActivity.startForResult(getPresenterActivity(),REQUEST_CODE);
     }
 
     @Override
@@ -128,8 +141,7 @@ public class TopicFragment extends BaseFragment<RefreshView,CircleModel> {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE){
             page = 1;
-            topics();
+            makingFriends();
         }
     }
-
 }

@@ -106,14 +106,7 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
         csr.setEnableRefresh(true);
         csr.setFooterRefreshAble(false);
         crv.setAdapter(adapter);
-
-        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
-        if (user!=null){
-            setTitleText(userId.equals(user.getUserId())?"我的历史动态":"好友信息");
-            if (!userId.equals(user.getUserId())){
-                crv.addHeadView(vi);
-            }
-        }
+        crv.addHeadView(vi);
     }
 
 
@@ -245,7 +238,17 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
     }
 
     private void setFriendInfo() {
-        btnAdd.setVisibility("1".equals(friendInfoBean.getFriendFlag())?View.GONE:View.VISIBLE);
+
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        String flag = friendInfoBean.getFriendFlag();
+        if (user!=null){
+            if ("1".equals(flag)|| "0".equals(flag)){
+                setTitleText("好友信息");
+            }else if ("3".equals(userId.equals(user.getUserId()))){
+                setTitle("个人信息");
+            }
+        }
+        btnAdd.setVisibility("1".equals(flag)||"3".equals(flag)?View.GONE:View.VISIBLE);
         tvName.setText(friendInfoBean.getNickname());
         ImageLoader.getInstance().displayImage(friendInfoBean.getHeadImgUrl(), rivHeader,
                 BaseApplication

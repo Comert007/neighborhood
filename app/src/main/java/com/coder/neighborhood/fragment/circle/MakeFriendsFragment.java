@@ -14,6 +14,7 @@ import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.MainActivity;
 import com.coder.neighborhood.activity.circle.DoingsDetailActivity;
 import com.coder.neighborhood.activity.circle.EventDetailActivity;
+import com.coder.neighborhood.activity.circle.MakingFriendsActivity;
 import com.coder.neighborhood.activity.circle.PublishCircleActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.FriendsInfoActivity;
@@ -211,7 +212,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     }
 
 
-    @OnClick({R.id.btn_add, R.id.btn_circle})
+    @OnClick({R.id.btn_add, R.id.btn_circle,R.id.btn_making_friends})
     public void onMakeFriends(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
@@ -222,6 +223,9 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
                 if (user != null && !TextUtils.isEmpty(user.getUserId())) {
                     FriendsInfoActivity.start(getContext(), user.getUserId());
                 }
+                break;
+            case R.id.btn_making_friends:
+                MakingFriendsActivity.start(getContext());
                 break;
             default:
                 break;

@@ -21,11 +21,13 @@ public class CircleBean {
 
     private String circleLike;
     private String headImg;
+    private String userlevel;
     private String nickName;
     private String circleInfo;
     private String circleId;
     private String circleAuthor;
     private String circleDate;
+    private String userId;
     private List<CommentsBean> comments;
     private List<ImgUrlsBean> imgUrls;
 
@@ -111,6 +113,15 @@ public class CircleBean {
         private String commentsContent;
         private String nickname;
         private String commentsDate;
+        private String userId;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
 
         public String getCommentsContent() {
             return commentsContent;
@@ -153,5 +164,21 @@ public class CircleBean {
         public void setImgUrl(String imgUrl) {
             this.imgUrl = imgUrl;
         }
+    }
+
+    public String getUserlevel() {
+        return userlevel;
+    }
+
+    public void setUserlevel(String userlevel) {
+        this.userlevel = userlevel;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

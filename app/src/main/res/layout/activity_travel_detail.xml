@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/wwpx20"
-                android:text="加入购物车"
+                android:text="购物车"
                 android:textColor="@color/color_666666"
                 android:textSize="@dimen/wwpx28"/>
         </LinearLayout>

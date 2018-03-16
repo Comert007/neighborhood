@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.coder.neighborhood.R;
+import com.coder.neighborhood.activity.user.FriendsInfoActivity;
 import com.coder.neighborhood.bean.circle.CircleBean;
 
 import java.text.SimpleDateFormat;
@@ -61,6 +62,7 @@ public class CircleCommentAdapter extends RvAdapter<CircleBean.CommentsBean>{
                 tvTime.setVisibility(View.GONE);
             }
 
+            itemView.setOnClickListener(v -> FriendsInfoActivity.start(getContext(),bean.getUserId()));
         }
     }
 }

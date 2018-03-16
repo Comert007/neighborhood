@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/LlayFill"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="发布交友信息"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_marginTop="@dimen/wwpx2"
+                  android:gravity="center_horizontal"
+                  android:paddingTop="@dimen/wwpx80"
+                  android:paddingBottom="@dimen/wwpx80"
+                  android:background="@color/color_white"
+                  android:layout_height="wrap_content">
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:background="@drawable/gray_border_shape"
+                      android:layout_height="@dimen/wwpx260">
+            <EditText
+                android:id="@+id/et_content"
+                android:background="@android:color/transparent"
+                android:layout_width="@dimen/wwpx650"
+                android:textSize="@dimen/wwpx28"
+                android:padding="@dimen/wwpx20"
+                android:textColor="@color/color_999999"
+                android:hint="交友信息详情"
+                android:gravity="left"
+                android:maxLength="200"
+                android:layout_weight="1"
+                android:layout_height="0px"/>
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:text="0/200"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/wwpx22"
+                android:layout_marginTop="@dimen/wwpx5"
+                android:layout_marginRight="@dimen/wwpx20"
+                android:gravity="right"
+                android:layout_marginBottom="@dimen/wwpx20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/wwpx50"
+                        android:layout_marginTop="@dimen/wwpx40"
+                        android:layout_height="@dimen/wwpx160"
+                        android:gravity="center_vertical">
+            <RelativeLayout
+                android:id="@+id/rl_image_show"
+                android:layout_width="@dimen/wwpx230"
+                android:layout_height="@dimen/wwpx160"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="@dimen/wwpx210"
+                    android:layout_height="@dimen/wwpx130"
+                    android:layout_centerInParent="true"
+                    android:background="@color/color_page_bg"
+                    android:scaleType="centerCrop"/>
+                <com.coder.neighborhood.widget.IconFontTextView
+                    android:id="@+id/if_close"
+                    android:layout_width="@dimen/wwpx20"
+                    android:layout_height="@dimen/wwpx20"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/wwpx8"
+                    android:text="\ue6bf"
+                    android:textSize="@dimen/wwpx20"
+                />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_show"
+                android:layout_width="@dimen/wwpx210"
+                android:layout_height="@dimen/wwpx130"
+                android:background="@color/color_page_bg"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+
+                    android:layout_width="@dimen/wwpx48"
+                    android:layout_height="@dimen/wwpx48"
+                    android:src="@mipmap/ic_add"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="添加图片"
+                          android:layout_marginTop="@dimen/wwpx10"
+                          android:textColor="@color/color_666666"
+                          android:textSize="@dimen/wwpx26"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+
+        <Button
+            android:id="@+id/btn_publish"
+            android:background="@drawable/green_border_shape"
+            android:text="发布交友信息"
+            android:textSize="@dimen/wwpx30"
+            android:textColor="@color/color_text"
+            android:layout_marginTop="@dimen/wwpx40"
+            android:layout_width="@dimen/wwpx498"
+            android:layout_height="@dimen/wwpx60"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

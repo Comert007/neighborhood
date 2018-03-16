@@ -7,11 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.circle.ImageShowActivity;
+import com.coder.neighborhood.activity.user.FriendsInfoActivity;
 import com.coder.neighborhood.adapter.user.ImageAdapter;
 import com.coder.neighborhood.bean.circle.CircleBean;
 import com.coder.neighborhood.mvp.listener.OnActionListener;
@@ -64,6 +66,8 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
     }
 
     class GoodFriendsViewHolder extends RvViewHolder<CircleBean>{
+        @BindView(R.id.ll_user_info)
+        LinearLayout llUserInfo;
         @BindView(R.id.riv_header)
         RoundImageView riv;
         @BindView(R.id.tv_name)
@@ -132,6 +136,8 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
                 }
 
             }
+
+            tvGrade.setText(TextUtils.isEmpty(bean.getUserlevel())?"Lv.0":"LV."+bean.getUserlevel());
             tvPrise.setText(TextUtils.isEmpty(bean.getCircleLike())?"0":bean.getCircleLike());
             iconComment.setOnClickListener(v -> {
                 EditDialog editDialog = new EditDialog(getContext(),4);
@@ -149,6 +155,7 @@ public class MakeFriendsAdapter extends RvAdapter<CircleBean> {
                     actionListener.onAction(position,ivPrise);
                 }
             });
+            llUserInfo.setOnClickListener(v -> FriendsInfoActivity.start(getContext(),bean.getUserId()));
         }
     }
 

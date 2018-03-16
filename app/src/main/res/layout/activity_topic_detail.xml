@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LlayFill">
+
+    <com.coder.neighborhood.widget.TitleView
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleLeftIco="@mipmap/ic_back"
+        app:titleText="话题"/>
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:background="@color/color_b3b3b3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wwpx322" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:padding="@dimen/wwpx20"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/wwpx30"
+        android:layout_marginTop="@dimen/wwpx20"
+        android:minLines="8"
+        android:background="@color/color_white"
+        android:textColor="@color/color_666666"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+</LinearLayout>

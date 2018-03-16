@@ -106,6 +106,26 @@ public class CircleApi extends BaseApi {
         return onPost(getActionUrl("app/addEvents"),params);
     }
 
+    public static final Observable<ResponseBean> topics(String userId,String pageNo,String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getTopicsList"),params);
+    }
+
+    public static final Observable<ResponseBean> addTopic(String userId,String content,String path){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("content",content);
+        params.addParametersJPG("file",new File(path));
+
+        return onPost(getActionUrl("app/addTopic"),params);
+    }
+
+
+
     public static final Observable<ResponseBean> avtivities(String userId,String pageNo,String pageSize){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
@@ -125,11 +145,45 @@ public class CircleApi extends BaseApi {
     }
 
 
+    public static final Observable<ResponseBean> makingFriends(String userId,String pageNo,String pageSize){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("pageNo",pageNo);
+        params.addParameters("pageSize",pageSize);
+
+        return onPost(getActionUrl("app/getMakingFriendsList"),params);
+    }
+
+
+    public static final Observable<ResponseBean> addMakingFriend(String userId,String content,String path){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("content",content);
+        params.addParametersJPG("file",new File(path));
+
+        return onPost(getActionUrl("app/addMakingFriend"),params);
+    }
+
+    public static final Observable<ResponseBean> makingFriendsDetail(String makingFriendsId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("makingFriendsId",makingFriendsId);
+
+        return onPost(getActionUrl("app/getMakingFriendsInfo"),params);
+    }
+
+
     public static final Observable<ResponseBean> eventDetail(String eventsId){
         AjaxParams params = getBaseParams();
         params.addParameters("eventsId",eventsId);
 
         return onPost(getActionUrl("app/getEventsInfo"),params);
+    }
+
+    public static final Observable<ResponseBean> topicDetail(String topicsId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("topicsId",topicsId);
+
+        return onPost(getActionUrl("app/getTopicsInfo"),params);
     }
 
 

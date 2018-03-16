@@ -62,7 +62,7 @@ public class RefreshView extends BaseView {
 
             View emptyView = LayoutInflater.from(preActivity).inflate(R.layout.layout_empty, null);
             qmuiEmptyView = ButterKnife.findById(emptyView, R.id.empty_view);
-            qmuiEmptyView.setTitleText("暂无更多商品");
+            qmuiEmptyView.setTitleText("暂无更多数据");
             ScreenUtil.scale(emptyView);
             crv.addEmpty(emptyView);
         }
