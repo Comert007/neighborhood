@@ -144,12 +144,12 @@ public class PublishEventActivity extends BaseActivity<VoidView, CircleModel> {
         String content = etContent.getText().toString().trim();
 
         if (TextUtils.isEmpty(content)) {
-            ToastUtils.showToast("请输入问题");
+            ToastUtils.showToast("请输入事件");
             return;
         }
 
         if (content.length() < 5) {
-            ToastUtils.showToast("问题不得少于5字描述");
+            ToastUtils.showToast("事件不得少于5字描述");
             return;
         }
         List<ImageQuestionBean> imageQuestionBeans = adapter.getList();

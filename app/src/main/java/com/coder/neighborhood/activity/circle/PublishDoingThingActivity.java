@@ -140,12 +140,12 @@ public class PublishDoingThingActivity extends BaseActivity<VoidView, CircleMode
         String content = etContent.getText().toString().trim();
 
         if (TextUtils.isEmpty(content)) {
-            ToastUtils.showToast("请输入问题");
+            ToastUtils.showToast("请输入活动");
             return;
         }
 
         if (content.length() < 5) {
-            ToastUtils.showToast("问题不得少于5字描述");
+            ToastUtils.showToast("活动不得少于5字描述");
             return;
         }
         List<ImageQuestionBean> imageQuestionBeans = adapter.getList();

@@ -31,7 +31,7 @@
                 android:textSize="@dimen/wwpx28"
                 android:padding="@dimen/wwpx20"
                 android:textColor="@color/color_999999"
-                android:hint="问题详情"
+                android:hint="活动详情"
                 android:gravity="left"
                 android:maxLength="200"
                 android:layout_weight="1"
