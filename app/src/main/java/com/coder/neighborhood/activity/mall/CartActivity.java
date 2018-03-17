@@ -163,11 +163,16 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
     private boolean isWhole() {
         boolean isOk = true;
         List<CartBean> cartBeans = adapter.getList();
-        for (CartBean cartBean : cartBeans) {
-            if ("0".equals(cartBean.getSelectFlag())) {
-                isOk = false;
+        if (cartBeans!=null && cartBeans.size()>0){
+            for (CartBean cartBean : cartBeans) {
+                if ("0".equals(cartBean.getSelectFlag())) {
+                    isOk = false;
+                }
             }
+        }else {
+            isOk = false;
         }
+
         return isOk;
     }
 
