@@ -253,4 +253,16 @@ public class MallApi extends BaseApi {
     }
 
 
+    /**
+     * 确认订单
+     */
+    //POST /app/confirmGoods
+    public static final Observable<ResponseBean> confirmOrder(String userId,String orderId){
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("orderId",orderId);
+
+        return onPost(getActionUrl("app/confirmGoods"),params);
+    }
+
 }

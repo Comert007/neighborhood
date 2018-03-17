@@ -3,6 +3,7 @@ package com.coder.neighborhood.activity.mall;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
@@ -87,6 +88,11 @@ public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
             }
         });
 
+        adapter.setOnActionListener((position, view) -> {
+            OrderBean orderBean = adapter.getItem(position);
+            dealOrder(orderBean);
+        });
+
     }
 
     private void initData(){
@@ -158,6 +164,59 @@ public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
                         v.getCsr().setRefreshFinished();
                     }
                 });
+    }
+
+
+    /**
+     * 对订单进行处理
+     * @param orderBean
+     */
+    private void dealOrder(OrderBean orderBean){
+        String orderStatus = orderBean.getOrderStatus();
+        switch (orderStatus){
+            case "1":
+                payOrder(orderBean);
+                break;
+            case "2":
+                urgeOrder(orderBean);
+                break;
+            case "3":
+                confirmOrder(orderBean);
+                break;
+        }
+    }
+
+    /**
+     * 确认订单
+     * @param orderBean 订单实例
+     */
+    private void confirmOrder(OrderBean orderBean){
+        UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
+        if (user!=null && !TextUtils.isEmpty(user.getUserId())){
+            m.confirmOrder(user.getUserId(), orderBean.getOrderId(), bindUntilEvent(ActivityEvent.DESTROY),
+                    new HttpSubscriber<String>(this,true) {
+                        @Override
+                        public void onNext(String s) {
+                            onGoodsOrders(status+"");
+                        }
+                    });
+        }
+    }
+
+    /**
+     * 订单再支付
+     * @param orderBean
+     */
+    private void payOrder(OrderBean orderBean){
+
+    }
+
+    /**
+     * 催单
+     * @param orderBean
+     */
+    private void urgeOrder(OrderBean orderBean){
+
     }
 
 

@@ -249,7 +249,7 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
                 OrderLinkActivity.start(getContext(),2);
                 break;
             case R.id.ll_wait_gain:
-                OrderStatusActivity.start(getContext(),3);
+                OrderLinkActivity.start(getContext(),3);
                 break;
             case R.id.ll_wait_comment:
                 OrderStatusActivity.start(getContext(),4);

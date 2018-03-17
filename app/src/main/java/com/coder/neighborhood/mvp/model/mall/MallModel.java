@@ -340,4 +340,12 @@ public class MallModel extends BaseModel{
                 .subscribe(httpSubscriber);
     }
 
+    public void confirmOrder(String userId,String orderId,LifecycleTransformer transformer,
+                             HttpSubscriber<String> httpSubscriber){
+        MallApi.confirmOrder(userId, orderId)
+                .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
+                .compose(transformer)
+                .subscribe(httpSubscriber);
+    }
+
 }

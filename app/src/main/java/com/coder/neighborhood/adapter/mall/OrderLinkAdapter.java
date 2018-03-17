@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.bean.user.OrderBean;
 import com.coder.neighborhood.bean.user.OrderItemBean;
+import com.coder.neighborhood.mvp.listener.OnActionListener;
 import com.coder.neighborhood.utils.ArithmeticUtils;
 
 import java.util.List;
@@ -25,8 +26,18 @@ import ww.com.core.widget.CustomRecyclerView;
 
 public class OrderLinkAdapter extends RvAdapter<OrderBean> {
 
+    private OnActionListener onActionListener;
+
     public OrderLinkAdapter(Context context) {
         super(context);
+    }
+
+    public OnActionListener getOnActionListener() {
+        return onActionListener;
+    }
+
+    public void setOnActionListener(OnActionListener onActionListener) {
+        this.onActionListener = onActionListener;
     }
 
     @Override
@@ -39,7 +50,7 @@ public class OrderLinkAdapter extends RvAdapter<OrderBean> {
         return new OrderLinkViewHolder(view);
     }
 
-    class OrderLinkViewHolder extends RvViewHolder<OrderBean>{
+    class OrderLinkViewHolder extends RvViewHolder<OrderBean> {
         @BindView(R.id.crv)
         CustomRecyclerView crv;
         @BindView(R.id.tv_total_price)
@@ -61,20 +72,25 @@ public class OrderLinkAdapter extends RvAdapter<OrderBean> {
             adapter.addList(bean.getItems());
             crv.setAdapter(adapter);
 
-            if (bean.getItems()!=null && bean.getItems().size()>0){
-                tvTotalPrice.setText("总价："+getTotalPrice(bean.getItems()));
+            if (bean.getItems() != null && bean.getItems().size() > 0) {
+                tvTotalPrice.setText("总价：" + getTotalPrice(bean.getItems()));
             }
             showStatus(bean.getOrderStatus());
+            btnOrder.setOnClickListener(v -> {
+                if (onActionListener != null) {
+                    onActionListener.onAction(position,v);
+                }
+            });
         }
 
 
-        private double getTotalPrice(List<OrderItemBean> beans){
+        private double getTotalPrice(List<OrderItemBean> beans) {
             double price = 0;
             for (int i = 0; i < beans.size(); i++) {
                 double perPrice = ArithmeticUtils.mul(beans.get(i)
                         .getItemPrice(), beans.get(i).getBuyCount())
                         .doubleValue();
-                price = ArithmeticUtils.add(perPrice,price);
+                price = ArithmeticUtils.add(perPrice, price);
             }
 
             return price;
