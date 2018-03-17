@@ -1,6 +1,5 @@
 package com.coder.neighborhood.activity;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -44,7 +43,6 @@ public abstract class BaseActivity<V extends IView,M extends IModel> extends Pre
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         baseApp = BaseApplication.getInstance();
         super.onCreate(savedInstanceState);
     }

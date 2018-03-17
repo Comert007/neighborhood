@@ -14,6 +14,7 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.home.FeedBackQuestionActivity;
 import com.coder.neighborhood.activity.mall.CartActivity;
+import com.coder.neighborhood.activity.mall.OrderLinkActivity;
 import com.coder.neighborhood.activity.mall.OrderStatusActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
 import com.coder.neighborhood.activity.user.AboutUsActivity;
@@ -242,10 +243,10 @@ public class UserFragment extends BaseFragment<VoidView, UserModel> implements I
     public void onUserClick(View v) {
         switch (v.getId()) {
             case R.id.ll_wait_pay:
-                OrderStatusActivity.start(getContext(),1);
+                OrderLinkActivity.start(getContext(),1);
                 break;
             case R.id.ll_wait_send:
-                OrderStatusActivity.start(getContext(),2);
+                OrderLinkActivity.start(getContext(),2);
                 break;
             case R.id.ll_wait_gain:
                 OrderStatusActivity.start(getContext(),3);

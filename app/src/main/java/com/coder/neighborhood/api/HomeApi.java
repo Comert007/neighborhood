@@ -59,15 +59,18 @@ public class HomeApi extends BaseApi {
                                                               String type,
                                                               String phone,
                                                               String questionContent,
-                                                              String filePath){
+                                                              List<String>paths){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
         params.addParameters("type",type);
         params.addParameters("phone",phone);
         params.addParameters("lostContent",questionContent);
-        if (!TextUtils.isEmpty(filePath)){
-            params.addParametersJPG("file",new File(filePath));
+        if (paths !=null && paths.size()>0){
+            for (String path : paths) {
+                params.addParametersJPG("file",new File(path));
+            }
         }
+
 
         return onPost(getActionUrl("app/addLostAndRecruit"),params);
     }

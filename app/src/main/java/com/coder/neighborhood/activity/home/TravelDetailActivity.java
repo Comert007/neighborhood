@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
@@ -19,7 +20,6 @@ import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.home.HomeModel;
 import com.coder.neighborhood.mvp.vu.mall.GoodsDetailView;
 import com.coder.neighborhood.utils.ToastUtils;
-import com.tencent.smtt.sdk.WebView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.youth.banner.listener.OnBannerListener;
 

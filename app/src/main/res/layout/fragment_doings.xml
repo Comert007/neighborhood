@@ -19,6 +19,7 @@
         </ww.com.core.widget.CustomSwipeRefreshLayout>
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_ask"
             android:layout_width="@dimen/wwpx88"
             android:layout_height="@dimen/wwpx88"

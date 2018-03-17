@@ -244,8 +244,8 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoView, UserModel
         if (user!=null){
             if ("1".equals(flag)|| "0".equals(flag)){
                 setTitleText("好友信息");
-            }else if ("3".equals(userId.equals(user.getUserId()))){
-                setTitle("个人信息");
+            }else if ("3".equals(flag)){
+                setTitleText("我的历史动态");
             }
         }
         btnAdd.setVisibility("1".equals(flag)||"3".equals(flag)?View.GONE:View.VISIBLE);

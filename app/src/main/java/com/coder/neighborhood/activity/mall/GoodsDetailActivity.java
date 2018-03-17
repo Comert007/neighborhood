@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.GoodsDetailView;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.smtt.sdk.WebView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
 
     private void initData() {
         onGoodsDetail();
-        comment();
+
     }
 
     private void initListener() {
@@ -157,6 +157,7 @@ public class GoodsDetailActivity extends BaseActivity<GoodsDetailView, MallModel
                         }
                         startBanner(urls);
                         showGoodsDetail(goodsDetailBean);
+                        comment();
                     }
                 });
     }

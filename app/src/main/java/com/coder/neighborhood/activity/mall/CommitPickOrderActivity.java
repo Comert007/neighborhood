@@ -118,7 +118,7 @@ public class CommitPickOrderActivity extends BaseActivity<VoidView, MallModel> {
         bean.setItemName(goodsInfoBean.getItemName());
         bean.setBuyCount("1");
         bean.setPostCost(goodsInfoBean.getPostCost());
-        bean.setItemPrice(goodsInfoBean.getItemPrice());
+        bean.setItemPrice(goodsInfoBean.getItemPickingPrice());
         List<CartFlagBean> cartFlagBeans = new ArrayList<>();
         cartFlagBeans.add(bean);
         adapter.addList(cartFlagBeans);

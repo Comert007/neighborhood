@@ -149,14 +149,16 @@ public class PublishPicQuestionActivity extends BaseActivity<VoidView,HomeModel>
             ToastUtils.showToast("请输入联系方式");
             return;
         }
+
+        if (paths.size()==0){
+            ToastUtils.showToast("请添加图片");
+            return;
+        }
+
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user!=null){
             String userId = user.getUserId();
-            String path ="";
-            if (paths !=null && paths.size()>0){
-                 path = paths.get(0);
-            }
-            m.addLostThing(userId, type+"", phone, content, path, bindUntilEvent(ActivityEvent.DESTROY)
+            m.addLostThing(userId, type+"", phone, content, paths, bindUntilEvent(ActivityEvent.DESTROY)
                     , new HttpSubscriber<String>(this,true) {
                         @Override
                         public void onNext(String s) {

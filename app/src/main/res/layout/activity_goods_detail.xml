@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    style="@style/LlayFill"
+    xmlns:tools="http://schemas.android.com/tools" style="@style/LlayFill"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -118,10 +118,11 @@
                          android:layout_height="wrap_content"
                          android:background="@color/color_white">
 
-                <com.tencent.smtt.sdk.WebView
+                <WebView
                     android:id="@+id/ssw"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:ignore="WebViewLayout"/>
 
 
                 <FrameLayout android:layout_width="match_parent"

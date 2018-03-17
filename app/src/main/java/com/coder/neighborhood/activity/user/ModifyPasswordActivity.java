@@ -19,6 +19,7 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import ww.com.core.Debug;
 
 /**
  * @author feng
@@ -72,7 +73,8 @@ public class ModifyPasswordActivity extends BaseActivity<VoidView, UserModel> {
     public void modify() {
         String mobile = etMobile.getText().toString().trim().replaceAll(" ","");
         String password = etPassword.getText().toString();
-        String code = etCode.getText().toString();
+        String code = etCode.getText().toString().trim();
+        Debug.d("code:"+code);
         if (TextUtils.isEmpty(mobile) || mobile.length() != 11) {
             ToastUtils.showToast("请输入正确的手机号");
             return;

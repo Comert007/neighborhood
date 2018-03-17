@@ -8,36 +8,32 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
-import com.coder.neighborhood.adapter.mall.OrderStatusAdapter;
+import com.coder.neighborhood.adapter.mall.OrderLinkAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.user.OrderBean;
-import com.coder.neighborhood.bean.user.OrderComposeBean;
-import com.coder.neighborhood.bean.user.OrderItemBean;
 import com.coder.neighborhood.config.Constants;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.OrderStatusView;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
 /**
- * @author feng
- * @Date 2018/1/9
+ * @Author feng
+ * @Date 2018/3/17
  */
 
-public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel> {
-
+public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
 
     /**
      *
      * 订单状态(1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭',)
      */
-    private OrderStatusAdapter adapter;
+    private OrderLinkAdapter adapter;
     private int page = 1;
     private CustomSwipeRefreshLayout csr;
     private CustomRecyclerView crv;
@@ -45,11 +41,12 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
 
     private int status;
 
-    public static void start(Context context,int status) {
-        Intent intent = new Intent(context, OrderStatusActivity.class);
+    public static void start(Context context, int status) {
+        Intent intent = new Intent(context, OrderLinkActivity.class);
         intent.putExtra("status",status);
         context.startActivity(intent);
     }
+
 
     @Override
     protected int getLayoutResId() {
@@ -65,12 +62,13 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
     }
 
     private void initView() {
-        adapter = new OrderStatusAdapter(this);
+        adapter = new OrderLinkAdapter(this);
         csr = v.getCsr();
         crv = v.getCrv();
         csr.setEnableRefresh(true);
         csr.setFooterRefreshAble(false);
     }
+
 
     private void initListener() {
         csr.setOnSwipeRefreshListener(new CustomSwipeRefreshLayout.OnSwipeRefreshLayoutListener() {
@@ -133,19 +131,18 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
                     @Override
                     public void onNext(List<OrderBean> orderBeans) {
 
-                        List<OrderComposeBean> composeBeans = orderList(orderBeans);
 
                         v.getCsr().setRefreshFinished();
-                        if (composeBeans != null && composeBeans.size() > 0) {
+                        if (orderBeans != null && orderBeans.size() > 0) {
                             if (page == 1) {
-                                adapter.addList(composeBeans);
+                                adapter.addList(orderBeans);
                                 csr.setFooterRefreshAble(true);
                             } else {
                                 v.getCrv().removeFooterView(v.getFooterView());
-                                adapter.appendList(composeBeans);
+                                adapter.appendList(orderBeans);
                             }
 
-                            if (composeBeans.size() == Constants.PAGE_SIZE) {
+                            if (orderBeans.size() == Constants.PAGE_SIZE) {
                                 page++;
                             } else {
                                 v.getCsr().setFooterRefreshAble(false);
@@ -163,28 +160,6 @@ public class OrderStatusActivity extends BaseActivity<OrderStatusView,MallModel>
                 });
     }
 
-    private List<OrderComposeBean> orderList(List<OrderBean> orderBeans){
-        List<OrderComposeBean> orderComposeBeans = new ArrayList<>();
-
-        for (OrderBean orderBean : orderBeans) {
-            List<OrderItemBean> items = orderBean.getItems();
-            for (OrderItemBean item : items) {
-                OrderComposeBean composeBean = new OrderComposeBean();
-                composeBean.setOrderId(orderBean.getOrderId());
-                composeBean.setOrderPayment(orderBean.getOrderPayment());
-                composeBean.setOrderStatus(orderBean.getOrderStatus());
-                composeBean.setBuyCount(item.getBuyCount());
-                composeBean.setImgUrl(item.getImgUrl());
-                composeBean.setItemGroupUnit(item.getItemGroupUnit());
-                composeBean.setItemId(item.getItemId());
-                composeBean.setItemName(item.getItemName());
-                composeBean.setItemPrice(item.getItemPrice());
-                orderComposeBeans.add(composeBean);
-            }
-        }
-
-        return orderComposeBeans;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

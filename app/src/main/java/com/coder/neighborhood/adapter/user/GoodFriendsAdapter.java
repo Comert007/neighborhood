@@ -1,14 +1,16 @@
 package com.coder.neighborhood.adapter.user;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
-import com.coder.neighborhood.activity.user.FriendsInfoActivity;
+import com.coder.neighborhood.activity.message.ChatActivity;
 import com.coder.neighborhood.bean.user.FriendBean;
+import com.hyphenate.easeui.EaseConstant;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -56,7 +58,8 @@ public class GoodFriendsAdapter extends RvAdapter<FriendBean> {
             tvName.setText(TextUtils.isEmpty(bean.getNickName())?"未设置":bean.getNickName());
             tvGrade.setText(TextUtils.isEmpty(bean.getLevel())?"LV.0":("LV."+bean.getLevel()));
             itemView.setOnClickListener(v -> {
-                FriendsInfoActivity.start(getContext(),bean.getUserId());
+                getContext().startActivity( new Intent(getContext(),
+                        ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, bean.getEasemobId()));
             });
         }
     }

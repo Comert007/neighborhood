@@ -19,6 +19,7 @@ public class FriendBean implements Serializable{
     private String nickName;
     private String userId;
     private String level;
+    private String easemobId;
 
     public String getImgUrl() {
         return imgUrl;
@@ -50,5 +51,13 @@ public class FriendBean implements Serializable{
 
     public String getLevel() {
         return level;
+    }
+
+    public String getEasemobId() {
+        return easemobId;
+    }
+
+    public void setEasemobId(String easemobId) {
+        this.easemobId = easemobId;
     }
 }

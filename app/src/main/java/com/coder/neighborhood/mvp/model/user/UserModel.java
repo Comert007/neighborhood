@@ -70,12 +70,7 @@ public class UserModel implements IModel {
                                      httpSubscriber) {
 
         UserApi.findPassword(username, code,password)
-                .map(new Func1<ResponseBean, String>() {
-                    @Override
-                    public String call(ResponseBean responseBean) {
-                        return responseBean.getMessage();
-                    }
-                })
+                .map(responseBean -> responseBean.getMessage())
                 .compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);

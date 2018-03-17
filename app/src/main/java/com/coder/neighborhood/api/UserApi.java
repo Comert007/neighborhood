@@ -32,11 +32,13 @@ public class UserApi extends BaseApi {
         return onPost(getActionUrl("app/signup"),params);
     }
 
+    //POST /app/findPassword
     public static final Observable<ResponseBean> findPassword(String username,String code,String password){
         AjaxParams params = getBaseParams();
         params.addParameters("username",username);
         params.addParameters("code",code);
         params.addParameters("password",password);
+
         return onPost(getActionUrl("app/findPassword"),params);
     }
 
@@ -72,7 +74,9 @@ public class UserApi extends BaseApi {
                                                          String pageSize){
         AjaxParams params = getBaseParams();
         params.addParameters("userId",userId);
-        params.addParameters("userName",userName);
+        if (!TextUtils.isEmpty(userName)){
+            params.addParameters("userName",userName);
+        }
         params.addParameters("pageNo",pageNo);
         params.addParameters("pageSize",pageSize);
 

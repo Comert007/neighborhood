@@ -27,6 +27,7 @@
 
         <Button
             android:id="@+id/btn_ask"
+            android:visibility="gone"
             android:layout_width="@dimen/wwpx88"
             android:layout_height="@dimen/wwpx88"
             android:layout_alignParentBottom="true"

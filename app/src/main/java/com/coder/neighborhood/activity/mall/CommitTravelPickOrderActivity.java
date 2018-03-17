@@ -113,7 +113,7 @@ public class CommitTravelPickOrderActivity extends BaseActivity<VoidView, MallMo
         }
         bean.setItemName(goodsInfoBean.getTravelName());
         bean.setBuyCount("1");
-        bean.setItemPrice(goodsInfoBean.getTravelPrice());
+        bean.setItemPrice(goodsInfoBean.getTravelPickingPrice());
         List<CartFlagBean> cartFlagBeans = new ArrayList<>();
         cartFlagBeans.add(bean);
         adapter.addList(cartFlagBeans);

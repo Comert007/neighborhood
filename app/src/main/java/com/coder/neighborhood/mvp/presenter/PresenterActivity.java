@@ -43,7 +43,12 @@ public abstract class PresenterActivity<V extends IView, M extends IModel>
         wwApp = (WWApplication) getApplication();
         wwApp.addRunActivity(this);
 
-        setContentView(getLayoutResId());
+        try {
+            setContentView(getLayoutResId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         View contentView = findViewById(android.R.id.content);
         v.onAttach(this, contentView);
         m.onAttach(this);

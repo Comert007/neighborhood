@@ -143,11 +143,11 @@ public class HomeModel extends BaseModel {
                              String type,
                              String phone,
                              String questionContent,
-                             String filePath,
+                             List<String> paths,
                              LifecycleTransformer transformer,
                              HttpSubscriber<String> httpSubscriber){
 
-        HomeApi.addLostThing(userId, type, phone, questionContent, filePath)
+        HomeApi.addLostThing(userId, type, phone, questionContent, paths)
                 .map(responseBean -> responseBean.getMessage()).compose(RxHelper.cutMain())
                 .compose(transformer)
                 .subscribe(httpSubscriber);

@@ -225,7 +225,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
                 }
                 break;
             case R.id.btn_making_friends:
-                MakingFriendsActivity.start(getContext());
+                MakingFriendsActivity.start(getContext(),"");
                 break;
             default:
                 break;
@@ -339,6 +339,8 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
                 v.getCsr().setFooterRefreshAble(false);
             }
         } else {
+            adapter.getList().clear();
+            adapter.notifyDataSetChanged();
             v.getCsr().setFooterRefreshAble(false);
         }
     }
