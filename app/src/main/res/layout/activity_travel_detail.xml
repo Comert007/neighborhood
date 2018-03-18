@@ -156,30 +156,12 @@
                       android:layout_weight="2"
                       android:gravity="right">
 
-            <LinearLayout
-                android:id="@+id/ll_more_cart"
-                android:layout_width="@dimen/wwpx192"
-                android:layout_height="@dimen/wwpx60"
-                android:background="@drawable/green_border_shape"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/wwpx2"
-                android:paddingTop="@dimen/wwpx2">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="一键拼单"
-                    android:textColor="@color/color_title_text"
-                    android:textSize="@dimen/wwpx24"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_single_cart"
                 android:layout_width="@dimen/wwpx192"
                 android:layout_height="@dimen/wwpx60"
-                android:layout_marginLeft="@dimen/wwpx20"
                 android:background="@drawable/yellow_border_shape"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -195,6 +177,25 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_more_cart"
+                android:layout_width="@dimen/wwpx192"
+                android:layout_height="@dimen/wwpx60"
+                android:layout_marginLeft="@dimen/wwpx20"
+                android:background="@drawable/green_border_shape"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wwpx2"
+                android:paddingTop="@dimen/wwpx2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一键拼单"
+                    android:textColor="@color/color_title_text"
+                    android:textSize="@dimen/wwpx24"/>
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

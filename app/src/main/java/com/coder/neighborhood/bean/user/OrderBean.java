@@ -23,6 +23,7 @@ public class OrderBean {
     private String orderPayment;
     private String orderId;
     private String orderStatus;
+    private String orderString;
     private List<OrderItemBean> items;
 
     public String getOrderPayment() {
@@ -57,5 +58,11 @@ public class OrderBean {
         this.items = items;
     }
 
+    public String getOrderString() {
+        return orderString;
+    }
 
+    public void setOrderString(String orderString) {
+        this.orderString = orderString;
+    }
 }

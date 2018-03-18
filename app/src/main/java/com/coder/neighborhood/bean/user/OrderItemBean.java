@@ -18,6 +18,8 @@ public class OrderItemBean {
     private String imgUrl;
     private String itemName;
     private String buyCount;
+    private String orderTime;
+    private String buyerRate;
     private String ItemPrice;
     private String itemGroupUnit;
     private String ItemId;
@@ -68,5 +70,21 @@ public class OrderItemBean {
 
     public void setItemId(String ItemId) {
         this.ItemId = ItemId;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public String getBuyerRate() {
+        return buyerRate;
+    }
+
+    public void setBuyerRate(String buyerRate) {
+        this.buyerRate = buyerRate;
     }
 }

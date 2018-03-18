@@ -104,30 +104,32 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
     }
 
 
-    @OnClick({R.id.btn_address_manager, R.id.rl_address, R.id.btn_result})
+    @OnClick({R.id.btn_address_manager, R.id.rl_address, R.id.btn_result, R.id.fl_address_manager})
     public void onCommitOrder(View view) {
         switch (view.getId()) {
             case R.id.btn_address_manager:
             case R.id.rl_address:
+            case R.id.fl_address_manager:
                 AddressManagerActivity.start(this);
                 break;
             case R.id.btn_result:
-                if (TextUtils.isEmpty(recipientId)){
+                if (TextUtils.isEmpty(recipientId)) {
                     ToastUtils.showToast("请选择联系人");
                     return;
                 }
 
-                if (price == 0){
+                if (price == 0) {
                     ToastUtils.showToast("价格错误");
                     return;
                 }
 
                 HashMap map = new HashMap();
-                map.put("status","1");
+                map.put("status", "1");
                 map.put("recipientId", recipientId);
-                map.put("payment",price+"");
-                map.put("postFee",TextUtils.isEmpty(tvPostFee.getText().toString())?"0":tvPostFee.getText().toString());
-                map.put("buyerMessage",etMark.getText().toString());
+                map.put("payment", price + "");
+                map.put("postFee", TextUtils.isEmpty(tvPostFee.getText().toString()) ? "0" :
+                        tvPostFee.getText().toString());
+                map.put("buyerMessage", etMark.getText().toString());
                 PayShowActivity.start(this, map);
                 finish();
                 break;
@@ -167,14 +169,15 @@ public class CommitOrderActivity extends BaseActivity<VoidView, MallModel> {
                                     double perPrice = ArithmeticUtils.mul(cartFlagBeans.get(i)
                                             .getItemPrice(), cartFlagBeans.get(i).getBuyCount())
                                             .doubleValue();
-                                    price = ArithmeticUtils.add(perPrice,price);
+                                    price = ArithmeticUtils.add(perPrice, price);
                                     String postCast = cartFlagBeans.get(i).getPostCost();
-                                    postFee  = postFee + (TextUtils.isEmpty(postCast)?0:Integer.valueOf(postCast));
+                                    postFee = postFee + (TextUtils.isEmpty(postCast) ? 0 :
+                                            Integer.valueOf(postCast));
                                 }
                             }
-                            tvPostFee.setText(postFee+"");
+                            tvPostFee.setText(postFee + "");
 
-                            tvPrice.setText("合计：￥"+price);
+                            tvPrice.setText("合计：￥" + price);
                         }
                     });
         }

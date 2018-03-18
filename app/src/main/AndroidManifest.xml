@@ -314,6 +314,9 @@
         <activity android:name=".activity.mall.OrderLinkActivity"
                   android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.user.UrgeOrderActivity"
+                  android:screenOrientation="portrait"/>
+
 
     </application>
 

@@ -105,4 +105,5 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'liji.library.dev:citypickerview:3.1.5'
     compile 'org.aspectj:aspectjrt:1.8.10'
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 }

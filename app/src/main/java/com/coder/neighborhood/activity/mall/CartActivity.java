@@ -144,7 +144,6 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
 
     private void initData() {
         crv.setAdapter(adapter);
-        onCartGoods();
     }
 
 
@@ -301,4 +300,10 @@ public class CartActivity extends BaseActivity<CartView, MallModel> {
                 }).show();
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onCartGoods();
+    }
 }

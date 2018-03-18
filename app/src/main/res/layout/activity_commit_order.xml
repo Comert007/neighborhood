@@ -12,7 +12,9 @@
     <include layout="@layout/layout_split_fine"/>
 
 
-    <FrameLayout android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/fl_address_manager"
+        android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:background="@color/color_white">
 

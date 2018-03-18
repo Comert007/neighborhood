@@ -265,4 +265,18 @@ public class MallApi extends BaseApi {
         return onPost(getActionUrl("app/confirmGoods"),params);
     }
 
+    /**
+     * 追单
+     */
+    //POST /app/addTrackOrders
+    public static final Observable<ResponseBean> urgeOrder(String userId,String orderId,String content){
+
+        AjaxParams params = getBaseParams();
+        params.addParameters("userId",userId);
+        params.addParameters("orderId",orderId);
+        params.addParameters("content",content);
+
+        return onPost(getActionUrl("app/addTrackOrders"),params);
+    }
+
 }

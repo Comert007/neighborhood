@@ -9,17 +9,21 @@ import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.R;
 import com.coder.neighborhood.activity.BaseActivity;
 import com.coder.neighborhood.activity.rx.HttpSubscriber;
+import com.coder.neighborhood.activity.user.UrgeOrderActivity;
 import com.coder.neighborhood.adapter.mall.OrderLinkAdapter;
 import com.coder.neighborhood.bean.UserBean;
 import com.coder.neighborhood.bean.user.OrderBean;
 import com.coder.neighborhood.config.Constants;
+import com.coder.neighborhood.mvp.aop.CheckUser;
 import com.coder.neighborhood.mvp.model.mall.MallModel;
 import com.coder.neighborhood.mvp.vu.mall.OrderStatusView;
+import com.coder.neighborhood.pay.alipay.WWAlipay;
 import com.coder.neighborhood.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.List;
 
+import ww.com.core.Debug;
 import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
 
@@ -154,6 +158,8 @@ public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
                                 v.getCsr().setFooterRefreshAble(false);
                             }
                         } else {
+                            adapter.getList().clear();
+                            adapter.notifyDataSetChanged();
                             v.getCsr().setFooterRefreshAble(false);
                         }
                     }
@@ -161,6 +167,8 @@ public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        adapter.getList().clear();
+                        adapter.notifyDataSetChanged();
                         v.getCsr().setRefreshFinished();
                     }
                 });
@@ -190,6 +198,7 @@ public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
      * 确认订单
      * @param orderBean 订单实例
      */
+    @CheckUser
     private void confirmOrder(OrderBean orderBean){
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user!=null && !TextUtils.isEmpty(user.getUserId())){
@@ -207,16 +216,32 @@ public class OrderLinkActivity extends BaseActivity<OrderStatusView,MallModel> {
      * 订单再支付
      * @param orderBean
      */
+    @CheckUser
     private void payOrder(OrderBean orderBean){
+        WWAlipay.cretateAlipay(this, new WWAlipay
+                .AliPayListener() {
+            @Override
+            public void onPaySuccess(String info) {
+                Debug.d("info:" + info);
+                ToastUtils.showToast("支付成功", true);
+                onGoodsOrders(status+"");
+            }
 
+            @Override
+            public void onPayFail(String status, String errInfo) {
+                Debug.d("errInfo:" + errInfo);
+                ToastUtils.showToast("支付失败", false);
+            }
+        }).pay(orderBean.getOrderString());
     }
 
     /**
      * 催单
      * @param orderBean
      */
+    @CheckUser
     private void urgeOrder(OrderBean orderBean){
-
+        UrgeOrderActivity.start(this,orderBean.getOrderId());
     }
 
 

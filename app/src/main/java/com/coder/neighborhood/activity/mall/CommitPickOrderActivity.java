@@ -138,11 +138,12 @@ public class CommitPickOrderActivity extends BaseActivity<VoidView, MallModel> {
     }
 
 
-    @OnClick({R.id.btn_address_manager, R.id.rl_address, R.id.btn_result})
+    @OnClick({R.id.btn_address_manager, R.id.rl_address, R.id.btn_result,R.id.fl_address_manager})
     public void onCommitOrder(View view) {
         switch (view.getId()) {
             case R.id.btn_address_manager:
             case R.id.rl_address:
+            case R.id.fl_address_manager:
                 AddressManagerActivity.start(this);
                 break;
             case R.id.btn_result:

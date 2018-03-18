@@ -35,6 +35,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ww.com.core.Debug;
 import ww.com.core.ScreenUtil;
 import ww.com.core.widget.CustomRecyclerView;
 import ww.com.core.widget.CustomSwipeRefreshLayout;
@@ -357,6 +358,7 @@ public class MakeFriendsFragment extends BaseFragment<MakeFriendsView, CircleMod
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Debug.d("onActivityResult---->>>>>");
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
             int circleType = data.getIntExtra("circleType", 0);
             if (this.circleIndex == circleType - 1) {

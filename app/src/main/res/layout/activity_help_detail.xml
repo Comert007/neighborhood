@@ -9,7 +9,7 @@
         style="@style/TitleBar"
         app:titleLeftIco="@mipmap/ic_back"
         android:layout_marginBottom="@dimen/wwpx20"
-        app:titleText="寻物/失物"/>
+        app:titleText="帮帮"/>
 
 
     <RelativeLayout android:layout_width="match_parent"

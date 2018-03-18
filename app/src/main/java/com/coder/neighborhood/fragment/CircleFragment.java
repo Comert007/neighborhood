@@ -1,5 +1,6 @@
 package com.coder.neighborhood.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -102,4 +103,10 @@ public class CircleFragment extends BaseFragment<VoidView,VoidModel>{
 
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        makeFriendsFragment.onActivityResult(requestCode, resultCode, data);
+    }
 }

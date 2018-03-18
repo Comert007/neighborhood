@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    style="@style/LlayFill"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LlayFill"
+    android:background="#cccccc"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -9,31 +10,29 @@
         android:id="@+id/title_view"
         style="@style/TitleBar"
         app:titleLeftIco="@mipmap/ic_back"
-        app:titleText="发布问题"/>
+        app:titleText="催单"/>
+
 
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="vertical"
-                  android:layout_marginTop="@dimen/wwpx2"
                   android:gravity="center_horizontal"
                   android:paddingTop="@dimen/wwpx80"
                   android:paddingBottom="@dimen/wwpx80"
-                  android:paddingLeft="@dimen/wwpx20"
-                  android:paddingRight="@dimen/wwpx20"
                   android:background="@color/color_white"
                   android:layout_height="wrap_content">
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout android:layout_width="wrap_content"
                       android:orientation="vertical"
                       android:background="@drawable/gray_border_shape"
                       android:layout_height="@dimen/wwpx260">
             <EditText
-                android:id="@+id/et_question"
+                android:id="@+id/et_content"
                 android:background="@android:color/transparent"
                 android:layout_width="@dimen/wwpx650"
                 android:textSize="@dimen/wwpx28"
                 android:padding="@dimen/wwpx20"
                 android:textColor="@color/color_999999"
-                android:hint="问题详情"
+                android:hint="催单内容"
                 android:gravity="left"
                 android:maxLength="200"
                 android:layout_weight="1"
@@ -50,48 +49,15 @@
                 android:layout_marginBottom="@dimen/wwpx20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-
-
         </LinearLayout>
 
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:gravity="center_vertical"
-                      android:layout_marginTop="@dimen/wwpx40"
-                      android:layout_height="@dimen/wwpx50">
-            <TextView
-                android:text="联系方式"
-                android:textSize="@dimen/wwpx28"
-                android:textColor="@color/color_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/et_phone"
-                android:textSize="@dimen/wwpx28"
-                android:gravity="right|center_vertical"
-                android:textColor="@color/color_text"
-                android:hint="请输入联系方式"
-                android:inputType="number"
-                android:maxLength="11"
-                android:textColorHint="@color/color_text"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-
-        <ww.com.core.widget.CustomRecyclerView
-            android:id="@+id/crv"
-            android:layout_marginTop="@dimen/wwpx40"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
 
         <Button
             android:id="@+id/btn_publish"
             android:background="@drawable/green_border_shape"
-            android:text="发布问题"
+            android:text="催单"
             android:textSize="@dimen/wwpx30"
             android:textColor="@color/color_text"
             android:layout_marginTop="@dimen/wwpx80"

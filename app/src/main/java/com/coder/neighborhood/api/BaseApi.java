@@ -1,15 +1,23 @@
 package com.coder.neighborhood.api;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
+import com.coder.neighborhood.BaseApplication;
 import com.coder.neighborhood.api.convert.ResponseFunc;
 import com.coder.neighborhood.bean.ResponseBean;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import rx.Observable;
 import ww.com.http.OkHttpRequest;
 import ww.com.http.core.AjaxParams;
@@ -19,7 +27,6 @@ import ww.com.http.rx.RxHelper;
 import ww.com.http.rx.StringFunc;
 
 /**
- *
  * @author feng
  * @date 2017/12/21
  */
@@ -27,7 +34,7 @@ import ww.com.http.rx.StringFunc;
 public class BaseApi {
 
     public static final String HOST_URL = "http://39.106.140.31/";
-    private static final String BASE_URL = HOST_URL+"linli/";
+    private static final String BASE_URL = HOST_URL + "linli/";
 
     protected static final String getActionUrl(String action) {
         return String.format("%s%s", BASE_URL, action);
@@ -37,6 +44,8 @@ public class BaseApi {
         Map<String, String> params = new HashMap<>();
         return params;
     }
+
+    private static OkHttpClient okHttpClient = cookieClient();
 
     //jsonObject
     protected static Observable<String> onJson(String url, JSONObject json) {
@@ -111,6 +120,7 @@ public class BaseApi {
                                                  AjaxParams params) {
         params = params.setBaseUrl(url)
                 .setRequestMethod(RequestMethod.POST);
+        OkHttpRequest.setClient(okHttpClient);
         return OkHttpRequest.newObservable(params);
     }
 
@@ -129,7 +139,7 @@ public class BaseApi {
     public static final AjaxParams getBaseParams() {
         AjaxParams params = new AjaxParams();
         Map<String, String> header = getHeader();
-        if (header.size()>0){
+        if (header.size() > 0) {
             for (String key : header.keySet()) {
                 params.addHeaders(key, header.get(key));
             }
@@ -137,4 +147,30 @@ public class BaseApi {
         return params;
     }
 
+
+    private static OkHttpClient cookieClient() {
+        HttpLoggingInterceptor loggingInterceptor =
+                new HttpLoggingInterceptor(message -> {
+                    try {
+                        if (message != null && message.startsWith("{")) {
+                            Log.d("BASEAPI", new org.json.JSONObject(message).toString(4));
+                        } else {
+                            Log.d("BASEAPI", message);
+                        }
+                    } catch (Exception e) {
+                        Log.d("BASEAPI", message);
+                    }
+                });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        return new OkHttpClient().newBuilder()
+                .cookieJar(new PersistentCookieJar(new SetCookieCache(), new
+                        SharedPrefsCookiePersistor(BaseApplication.getInstance()
+                        .getApplicationContext())))
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .addInterceptor(loggingInterceptor)
+                .build();
+    }
 }
