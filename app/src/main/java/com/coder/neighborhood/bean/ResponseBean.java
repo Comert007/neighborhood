@@ -49,7 +49,19 @@ public class ResponseBean {
             bean.setCode(Constants.CODE_ERROR);
             bean.setMessage("数据解析错误!");
         }
+        try {
+           int count = json.getInteger("count");
+            bean.setCount(count);
+        }catch (Exception e){
+            bean.setCount(0);
+        }
 
+        try {
+            int pageSize = json.getInteger("pageSize");
+            bean.setCount(pageSize);
+        }catch (Exception e){
+            bean.setCount(0);
+        }
 
         return bean;
     }
