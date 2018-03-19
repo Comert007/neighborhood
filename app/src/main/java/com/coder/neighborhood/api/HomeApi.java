@@ -88,7 +88,6 @@ public class HomeApi extends BaseApi {
         return onPost(getActionUrl("app/getFriendQuestionList"),params);
     }
 
-
     public static final Observable<ResponseBean> customerQuestions(String pageNo,
                                                                  String pageSize) {
 
@@ -96,7 +95,7 @@ public class HomeApi extends BaseApi {
         params.addParameters("pageNo", pageNo);
         params.addParameters("pageSize", pageSize);
 
-        return onPost(getActionUrl("app/getFriendQuestionList"), params);
+        return onPost(getActionUrl("app/getGuestQuestionList"), params);
     }
 
     public static final Observable<ResponseBean> addHelpQuestion(String userId,
