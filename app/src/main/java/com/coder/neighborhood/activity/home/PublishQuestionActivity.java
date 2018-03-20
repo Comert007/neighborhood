@@ -116,6 +116,11 @@ public class PublishQuestionActivity extends BaseActivity<VoidView,HomeModel> {
             return;
         }
 
+        if (TextUtils.isEmpty(bounty)){
+            ToastUtils.showToast("请输入酬金");
+            return;
+        }
+
         UserBean user = (UserBean) BaseApplication.getInstance().getUserInfo();
         if (user!=null && !TextUtils.isEmpty(user.getUserId())){
             m.addHelpQuestion(user.getUserId(), type + "", content, bounty, bindUntilEvent(ActivityEvent.DESTROY)

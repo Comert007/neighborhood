@@ -5,8 +5,15 @@ import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'linli'
+            keyPassword 'linli2018'
+            storeFile file('../keystore/linli.jks')
+            storePassword 'linli2018'
+        }
+    }
     compileSdkVersion 26
-
     defaultConfig {
         applicationId "com.coder.neighborhood"
         minSdkVersion 14
@@ -16,20 +23,23 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
-        ndk{abiFilters "armeabi", "armeabi-v7a", "x86", "mips"}
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86", "mips" }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug{
+            signingConfig signingConfigs.release
         }
     }
-
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
