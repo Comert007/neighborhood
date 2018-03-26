@@ -1,31 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    style="@style/LlayFill"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/LlayFill">
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <com.coder.neighborhood.widget.TitleView
-    android:id="@+id/title_view"
-    style="@style/TitleBar"
-    app:titleText="圈"/>
+        android:id="@+id/title_view"
+        style="@style/TitleBar"
+        app:titleText="圈"/>
 
-    <ww.com.core.widget.TranslateTabBar
-        android:id="@+id/translate"
-        app:text="@array/circle_text"
-        android:layout_width="match_parent"
-        app:textColor="@color/color_666666"
-        app:textSize="@dimen/wwpx30"
-        android:layout_marginTop="@dimen/wwpx10"
-        app:translateLineHeight="@dimen/wwpx5"
-        app:lineWidth="@dimen/wwpx100"
-        android:background="@color/color_white"
-        android:layout_height="@dimen/wwpx80"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:background="@color/white"
+                  android:layout_height="@dimen/wwpx90">
+        <Button
+            android:text="交友"
+            android:layout_width="0px"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp"
+        <Button
+            android:text="大事件"
+            android:layout_width="0px"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+
+        <Button
+            android:text="话题"
+            android:layout_width="0px"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:text="活动"
+            android:layout_width="0px"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="0px"
+        android:layout_weight="1"
+        tools:ignore="Suspicious0dp">
+
+        <include layout="@layout/layout_refresh"/>
+
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentRight="true"
+                      android:layout_marginBottom="@dimen/wwpx50"
+                      android:orientation="vertical"
+                      android:paddingRight="@dimen/wwpx20">
+
+            <Button
+                android:id="@+id/btn_making_friends"
+                android:layout_width="@dimen/wwpx88"
+                android:layout_height="@dimen/wwpx88"
+                android:background="@drawable/yellow_circle_shape"
+                android:gravity="center"
+                android:text="交友"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/wwpx24"/>
+
+            <Button
+                android:id="@+id/btn_circle"
+                android:layout_width="@dimen/wwpx88"
+                android:layout_height="@dimen/wwpx88"
+                android:layout_marginTop="@dimen/wwpx20"
+                android:background="@drawable/yellow_circle_shape"
+                android:gravity="center"
+                android:text="我的历史动态"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/wwpx22"/>
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="@dimen/wwpx88"
+                android:layout_height="@dimen/wwpx88"
+                android:layout_marginTop="@dimen/wwpx20"
+                android:background="@drawable/yellow_circle_shape"
+                android:text="+"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/wwpx44"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/wwpx80"
+                  android:layout_margin="@dimen/wwpx20"
+                  android:background="@color/color_white"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20"
+                  android:visibility="gone">
+
+        <ImageView android:layout_width="@dimen/wwpx20"
+                   android:layout_height="@dimen/wwpx30"
+                   android:src="@mipmap/ic_microphone"/>
+
+        <TextView android:layout_width="0px"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:background="@android:color/transparent"
+                  android:gravity="center"
+                  android:paddingLeft="@dimen/wwpx20"
+                  android:paddingRight="@dimen/wwpx20"
+                  android:text="输入"
+                  android:textColor="@color/color_999999"
+                  android:textSize="@dimen/wwpx26"/>
+
+        <ImageView android:layout_width="@dimen/wwpx33"
+                   android:layout_height="@dimen/wwpx30"
+                   android:src="@mipmap/ic_camera"/>
+    </LinearLayout>
 
 </LinearLayout>

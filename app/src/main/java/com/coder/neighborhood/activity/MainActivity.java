@@ -188,10 +188,6 @@ public class MainActivity extends BaseActivity<VoidView, VoidModel> {
     }
 
 
-    public void changeCircleMnue(int position){
-        circleFragment.changeCircleMnue(position);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
